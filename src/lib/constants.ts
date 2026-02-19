@@ -15,8 +15,18 @@ export const COMPANY_CITY = process.env.NEXT_PUBLIC_COMPANY_CITY ?? "Milano";
 export const COMPANY_VAT =
   process.env.NEXT_PUBLIC_COMPANY_VAT ?? "P.IVA XXXXXXXX";
 
+const rawRestaurantVetrinaUrl =
+  process.env.NEXT_PUBLIC_RESTAURANT_VETRINA_URL?.trim() ?? "";
+
+const normalizeUrl = (value: string) => value.replace(/\/+$/, "");
+
+const siteUrlNormalized = normalizeUrl(SITE_URL);
+const restaurantUrlNormalized = normalizeUrl(rawRestaurantVetrinaUrl);
+
 export const RESTAURANT_VETRINA_URL =
-  process.env.NEXT_PUBLIC_RESTAURANT_VETRINA_URL ?? "http://localhost:3001";
+  !restaurantUrlNormalized || restaurantUrlNormalized === siteUrlNormalized
+    ? "/demo-ristorante"
+    : rawRestaurantVetrinaUrl;
 
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "";
