@@ -170,7 +170,9 @@ export function ReservationCalendar() {
           >
             ←
           </button>
-          <p className="text-sm font-medium capitalize">{formatMonth(visibleMonth)}</p>
+          <p className="text-sm font-medium capitalize">
+            {formatMonth(visibleMonth)}
+          </p>
           <button
             type="button"
             className="cal-nav"
@@ -209,7 +211,9 @@ export function ReservationCalendar() {
       </div>
 
       <div>
-        <p className="mb-2 text-xs tracking-[0.14em] text-amber-200/80 uppercase">Orari disponibili</p>
+        <p className="mb-2 text-xs tracking-[0.14em] text-amber-200/80 uppercase">
+          Orari disponibili
+        </p>
         <div className="flex flex-wrap gap-2">
           {slots.map((slot) => (
             <button
@@ -280,7 +284,8 @@ export function ReservationCalendar() {
       </p>
       {isSubmitted ? (
         <p className="text-xs text-amber-100/90" aria-live="polite">
-          Richiesta preparata: si apre il tuo programma di posta elettronica con i dati già compilati.
+          Richiesta preparata: si apre il tuo programma di posta elettronica con
+          i dati già compilati.
         </p>
       ) : null}
     </form>
