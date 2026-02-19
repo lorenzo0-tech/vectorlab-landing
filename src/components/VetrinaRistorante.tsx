@@ -1,9 +1,6 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import { RESTAURANT_VETRINA_URL } from "@/lib/constants";
 
 export function VetrinaRistorante() {
-  const hasVetrinaUrl = RESTAURANT_VETRINA_URL.trim().length > 0;
-
   return (
     <section className="section-pad" id="vetrina-ristorante">
       <div className="container-pad">
@@ -24,32 +21,14 @@ export function VetrinaRistorante() {
                 prenotazione e ottimizzazione per cellulare.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={
-                    hasVetrinaUrl
-                      ? RESTAURANT_VETRINA_URL
-                      : "#vetrina-ristorante"
-                  }
-                  target={hasVetrinaUrl ? "_blank" : undefined}
-                  rel={hasVetrinaUrl ? "noopener noreferrer" : undefined}
-                  aria-disabled={!hasVetrinaUrl}
-                  className={`btn-primary focus-ring ${hasVetrinaUrl ? "" : "pointer-events-none opacity-60"}`}
-                >
-                  {hasVetrinaUrl
-                    ? "Apri la vetrina ristorante"
-                    : "Imposta URL vetrina in .env.local"}
+                <a href="/demo-ristorante" className="btn-primary focus-ring">
+                  Apri la vetrina ristorante
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a href="#metodo" className="btn-secondary focus-ring">
                   Vedi come lavoro
                 </a>
               </div>
-              {!hasVetrinaUrl ? (
-                <p className="mt-3 text-xs text-(--muted)">
-                  Aggiungi `NEXT_PUBLIC_RESTAURANT_VETRINA_URL` per collegare il
-                  sito ristorante reale.
-                </p>
-              ) : null}
             </div>
 
             <div className="lg:col-span-5">

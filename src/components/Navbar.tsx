@@ -92,11 +92,20 @@ export function Navbar() {
           >
             <a
               href="#top"
-              className="heading-display inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
+              className="group heading-display inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
             >
-              <span className="h-2 w-2 rounded-full bg-cyan-500/80 shadow-[0_0_14px_rgba(6,182,212,.6)]" />
-              <span className="max-w-[38vw] truncate sm:max-w-none">
-                {COMPANY_NAME}
+              <span className="relative h-2.5 w-2.5">
+                <span className="absolute inset-0 rounded-full bg-cyan-300/90 shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+                <span className="absolute inset-0 rounded-full bg-cyan-200/70 blur-[3px]" />
+              </span>
+              <span className="relative max-w-[44vw] truncate sm:max-w-none">
+                <span className="bg-[linear-gradient(108deg,rgba(240,249,255,0.98)_0%,rgba(103,232,249,0.94)_34%,rgba(165,180,252,0.93)_66%,rgba(232,121,249,0.9)_100%)] bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(34,211,238,0.36)]">
+                  {COMPANY_NAME}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-0.5 left-0 h-px w-full bg-linear-to-r from-cyan-300/0 via-cyan-200/70 to-fuchsia-300/0 opacity-55 transition-opacity group-hover:opacity-95"
+                />
               </span>
             </a>
 

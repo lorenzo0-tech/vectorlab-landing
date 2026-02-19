@@ -283,7 +283,7 @@ export function EntryGate({ onEnterAction }: EntryGateProps) {
           }
           transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}
         />
-        {jumping ? "Ingresso in iperspazio" : "Esplora il sito"}
+        {jumping ? "Ingresso in HyperLab" : "Esplora il sito"}
         <ArrowRight className="h-4 w-4" />
       </motion.button>
 

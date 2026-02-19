@@ -733,3 +733,387 @@ body::before {
     left: -4%;
   }
 }
+
+/* Restaurant demo scoped styles */
+.restaurant-demo {
+  background:
+    radial-gradient(95% 70% at 8% 0%, rgba(180, 83, 9, 0.14), transparent 58%),
+    radial-gradient(
+      90% 78% at 100% 12%,
+      rgba(180, 83, 9, 0.08),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #0b0908 0%, #100d0c 42%, #151110 100%);
+  color: #f5f1ea;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.restaurant-demo a,
+.restaurant-demo button,
+.restaurant-demo input,
+.restaurant-demo textarea {
+  @apply focus-visible:outline-none;
+}
+
+.restaurant-demo a:focus-visible,
+.restaurant-demo button:focus-visible,
+.restaurant-demo input:focus-visible,
+.restaurant-demo textarea:focus-visible {
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+}
+
+.restaurant-demo .skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: 999px;
+  background: #f59e0b;
+  color: #0c0a09;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: transform 180ms ease;
+}
+
+.restaurant-demo .skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.restaurant-demo .container-shell {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+.restaurant-demo .brand-mark {
+  font-family: var(--font-display), var(--font-sans), system-ui;
+  letter-spacing: 0.08em;
+  @apply text-xl font-semibold text-amber-100;
+}
+
+.restaurant-demo .eyebrow {
+  @apply text-xs tracking-[0.24em] text-amber-200/80 uppercase;
+}
+
+.restaurant-demo .hero-shell {
+  position: relative;
+}
+
+.restaurant-demo .hero-orb {
+  position: absolute;
+  inset: -14% -10% auto -16%;
+  height: 58%;
+  pointer-events: none;
+  border-radius: 999px;
+  background:
+    radial-gradient(closest-side, rgba(251, 191, 36, 0.14), transparent 74%),
+    radial-gradient(closest-side, rgba(245, 158, 11, 0.12), transparent 70%);
+  filter: blur(20px);
+  z-index: -1;
+  animation: restaurant-demo-hero-breathe 8s ease-in-out infinite;
+}
+
+.restaurant-demo .hero-title {
+  font-family: var(--font-display), var(--font-sans), system-ui;
+  @apply text-5xl font-semibold leading-[0.98] text-stone-100 sm:text-7xl;
+}
+
+.restaurant-demo .section-title {
+  font-family: var(--font-display), var(--font-sans), system-ui;
+  @apply text-4xl font-semibold tracking-tight text-stone-100 sm:text-5xl;
+}
+
+.restaurant-demo .card {
+  @apply rounded-3xl border border-amber-100/10 bg-stone-950/60 p-5 backdrop-blur-md sm:p-6;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.38);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 260ms ease;
+}
+
+.restaurant-demo .card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(251, 191, 36, 0.28);
+  box-shadow: 0 24px 78px rgba(0, 0, 0, 0.44);
+}
+
+.restaurant-demo .lux-panel {
+  @apply rounded-3xl border border-amber-100/15 bg-linear-to-b from-amber-950/30 to-stone-950/70 p-6 backdrop-blur-md sm:p-7;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+}
+
+.restaurant-demo .mini-stat {
+  @apply rounded-2xl border border-amber-100/10 bg-black/25 p-3;
+}
+
+.restaurant-demo .mini-value {
+  font-family: var(--font-display), var(--font-sans), system-ui;
+  @apply text-3xl text-amber-100;
+}
+
+.restaurant-demo .mini-label {
+  @apply text-xs text-stone-300;
+}
+
+.restaurant-demo .hero-media-card {
+  @apply relative overflow-hidden rounded-3xl border border-amber-100/15;
+  min-height: 240px;
+  background: rgba(26, 20, 17, 0.74);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+}
+
+.restaurant-demo .hero-media-image {
+  object-fit: cover;
+  object-position: 50% 42%;
+  filter: contrast(1.08) saturate(1.08) brightness(1.03);
+}
+
+.restaurant-demo .hero-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.52));
+}
+
+.restaurant-demo .hero-media-label {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.9rem;
+  z-index: 2;
+  @apply text-xs tracking-[0.16em] text-amber-100 uppercase;
+}
+
+.restaurant-demo .btn-primary {
+  @apply relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-3 text-sm font-semibold text-black transition-all;
+  background: linear-gradient(120deg, #fde68a, #f59e0b);
+  box-shadow:
+    0 10px 34px rgba(245, 158, 11, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.restaurant-demo .btn-primary::after {
+  content: "";
+  position: absolute;
+  top: -170%;
+  left: -35%;
+  width: 34%;
+  height: 430%;
+  transform: rotate(22deg);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.58),
+    rgba(255, 255, 255, 0)
+  );
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.restaurant-demo .btn-primary:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.restaurant-demo .btn-primary:hover::after {
+  opacity: 1;
+  animation: restaurant-demo-btn-sheen 950ms ease;
+}
+
+.restaurant-demo .btn-secondary {
+  @apply inline-flex items-center justify-center rounded-full border border-amber-100/25 bg-stone-900/55 px-5 py-3 text-sm font-semibold text-amber-100 transition-all;
+}
+
+.restaurant-demo .btn-secondary:hover {
+  border-color: rgba(251, 191, 36, 0.45);
+  background: rgba(68, 57, 46, 0.4);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32);
+  transform: translateY(-1px);
+}
+
+.restaurant-demo .field {
+  @apply rounded-2xl border border-amber-100/15 bg-black/35 px-4 py-3 text-sm text-stone-100 placeholder:text-stone-400;
+}
+
+.restaurant-demo .gallery-card {
+  @apply relative min-h-40 overflow-hidden rounded-3xl border border-amber-100/15 p-4;
+  background: rgba(26, 20, 17, 0.74);
+}
+
+.restaurant-demo .gallery-image {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+  filter: contrast(1.06) saturate(1.08) brightness(1.04);
+  transition:
+    transform 650ms ease,
+    filter 380ms ease;
+}
+
+.restaurant-demo .gallery-card:hover .gallery-image {
+  transform: scale(1.08);
+  filter: contrast(1.1) saturate(1.12) brightness(1.06);
+}
+
+.restaurant-demo .gallery-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(
+      closest-side at 16% 28%,
+      rgba(245, 158, 11, 0.16),
+      transparent 65%
+    ),
+    radial-gradient(
+      closest-side at 72% 34%,
+      rgba(251, 191, 36, 0.1),
+      transparent 65%
+    ),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.46));
+}
+
+.restaurant-demo .calendar-shell {
+  @apply rounded-2xl border border-amber-100/15 bg-black/25 p-3;
+}
+
+.restaurant-demo .calendar-head {
+  @apply mb-3 flex items-center justify-between;
+}
+
+.restaurant-demo .cal-nav {
+  @apply inline-flex h-8 w-8 items-center justify-center rounded-full border border-amber-100/20 text-amber-100 transition;
+}
+
+.restaurant-demo .cal-nav:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.restaurant-demo .cal-nav:hover {
+  border-color: rgba(251, 191, 36, 0.45);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.restaurant-demo .calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.restaurant-demo .calendar-weekdays {
+  @apply mb-2 text-center text-[11px] tracking-[0.12em] text-stone-400 uppercase;
+}
+
+.restaurant-demo .cal-day {
+  @apply min-h-10 rounded-xl border border-transparent py-2 text-xs text-stone-300 transition;
+}
+
+.restaurant-demo .cal-day:hover:not(:disabled) {
+  border-color: rgba(251, 191, 36, 0.32);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.restaurant-demo .cal-day:disabled {
+  @apply cursor-not-allowed text-stone-600;
+}
+
+.restaurant-demo .cal-day.is-active {
+  border-color: rgba(251, 191, 36, 0.6);
+  background: rgba(245, 158, 11, 0.16);
+  color: #fff7ed;
+}
+
+.restaurant-demo .cal-day.is-out {
+  opacity: 0.35;
+}
+
+.restaurant-demo .time-chip {
+  @apply rounded-full border border-amber-100/25 px-3 py-2 text-xs text-stone-200 transition;
+}
+
+.restaurant-demo .time-chip:hover {
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.restaurant-demo .time-chip.is-active {
+  border-color: rgba(251, 191, 36, 0.8);
+  background: rgba(245, 158, 11, 0.15);
+  color: #fff7ed;
+}
+
+.restaurant-demo .mobile-cta {
+  position: sticky;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  z-index: 40;
+  margin: 0 auto;
+  width: calc(100% - 1rem);
+  max-width: 560px;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 20px;
+  background: rgba(15, 12, 11, 0.9);
+  backdrop-filter: blur(12px);
+  padding: 0.6rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.restaurant-demo .mobile-cta a {
+  min-height: 44px;
+}
+
+@keyframes restaurant-demo-btn-sheen {
+  0% {
+    transform: translateX(-24px) rotate(22deg);
+  }
+  100% {
+    transform: translateX(280px) rotate(22deg);
+  }
+}
+
+@keyframes restaurant-demo-hero-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(0, 8px, 0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .restaurant-demo .container-shell {
+    @apply px-4;
+  }
+
+  .restaurant-demo .hero-title {
+    @apply text-4xl leading-[1.02];
+  }
+
+  .restaurant-demo .section-title {
+    @apply text-3xl;
+  }
+
+  .restaurant-demo .card,
+  .restaurant-demo .lux-panel {
+    @apply rounded-2xl p-4;
+  }
+
+  .restaurant-demo .gallery-card {
+    min-height: 220px;
+  }
+
+  .restaurant-demo .hero-media-card {
+    min-height: 210px;
+    @apply rounded-2xl;
+  }
+
+  .restaurant-demo .hero-media-image {
+    object-position: 50% 38%;
+  }
+
+  .restaurant-demo .mobile-cta {
+    padding-bottom: calc(0.6rem + env(safe-area-inset-bottom) * 0.45);
+  }
+}
