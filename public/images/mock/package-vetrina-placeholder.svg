@@ -1,0 +1,26 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgShow" x1="120" y1="80" x2="1080" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A0D2E"/>
+      <stop offset="1" stop-color="#2B1B4F"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="760" y1="184" x2="1022" y2="468" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C4B5FD" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#E879F9" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="32" fill="url(#bgShow)"/>
+  <rect x="72" y="72" width="1056" height="576" rx="26" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <rect x="132" y="116" width="248" height="46" rx="23" fill="rgba(216,180,254,0.2)"/>
+  <text x="256" y="146" text-anchor="middle" fill="#F3E8FF" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="700" letter-spacing="2">VETRINA</text>
+  <text x="132" y="220" fill="#FAE8FF" font-size="48" font-family="Inter, Arial, sans-serif" font-weight="700">Immagine premium</text>
+  <text x="132" y="272" fill="#D8B4FE" font-size="32" font-family="Inter, Arial, sans-serif">Design curato che alza il valore percepito.</text>
+  <rect x="132" y="340" width="520" height="220" rx="20" fill="rgba(255,255,255,0.06)"/>
+  <rect x="156" y="364" width="186" height="70" rx="12" fill="rgba(255,255,255,0.1)"/>
+  <rect x="356" y="364" width="272" height="70" rx="12" fill="rgba(255,255,255,0.1)"/>
+  <rect x="156" y="446" width="472" height="90" rx="12" fill="rgba(255,255,255,0.08)"/>
+  <rect x="730" y="184" width="300" height="300" rx="30" fill="url(#glass)" stroke="rgba(255,255,255,0.24)" stroke-width="2"/>
+  <path d="M800 286C800 246.235 832.235 214 872 214H888C927.765 214 960 246.235 960 286V382H800V286Z" fill="rgba(255,255,255,0.18)"/>
+  <circle cx="880" cy="320" r="42" fill="rgba(250,232,255,0.55)"/>
+  <path d="M770 520H990" stroke="rgba(232,121,249,0.55)" stroke-width="12" stroke-linecap="round"/>
+</svg>

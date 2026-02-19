@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="840" viewBox="0 0 1400 840" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="48" y1="34" x2="1366" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1228"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="190" y1="76" x2="1238" y2="804" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="overlayTop" x1="700" y1="84" x2="700" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#020617" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="overlayBottom" x1="700" y1="418" x2="700" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#020617" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <filter id="shadow" x="0" y="0" width="1600" height="1040" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#020617" flood-opacity="0.45"/>
+    </filter>
+
+    <clipPath id="clipMainLeft"><rect x="76" y="84" width="642" height="330" rx="24"/></clipPath>
+    <clipPath id="clipMainRight"><rect x="734" y="84" width="590" height="330" rx="24"/></clipPath>
+    <clipPath id="clipBottomLeft"><rect x="76" y="430" width="420" height="334" rx="22"/></clipPath>
+    <clipPath id="clipBottomMid"><rect x="512" y="430" width="460" height="334" rx="22"/></clipPath>
+    <clipPath id="clipBottomRight"><rect x="988" y="430" width="336" height="334" rx="22"/></clipPath>
+  </defs>
+
+  <rect width="1400" height="840" rx="30" fill="url(#bg)"/>
+  <rect x="34" y="34" width="1332" height="772" rx="26" fill="url(#glass)"/>
+  <rect x="34.5" y="34.5" width="1331" height="771" rx="25.5" stroke="white" stroke-opacity="0.12"/>
+
+  <g filter="url(#shadow)">
+    <g clip-path="url(#clipMainLeft)">
+      <image href="/images/mock/caption.jpg" x="76" y="84" width="642" height="330" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="76" y="84" width="642" height="330" fill="url(#overlayTop)"/>
+    </g>
+
+    <g clip-path="url(#clipMainRight)">
+      <image href="/images/mock/shopping.webp" x="734" y="84" width="590" height="330" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="734" y="84" width="590" height="330" fill="url(#overlayTop)"/>
+    </g>
+
+    <g clip-path="url(#clipBottomLeft)">
+      <image href="/images/mock/download%20%281%29.jpeg" x="76" y="430" width="420" height="334" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="76" y="430" width="420" height="334" fill="url(#overlayBottom)"/>
+    </g>
+
+    <g clip-path="url(#clipBottomMid)">
+      <image href="/images/mock/download%20%282%29.jpeg" x="512" y="430" width="460" height="334" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="512" y="430" width="460" height="334" fill="url(#overlayBottom)"/>
+    </g>
+
+    <g clip-path="url(#clipBottomRight)">
+      <image href="/images/mock/download.jpeg" x="988" y="430" width="336" height="334" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="988" y="430" width="336" height="334" fill="url(#overlayBottom)"/>
+    </g>
+  </g>
+
+  <rect x="76.5" y="84.5" width="641" height="329" rx="23.5" stroke="white" stroke-opacity="0.2"/>
+  <rect x="734.5" y="84.5" width="589" height="329" rx="23.5" stroke="white" stroke-opacity="0.2"/>
+  <rect x="76.5" y="430.5" width="419" height="333" rx="21.5" stroke="white" stroke-opacity="0.2"/>
+  <rect x="512.5" y="430.5" width="459" height="333" rx="21.5" stroke="white" stroke-opacity="0.2"/>
+  <rect x="988.5" y="430.5" width="335" height="333" rx="21.5" stroke="white" stroke-opacity="0.2"/>
+
+  <rect x="104" y="108" width="186" height="30" rx="15" fill="#0B1228" fill-opacity="0.62"/>
+  <text x="124" y="128" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600">RISTORANTI PREMIUM</text>
+
+  <rect x="1064" y="728" width="220" height="28" rx="14" fill="#0B1228" fill-opacity="0.62"/>
+  <text x="1084" y="747" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500">Esperienza • Atmosfera • Story</text>
+</svg>

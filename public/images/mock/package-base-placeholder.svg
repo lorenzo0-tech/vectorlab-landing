@@ -1,0 +1,24 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgBase" x1="120" y1="40" x2="1080" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1223"/>
+      <stop offset="1" stop-color="#122647"/>
+    </linearGradient>
+    <linearGradient id="lineBase" x1="220" y1="200" x2="940" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0.25"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="32" fill="url(#bgBase)"/>
+  <rect x="72" y="72" width="1056" height="576" rx="26" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <rect x="132" y="116" width="220" height="46" rx="23" fill="rgba(34,211,238,0.2)"/>
+  <text x="242" y="146" text-anchor="middle" fill="#CFFAFE" font-size="22" font-family="Inter, Arial, sans-serif" font-weight="700" letter-spacing="2">BASE</text>
+  <text x="132" y="220" fill="#E0F2FE" font-size="48" font-family="Inter, Arial, sans-serif" font-weight="700">Sito essenziale</text>
+  <text x="132" y="272" fill="#A5C4E6" font-size="32" font-family="Inter, Arial, sans-serif">Chiaro. Veloce. Pronto a convertire.</text>
+  <path d="M132 406H520" stroke="url(#lineBase)" stroke-width="14" stroke-linecap="round"/>
+  <path d="M132 458H660" stroke="url(#lineBase)" stroke-width="14" stroke-linecap="round"/>
+  <path d="M132 510H580" stroke="url(#lineBase)" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="958" cy="404" r="116" fill="rgba(56,189,248,0.13)"/>
+  <circle cx="958" cy="404" r="78" fill="rgba(125,211,252,0.27)"/>
+  <path d="M926 404L952 430L996 378" stroke="#BAE6FD" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
