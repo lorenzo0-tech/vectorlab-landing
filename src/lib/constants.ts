@@ -7,7 +7,7 @@ export const EMAIL_TO =
   process.env.NEXT_PUBLIC_EMAIL_TO ?? "info@ultratech.studio";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vettolab.com";
 
 export const OG_IMAGE_PATH = "/images/og.jpg";
 

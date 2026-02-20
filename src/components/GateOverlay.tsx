@@ -14,7 +14,6 @@ export function GateOverlay() {
 
     const timer = window.setTimeout(() => {
       setVisible(true);
-      window.sessionStorage.setItem(GATE_SESSION_KEY, "1");
     }, 0);
 
     return () => window.clearTimeout(timer);
@@ -28,11 +27,12 @@ export function GateOverlay() {
       aria-hidden="true"
     >
       <EntryGate
-        nonBlocking
-        autoStart
-        showSkip
+        showSkip={false}
         durationMs={1700}
-        onCompleteAction={() => setVisible(false)}
+        onCompleteAction={() => {
+          window.sessionStorage.setItem(GATE_SESSION_KEY, "1");
+          setVisible(false);
+        }}
       />
     </div>
   );
