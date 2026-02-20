@@ -7,22 +7,24 @@ const cases = [
     name: "Ristorante centro città · Milano",
     metric: "+38% richieste tavolo",
     detail: "45 giorni dopo il rilascio",
-    before: "CTA poco visibile e percorso prenotazione dispersivo",
-    action: "Header semplificata, CTA sticky e percorso mobile lineare",
+    before:
+      "Invito all’azione poco visibile e percorso prenotazione dispersivo",
+    action:
+      "Testata semplificata, invito all’azione fisso e percorso smartphone lineare",
   },
   {
-    name: "Pizzeria takeaway · Bergamo",
+    name: "Pizzeria da asporto · Bergamo",
     metric: "+52% clic su menu",
-    detail: "30 giorni dopo ottimizzazione testata e CTA",
+    detail: "30 giorni dopo ottimizzazione testata e invito all’azione",
     before: "Menu difficile da trovare da smartphone",
-    action: "Menu in 1 tap + gerarchia visiva orientata all’azione",
+    action: "Menu in un tocco + gerarchia visiva orientata all’azione",
   },
   {
-    name: "Cocktail bar eventi · Torino",
+    name: "Bar di miscelazione eventi · Torino",
     metric: "2.1x clic su prenota",
     detail: "60 giorni con tracciamento eventi attivo",
-    before: "Traffico buono ma conversione bassa su mobile",
-    action: "Riduzione frizione sui tap e blocchi trust sopra la piega",
+    before: "Traffico buono ma conversione bassa su smartphone",
+    action: "Riduzione frizione sui tocchi e blocchi fiducia sopra la piega",
   },
 ];
 
@@ -30,7 +32,7 @@ export function CaseStudies() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="section-pad" id="case-study">
+    <section className="section-pad" id="casi-reali">
       <div className="container-pad">
         <motion.div
           initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
@@ -42,8 +44,8 @@ export function CaseStudies() {
             Risultati reali, non promesse.
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
-            Mini-case con contesto, intervento e outcome. Niente promesse vaghe:
-            solo metriche di comportamento utili alla vendita.
+            Mini casi con contesto, intervento e risultato. Niente promesse
+            vaghe: solo metriche di comportamento utili alla vendita.
           </p>
         </motion.div>
 

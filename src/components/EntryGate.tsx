@@ -272,7 +272,7 @@ export function EntryGate({
       completeTimeoutRef.current = window.setTimeout(() => {
         setJumping(false);
         trackIntroComplete({
-          mode: nonBlocking ? "non_blocking" : "blocking",
+          modalita: nonBlocking ? "non_bloccante" : "bloccante",
           autoStart: true,
         });
         onCompleteAction?.();
@@ -295,7 +295,7 @@ export function EntryGate({
     setJumping(true);
     completeTimeoutRef.current = window.setTimeout(() => {
       onEnterAction?.();
-      trackIntroComplete({ mode: "blocking", autoStart: false });
+      trackIntroComplete({ modalita: "bloccante", autoStart: false });
       onCompleteAction?.();
     }, durationMs);
   };
@@ -309,7 +309,7 @@ export function EntryGate({
     }
     setJumping(false);
     trackIntroSkip({
-      mode: nonBlocking ? "non_blocking" : "blocking",
+      modalita: nonBlocking ? "non_bloccante" : "bloccante",
       autoStart,
     });
     onCompleteAction?.();
@@ -359,7 +359,7 @@ export function EntryGate({
               ease: "easeInOut",
             }}
           />
-          {jumping ? "Ingresso in HyperLab" : "Esplora il sito"}
+          {jumping ? "Ingresso in modalità immersiva" : "Esplora il sito"}
           <ArrowRight className="h-4 w-4" />
         </motion.button>
       ) : null}

@@ -466,6 +466,17 @@ body::before {
     animation: brand-scan 1.9s ease-in-out infinite;
   }
 
+  .lead-form input:-webkit-autofill,
+  .lead-form input:-webkit-autofill:hover,
+  .lead-form input:-webkit-autofill:focus,
+  .lead-form textarea:-webkit-autofill,
+  .lead-form textarea:-webkit-autofill:hover,
+  .lead-form textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: #e2e8f0;
+    box-shadow: 0 0 0px 1000px rgba(2, 6, 23, 0.72) inset;
+    transition: background-color 9999s ease-out 0s;
+  }
+
   .nav-link-tech::after {
     content: "";
     position: absolute;

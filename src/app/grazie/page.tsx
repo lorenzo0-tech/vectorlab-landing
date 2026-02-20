@@ -26,7 +26,7 @@ export default function GraziePage() {
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring"
               >
-                Prenota una call ora
+                Prenota una chiamata ora
               </a>
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />

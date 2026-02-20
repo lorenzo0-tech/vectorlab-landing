@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "Ci serve un sito “bello” o un sito che porta risultati?",
-    a: "Noi progettiamo per l’azione: prenotazioni, chiamate, richieste. Il design è di alto livello, ma è al servizio della conversione: inviti all’azione visibili, percorso semplice, prima mobile, velocità reale.",
+    a: "Noi progettiamo per l’azione: prenotazioni, chiamate, richieste. La progettazione è di alto livello, ma è al servizio della conversione: inviti all’azione visibili, percorso semplice, prima su smartphone, velocità reale.",
   },
   {
     q: "Gestite anche menu, foto e contenuti?",

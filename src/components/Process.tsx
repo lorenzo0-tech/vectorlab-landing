@@ -18,8 +18,8 @@ const steps = [
   },
   {
     n: "03",
-    title: "Design di alto livello + sviluppo",
-    desc: "Prima mobile, prestazioni, immagini ottimizzate, interfaccia pulita.",
+    title: "Progettazione di alto livello + sviluppo",
+    desc: "Prima su smartphone, prestazioni, immagini ottimizzate, interfaccia pulita.",
     Icon: Rocket,
   },
   {

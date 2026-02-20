@@ -23,13 +23,13 @@ const items = [
     Icon: Smartphone,
   },
   {
-    title: "Menu in 1 tap",
+    title: "Menu in un tocco",
     desc: "PDF + pagina web indicizzabile: utile per persone e Google.",
     Icon: UtensilsCrossed,
   },
   {
     title: "Foto ottimizzate",
-    desc: "Immagini leggere, nitide, con caricamento veloce su mobile.",
+    desc: "Immagini leggere, nitide, con caricamento veloce su smartphone.",
     Icon: Gauge,
   },
   {
@@ -71,7 +71,7 @@ export function Solution() {
   const gallery = [
     {
       src: "/images/herosala.jpg",
-      alt: "Hero sala completa con profondità e luce calda",
+      alt: "Testata sala completa con profondità e luce calda",
       label: "Testata + prenota",
       mockHeader: true,
       className:
@@ -80,7 +80,7 @@ export function Solution() {
     },
     {
       src: "/images/piattosignature.jpg",
-      alt: "Piatto signature in close-up con servizio al tavolo",
+      alt: "Piatto simbolo in primo piano con servizio al tavolo",
       label: "Piatto firma primo piano",
       mockHeader: false,
       className:
@@ -165,7 +165,7 @@ export function Solution() {
                   {shot.mockHeader ? (
                     <div className="absolute left-2 top-2 w-[58%] rounded-lg border border-cyan-100/30 bg-slate-950/72 p-1.5 shadow-[0_16px_44px_rgba(2,6,23,0.45)] backdrop-blur-md sm:left-3 sm:top-3 sm:w-[46%] sm:rounded-xl sm:p-2 lg:w-[42%]">
                       <p className="text-[10px] font-semibold tracking-[0.14em] text-cyan-100/85 uppercase">
-                        Header preview
+                        Anteprima testata
                       </p>
                       <p className="mt-1 text-[10px] font-semibold leading-3.5 text-white/95 sm:text-[11px] sm:leading-4 lg:text-xs">
                         Prenota il tavolo in 15 secondi.
@@ -198,18 +198,19 @@ export function Solution() {
           </div>
         </motion.div>
 
-        <motion.div
-          className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          variants={sequenceContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.18 }}
-        >
-          {items.map(({ title, desc, Icon }) => (
+        <motion.div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map(({ title, desc, Icon }, index) => (
             <motion.div
               key={title}
               className="glass gradient-border card-tech group rounded-3xl p-6 transition-transform will-change-transform"
-              variants={sequenceItem}
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14, scale: 0.99 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.45,
+                ease: [0.2, 0.8, 0.2, 1],
+                delay: reduce ? 0 : index * 0.05,
+              }}
               whileHover={reduce ? undefined : { y: -2 }}
             >
               <div className="flex items-center gap-3">

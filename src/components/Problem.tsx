@@ -5,8 +5,8 @@ import { TriangleAlert } from "lucide-react";
 
 const bullets = [
   "Menu nascosto o scomodo: chi vuole prenotare abbandona.",
-  "CTA assente o debole: le persone non sanno cosa fare.",
-  "Mobile disastro: tap difficili, testi piccoli, pagina pesante.",
+  "Invito all’azione assente o debole: le persone non sanno cosa fare.",
+  "Versione smartphone disastrosa: tocchi difficili, testi piccoli, pagina pesante.",
   "Sito lento: perdi traffico e fiducia ancora prima di parlare del locale.",
 ];
 

@@ -29,7 +29,7 @@ export default function DemoRistorantePage() {
     },
     {
       nome: "Percorso Icone",
-      descrizione: "9 portate signature con pairing dedicato",
+      descrizione: "9 portate simbolo con abbinamento dedicato",
       prezzo: "€145",
       esempi: [
         "Caviale italiano, patata e panna acida",
@@ -52,7 +52,7 @@ export default function DemoRistorantePage() {
     {
       titolo: "Sala riservata",
       testo:
-        "Sala riservata fino a 18 ospiti per cene business o celebrazioni.",
+        "Sala riservata fino a 18 ospiti per cene aziendali o celebrazioni.",
     },
     {
       titolo: "Abbinamento vini",
@@ -72,7 +72,7 @@ export default function DemoRistorantePage() {
     },
     {
       q: "Posso prenotare per eventi privati?",
-      a: "Sì, organizziamo eventi da 10 a 60 persone con format personalizzato.",
+      a: "Sì, organizziamo eventi da 10 a 60 persone con impostazione personalizzata.",
     },
   ];
 
@@ -83,22 +83,22 @@ export default function DemoRistorantePage() {
       extra: "lg:col-span-2",
     },
     {
-      titolo: "Chef table",
+      titolo: "Tavolo dello chef",
       src: "/images/cheftable.jpg",
       extra: "",
     },
     {
-      titolo: "Beverage lab",
+      titolo: "Laboratorio bevande",
       src: "/images/beveragelab.webp",
       extra: "",
     },
     {
-      titolo: "Dessert station",
+      titolo: "Postazione dessert",
       src: "/images/dessertstation.jpeg",
       extra: "",
     },
     {
-      titolo: "Private room",
+      titolo: "Sala privata",
       src: "/images/privateroom.jpg",
       extra: "lg:col-span-2",
     },
@@ -158,9 +158,9 @@ export default function DemoRistorantePage() {
             ma con anima artigianale.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-stone-300 sm:text-lg">
-            Atelier Nove unisce ricerca culinaria, design sensoriale e servizio
-            sartoriale. Un format costruito per distinguersi davvero nel mercato
-            italiano.
+            Atelier Nove unisce ricerca culinaria, progettazione sensoriale e
+            servizio sartoriale. Un&apos;impostazione costruita per distinguersi
+            davvero nel mercato italiano.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="#prenota" className="btn-primary">
@@ -175,7 +175,7 @@ export default function DemoRistorantePage() {
           <article className="hero-media-card">
             <Image
               src="/images/fotohero.jpeg"
-              alt="Piatto signature Atelier Nove"
+              alt="Piatto simbolo Atelier Nove"
               fill
               className="hero-media-image"
               priority
@@ -210,7 +210,7 @@ export default function DemoRistorantePage() {
             </div>
             <p className="mt-5 text-sm leading-7 text-stone-300">
               Cucina aperta, carta vini in evoluzione e abbinamenti analcolici
-              firmati dal nostro beverage lab.
+              firmati dal nostro laboratorio bevande.
             </p>
           </div>
         </div>
@@ -363,7 +363,9 @@ export default function DemoRistorantePage() {
 
       <footer className="container-shell border-t border-white/10 pt-8 pb-10 text-sm text-stone-400">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Atelier Nove — sito demo portfolio (contenuti fittizi)</p>
+          <p>
+            © 2026 Atelier Nove — sito dimostrativo vetrina (contenuti fittizi)
+          </p>
           <p>Instagram • Guide • Carta regalo</p>
         </div>
       </footer>

@@ -10,6 +10,7 @@ export { FAQ } from "./FAQ";
 export { FinalCTA } from "./FinalCTA";
 export { Footer } from "./Footer";
 export { AmbientBackdrop } from "./AmbientBackdrop";
+export { GateOverlay } from "./GateOverlay";
 export { VetrinaRistorante } from "./VetrinaRistorante";
 export { CaseStudies } from "./CaseStudies";
 export { AnalyticsProvider } from "./AnalyticsProvider";

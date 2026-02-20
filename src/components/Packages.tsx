@@ -23,7 +23,7 @@ const packages: PackageCard[] = [
       "Testata + invito all’azione chiaro",
       "Menu in un tocco",
       "Contatti e indicazioni immediate",
-      "Ottimizzazione performance base",
+      "Ottimizzazione prestazioni base",
       "SEO locale base",
     ],
     image: "/images/mock/package-base-placeholder.svg",
@@ -34,14 +34,14 @@ const packages: PackageCard[] = [
     tagline: "Di alto livello e credibile, per alzare il valore percepito.",
     highlight: true,
     points: [
-      "Struttura di alto livello prima mobile",
+      "Struttura di alto livello prima su smartphone",
       "Sezioni persuasive + prove rapide",
       "Galleria foto ottimizzata",
       "Tracciamento clic (inviti all’azione / menu / mappa)",
       "Impostazione tecnica pulita e scalabile",
     ],
     image: "/images/mock/package-vetrina-placeholder.svg",
-    segment: "Cocktail bar ed eventi",
+    segment: "Bar di miscelazione ed eventi",
   },
   {
     name: "CRESCITA",
@@ -49,9 +49,9 @@ const packages: PackageCard[] = [
     points: [
       "Struttura orientata a contatti/prenotazioni",
       "Miglioramenti dell’esperienza utente su dati reali",
-      "Test comparativo A/B sugli inviti all’azione (quando serve)",
+      "Confronto tra due varianti sugli inviti all’azione (quando serve)",
       "Eventi e tracciamenti avanzati",
-      "Roadmap iterativa di ottimizzazione",
+      "Piano iterativo di ottimizzazione",
     ],
     image: "/images/mock/package-crescita-placeholder.svg",
     segment: "Attività locali ad alto valore",
@@ -100,7 +100,7 @@ export function Packages() {
               <div className="mb-4 aspect-5/3 overflow-hidden rounded-2xl border border-black/10">
                 <Image
                   src={p.image}
-                  alt={`Anteprima visual pacchetto ${p.name}`}
+                  alt={`Anteprima grafica pacchetto ${p.name}`}
                   width={900}
                   height={540}
                   className="h-full w-full object-cover"
@@ -139,9 +139,9 @@ export function Packages() {
                   className="btn-primary focus-ring w-full"
                   onClick={() =>
                     trackCtaClick({
-                      location: "packages",
-                      target: "calendly",
-                      packageName: p.name,
+                      posizione: "pacchetti",
+                      destinazione: "calendly",
+                      nomePacchetto: p.name,
                     })
                   }
                 >
@@ -153,9 +153,9 @@ export function Packages() {
                   className="btn-secondary focus-ring w-full"
                   onClick={() =>
                     trackCtaClick({
-                      location: "packages",
-                      target: "preventivo",
-                      packageName: p.name,
+                      posizione: "pacchetti",
+                      destinazione: "preventivo",
+                      nomePacchetto: p.name,
                     })
                   }
                 >

@@ -22,7 +22,7 @@ export function Footer() {
                 {COMPANY_CITY} · {COMPANY_VAT}
               </p>
               <p className="mt-3 text-xs text-(--muted)">
-                Microcopy legale: le informazioni non costituiscono offerta
+                Nota legale: le informazioni non costituiscono offerta
                 vincolante.
               </p>
               <p className="mt-4 inline-flex items-center rounded-full border border-cyan-200/60 bg-cyan-50/80 px-3 py-1 text-xs font-semibold text-cyan-900">

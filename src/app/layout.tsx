@@ -19,11 +19,30 @@ const fontDisplay = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${COMPANY_NAME} — Siti web che portano prenotazioni`,
+    default: `${COMPANY_NAME} — Siti web per ristoranti e hotel`,
     template: `%s — ${COMPANY_NAME}`,
   },
   description:
-    "Progettiamo e sviluppiamo siti moderni per ristoranti e attività locali che vogliono risultati: prenotazioni, chiamate, richieste.",
+    "Creazione e sviluppo siti web su misura per ristoranti e hotel. Progettazione di alto livello, esperienza utente prima da smartphone e struttura orientata alla conversione.",
+  keywords: [
+    "siti web ristoranti",
+    "siti web hotel",
+    "progettazione siti ristoranti",
+    "sviluppo siti hotel",
+    "pagina di atterraggio ospitalità",
+  ],
+  category: "attività",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
   alternates: {
     canonical: "/",
   },
@@ -31,22 +50,30 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: COMPANY_NAME,
-    title: `${COMPANY_NAME} — Siti web che portano risultati`,
+    title: `${COMPANY_NAME} — Siti web per ristoranti e hotel`,
     description:
-      "Design premium + sviluppo solido. Mobile-first, veloce, Google-friendly.",
+      "Creiamo siti web su misura per ristoranti e hotel: progettazione di alto livello, prestazioni ed esperienza utente orientata ai risultati.",
     images: [
       {
         url: OG_IMAGE_PATH,
         width: 1200,
         height: 630,
-        alt: `${COMPANY_NAME} — Landing`,
+        alt: `${COMPANY_NAME} — Pagina principale`,
       },
     ],
     locale: "it_IT",
   },
   twitter: {
     card: "summary_large_image",
+    title: `${COMPANY_NAME} — Siti web per ristoranti e hotel`,
+    description:
+      "Creazione e sviluppo siti web su misura per ristoranti e hotel.",
     images: [OG_IMAGE_PATH],
+  },
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
   },
 };
 

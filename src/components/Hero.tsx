@@ -134,7 +134,7 @@ export function Hero() {
 
   const pills = useMemo(
     () => [
-      "Prima mobile",
+      "Prima su smartphone",
       "Velocità reale",
       "Menu in un tocco",
       "SEO locale di base",
@@ -198,13 +198,14 @@ export function Hero() {
 
               <p className="mt-6 text-pretty text-lg leading-8 text-(--muted) sm:text-xl">
                 Siamo specializzati in creazione e sviluppo di siti web per
-                ristoranti e hotel: design premium, UX mobile-first e tecnologia
-                solida per trasformare visite in prenotazioni e richieste.
+                ristoranti e hotel: progettazione di alto livello, esperienza
+                utente prima da smartphone e tecnologia solida per trasformare
+                visite in prenotazioni e richieste.
               </p>
 
               <p className="mt-3 text-sm font-semibold tracking-wide text-cyan-100/90">
                 Dalla strategia al lancio: un unico partner per immagine,
-                performance e conversione.
+                prestazioni e conversione.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
@@ -226,8 +227,8 @@ export function Hero() {
                   className="btn-primary focus-ring"
                   onClick={() =>
                     trackCtaClick({
-                      location: "hero",
-                      target: "calendly",
+                      posizione: "testata",
+                      destinazione: "calendly",
                     })
                   }
                 >
@@ -239,8 +240,8 @@ export function Hero() {
                   className="btn-secondary focus-ring"
                   onClick={() =>
                     trackCtaClick({
-                      location: "hero",
-                      target: "preventivo",
+                      posizione: "testata",
+                      destinazione: "preventivo",
                     })
                   }
                 >
@@ -278,7 +279,7 @@ export function Hero() {
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <div className="glass gradient-border rounded-2xl px-4 py-3">
                   <p className="text-[11px] font-semibold tracking-widest text-(--muted)">
-                    FOCUS
+                    SPECIALIZZAZIONE
                   </p>
                   <p className="mt-1 text-sm font-semibold">
                     Ristoranti · Pizzerie · Cocktail bar

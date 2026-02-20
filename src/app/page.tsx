@@ -1,14 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
 import {
   AmbientBackdrop,
   CaseStudies,
-  EntryGate,
   FAQ,
   FinalCTA,
   Footer,
+  GateOverlay,
   Hero,
   Navbar,
   Packages,
@@ -18,25 +17,55 @@ import {
   TrustBar,
   VetrinaRistorante,
 } from "@/components";
+import {
+  COMPANY_CITY,
+  COMPANY_NAME,
+  SITE_URL,
+  COMPANY_VAT,
+} from "@/lib/constants";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: COMPANY_NAME,
+      url: SITE_URL,
+      vatID: COMPANY_VAT,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: COMPANY_CITY,
+        addressCountry: "IT",
+      },
+    },
+    {
+      "@type": "ProfessionalService",
+      name: `${COMPANY_NAME} - Progettazione siti per ospitalità`,
+      areaServed: "IT",
+      serviceType: [
+        "Creazione siti web per ristoranti",
+        "Creazione siti web per hotel",
+        "Sviluppo pagina di atterraggio per conversione",
+      ],
+      provider: {
+        "@type": "Organization",
+        name: COMPANY_NAME,
+      },
+      url: SITE_URL,
+    },
+  ],
+};
 
 export default function Home() {
-  const [entered, setEntered] = useState(false);
-
-  if (!entered) {
-    return (
-      <div className="min-h-screen">
-        <main className="main-ambient overflow-hidden">
-          <AmbientBackdrop />
-          <EntryGate onEnterAction={() => setEntered(true)} />
-        </main>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen">
       <main className="main-ambient overflow-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <AmbientBackdrop />
+        <GateOverlay />
         <AnimatePresence>
           <motion.div
             key="site"

@@ -1,68 +1,68 @@
 import { trackEvent } from "@/lib/analytics";
 
 export const EVENT_NAMES = {
-  ctaClick: "cta_click",
-  leadSubmitAttempt: "lead_submit_attempt",
-  leadSubmitSuccess: "lead_submit_success",
-  leadSubmitError: "lead_submit_error",
-  introComplete: "intro_complete",
-  introSkip: "intro_skip",
+  clicInvitoAzione: "clic_invito_azione",
+  tentativoInvioContatto: "tentativo_invio_contatto",
+  successoInvioContatto: "successo_invio_contatto",
+  erroreInvioContatto: "errore_invio_contatto",
+  completamentoIntro: "completamento_intro",
+  saltoIntro: "salto_intro",
 } as const;
 
-export type CtaLocation =
-  | "hero"
-  | "navbar"
-  | "mobile_sticky_bar"
-  | "packages"
-  | "final_cta";
+export type PosizioneInvitoAzione =
+  | "testata"
+  | "barra_nav"
+  | "barra_fissa_smartphone"
+  | "pacchetti"
+  | "cta_finale";
 
-export type CtaTarget = "calendly" | "preventivo";
+export type DestinazioneInvitoAzione = "calendly" | "preventivo";
 
-export type LeadSource = "final_cta_form";
-export type IntroMode = "blocking" | "non_blocking";
+export type SorgenteContatto = "modulo_cta_finale";
+export type ModalitaIntro = "bloccante" | "non_bloccante";
 
-type CtaPayload = {
-  location: CtaLocation;
-  target: CtaTarget;
-  packageName?: "BASE" | "VETRINA" | "CRESCITA";
+type PayloadInvitoAzione = {
+  posizione: PosizioneInvitoAzione;
+  destinazione: DestinazioneInvitoAzione;
+  nomePacchetto?: "BASE" | "VETRINA" | "CRESCITA";
 };
 
-export function trackCtaClick(payload: CtaPayload) {
-  trackEvent(EVENT_NAMES.ctaClick, {
-    location: payload.location,
-    target: payload.target,
-    package_name: payload.packageName,
+export function trackCtaClick(payload: PayloadInvitoAzione) {
+  trackEvent(EVENT_NAMES.clicInvitoAzione, {
+    posizione: payload.posizione,
+    destinazione: payload.destinazione,
+    nome_pacchetto: payload.nomePacchetto,
   });
 }
 
 export function trackLeadSubmitAttempt(payload: {
-  source: LeadSource;
-  city: string;
+  sorgente: SorgenteContatto;
+  citta: string;
 }) {
-  trackEvent(EVENT_NAMES.leadSubmitAttempt, payload);
+  trackEvent(EVENT_NAMES.tentativoInvioContatto, payload);
 }
 
 export function trackLeadSubmitSuccess(payload: {
-  source: LeadSource;
-  city: string;
+  sorgente: SorgenteContatto;
+  citta: string;
 }) {
-  trackEvent(EVENT_NAMES.leadSubmitSuccess, payload);
+  trackEvent(EVENT_NAMES.successoInvioContatto, payload);
 }
 
-export function trackLeadSubmitError(payload: { source: LeadSource }) {
-  trackEvent(EVENT_NAMES.leadSubmitError, payload);
+export function trackLeadSubmitError(payload: { sorgente: SorgenteContatto }) {
+  trackEvent(EVENT_NAMES.erroreInvioContatto, payload);
 }
 
 export function trackIntroComplete(payload: {
-  mode: IntroMode;
+  modalita: ModalitaIntro;
   autoStart: boolean;
 }) {
-  trackEvent(EVENT_NAMES.introComplete, payload);
+  trackEvent(EVENT_NAMES.completamentoIntro, payload);
 }
 
 export function trackIntroSkip(payload: {
-  mode: IntroMode;
+  modalita: ModalitaIntro;
   autoStart: boolean;
 }) {
-  trackEvent(EVENT_NAMES.introSkip, payload);
+  trackEvent(EVENT_NAMES.saltoIntro, payload);
 }

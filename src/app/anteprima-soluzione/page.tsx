@@ -3,12 +3,13 @@ import Image from "next/image";
 const candidates = [
   {
     label: "Testata + prenota",
-    reason: "Sala premium leggibile e orientata a conversione high-end.",
+    reason: "Sala di alto livello leggibile e orientata a conversione.",
     src: "/images/salaprincipale.jpeg",
   },
   {
     label: "Piatto firma primo piano",
-    reason: "Visual food hero più coerente con valore percepito del locale.",
+    reason:
+      "Immagine principale del cibo più coerente con il valore percepito del locale.",
     src: "/images/herofoto.webp",
   },
   {
@@ -23,7 +24,8 @@ const candidates = [
   },
   {
     label: "Prenotazione tavolo",
-    reason: "Dettaglio reserved chiaro, perfetto per CTA prenotazione.",
+    reason:
+      "Dettaglio tavolo riservato chiaro, perfetto per invito alla prenotazione.",
     src: "/images/tavoloreserved.jpg",
   },
 ] as const;

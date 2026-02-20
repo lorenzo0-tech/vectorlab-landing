@@ -137,11 +137,11 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring px-4 py-2.5 text-xs sm:px-5 sm:py-3 sm:text-sm"
-                aria-label="Prenota una call di 15 minuti su Calendly"
+                aria-label="Prenota una chiamata di 15 minuti su Calendly"
                 onClick={() =>
                   trackCtaClick({
-                    location: "navbar",
-                    target: "calendly",
+                    posizione: "barra_nav",
+                    destinazione: "calendly",
                   })
                 }
               >
@@ -164,8 +164,8 @@ export function Navbar() {
               className="btn-primary focus-ring w-full"
               onClick={() =>
                 trackCtaClick({
-                  location: "mobile_sticky_bar",
-                  target: "calendly",
+                  posizione: "barra_fissa_smartphone",
+                  destinazione: "calendly",
                 })
               }
             >
@@ -177,8 +177,8 @@ export function Navbar() {
               className="btn-secondary focus-ring w-full"
               onClick={() =>
                 trackCtaClick({
-                  location: "mobile_sticky_bar",
-                  target: "preventivo",
+                  posizione: "barra_fissa_smartphone",
+                  destinazione: "preventivo",
                 })
               }
             >

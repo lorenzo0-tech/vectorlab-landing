@@ -14,26 +14,34 @@ import {
 
 type FormState = {
   nome: string;
+  email: string;
+  telefono: string;
   attivita: string;
   citta: string;
   sito: string;
   obiettivo: string;
   messaggio: string;
+  websiteTrap: string;
 };
 
 const initial: FormState = {
   nome: "",
+  email: "",
+  telefono: "",
   attivita: "",
   citta: "",
   sito: "",
   obiettivo: "",
   messaggio: "",
+  websiteTrap: "",
 };
 
 function buildMailto(values: FormState) {
   const subject = `Richiesta preventivo — ${values.attivita || "Attività"} (${values.citta || "Città"})`;
   const bodyLines = [
     `Nome: ${values.nome}`,
+    `Email: ${values.email}`,
+    `Telefono: ${values.telefono || "-"}`,
     `Attività: ${values.attivita}`,
     `Città: ${values.citta}`,
     `Sito attuale: ${values.sito}`,
@@ -53,7 +61,24 @@ export function FinalCTA() {
   const [values, setValues] = useState<FormState>(initial);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [startedAt] = useState(() => Date.now());
   const mailto = useMemo(() => buildMailto(values), [values]);
+
+  const calendlyEmbedUrl = useMemo(() => {
+    if (!CALENDLY_URL || CALENDLY_URL.includes("tuo-link")) return null;
+
+    try {
+      const url = new URL(CALENDLY_URL);
+      if (!url.hostname.includes("calendly.com")) return null;
+
+      url.searchParams.set("hide_event_type_details", "1");
+      url.searchParams.set("hide_gdpr_banner", "1");
+      url.searchParams.set("primary_color", "06b6d4");
+      return url.toString();
+    } catch {
+      return null;
+    }
+  }, []);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -61,15 +86,19 @@ export function FinalCTA() {
     setIsSubmitting(true);
 
     trackLeadSubmitAttempt({
-      source: "final_cta_form",
-      city: values.citta,
+      sorgente: "modulo_cta_finale",
+      citta: values.citta,
     });
 
     try {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          _startedAt: startedAt,
+          _trap: values.websiteTrap,
+        }),
       });
 
       if (!response.ok) {
@@ -80,8 +109,8 @@ export function FinalCTA() {
       }
 
       trackLeadSubmitSuccess({
-        source: "final_cta_form",
-        city: values.citta,
+        sorgente: "modulo_cta_finale",
+        citta: values.citta,
       });
 
       router.push("/grazie");
@@ -93,7 +122,7 @@ export function FinalCTA() {
 
       setErrorMessage(message);
       trackLeadSubmitError({
-        source: "final_cta_form",
+        sorgente: "modulo_cta_finale",
       });
     } finally {
       setIsSubmitting(false);
@@ -114,10 +143,10 @@ export function FinalCTA() {
             <div className="lg:col-span-6">
               <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
                 Se il tuo sito non sta portando clienti, è un costo. Noi lo
-                trasformiamo in un asset.
+                trasformiamo in uno strumento che produce risultati.
               </h2>
               <p className="mt-4 text-lg leading-8 text-(--muted)">
-                Partiamo da una call di 15 minuti: obiettivo chiaro, azione
+                Partiamo da una chiamata di 15 minuti: obiettivo chiaro, azione
                 principale, e la struttura giusta per far muovere le persone.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -128,18 +157,32 @@ export function FinalCTA() {
                   className="btn-primary focus-ring"
                   onClick={() =>
                     trackCtaClick({
-                      location: "final_cta",
-                      target: "calendly",
+                      posizione: "cta_finale",
+                      destinazione: "calendly",
                     })
                   }
                 >
-                  Prenota una call (15 min)
+                  Prenota una chiamata (15 min)
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a href="#preventivo" className="btn-secondary focus-ring">
                   Richiedi un preventivo
                 </a>
               </div>
+
+              {calendlyEmbedUrl ? (
+                <div className="mt-6 overflow-hidden rounded-2xl border border-white/15 bg-slate-950/70">
+                  <p className="px-4 pt-4 text-xs font-semibold tracking-widest text-(--muted)">
+                    CALENDARIO RAPIDO
+                  </p>
+                  <iframe
+                    title="Calendario prenotazione chiamata"
+                    src={calendlyEmbedUrl}
+                    className="h-[620px] w-full"
+                    loading="lazy"
+                  />
+                </div>
+              ) : null}
             </div>
 
             <div className="lg:col-span-6">
@@ -152,14 +195,29 @@ export function FinalCTA() {
                   struttura e le azioni da spingere.
                 </p>
 
-                <form onSubmit={onSubmit} className="mt-6 space-y-3">
+                <form onSubmit={onSubmit} className="lead-form mt-6 space-y-3">
+                  <label className="hidden" aria-hidden="true">
+                    <span>Sito esca</span>
+                    <input
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={values.websiteTrap}
+                      onChange={(e) =>
+                        setValues((v) => ({
+                          ...v,
+                          websiteTrap: e.target.value,
+                        }))
+                      }
+                    />
+                  </label>
+
                   <div className="grid gap-3 sm:grid-cols-2">
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
                         Nome
                       </span>
                       <input
-                        className="focus-ring w-full rounded-2xl border border-black/10 bg-white/95 px-4 py-3 text-sm"
+                        className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.nome}
                         onChange={(e) =>
                           setValues((v) => ({ ...v, nome: e.target.value }))
@@ -169,10 +227,37 @@ export function FinalCTA() {
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
+                        Email
+                      </span>
+                      <input
+                        type="email"
+                        className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
+                        value={values.email}
+                        onChange={(e) =>
+                          setValues((v) => ({ ...v, email: e.target.value }))
+                        }
+                        required
+                      />
+                    </label>
+                    <label className="space-y-1">
+                      <span className="text-xs font-semibold text-(--muted)">
+                        Telefono (opzionale)
+                      </span>
+                      <input
+                        className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
+                        value={values.telefono}
+                        onChange={(e) =>
+                          setValues((v) => ({ ...v, telefono: e.target.value }))
+                        }
+                        placeholder="+39 ..."
+                      />
+                    </label>
+                    <label className="space-y-1">
+                      <span className="text-xs font-semibold text-(--muted)">
                         Attività
                       </span>
                       <input
-                        className="focus-ring w-full rounded-2xl border border-black/10 bg-white/95 px-4 py-3 text-sm"
+                        className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.attivita}
                         onChange={(e) =>
                           setValues((v) => ({ ...v, attivita: e.target.value }))
@@ -185,7 +270,7 @@ export function FinalCTA() {
                         Città
                       </span>
                       <input
-                        className="focus-ring w-full rounded-2xl border border-black/10 bg-white/95 px-4 py-3 text-sm"
+                        className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.citta}
                         onChange={(e) =>
                           setValues((v) => ({ ...v, citta: e.target.value }))
@@ -198,7 +283,7 @@ export function FinalCTA() {
                         Sito attuale
                       </span>
                       <input
-                        className="focus-ring w-full rounded-2xl border border-black/10 bg-white/95 px-4 py-3 text-sm"
+                        className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.sito}
                         onChange={(e) =>
                           setValues((v) => ({ ...v, sito: e.target.value }))
@@ -213,7 +298,7 @@ export function FinalCTA() {
                       Obiettivo
                     </span>
                     <input
-                      className="focus-ring w-full rounded-2xl border border-black/10 bg-white/95 px-4 py-3 text-sm"
+                      className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                       value={values.obiettivo}
                       onChange={(e) =>
                         setValues((v) => ({ ...v, obiettivo: e.target.value }))
@@ -228,7 +313,7 @@ export function FinalCTA() {
                       Messaggio
                     </span>
                     <textarea
-                      className="focus-ring min-h-28 w-full resize-none rounded-2xl border border-black/10 bg-white/95 px-4 py-3 text-sm"
+                      className="focus-ring min-h-28 w-full resize-none rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                       value={values.messaggio}
                       onChange={(e) =>
                         setValues((v) => ({ ...v, messaggio: e.target.value }))
@@ -248,13 +333,13 @@ export function FinalCTA() {
 
                   <p className="text-xs text-(--muted)">
                     Invio diretto dal sito. Se il server non è configurato puoi
-                    usare il fallback email qui sotto.
+                    usare l&apos;alternativa via email qui sotto.
                   </p>
                   <a
                     href={mailto}
-                    className="text-xs font-semibold text-cyan-800 underline-offset-2 hover:underline"
+                    className="text-xs font-semibold text-cyan-200 underline-offset-2 hover:text-cyan-100 hover:underline"
                   >
-                    Fallback: apri email precompilata
+                    Alternativa: apri email precompilata
                   </a>
 
                   {errorMessage ? (
