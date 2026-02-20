@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { trackFaqToggle } from "@/lib/analytics-events";
 
 const faqs = [
   {
@@ -27,6 +28,12 @@ const faqs = [
   },
 ];
 
+const proveRapide = [
+  { valore: "14 gg", etichetta: "Consegna tipica" },
+  { valore: "< 24h", etichetta: "Primo riscontro" },
+  { valore: "100%", etichetta: "Focalizzati su conversione" },
+] as const;
+
 export function FAQ() {
   const reduce = useReducedMotion();
   const baseId = useId();
@@ -47,6 +54,19 @@ export function FAQ() {
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             Risposte dirette per chi deve decidere.
           </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {proveRapide.map((prova) => (
+              <div
+                key={prova.etichetta}
+                className="glass gradient-border rounded-2xl px-4 py-3"
+              >
+                <p className="text-lg font-semibold tracking-tight text-foreground">
+                  {prova.valore}
+                </p>
+                <p className="text-xs text-(--muted)">{prova.etichetta}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         <div className="mt-10 space-y-3">
@@ -64,14 +84,21 @@ export function FAQ() {
                 <button
                   type="button"
                   className="focus-ring flex w-full items-center justify-between gap-4 rounded-3xl px-6 py-5 text-left"
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  onClick={() => {
+                    const nextOpen = isOpen ? null : idx;
+                    setOpenIndex(nextOpen);
+                    trackFaqToggle({
+                      indice: idx,
+                      azione: nextOpen === idx ? "aperta" : "chiusa",
+                    });
+                  }}
                   aria-expanded={isOpen}
                   aria-controls={contentId}
                 >
                   <span className="text-sm font-semibold tracking-tight sm:text-base">
                     {f.q}
                   </span>
-                  <span className="icon-chip h-10 w-10">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-200/20 bg-slate-900/75 text-cyan-100">
                     <ChevronDown
                       className={
                         "h-5 w-5 transition-transform duration-150 " +
@@ -83,11 +110,11 @@ export function FAQ() {
                 <div
                   id={contentId}
                   className={
-                    "grid overflow-hidden transition-all " +
+                    "faq-item-content grid overflow-hidden transition-[grid-template-rows,opacity,transform] will-change-[grid-template-rows,opacity,transform] " +
                     (reduce ? "duration-0" : "duration-150 ease-out") +
                     (isOpen
-                      ? " grid-rows-[1fr] opacity-100"
-                      : " grid-rows-[0fr] opacity-0")
+                      ? " grid-rows-[1fr] opacity-100 translate-y-0"
+                      : " grid-rows-[0fr] opacity-0 -translate-y-1")
                   }
                 >
                   <div className="min-h-0">

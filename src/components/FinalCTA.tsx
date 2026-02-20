@@ -6,10 +6,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Send } from "lucide-react";
 import { CALENDLY_URL, EMAIL_TO } from "@/lib/constants";
 import {
+  trackAllertaConversione,
   trackCtaClick,
   trackLeadSubmitAttempt,
   trackLeadSubmitError,
   trackLeadSubmitSuccess,
+  trackValidazioneModulo,
 } from "@/lib/analytics-events";
 
 type FormState = {
@@ -36,6 +38,71 @@ const initial: FormState = {
   websiteTrap: "",
 };
 
+type CampoForm = Exclude<keyof FormState, "websiteTrap">;
+
+const CAMPI_OBBLIGATORI: CampoForm[] = [
+  "nome",
+  "email",
+  "attivita",
+  "citta",
+  "obiettivo",
+  "messaggio",
+];
+
+function validaCampo(campo: CampoForm, valore: string) {
+  const pulito = valore.trim();
+
+  if (CAMPI_OBBLIGATORI.includes(campo) && pulito.length < 2) {
+    return "Campo obbligatorio";
+  }
+
+  if (campo === "email") {
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pulito);
+    if (!ok) return "Email non valida";
+  }
+
+  if (campo === "telefono" && pulito.length > 0) {
+    const ok = /^[+()\d\s-]{6,24}$/.test(pulito);
+    if (!ok) return "Telefono non valido";
+  }
+
+  if (campo === "sito" && pulito.length > 0) {
+    const ok = /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}/i.test(pulito);
+    if (!ok) return "Sito non valido";
+  }
+
+  if (campo === "obiettivo" && pulito.length > 0 && pulito.length < 4) {
+    return "Inserisci almeno 4 caratteri";
+  }
+
+  if (campo === "messaggio" && pulito.length > 0 && pulito.length < 10) {
+    return "Inserisci almeno 10 caratteri";
+  }
+
+  return "";
+}
+
+function validaTutto(values: FormState) {
+  const errori: Partial<Record<CampoForm, string>> = {};
+  const campi: CampoForm[] = [
+    "nome",
+    "email",
+    "telefono",
+    "attivita",
+    "citta",
+    "sito",
+    "obiettivo",
+    "messaggio",
+  ];
+
+  for (const campo of campi) {
+    const errore = validaCampo(campo, values[campo]);
+    if (errore) errori[campo] = errore;
+  }
+
+  return errori;
+}
+
 function buildMailto(values: FormState) {
   const subject = `Richiesta preventivo — ${values.attivita || "Attività"} (${values.citta || "Città"})`;
   const bodyLines = [
@@ -61,8 +128,37 @@ export function FinalCTA() {
   const [values, setValues] = useState<FormState>(initial);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<
+    Partial<Record<CampoForm, string>>
+  >({});
+  const [touched, setTouched] = useState<Partial<Record<CampoForm, boolean>>>(
+    {},
+  );
   const [startedAt] = useState(() => Date.now());
   const mailto = useMemo(() => buildMailto(values), [values]);
+
+  const setCampo = (campo: CampoForm, valore: string) => {
+    setValues((v) => ({ ...v, [campo]: valore }));
+
+    if (touched[campo]) {
+      const errore = validaCampo(campo, valore);
+      setFieldErrors((prev) => ({ ...prev, [campo]: errore }));
+      trackValidazioneModulo({
+        campo,
+        esito: errore ? "errore" : "ok",
+      });
+    }
+  };
+
+  const onBlurCampo = (campo: CampoForm) => {
+    setTouched((prev) => ({ ...prev, [campo]: true }));
+    const errore = validaCampo(campo, values[campo]);
+    setFieldErrors((prev) => ({ ...prev, [campo]: errore }));
+    trackValidazioneModulo({
+      campo,
+      esito: errore ? "errore" : "ok",
+    });
+  };
 
   const calendlyEmbedUrl = useMemo(() => {
     if (!CALENDLY_URL || CALENDLY_URL.includes("tuo-link")) return null;
@@ -83,6 +179,25 @@ export function FinalCTA() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
+
+    const errori = validaTutto(values);
+    setFieldErrors(errori);
+    setTouched({
+      nome: true,
+      email: true,
+      telefono: true,
+      attivita: true,
+      citta: true,
+      sito: true,
+      obiettivo: true,
+      messaggio: true,
+    });
+
+    if (Object.values(errori).some(Boolean)) {
+      setErrorMessage("Controlla i campi evidenziati e riprova.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     trackLeadSubmitAttempt({
@@ -113,6 +228,10 @@ export function FinalCTA() {
         citta: values.citta,
       });
 
+      if (typeof window !== "undefined") {
+        window.sessionStorage.removeItem("contatti_errori_consecutivi");
+      }
+
       router.push("/grazie");
     } catch (error) {
       const message =
@@ -124,6 +243,20 @@ export function FinalCTA() {
       trackLeadSubmitError({
         sorgente: "modulo_cta_finale",
       });
+
+      if (typeof window !== "undefined") {
+        const current = Number(
+          window.sessionStorage.getItem("contatti_errori_consecutivi") ?? "0",
+        );
+        const prossimo = current + 1;
+        window.sessionStorage.setItem(
+          "contatti_errori_consecutivi",
+          String(prossimo),
+        );
+        if (prossimo >= 3) {
+          trackAllertaConversione({ erroriConsecutivi: prossimo });
+        }
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -219,11 +352,16 @@ export function FinalCTA() {
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.nome}
-                        onChange={(e) =>
-                          setValues((v) => ({ ...v, nome: e.target.value }))
-                        }
+                        onChange={(e) => setCampo("nome", e.target.value)}
+                        onBlur={() => onBlurCampo("nome")}
+                        aria-invalid={Boolean(fieldErrors.nome)}
                         required
                       />
+                      {touched.nome && fieldErrors.nome ? (
+                        <p className="mt-1 text-xs text-rose-300">
+                          {fieldErrors.nome}
+                        </p>
+                      ) : null}
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
@@ -233,11 +371,16 @@ export function FinalCTA() {
                         type="email"
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.email}
-                        onChange={(e) =>
-                          setValues((v) => ({ ...v, email: e.target.value }))
-                        }
+                        onChange={(e) => setCampo("email", e.target.value)}
+                        onBlur={() => onBlurCampo("email")}
+                        aria-invalid={Boolean(fieldErrors.email)}
                         required
                       />
+                      {touched.email && fieldErrors.email ? (
+                        <p className="mt-1 text-xs text-rose-300">
+                          {fieldErrors.email}
+                        </p>
+                      ) : null}
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
@@ -246,11 +389,16 @@ export function FinalCTA() {
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.telefono}
-                        onChange={(e) =>
-                          setValues((v) => ({ ...v, telefono: e.target.value }))
-                        }
+                        onChange={(e) => setCampo("telefono", e.target.value)}
+                        onBlur={() => onBlurCampo("telefono")}
+                        aria-invalid={Boolean(fieldErrors.telefono)}
                         placeholder="+39 ..."
                       />
+                      {touched.telefono && fieldErrors.telefono ? (
+                        <p className="mt-1 text-xs text-rose-300">
+                          {fieldErrors.telefono}
+                        </p>
+                      ) : null}
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
@@ -259,11 +407,16 @@ export function FinalCTA() {
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.attivita}
-                        onChange={(e) =>
-                          setValues((v) => ({ ...v, attivita: e.target.value }))
-                        }
+                        onChange={(e) => setCampo("attivita", e.target.value)}
+                        onBlur={() => onBlurCampo("attivita")}
+                        aria-invalid={Boolean(fieldErrors.attivita)}
                         required
                       />
+                      {touched.attivita && fieldErrors.attivita ? (
+                        <p className="mt-1 text-xs text-rose-300">
+                          {fieldErrors.attivita}
+                        </p>
+                      ) : null}
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
@@ -272,11 +425,16 @@ export function FinalCTA() {
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.citta}
-                        onChange={(e) =>
-                          setValues((v) => ({ ...v, citta: e.target.value }))
-                        }
+                        onChange={(e) => setCampo("citta", e.target.value)}
+                        onBlur={() => onBlurCampo("citta")}
+                        aria-invalid={Boolean(fieldErrors.citta)}
                         required
                       />
+                      {touched.citta && fieldErrors.citta ? (
+                        <p className="mt-1 text-xs text-rose-300">
+                          {fieldErrors.citta}
+                        </p>
+                      ) : null}
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
@@ -285,11 +443,16 @@ export function FinalCTA() {
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                         value={values.sito}
-                        onChange={(e) =>
-                          setValues((v) => ({ ...v, sito: e.target.value }))
-                        }
+                        onChange={(e) => setCampo("sito", e.target.value)}
+                        onBlur={() => onBlurCampo("sito")}
+                        aria-invalid={Boolean(fieldErrors.sito)}
                         placeholder="https://"
                       />
+                      {touched.sito && fieldErrors.sito ? (
+                        <p className="mt-1 text-xs text-rose-300">
+                          {fieldErrors.sito}
+                        </p>
+                      ) : null}
                     </label>
                   </div>
 
@@ -300,12 +463,17 @@ export function FinalCTA() {
                     <input
                       className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                       value={values.obiettivo}
-                      onChange={(e) =>
-                        setValues((v) => ({ ...v, obiettivo: e.target.value }))
-                      }
+                      onChange={(e) => setCampo("obiettivo", e.target.value)}
+                      onBlur={() => onBlurCampo("obiettivo")}
+                      aria-invalid={Boolean(fieldErrors.obiettivo)}
                       required
                       placeholder="Prenotazioni, chiamate, richieste…"
                     />
+                    {touched.obiettivo && fieldErrors.obiettivo ? (
+                      <p className="mt-1 text-xs text-rose-300">
+                        {fieldErrors.obiettivo}
+                      </p>
+                    ) : null}
                   </label>
 
                   <label className="space-y-1">
@@ -315,11 +483,16 @@ export function FinalCTA() {
                     <textarea
                       className="focus-ring min-h-28 w-full resize-none rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
                       value={values.messaggio}
-                      onChange={(e) =>
-                        setValues((v) => ({ ...v, messaggio: e.target.value }))
-                      }
+                      onChange={(e) => setCampo("messaggio", e.target.value)}
+                      onBlur={() => onBlurCampo("messaggio")}
+                      aria-invalid={Boolean(fieldErrors.messaggio)}
                       required
                     />
+                    {touched.messaggio && fieldErrors.messaggio ? (
+                      <p className="mt-1 text-xs text-rose-300">
+                        {fieldErrors.messaggio}
+                      </p>
+                    ) : null}
                   </label>
 
                   <button

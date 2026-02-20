@@ -79,7 +79,7 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    const count = Math.max(18, Math.min(42, Math.floor(width / 30)));
+    const count = Math.max(14, Math.min(30, Math.floor(width / 38)));
     const particles = Array.from({ length: count }).map(() => {
       const speed = 0.18 + Math.random() * 0.4;
       return {
@@ -272,6 +272,8 @@ export function Hero() {
                   width={1400}
                   height={900}
                   priority
+                  quality={82}
+                  sizes="(max-width: 1024px) 100vw, 40vw"
                   className="h-auto w-full rounded-2xl"
                 />
               </div>

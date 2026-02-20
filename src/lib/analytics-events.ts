@@ -7,6 +7,9 @@ export const EVENT_NAMES = {
   erroreInvioContatto: "errore_invio_contatto",
   completamentoIntro: "completamento_intro",
   saltoIntro: "salto_intro",
+  interazioneFaq: "interazione_faq",
+  validazioneModuloContatto: "validazione_modulo_contatto",
+  allertaConversioneInvio: "allerta_conversione_invio",
 } as const;
 
 export type PosizioneInvitoAzione =
@@ -65,4 +68,24 @@ export function trackIntroSkip(payload: {
   autoStart: boolean;
 }) {
   trackEvent(EVENT_NAMES.saltoIntro, payload);
+}
+
+export function trackFaqToggle(payload: {
+  indice: number;
+  azione: "aperta" | "chiusa";
+}) {
+  trackEvent(EVENT_NAMES.interazioneFaq, payload);
+}
+
+export function trackValidazioneModulo(payload: {
+  campo: string;
+  esito: "ok" | "errore";
+}) {
+  trackEvent(EVENT_NAMES.validazioneModuloContatto, payload);
+}
+
+export function trackAllertaConversione(payload: {
+  erroriConsecutivi: number;
+}) {
+  trackEvent(EVENT_NAMES.allertaConversioneInvio, payload);
 }
