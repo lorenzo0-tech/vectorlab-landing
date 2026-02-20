@@ -203,7 +203,9 @@ export function Solution() {
             <motion.div
               key={title}
               className="glass gradient-border card-tech group rounded-3xl p-6 transition-transform will-change-transform"
-              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14, scale: 0.99 }}
+              initial={
+                reduce ? { opacity: 1 } : { opacity: 0, y: 14, scale: 0.99 }
+              }
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{

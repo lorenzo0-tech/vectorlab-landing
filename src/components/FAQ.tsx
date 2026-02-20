@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
@@ -74,30 +74,28 @@ export function FAQ() {
                   <span className="icon-chip h-10 w-10">
                     <ChevronDown
                       className={
-                        "h-5 w-5 transition-transform " +
+                        "h-5 w-5 transition-transform duration-150 " +
                         (isOpen ? "rotate-180" : "rotate-0")
                       }
                     />
                   </span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen ? (
-                    <motion.div
-                      id={contentId}
-                      initial={
-                        reduce ? { opacity: 1 } : { height: 0, opacity: 0 }
-                      }
-                      animate={
-                        reduce ? { opacity: 1 } : { height: "auto", opacity: 1 }
-                      }
-                      exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                      className="overflow-hidden px-6 pb-6"
-                    >
-                      <p className="text-sm leading-7 text-(--muted)">{f.a}</p>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
+                <div
+                  id={contentId}
+                  className={
+                    "grid overflow-hidden transition-all " +
+                    (reduce ? "duration-0" : "duration-150 ease-out") +
+                    (isOpen
+                      ? " grid-rows-[1fr] opacity-100"
+                      : " grid-rows-[0fr] opacity-0")
+                  }
+                >
+                  <div className="min-h-0">
+                    <p className="px-6 pb-6 text-sm leading-7 text-(--muted)">
+                      {f.a}
+                    </p>
+                  </div>
+                </div>
               </div>
             );
           })}

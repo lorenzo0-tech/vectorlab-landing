@@ -477,6 +477,26 @@ body::before {
     transition: background-color 9999s ease-out 0s;
   }
 
+  .lead-form input,
+  .lead-form textarea {
+    transition:
+      border-color 140ms ease,
+      background-color 140ms ease,
+      box-shadow 140ms ease;
+  }
+
+  .lead-form input:hover,
+  .lead-form textarea:hover {
+    border-color: color-mix(in srgb, var(--accent-cyan) 34%, transparent);
+  }
+
+  .lead-form input:focus-visible,
+  .lead-form textarea:focus-visible {
+    border-color: color-mix(in srgb, var(--accent-cyan) 62%, transparent);
+    background: rgba(2, 6, 23, 0.84);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+  }
+
   .nav-link-tech::after {
     content: "";
     position: absolute;
