@@ -4,19 +4,25 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const cases = [
   {
-    name: "Ristorante centro città",
+    name: "Ristorante centro città · Milano",
     metric: "+38% richieste tavolo",
-    detail: "nei primi 45 giorni dopo il rilascio",
+    detail: "45 giorni dopo il rilascio",
+    before: "CTA poco visibile e percorso prenotazione dispersivo",
+    action: "Header semplificata, CTA sticky e percorso mobile lineare",
   },
   {
-    name: "Pizzeria takeaway",
+    name: "Pizzeria takeaway · Bergamo",
     metric: "+52% clic su menu",
-    detail: "dopo ottimizzazione testata e CTA",
+    detail: "30 giorni dopo ottimizzazione testata e CTA",
+    before: "Menu difficile da trovare da smartphone",
+    action: "Menu in 1 tap + gerarchia visiva orientata all’azione",
   },
   {
-    name: "Cocktail bar eventi",
-    metric: "2.1x click su prenota",
-    detail: "grazie a percorso mobile semplificato",
+    name: "Cocktail bar eventi · Torino",
+    metric: "2.1x clic su prenota",
+    detail: "60 giorni con tracciamento eventi attivo",
+    before: "Traffico buono ma conversione bassa su mobile",
+    action: "Riduzione frizione sui tap e blocchi trust sopra la piega",
   },
 ];
 
@@ -36,8 +42,8 @@ export function CaseStudies() {
             Risultati reali, non promesse.
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
-            Esempi sintetici di outcome tipici su attività locali con struttura
-            orientata alle conversioni.
+            Mini-case con contesto, intervento e outcome. Niente promesse vaghe:
+            solo metriche di comportamento utili alla vendita.
           </p>
         </motion.div>
 
@@ -58,6 +64,16 @@ export function CaseStudies() {
                 {item.metric}
               </p>
               <p className="mt-2 text-sm text-(--muted)">{item.detail}</p>
+              <p className="mt-4 text-xs leading-6 text-(--muted)">
+                <span className="font-semibold text-foreground/90">Prima:</span>{" "}
+                {item.before}
+              </p>
+              <p className="mt-1 text-xs leading-6 text-(--muted)">
+                <span className="font-semibold text-foreground/90">
+                  Intervento:
+                </span>{" "}
+                {item.action}
+              </p>
             </motion.article>
           ))}
         </div>

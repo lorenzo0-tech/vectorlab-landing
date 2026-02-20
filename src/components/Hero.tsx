@@ -191,16 +191,20 @@ export function Hero() {
                 />
                 <h1 className="heading-display text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
                   <span className="hero-title-tech">
-                    Il tuo sito dovrebbe vendere. Non solo esistere.
+                    Siti web per ristoranti e hotel, creati su misura.
                   </span>
                 </h1>
               </div>
 
               <p className="mt-6 text-pretty text-lg leading-8 text-(--muted) sm:text-xl">
-                “Progettiamo e sviluppiamo siti moderni per ristoranti e
-                attività locali che vogliono risultati: prenotazioni, chiamate,
-                richieste. Design di alto livello + sviluppo solido. Consegna
-                tipica: 14 giorni (in base alla complessità).”
+                Siamo specializzati in creazione e sviluppo di siti web per
+                ristoranti e hotel: design premium, UX mobile-first e tecnologia
+                solida per trasformare visite in prenotazioni e richieste.
+              </p>
+
+              <p className="mt-3 text-sm font-semibold tracking-wide text-cyan-100/90">
+                Dalla strategia al lancio: un unico partner per immagine,
+                performance e conversione.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">

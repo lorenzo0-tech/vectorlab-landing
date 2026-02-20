@@ -5,6 +5,8 @@ export const EVENT_NAMES = {
   leadSubmitAttempt: "lead_submit_attempt",
   leadSubmitSuccess: "lead_submit_success",
   leadSubmitError: "lead_submit_error",
+  introComplete: "intro_complete",
+  introSkip: "intro_skip",
 } as const;
 
 export type CtaLocation =
@@ -17,6 +19,7 @@ export type CtaLocation =
 export type CtaTarget = "calendly" | "preventivo";
 
 export type LeadSource = "final_cta_form";
+export type IntroMode = "blocking" | "non_blocking";
 
 type CtaPayload = {
   location: CtaLocation;
@@ -48,4 +51,18 @@ export function trackLeadSubmitSuccess(payload: {
 
 export function trackLeadSubmitError(payload: { source: LeadSource }) {
   trackEvent(EVENT_NAMES.leadSubmitError, payload);
+}
+
+export function trackIntroComplete(payload: {
+  mode: IntroMode;
+  autoStart: boolean;
+}) {
+  trackEvent(EVENT_NAMES.introComplete, payload);
+}
+
+export function trackIntroSkip(payload: {
+  mode: IntroMode;
+  autoStart: boolean;
+}) {
+  trackEvent(EVENT_NAMES.introSkip, payload);
 }

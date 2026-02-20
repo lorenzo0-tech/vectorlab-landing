@@ -30,7 +30,7 @@ export function TrustBar() {
           {checks.map((c) => (
             <div
               key={c}
-              className="glass rounded-2xl px-3 py-3 transition-colors hover:bg-white"
+              className="glass trust-chip rounded-2xl px-3 py-3 transition-colors"
             >
               <div className="flex items-start gap-2">
                 <span className="icon-chip mt-0.5 h-6 w-6">

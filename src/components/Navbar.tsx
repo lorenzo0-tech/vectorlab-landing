@@ -99,13 +99,17 @@ export function Navbar() {
                 <span className="absolute inset-0 rounded-full bg-cyan-200/70 blur-[3px]" />
               </span>
               <span className="relative max-w-[54vw] truncate sm:max-w-none">
-                <span className="bg-[linear-gradient(108deg,rgba(240,249,255,0.98)_0%,rgba(103,232,249,0.94)_34%,rgba(165,180,252,0.93)_66%,rgba(232,121,249,0.9)_100%)] bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(34,211,238,0.36)]">
+                <span
+                  data-text={COMPANY_NAME}
+                  className="brand-tech-wordmark bg-[linear-gradient(108deg,rgba(240,249,255,0.98)_0%,rgba(103,232,249,0.94)_34%,rgba(165,180,252,0.93)_66%,rgba(232,121,249,0.9)_100%)] bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(34,211,238,0.36)]"
+                >
                   {COMPANY_NAME}
                 </span>
                 <span
                   aria-hidden="true"
                   className="absolute -bottom-0.5 left-0 h-px w-full bg-linear-to-r from-cyan-300/0 via-cyan-200/70 to-fuchsia-300/0 opacity-55 transition-opacity group-hover:opacity-95"
                 />
+                <span aria-hidden="true" className="brand-tech-scanline" />
               </span>
             </a>
 

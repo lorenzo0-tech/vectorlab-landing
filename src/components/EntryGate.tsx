@@ -1,9 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { trackIntroComplete, trackIntroSkip } from "@/lib/analytics-events";
+import { COMPANY_NAME } from "@/lib/constants";
 
 type EntryGateProps = {
-  onEnterAction: () => void;
+  onEnterAction?: () => void;
+  onCompleteAction?: () => void;
+  nonBlocking?: boolean;
+  autoStart?: boolean;
+  showSkip?: boolean;
+  durationMs?: number;
 };
 
 type Orb = {
@@ -164,7 +171,7 @@ function OrbsField() {
   );
 }
 
-function EntryWordmark() {
+function EntryWordmark({ companyName }: { companyName: string }) {
   return (
     <motion.h1
       className="heading-display relative inline-block text-3xl font-semibold tracking-[0.08em] sm:text-6xl sm:tracking-[0.12em]"
@@ -178,7 +185,7 @@ function EntryWordmark() {
         animate={{ opacity: [0.38, 0.72, 0.38], scale: [1, 1.025, 1] }}
         transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
       >
-        VectorLab
+        {companyName}
       </motion.span>
 
       <motion.span
@@ -190,7 +197,7 @@ function EntryWordmark() {
         }}
         transition={{ duration: 1.9, repeat: Infinity, ease: "linear" }}
       >
-        VectorLab
+        {companyName}
       </motion.span>
 
       <motion.span
@@ -202,11 +209,11 @@ function EntryWordmark() {
         }}
         transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
       >
-        VectorLab
+        {companyName}
       </motion.span>
 
       <span className="relative inline-block bg-[linear-gradient(110deg,rgba(240,249,255,0.98)_0%,rgba(125,211,252,0.94)_35%,rgba(165,180,252,0.94)_65%,rgba(232,121,249,0.92)_100%)] bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(34,211,238,0.45)]">
-        VectorLab
+        {companyName}
         <motion.span
           aria-hidden="true"
           className="absolute inset-y-0 left-[-26%] w-[26%] skew-x-[-18deg] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.72),transparent)] blur-md"
@@ -223,69 +230,150 @@ function EntryWordmark() {
   );
 }
 
-export function EntryGate({ onEnterAction }: EntryGateProps) {
-  const [ready, setReady] = useState(false);
+export function EntryGate({
+  onEnterAction,
+  onCompleteAction,
+  nonBlocking = false,
+  autoStart = false,
+  showSkip = false,
+  durationMs = WARP_DURATION_MS,
+}: EntryGateProps) {
+  const [ready, setReady] = useState(nonBlocking || autoStart);
   const [jumping, setJumping] = useState(false);
-  const enterTimeoutRef = useRef<number | null>(null);
+  const completeTimeoutRef = useRef<number | null>(null);
+  const startTimeoutRef = useRef<number | null>(null);
+  const ringCount = nonBlocking ? 8 : 11;
+  const streakCount = nonBlocking ? 140 : 240;
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setReady(true), 1100);
-    return () => window.clearTimeout(timeout);
+    return () => {
+      if (completeTimeoutRef.current) {
+        window.clearTimeout(completeTimeoutRef.current);
+      }
+      if (startTimeoutRef.current) {
+        window.clearTimeout(startTimeoutRef.current);
+      }
+    };
   }, []);
 
-  useEffect(
-    () => () => {
-      if (enterTimeoutRef.current) {
-        window.clearTimeout(enterTimeoutRef.current);
+  useEffect(() => {
+    if (nonBlocking || autoStart) return;
+
+    const timeout = window.setTimeout(() => setReady(true), 1100);
+    return () => window.clearTimeout(timeout);
+  }, [autoStart, nonBlocking]);
+
+  useEffect(() => {
+    if (!autoStart) return;
+
+    startTimeoutRef.current = window.setTimeout(() => {
+      setJumping(true);
+
+      completeTimeoutRef.current = window.setTimeout(() => {
+        setJumping(false);
+        trackIntroComplete({
+          mode: nonBlocking ? "non_blocking" : "blocking",
+          autoStart: true,
+        });
+        onCompleteAction?.();
+      }, durationMs);
+    }, 120);
+
+    return () => {
+      if (startTimeoutRef.current) {
+        window.clearTimeout(startTimeoutRef.current);
       }
-    },
-    [],
-  );
+      if (completeTimeoutRef.current) {
+        window.clearTimeout(completeTimeoutRef.current);
+      }
+    };
+  }, [autoStart, durationMs, nonBlocking, onCompleteAction]);
 
   const handleEnter = () => {
     if (!ready || jumping) return;
 
     setJumping(true);
-    enterTimeoutRef.current = window.setTimeout(() => {
-      onEnterAction();
-    }, WARP_DURATION_MS);
+    completeTimeoutRef.current = window.setTimeout(() => {
+      onEnterAction?.();
+      trackIntroComplete({ mode: "blocking", autoStart: false });
+      onCompleteAction?.();
+    }, durationMs);
+  };
+
+  const handleSkip = () => {
+    if (startTimeoutRef.current) {
+      window.clearTimeout(startTimeoutRef.current);
+    }
+    if (completeTimeoutRef.current) {
+      window.clearTimeout(completeTimeoutRef.current);
+    }
+    setJumping(false);
+    trackIntroSkip({
+      mode: nonBlocking ? "non_blocking" : "blocking",
+      autoStart,
+    });
+    onCompleteAction?.();
   };
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+    <section
+      className={
+        nonBlocking
+          ? "pointer-events-none fixed inset-0 z-[70] flex items-center justify-center overflow-hidden"
+          : "relative flex min-h-screen items-center justify-center overflow-hidden"
+      }
+      aria-hidden={nonBlocking ? "true" : undefined}
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(82%_62%_at_20%_18%,rgba(6,182,212,0.36),transparent_62%),radial-gradient(74%_56%_at_84%_22%,rgba(99,102,241,0.32),transparent_64%),radial-gradient(70%_60%_at_50%_88%,rgba(217,70,239,0.24),transparent_66%)]" />
 
-      <OrbsField />
+      {!nonBlocking ? <OrbsField /> : null}
 
       <div className="pointer-events-none absolute top-10 left-0 right-0 z-10 px-4 text-center sm:top-14">
-        <EntryWordmark />
+        <EntryWordmark companyName={COMPANY_NAME} />
       </div>
 
-      <motion.button
-        type="button"
-        onClick={handleEnter}
-        disabled={!ready || jumping}
-        aria-disabled={!ready || jumping}
-        className={`btn-primary focus-ring relative z-20 ${ready && !jumping ? "" : "cursor-not-allowed opacity-70"}`}
-        whileHover={ready && !jumping ? { scale: 1.04 } : undefined}
-        whileTap={{ scale: 0.98 }}
-      >
-        <motion.span
-          aria-hidden="true"
-          className="pointer-events-none absolute -inset-2 -z-10 rounded-full bg-cyan-300/25 blur-md"
-          animate={
-            ready && !jumping
-              ? {
-                  scale: [1, 1.3, 1],
-                  opacity: [0.2, 0.7, 0.2],
-                }
-              : undefined
-          }
-          transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {jumping ? "Ingresso in HyperLab" : "Esplora il sito"}
-        <ArrowRight className="h-4 w-4" />
-      </motion.button>
+      {!nonBlocking && !autoStart ? (
+        <motion.button
+          type="button"
+          onClick={handleEnter}
+          disabled={!ready || jumping}
+          aria-disabled={!ready || jumping}
+          className={`btn-primary focus-ring relative z-20 ${ready && !jumping ? "" : "cursor-not-allowed opacity-70"}`}
+          whileHover={ready && !jumping ? { scale: 1.04 } : undefined}
+          whileTap={{ scale: 0.98 }}
+        >
+          <motion.span
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-2 -z-10 rounded-full bg-cyan-300/25 blur-md"
+            animate={
+              ready && !jumping
+                ? {
+                    scale: [1, 1.3, 1],
+                    opacity: [0.2, 0.7, 0.2],
+                  }
+                : undefined
+            }
+            transition={{
+              duration: 1.7,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          {jumping ? "Ingresso in HyperLab" : "Esplora il sito"}
+          <ArrowRight className="h-4 w-4" />
+        </motion.button>
+      ) : null}
+
+      {nonBlocking && showSkip && jumping ? (
+        <button
+          type="button"
+          onClick={handleSkip}
+          className="btn-secondary pointer-events-auto absolute right-4 top-4 z-40 px-4 py-2 text-xs"
+          aria-label="Salta animazione iniziale"
+        >
+          Salta animazione
+        </button>
+      ) : null}
 
       <AnimatePresence>
         {jumping ? (
@@ -297,16 +385,16 @@ export function EntryGate({ onEnterAction }: EntryGateProps) {
             transition={{ duration: 0.2 }}
           >
             <motion.div
-              className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.2),rgba(2,6,23,0.94)_40%,rgba(2,6,23,1)_75%)]"
+              className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.18),rgba(2,6,23,0.74)_40%,rgba(2,6,23,0.9)_75%)]"
               initial={{ scale: 1 }}
               animate={{ scale: 1.7 }}
               transition={{
-                duration: WARP_DURATION_MS / 1000,
+                duration: durationMs / 1000,
                 ease: [0.08, 0.82, 0.2, 1],
               }}
             />
 
-            {Array.from({ length: 11 }).map((_, index) => (
+            {Array.from({ length: ringCount }).map((_, index) => (
               <motion.div
                 key={index}
                 className="absolute left-1/2 top-1/2 rounded-full border border-cyan-100/35"
@@ -317,7 +405,7 @@ export function EntryGate({ onEnterAction }: EntryGateProps) {
                   opacity: [0, 1, 0.3, 0],
                 }}
                 transition={{
-                  duration: WARP_DURATION_MS / 1000,
+                  duration: durationMs / 1000,
                   delay: index * 0.08,
                   ease: [0.06, 0.82, 0.2, 1],
                 }}
@@ -325,7 +413,7 @@ export function EntryGate({ onEnterAction }: EntryGateProps) {
               />
             ))}
 
-            {Array.from({ length: 240 }).map((_, index) => {
+            {Array.from({ length: streakCount }).map((_, index) => {
               const angle = (index * 137.5 * Math.PI) / 180;
               const distance = 420 + ((index * 67) % 2200);
               const angleDeg = (angle * 180) / Math.PI;
@@ -368,7 +456,7 @@ export function EntryGate({ onEnterAction }: EntryGateProps) {
               initial={{ opacity: 0, scale: 0.3 }}
               animate={{ opacity: [0, 1, 0], scale: [0.3, 7, 16] }}
               transition={{
-                duration: WARP_DURATION_MS / 1000,
+                duration: durationMs / 1000,
                 ease: [0.14, 0.82, 0.2, 1],
               }}
             />

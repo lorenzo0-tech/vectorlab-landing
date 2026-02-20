@@ -29,7 +29,8 @@ export function Problem() {
               altri.
             </h2>
             <p className="mt-4 text-lg leading-8 text-(--muted)">
-              “Le persone decidono in pochi secondi…”
+              Le persone decidono in pochi secondi: se non capiscono subito cosa
+              fare, escono.
             </p>
           </div>
           <div className="lg:col-span-7">
