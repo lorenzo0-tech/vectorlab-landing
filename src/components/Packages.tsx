@@ -136,7 +136,7 @@ export function Packages() {
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {packages.map((p) => (
             <motion.div
-              key={p.name}
+              key={p.trackingName}
               className={
                 "group card-tech relative overflow-hidden rounded-3xl p-6 transition-transform " +
                 (p.highlight

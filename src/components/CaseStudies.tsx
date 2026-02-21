@@ -82,9 +82,9 @@ export function CaseStudies() {
         </motion.div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {cases.map((item) => (
+          {cases.map((item, index) => (
             <motion.article
-              key={item.name}
+              key={`case-${index}`}
               className="glass gradient-border card-tech rounded-3xl p-6"
               initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}

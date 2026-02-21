@@ -204,7 +204,7 @@ export function Solution() {
             >
               {gallery.map((shot) => (
                 <motion.div
-                  key={shot.label}
+                  key={shot.src}
                   className={shot.className}
                   variants={sequenceItem}
                 >
@@ -257,7 +257,7 @@ export function Solution() {
         <motion.div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map(({ title, desc, Icon }, index) => (
             <motion.div
-              key={title}
+              key={`solution-item-${index}`}
               className="glass gradient-border card-tech group rounded-3xl p-6 transition-transform will-change-transform"
               initial={
                 reduce ? { opacity: 1 } : { opacity: 0, y: 14, scale: 0.99 }
