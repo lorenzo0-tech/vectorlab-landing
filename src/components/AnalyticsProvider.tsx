@@ -2,8 +2,13 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GA_MEASUREMENT_ID } from "@/lib/constants";
+import {
+  COOKIE_CONSENT_EVENT,
+  readCookieConsent,
+  type CookieConsentState,
+} from "@/lib/cookie-consent";
 
 declare global {
   interface Window {
@@ -13,9 +18,33 @@ declare global {
 
 export function AnalyticsProvider() {
   const pathname = usePathname();
+  const [consent, setConsent] = useState<CookieConsentState | null>(null);
 
   useEffect(() => {
-    if (!GA_MEASUREMENT_ID || typeof window === "undefined") return;
+    if (typeof window === "undefined") return;
+
+    const syncConsent = () => {
+      setConsent(readCookieConsent());
+    };
+
+    syncConsent();
+    window.addEventListener(COOKIE_CONSENT_EVENT, syncConsent);
+    window.addEventListener("storage", syncConsent);
+
+    return () => {
+      window.removeEventListener(COOKIE_CONSENT_EVENT, syncConsent);
+      window.removeEventListener("storage", syncConsent);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (
+      !GA_MEASUREMENT_ID ||
+      consent !== "accepted" ||
+      typeof window === "undefined"
+    ) {
+      return;
+    }
 
     const query = window.location.search.replace(/^\?/, "");
     const pagePath = query ? `${pathname}?${query}` : pathname;
@@ -23,9 +52,9 @@ export function AnalyticsProvider() {
     window.gtag?.("config", GA_MEASUREMENT_ID, {
       page_path: pagePath,
     });
-  }, [pathname]);
+  }, [consent, pathname]);
 
-  if (!GA_MEASUREMENT_ID) return null;
+  if (!GA_MEASUREMENT_ID || consent !== "accepted") return null;
 
   return (
     <>

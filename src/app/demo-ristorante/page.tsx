@@ -342,7 +342,7 @@ export default function DemoRistorantePage() {
             <div className="mt-6 space-y-2 text-sm text-stone-200">
               <p>Via Monte Napoleone 9, Milano</p>
               <p>+39 02 1234 5678</p>
-              <p>prenotazioni@ateliernove.it</p>
+              <p>vettolab0@gmail.com</p>
             </div>
           </div>
           <ReservationCalendar />
@@ -412,7 +412,7 @@ export default function DemoRistorantePage() {
               },
             ],
             priceRange: "€€€",
-            email: "prenotazioni@ateliernove.it",
+            email: "vettolab0@gmail.com",
           }),
         }}
       />

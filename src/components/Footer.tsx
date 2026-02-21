@@ -1,4 +1,6 @@
 import { ArrowUpRight, Mail } from "lucide-react";
+import Link from "next/link";
+import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -19,7 +21,7 @@ export function Footer() {
                 {COMPANY_NAME}
               </p>
               <p className="mt-2 text-sm text-(--muted)">
-                {COMPANY_CITY} · {COMPANY_VAT}
+                {COMPANY_CITY} · P.IVA: {COMPANY_VAT}
               </p>
               <p className="mt-3 text-xs text-(--muted)">
                 Nota legale: le informazioni non costituiscono offerta
@@ -31,6 +33,27 @@ export function Footer() {
             </div>
 
             <div className="flex w-full flex-col gap-2 sm:w-auto">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-(--muted)">
+                <Link
+                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  href="/privacy-policy"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  href="/cookie-policy"
+                >
+                  Cookie Policy
+                </Link>
+                <Link
+                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  href="/termini-condizioni"
+                >
+                  Termini e Condizioni
+                </Link>
+                <CookiePreferencesButton />
+              </div>
               <a
                 className="btn-secondary focus-ring w-full break-all text-xs sm:w-auto sm:text-sm"
                 href={`mailto:${EMAIL_TO}`}

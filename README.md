@@ -18,8 +18,8 @@ Pagina singola in italiano per vendita siti web di alto livello per ristoranti e
    - `NEXT_PUBLIC_RESTAURANT_VETRINA_URL`
 
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID` (opzionale, per analisi traffico)
-- `RESEND_API_KEY`
-- `LEADS_FROM_EMAIL`
+- `SMTP_GMAIL_USER`
+- `SMTP_GMAIL_APP_PASSWORD`
 
 3. Installa dipendenze e avvia:
 
@@ -51,8 +51,9 @@ Il modulo in `FinalCTA` invia i dati a `POST /api/lead`.
 
 Env richieste per produzione:
 
-- `RESEND_API_KEY`
-- `LEADS_FROM_EMAIL` (mittente verificato su Resend)
+- `SMTP_GMAIL_USER`
+- `SMTP_GMAIL_APP_PASSWORD` (App Password Google, non la password account)
+- `LEADS_FROM_EMAIL` (opzionale, default: `SMTP_GMAIL_USER`)
 - `LEADS_EMAIL_TO` (opzionale, alternativa a `NEXT_PUBLIC_EMAIL_TO`)
 - `LEADS_REPLY_TO` (opzionale)
 
@@ -72,23 +73,17 @@ Se `NEXT_PUBLIC_CALENDLY_URL` punta a un link Calendly valido, nella sezione fin
 Quando acquisti il dominio, imposta:
 
 1. `NEXT_PUBLIC_SITE_URL=https://www.tuodominio.it`
-2. `NEXT_PUBLIC_EMAIL_TO=info@tuodominio.it`
-3. `LEADS_FROM_EMAIL=contatti@tuodominio.it`
-4. `LEADS_EMAIL_TO=info@tuodominio.it`
+2. `NEXT_PUBLIC_EMAIL_TO=vettolab0@gmail.com`
+3. `LEADS_FROM_EMAIL=vettolab0@gmail.com`
+4. `LEADS_EMAIL_TO=vettolab0@gmail.com`
 
-### DNS consigliato (recapitabilità email)
+### Nota invio email con Gmail
 
-- SPF (TXT)
-- DKIM (TXT/CNAME forniti da Resend)
-- DMARC (TXT)
+Per usare Gmail senza servizi esterni:
 
-Esempio DMARC base:
-
-```txt
-v=DMARC1; p=none; rua=mailto:dmarc@tuodominio.it; fo=1
-```
-
-Dopo verifica DNS su Resend, usa `LEADS_FROM_EMAIL` su dominio verificato (non `onboarding@resend.dev`) per evitare problemi di consegna.
+1. Attiva verifica a due fattori sull'account Google.
+2. Genera una App Password.
+3. Inserisci l'App Password in `SMTP_GMAIL_APP_PASSWORD`.
 
 ## Analisi traffico (GA4)
 

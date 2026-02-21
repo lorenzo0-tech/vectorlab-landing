@@ -272,7 +272,7 @@ export function Hero() {
                   width={1400}
                   height={900}
                   priority
-                  quality={82}
+                  quality={75}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="h-auto w-full rounded-2xl"
                 />

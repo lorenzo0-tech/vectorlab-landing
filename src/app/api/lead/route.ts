@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { EMAIL_TO } from "@/lib/constants";
 
 type LeadPayload = {
@@ -122,29 +122,39 @@ export async function POST(req: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const smtpUser = process.env.SMTP_GMAIL_USER;
+  const smtpAppPassword = process.env.SMTP_GMAIL_APP_PASSWORD;
   const to = process.env.LEADS_EMAIL_TO ?? EMAIL_TO;
-  const from = process.env.LEADS_FROM_EMAIL ?? "onboarding@resend.dev";
+  const from =
+    process.env.LEADS_FROM_EMAIL ?? smtpUser ?? "vettolab0@gmail.com";
 
-  if (!apiKey) {
+  if (!smtpUser || !smtpAppPassword) {
     return NextResponse.json(
       {
         ok: false,
         message:
-          "Server non configurato: imposta RESEND_API_KEY e LEADS_FROM_EMAIL.",
+          "Server non configurato: imposta SMTP_GMAIL_USER e SMTP_GMAIL_APP_PASSWORD.",
       },
       { status: 503 },
     );
   }
 
   try {
-    const resend = new Resend(apiKey);
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: smtpUser,
+        pass: smtpAppPassword,
+      },
+    });
 
-    await resend.emails.send({
+    await transporter.sendMail({
       from,
       to,
       subject: `Nuova richiesta preventivo — ${payload.attivita} (${payload.citta})`,
-      replyTo: process.env.LEADS_REPLY_TO ?? undefined,
+      replyTo: process.env.LEADS_REPLY_TO ?? payload.email,
       text: [
         `Nome: ${payload.nome}`,
         `Email: ${payload.email}`,
@@ -157,6 +167,17 @@ export async function POST(req: Request) {
         "Messaggio:",
         payload.messaggio,
       ].join("\n"),
+      html: `
+        <h2>Nuova richiesta preventivo</h2>
+        <p><strong>Nome:</strong> ${payload.nome}</p>
+        <p><strong>Email:</strong> ${payload.email}</p>
+        <p><strong>Telefono:</strong> ${payload.telefono || "-"}</p>
+        <p><strong>Attività:</strong> ${payload.attivita}</p>
+        <p><strong>Città:</strong> ${payload.citta}</p>
+        <p><strong>Sito attuale:</strong> ${payload.sito || "-"}</p>
+        <p><strong>Obiettivo:</strong> ${payload.obiettivo}</p>
+        <p><strong>Messaggio:</strong><br/>${payload.messaggio.replace(/\n/g, "<br/>")}</p>
+      `,
     });
 
     return NextResponse.json({ ok: true });

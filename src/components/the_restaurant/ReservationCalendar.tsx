@@ -154,7 +154,7 @@ export function ReservationCalendar() {
       notes || "Nessuna nota",
     ].join("\n");
 
-    window.location.href = `mailto:prenotazioni@ateliernove.it?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:vettolab0@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
