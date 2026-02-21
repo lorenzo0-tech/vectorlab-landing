@@ -77,9 +77,9 @@ export const metadata: Metadata = {
     address: false,
   },
   icons: {
-    icon: "/images/vettolab-logo-neon.svg",
-    shortcut: "/images/vettolab-logo-neon.svg",
-    apple: "/images/vettolab-logo-neon.svg",
+    icon: "/images/logo_vettolab.png",
+    shortcut: "/images/logo_vettolab.png",
+    apple: "/images/logo_vettolab.png",
   },
 };
 

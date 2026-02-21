@@ -97,7 +97,7 @@ export function Navbar() {
             >
               <span className="logo-tech-shell">
                 <Image
-                  src="/images/vettolab-logo-neon.svg"
+                  src="/images/logo_vettolab.png"
                   alt={`${COMPANY_NAME} logo`}
                   width={30}
                   height={30}
