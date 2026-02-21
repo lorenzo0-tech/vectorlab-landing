@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { CALENDLY_URL, COMPANY_NAME } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
@@ -95,15 +94,9 @@ export function Navbar() {
               href="#top"
               className="group heading-display inline-flex items-center gap-2.5 text-base font-semibold leading-none tracking-tight text-foreground sm:text-lg"
             >
-              <span className="logo-mark-wrap" aria-hidden="true">
-                <Image
-                  src="/images/logo_vettolab.png"
-                  alt={`${COMPANY_NAME} logo`}
-                  width={96}
-                  height={96}
-                  className="logo-tech-image"
-                  priority
-                />
+              <span className="relative h-3 w-3 shrink-0">
+                <span className="absolute inset-0 rounded-full bg-cyan-300/90 shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+                <span className="absolute inset-0 rounded-full bg-cyan-200/70 blur-[3px]" />
               </span>
               <span className="relative max-w-[54vw] truncate sm:max-w-none">
                 <span

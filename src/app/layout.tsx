@@ -76,11 +76,6 @@ export const metadata: Metadata = {
     email: false,
     address: false,
   },
-  icons: {
-    icon: "/images/logo_vettolab.png",
-    shortcut: "/images/logo_vettolab.png",
-    apple: "/images/logo_vettolab.png",
-  },
 };
 
 export default function RootLayout({

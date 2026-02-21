@@ -24,8 +24,6 @@ import {
   COMPANY_VAT,
 } from "@/lib/constants";
 
-const LOGO_URL = `${SITE_URL.replace(/\/+$/, "")}/images/logo_vettolab.png`;
-
 const homepageFaq = [
   {
     question: "In quanto tempo consegnate?",
@@ -51,7 +49,6 @@ const structuredData = {
       "@type": "Organization",
       name: COMPANY_NAME,
       url: SITE_URL,
-      logo: LOGO_URL,
       vatID: COMPANY_VAT,
       address: {
         "@type": "PostalAddress",
