@@ -95,7 +95,7 @@ export function Navbar() {
               href="#top"
               className="group heading-display inline-flex items-center gap-2.5 text-base font-semibold leading-none tracking-tight text-foreground sm:text-lg"
             >
-              <span className="logo-tech-shell">
+              <span className="logo-mark-wrap" aria-hidden="true">
                 <Image
                   src="/images/logo_vettolab.png"
                   alt={`${COMPANY_NAME} logo`}

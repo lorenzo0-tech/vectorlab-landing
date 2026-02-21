@@ -466,58 +466,21 @@ body::before {
     animation: brand-scan 1.9s ease-in-out infinite;
   }
 
-  .logo-tech-shell {
+  .logo-mark-wrap {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 11px;
-    background: radial-gradient(
-      circle at 20% 20%,
-      rgba(34, 211, 238, 0.24),
-      rgba(10, 10, 30, 0.82) 62%
-    );
-    box-shadow:
-      0 0 18px rgba(34, 211, 238, 0.32),
-      0 0 26px rgba(232, 121, 249, 0.2),
-      inset 0 0 0 1px rgba(165, 180, 252, 0.26);
-    padding: 2px;
-    overflow: visible;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 auto;
   }
 
   @media (min-width: 1024px) {
-    .logo-tech-shell {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      padding: 4px;
-      box-shadow:
-        0 0 22px rgba(34, 211, 238, 0.34),
-        0 0 30px rgba(232, 121, 249, 0.22),
-        inset 0 0 0 1px rgba(165, 180, 252, 0.3);
+    .logo-mark-wrap {
+      width: 40px;
+      height: 40px;
     }
-  }
-
-  .logo-tech-shell::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(
-      120deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.2) 40%,
-      transparent 70%
-    );
-    transform: translateX(-140%);
-    transition: transform 560ms ease;
-    pointer-events: none;
-  }
-
-  .group:hover .logo-tech-shell::after {
-    transform: translateX(140%);
   }
 
   .logo-tech-image {
@@ -525,17 +488,18 @@ body::before {
     height: 100%;
     object-fit: contain;
     object-position: center;
-    transform: scale(1.32);
+    transform: scale(1);
     transform-origin: center;
-    filter: saturate(1.12) contrast(1.06)
-      drop-shadow(0 0 8px rgba(34, 211, 238, 0.28));
+    filter: saturate(1.08) contrast(1.03)
+      drop-shadow(0 0 4px rgba(34, 211, 238, 0.2));
+    mix-blend-mode: screen;
   }
 
   @media (min-width: 1024px) {
     .logo-tech-image {
-      transform: scale(1.42);
-      filter: saturate(1.16) contrast(1.08)
-        drop-shadow(0 0 10px rgba(34, 211, 238, 0.32));
+      transform: scale(1);
+      filter: saturate(1.1) contrast(1.04)
+        drop-shadow(0 0 6px rgba(34, 211, 238, 0.24));
     }
   }
 
