@@ -3,11 +3,13 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/components/LanguageProvider";
 import { CALENDLY_URL } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
 
 type PackageCard = {
-  name: "BASE" | "VETRINA" | "CRESCITA";
+  name: string;
+  trackingName: "BASE" | "VETRINA" | "CRESCITA";
   tagline: string;
   points: string[];
   image: string;
@@ -15,51 +17,102 @@ type PackageCard = {
   highlight?: boolean;
 };
 
-const packages: PackageCard[] = [
-  {
-    name: "BASE",
-    tagline: "Essenziale, veloce, pronto a convertire.",
-    points: [
-      "Testata + invito all’azione chiaro",
-      "Menu in un tocco",
-      "Contatti e indicazioni immediate",
-      "Ottimizzazione prestazioni base",
-      "SEO locale base",
-    ],
-    image: "/images/mock/package-base-placeholder.svg",
-    segment: "Ristoranti e pizzerie",
-  },
-  {
-    name: "VETRINA",
-    tagline: "Di alto livello e credibile, per alzare il valore percepito.",
-    highlight: true,
-    points: [
-      "Struttura di alto livello prima su smartphone",
-      "Sezioni persuasive + prove rapide",
-      "Galleria foto ottimizzata",
-      "Tracciamento clic (inviti all’azione / menu / mappa)",
-      "Impostazione tecnica pulita e scalabile",
-    ],
-    image: "/images/mock/package-vetrina-placeholder.svg",
-    segment: "Bar di miscelazione ed eventi",
-  },
-  {
-    name: "CRESCITA",
-    tagline: "Per chi vuole misurare e migliorare nel tempo.",
-    points: [
-      "Struttura orientata a contatti/prenotazioni",
-      "Miglioramenti dell’esperienza utente su dati reali",
-      "Confronto tra due varianti sugli inviti all’azione (quando serve)",
-      "Eventi e tracciamenti avanzati",
-      "Piano iterativo di ottimizzazione",
-    ],
-    image: "/images/mock/package-crescita-placeholder.svg",
-    segment: "Attività locali ad alto valore",
-  },
-];
-
 export function Packages() {
+  const { locale } = useLanguage();
   const reduce = useReducedMotion();
+  const packages: PackageCard[] =
+    locale === "it"
+      ? [
+          {
+            name: "BASE",
+            trackingName: "BASE",
+            tagline: "Essenziale, veloce, pronto a convertire.",
+            points: [
+              "Testata + invito all’azione chiaro",
+              "Menu in un tocco",
+              "Contatti e indicazioni immediate",
+              "Ottimizzazione prestazioni base",
+              "SEO locale base",
+            ],
+            image: "/images/mock/package-base-placeholder.svg",
+            segment: "Ristoranti e pizzerie",
+          },
+          {
+            name: "VETRINA",
+            trackingName: "VETRINA",
+            tagline:
+              "Di alto livello e credibile, per alzare il valore percepito.",
+            highlight: true,
+            points: [
+              "Struttura di alto livello prima su smartphone",
+              "Sezioni persuasive + prove rapide",
+              "Galleria foto ottimizzata",
+              "Tracciamento clic (inviti all’azione / menu / mappa)",
+              "Impostazione tecnica pulita e scalabile",
+            ],
+            image: "/images/mock/package-vetrina-placeholder.svg",
+            segment: "Bar di miscelazione ed eventi",
+          },
+          {
+            name: "CRESCITA",
+            trackingName: "CRESCITA",
+            tagline: "Per chi vuole misurare e migliorare nel tempo.",
+            points: [
+              "Struttura orientata a contatti/prenotazioni",
+              "Miglioramenti dell’esperienza utente su dati reali",
+              "Confronto tra due varianti sugli inviti all’azione (quando serve)",
+              "Eventi e tracciamenti avanzati",
+              "Piano iterativo di ottimizzazione",
+            ],
+            image: "/images/mock/package-crescita-placeholder.svg",
+            segment: "Attività locali ad alto valore",
+          },
+        ]
+      : [
+          {
+            name: "BASE",
+            trackingName: "BASE",
+            tagline: "Essential, fast, and conversion-ready.",
+            points: [
+              "Clear hero + call to action",
+              "One-tap menu",
+              "Instant contact and directions",
+              "Core performance optimization",
+              "Local SEO basics",
+            ],
+            image: "/images/mock/package-base-placeholder.svg",
+            segment: "Restaurants and pizzerias",
+          },
+          {
+            name: "SHOWCASE",
+            trackingName: "VETRINA",
+            tagline: "Premium and credible, designed to raise perceived value.",
+            highlight: true,
+            points: [
+              "Premium smartphone-first structure",
+              "Persuasive sections + quick social proof",
+              "Optimized image gallery",
+              "Click tracking (CTA / menu / map)",
+              "Clean and scalable technical setup",
+            ],
+            image: "/images/mock/package-vetrina-placeholder.svg",
+            segment: "Cocktail bars and event venues",
+          },
+          {
+            name: "GROWTH",
+            trackingName: "CRESCITA",
+            tagline: "For teams that want measurable, ongoing improvement.",
+            points: [
+              "Structure focused on leads/bookings",
+              "UX improvements driven by real data",
+              "CTA variation comparisons when needed",
+              "Advanced events and tracking",
+              "Iterative optimization roadmap",
+            ],
+            image: "/images/mock/package-crescita-placeholder.svg",
+            segment: "High-value local businesses",
+          },
+        ];
 
   return (
     <section id="pacchetti" className="section-pad">
@@ -71,11 +124,12 @@ export function Packages() {
           transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
         >
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            Pacchetti
+            {locale === "it" ? "Pacchetti" : "Packages"}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
-            Nessun pacchetto “standard”: scegliamo il taglio giusto in base a
-            obiettivi e contenuti.
+            {locale === "it"
+              ? "Nessun pacchetto “standard”: scegliamo il taglio giusto in base a obiettivi e contenuti."
+              : "No generic plans: we choose the right setup based on your goals and content."}
           </p>
         </motion.div>
 
@@ -100,7 +154,11 @@ export function Packages() {
               <div className="mb-4 aspect-5/3 overflow-hidden rounded-2xl border border-black/10">
                 <Image
                   src={p.image}
-                  alt={`Anteprima grafica pacchetto ${p.name}`}
+                  alt={
+                    locale === "it"
+                      ? `Anteprima grafica pacchetto ${p.name}`
+                      : `Package visual preview ${p.name}`
+                  }
                   width={900}
                   height={540}
                   className="h-full w-full object-cover"
@@ -141,11 +199,11 @@ export function Packages() {
                     trackCtaClick({
                       posizione: "pacchetti",
                       destinazione: "calendly",
-                      nomePacchetto: p.name,
+                      nomePacchetto: p.trackingName,
                     })
                   }
                 >
-                  Prenota una chiamata
+                  {locale === "it" ? "Prenota una chiamata" : "Book a call"}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a
@@ -155,11 +213,11 @@ export function Packages() {
                     trackCtaClick({
                       posizione: "pacchetti",
                       destinazione: "preventivo",
-                      nomePacchetto: p.name,
+                      nomePacchetto: p.trackingName,
                     })
                   }
                 >
-                  Richiedi preventivo
+                  {locale === "it" ? "Richiedi preventivo" : "Request quote"}
                 </a>
               </div>
             </motion.div>

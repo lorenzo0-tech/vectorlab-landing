@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { cookies } from "next/headers";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -32,28 +33,54 @@ export const metadata: Metadata = {
   },
 };
 
-const punti = [
-  "Struttura mobile-first per utenti che cercano tavolo da smartphone",
-  "Menu, CTA e contatti in evidenza per aumentare richieste e chiamate",
-  "Base SEO locale pulita per ricerche geo-localizzate su Milano",
-] as const;
+export default async function SitiWebRistorantiMilanoPage() {
+  const cookieStore = await cookies();
+  const locale =
+    cookieStore.get("site_locale_v1")?.value === "en" ? "en" : "it";
+  const punti =
+    locale === "it"
+      ? [
+          "Struttura mobile-first per utenti che cercano tavolo da smartphone",
+          "Menu, CTA e contatti in evidenza per aumentare richieste e chiamate",
+          "Base SEO locale pulita per ricerche geo-localizzate su Milano",
+        ]
+      : [
+          "Mobile-first structure for users searching for a table on smartphone",
+          "Menu, CTA and contacts highlighted to increase leads and calls",
+          "Clean local SEO base for geo-localized Milan searches",
+        ];
 
-const faq = [
-  {
-    q: "Quanto tempo serve per pubblicare un sito ristorante a Milano?",
-    a: "In molti casi servono circa 2-4 settimane, in base a contenuti disponibili, numero di pagine e integrazioni richieste.",
-  },
-  {
-    q: "Il menu viene gestito in modo semplice anche da smartphone?",
-    a: "Sì, progettiamo una struttura menu veloce da consultare, con percorsi chiari per prenotazione, chiamata e richiesta informazioni.",
-  },
-  {
-    q: "Il sito aiuta davvero la visibilità locale su Milano?",
-    a: "La base SEO locale è progettata per supportare le ricerche geolocalizzate, con struttura tecnica pulita e contenuti orientati all'intento di ricerca.",
-  },
-] as const;
+  const faq =
+    locale === "it"
+      ? [
+          {
+            q: "Quanto tempo serve per pubblicare un sito ristorante a Milano?",
+            a: "In molti casi servono circa 2-4 settimane, in base a contenuti disponibili, numero di pagine e integrazioni richieste.",
+          },
+          {
+            q: "Il menu viene gestito in modo semplice anche da smartphone?",
+            a: "Sì, progettiamo una struttura menu veloce da consultare, con percorsi chiari per prenotazione, chiamata e richiesta informazioni.",
+          },
+          {
+            q: "Il sito aiuta davvero la visibilità locale su Milano?",
+            a: "La base SEO locale è progettata per supportare le ricerche geolocalizzate, con struttura tecnica pulita e contenuti orientati all'intento di ricerca.",
+          },
+        ]
+      : [
+          {
+            q: "How long does it take to publish a restaurant website in Milan?",
+            a: "In many cases it takes about 2-4 weeks, depending on available content, number of pages, and required integrations.",
+          },
+          {
+            q: "Can the menu be managed easily on smartphone too?",
+            a: "Yes, we design a fast menu structure with clear paths for booking, calling, and requesting information.",
+          },
+          {
+            q: "Does the site really help local visibility in Milan?",
+            a: "The local SEO base is designed to support geo-localized searches with clean technical structure and intent-oriented content.",
+          },
+        ];
 
-export default function SitiWebRistorantiMilanoPage() {
   const cleanSiteUrl = SITE_URL.replace(/\/+$/, "");
   const pageUrl = `${cleanSiteUrl}/siti-web-ristoranti-milano`;
 
@@ -62,8 +89,14 @@ export default function SitiWebRistorantiMilanoPage() {
     "@graph": [
       {
         "@type": "Service",
-        name: "Siti web per ristoranti a Milano",
-        serviceType: "Creazione siti web per ristoranti",
+        name:
+          locale === "it"
+            ? "Siti web per ristoranti a Milano"
+            : "Restaurant websites in Milan",
+        serviceType:
+          locale === "it"
+            ? "Creazione siti web per ristoranti"
+            : "Restaurant website development",
         areaServed: {
           "@type": "City",
           name: COMPANY_CITY,
@@ -99,7 +132,10 @@ export default function SitiWebRistorantiMilanoPage() {
           {
             "@type": "ListItem",
             position: 2,
-            name: "Siti web per ristoranti a Milano",
+            name:
+              locale === "it"
+                ? "Siti web per ristoranti a Milano"
+                : "Restaurant websites in Milan",
             item: pageUrl,
           },
         ],
@@ -118,16 +154,17 @@ export default function SitiWebRistorantiMilanoPage() {
             />
 
             <p className="text-xs font-semibold tracking-[0.16em] text-cyan-100/90 uppercase">
-              SEO Locale · Milano
+              {locale === "it" ? "SEO Locale · Milano" : "Local SEO · Milan"}
             </p>
             <h1 className="heading-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Siti web per ristoranti a Milano
+              {locale === "it"
+                ? "Siti web per ristoranti a Milano"
+                : "Restaurant websites in Milan"}
             </h1>
             <p className="mt-4 text-(--muted)">
-              Realizziamo siti web per ristoranti con un approccio orientato a
-              prenotazioni, chiamate e richieste reali. Layout pulito,
-              performance solide e messaggi chiari per chi cerca un locale a
-              Milano.
+              {locale === "it"
+                ? "Realizziamo siti web per ristoranti con un approccio orientato a prenotazioni, chiamate e richieste reali. Layout pulito, performance solide e messaggi chiari per chi cerca un locale a Milano."
+                : "We build restaurant websites with a booking-, call-, and lead-focused approach. Clean layout, solid performance, and clear messaging for people searching in Milan."}
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-(--muted)">
@@ -141,7 +178,9 @@ export default function SitiWebRistorantiMilanoPage() {
 
             <div className="mt-8 rounded-2xl border border-cyan-200/20 bg-slate-900/45 p-5 sm:p-6">
               <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
-                FAQ su siti web per ristoranti a Milano
+                {locale === "it"
+                  ? "FAQ su siti web per ristoranti a Milano"
+                  : "FAQ about restaurant websites in Milan"}
               </h2>
               <div className="mt-4 space-y-4">
                 {faq.map((item) => (
@@ -162,18 +201,20 @@ export default function SitiWebRistorantiMilanoPage() {
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring"
               >
-                Prenota una chiamata
+                {locale === "it" ? "Prenota una chiamata" : "Book a call"}
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />
-                Torna alla home
+                {locale === "it" ? "Torna alla home" : "Back to home"}
               </Link>
               <Link
                 href="/siti-web-hotel-milano"
                 className="btn-secondary focus-ring inline-flex"
               >
-                Vedi anche: siti web hotel Milano
+                {locale === "it"
+                  ? "Vedi anche: siti web hotel Milano"
+                  : "See also: hotel websites Milan"}
               </Link>
             </div>
           </article>

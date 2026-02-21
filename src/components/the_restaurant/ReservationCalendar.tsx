@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 type DayCell = {
   key: string;
@@ -9,7 +10,10 @@ type DayCell = {
   available: boolean;
 };
 
-const WEEK_DAYS = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
+const WEEK_DAYS = {
+  it: ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"],
+  en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+} as const;
 
 function toKey(date: Date) {
   return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
@@ -62,8 +66,8 @@ function getTimeSlots(date: Date) {
     : ["19:00", "19:30", "20:15", "21:00", "21:45"];
 }
 
-function formatDateLabel(date: Date) {
-  return new Intl.DateTimeFormat("it-IT", {
+function formatDateLabel(date: Date, locale: "it" | "en") {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "it-IT", {
     weekday: "long",
     day: "2-digit",
     month: "long",
@@ -71,14 +75,70 @@ function formatDateLabel(date: Date) {
   }).format(date);
 }
 
-function formatMonth(date: Date) {
-  return new Intl.DateTimeFormat("it-IT", {
+function formatMonth(date: Date, locale: "it" | "en") {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "it-IT", {
     month: "long",
     year: "numeric",
   }).format(date);
 }
 
 export function ReservationCalendar() {
+  const { locale } = useLanguage();
+  const isEn = locale === "en";
+
+  const t = isEn
+    ? {
+        prevMonth: "Previous month",
+        nextMonth: "Next month",
+        availableTimes: "Available times",
+        fullName: "Full name",
+        email: "Email",
+        guests: "Guests",
+        specialRequests: "Special requests",
+        specialRequestsPlaceholder:
+          "Allergies, intolerances, or special requests",
+        summary: "Summary:",
+        at: "at",
+        submit: "Confirm booking request",
+        callback: "We will contact you within 30 minutes during opening hours.",
+        requestReady:
+          "Request prepared: your email app opens with details pre-filled.",
+        noNotes: "No notes",
+        subjectPrefix: "Reservation Atelier Nove —",
+        labelName: "Name",
+        labelEmail: "Email",
+        labelGuests: "Guests",
+        labelDate: "Date",
+        labelTime: "Time",
+        labelNotes: "Notes",
+      }
+    : {
+        prevMonth: "Mese precedente",
+        nextMonth: "Mese successivo",
+        availableTimes: "Orari disponibili",
+        fullName: "Nome e cognome",
+        email: "Posta elettronica",
+        guests: "Numero ospiti",
+        specialRequests: "Richieste speciali",
+        specialRequestsPlaceholder:
+          "Allergie, intolleranze o richieste speciali",
+        summary: "Riepilogo:",
+        at: "alle",
+        submit: "Conferma richiesta di prenotazione",
+        callback:
+          "Ti ricontattiamo entro 30 minuti in orario di apertura per conferma.",
+        requestReady:
+          "Richiesta preparata: si apre il tuo programma di posta elettronica con i dati già compilati.",
+        noNotes: "Nessuna nota",
+        subjectPrefix: "Prenotazione Atelier Nove —",
+        labelName: "Nome",
+        labelEmail: "Email",
+        labelGuests: "Ospiti",
+        labelDate: "Data",
+        labelTime: "Orario",
+        labelNotes: "Note",
+      };
+
   const today = useMemo(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -142,16 +202,16 @@ export function ReservationCalendar() {
     event.preventDefault();
     setIsSubmitted(true);
 
-    const subject = `Prenotazione Atelier Nove — ${formatDateLabel(selectedDate)} ${selectedTime}`;
+    const subject = `${t.subjectPrefix} ${formatDateLabel(selectedDate, locale)} ${selectedTime}`;
     const body = [
-      `Nome: ${name}`,
-      `Email: ${email}`,
-      `Ospiti: ${guests}`,
-      `Data: ${formatDateLabel(selectedDate)}`,
-      `Orario: ${selectedTime}`,
+      `${t.labelName}: ${name}`,
+      `${t.labelEmail}: ${email}`,
+      `${t.labelGuests}: ${guests}`,
+      `${t.labelDate}: ${formatDateLabel(selectedDate, locale)}`,
+      `${t.labelTime}: ${selectedTime}`,
       "",
-      "Note:",
-      notes || "Nessuna nota",
+      `${t.labelNotes}:`,
+      notes || t.noNotes,
     ].join("\n");
 
     window.location.href = `mailto:vettolab0@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -166,26 +226,26 @@ export function ReservationCalendar() {
             className="cal-nav"
             onClick={prevMonth}
             disabled={visibleMonth <= minMonth}
-            aria-label="Mese precedente"
+            aria-label={t.prevMonth}
           >
             ←
           </button>
           <p className="text-sm font-medium capitalize">
-            {formatMonth(visibleMonth)}
+            {formatMonth(visibleMonth, locale)}
           </p>
           <button
             type="button"
             className="cal-nav"
             onClick={nextMonth}
             disabled={visibleMonth >= maxMonth}
-            aria-label="Mese successivo"
+            aria-label={t.nextMonth}
           >
             →
           </button>
         </div>
 
         <div className="calendar-grid calendar-weekdays">
-          {WEEK_DAYS.map((day) => (
+          {WEEK_DAYS[locale].map((day) => (
             <span key={day}>{day}</span>
           ))}
         </div>
@@ -200,7 +260,7 @@ export function ReservationCalendar() {
                 disabled={!cell.available}
                 onClick={() => onSelectDate(cell.date)}
                 className={`cal-day ${active ? "is-active" : ""} ${!cell.inMonth ? "is-out" : ""}`}
-                aria-label={formatDateLabel(cell.date)}
+                aria-label={formatDateLabel(cell.date, locale)}
                 aria-pressed={active}
               >
                 {cell.date.getDate()}
@@ -212,7 +272,7 @@ export function ReservationCalendar() {
 
       <div>
         <p className="mb-2 text-xs tracking-[0.14em] text-amber-200/80 uppercase">
-          Orari disponibili
+          {t.availableTimes}
         </p>
         <div className="flex flex-wrap gap-2">
           {slots.map((slot) => (
@@ -229,9 +289,9 @@ export function ReservationCalendar() {
       </div>
 
       <input
-        aria-label="Nome e cognome"
+        aria-label={t.fullName}
         className="field"
-        placeholder="Nome e cognome"
+        placeholder={t.fullName}
         autoComplete="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -239,53 +299,53 @@ export function ReservationCalendar() {
       />
       <div className="grid gap-3 sm:grid-cols-2">
         <input
-          aria-label="Posta elettronica"
+          aria-label={t.email}
           className="field"
           type="email"
-          placeholder="Posta elettronica"
+          placeholder={t.email}
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
-          aria-label="Numero ospiti"
+          aria-label={t.guests}
           className="field"
           type="number"
           inputMode="numeric"
           min={1}
           max={12}
-          placeholder="Numero ospiti"
+          placeholder={t.guests}
           value={guests}
           onChange={(e) => setGuests(e.target.value)}
           required
         />
       </div>
       <textarea
-        aria-label="Richieste speciali"
+        aria-label={t.specialRequests}
         className="field min-h-24 resize-none"
-        placeholder="Allergie, intolleranze o richieste speciali"
+        placeholder={t.specialRequestsPlaceholder}
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
 
       <div className="rounded-2xl border border-amber-100/10 bg-black/20 px-4 py-3 text-sm text-stone-200">
         <p>
-          <span className="font-medium text-amber-100">Riepilogo:</span>{" "}
-          {formatDateLabel(selectedDate)} alle {selectedTime} · {guests} ospiti
+          <span className="font-medium text-amber-100">{t.summary}</span>{" "}
+          {formatDateLabel(selectedDate, locale)} {t.at} {selectedTime} ·{" "}
+          {guests} {isEn ? "guests" : "ospiti"}
         </p>
       </div>
 
       <button type="submit" className="btn-primary w-full">
-        Conferma richiesta di prenotazione
+        {t.submit}
       </button>
       <p className="text-xs text-stone-400" aria-live="polite">
-        Ti ricontattiamo entro 30 minuti in orario di apertura per conferma.
+        {t.callback}
       </p>
       {isSubmitted ? (
         <p className="text-xs text-amber-100/90" aria-live="polite">
-          Richiesta preparata: si apre il tuo programma di posta elettronica con
-          i dati già compilati.
+          {t.requestReady}
         </p>
       ) : null}
     </form>

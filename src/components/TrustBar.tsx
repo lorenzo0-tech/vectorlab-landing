@@ -2,17 +2,27 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
-
-const checks = [
-  "Inviti all’azione sempre visibili (Chiama / Prenota / Indicazioni)",
-  "Menu immediato (PDF + pagina web indicizzabile)",
-  "Prestazioni e struttura adatte a Google",
-  "Struttura pensata per cellulare",
-  "Tempi chiari, consegna tipica 14 giorni",
-];
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function TrustBar() {
+  const { locale } = useLanguage();
   const reduce = useReducedMotion();
+  const checks =
+    locale === "it"
+      ? [
+          "Inviti all’azione sempre visibili (Chiama / Prenota / Indicazioni)",
+          "Menu immediato (PDF + pagina web indicizzabile)",
+          "Prestazioni e struttura adatte a Google",
+          "Struttura pensata per cellulare",
+          "Tempi chiari, consegna tipica 14 giorni",
+        ]
+      : [
+          "Always-visible CTAs (Call / Book / Directions)",
+          "Instant menu access (PDF + indexable web page)",
+          "Performance and structure aligned with Google",
+          "Smartphone-first structure",
+          "Clear timelines, typical delivery in 14 days",
+        ];
 
   return (
     <motion.section
@@ -24,7 +34,9 @@ export function TrustBar() {
     >
       <div className="glass-strong gradient-border panel-tech relative overflow-hidden rounded-3xl p-6 sm:p-8">
         <p className="text-sm font-semibold tracking-tight sm:text-base">
-          Niente promesse vaghe. Solo scelte che aumentano le conversioni.
+          {locale === "it"
+            ? "Niente promesse vaghe. Solo scelte che aumentano le conversioni."
+            : "No vague promises. Only choices that increase conversion."}
         </p>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {checks.map((c) => (

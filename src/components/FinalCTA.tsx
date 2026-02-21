@@ -4,6 +4,7 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Send } from "lucide-react";
+import { Locale, useLanguage } from "@/components/LanguageProvider";
 import { CALENDLY_URL, EMAIL_TO } from "@/lib/constants";
 import {
   trackAllertaConversione,
@@ -49,40 +50,44 @@ const CAMPI_OBBLIGATORI: CampoForm[] = [
   "messaggio",
 ];
 
-function validaCampo(campo: CampoForm, valore: string) {
+function validaCampo(campo: CampoForm, valore: string, locale: Locale) {
   const pulito = valore.trim();
 
   if (CAMPI_OBBLIGATORI.includes(campo) && pulito.length < 2) {
-    return "Campo obbligatorio";
+    return locale === "it" ? "Campo obbligatorio" : "Required field";
   }
 
   if (campo === "email") {
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pulito);
-    if (!ok) return "Email non valida";
+    if (!ok) return locale === "it" ? "Email non valida" : "Invalid email";
   }
 
   if (campo === "telefono" && pulito.length > 0) {
     const ok = /^[+()\d\s-]{6,24}$/.test(pulito);
-    if (!ok) return "Telefono non valido";
+    if (!ok) return locale === "it" ? "Telefono non valido" : "Invalid phone";
   }
 
   if (campo === "sito" && pulito.length > 0) {
     const ok = /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}/i.test(pulito);
-    if (!ok) return "Sito non valido";
+    if (!ok) return locale === "it" ? "Sito non valido" : "Invalid website";
   }
 
   if (campo === "obiettivo" && pulito.length > 0 && pulito.length < 4) {
-    return "Inserisci almeno 4 caratteri";
+    return locale === "it"
+      ? "Inserisci almeno 4 caratteri"
+      : "Enter at least 4 characters";
   }
 
   if (campo === "messaggio" && pulito.length > 0 && pulito.length < 10) {
-    return "Inserisci almeno 10 caratteri";
+    return locale === "it"
+      ? "Inserisci almeno 10 caratteri"
+      : "Enter at least 10 characters";
   }
 
   return "";
 }
 
-function validaTutto(values: FormState) {
+function validaTutto(values: FormState, locale: Locale) {
   const errori: Partial<Record<CampoForm, string>> = {};
   const campi: CampoForm[] = [
     "nome",
@@ -96,25 +101,28 @@ function validaTutto(values: FormState) {
   ];
 
   for (const campo of campi) {
-    const errore = validaCampo(campo, values[campo]);
+    const errore = validaCampo(campo, values[campo], locale);
     if (errore) errori[campo] = errore;
   }
 
   return errori;
 }
 
-function buildMailto(values: FormState) {
-  const subject = `Richiesta preventivo — ${values.attivita || "Attività"} (${values.citta || "Città"})`;
+function buildMailto(values: FormState, locale: Locale) {
+  const subject =
+    locale === "it"
+      ? `Richiesta preventivo — ${values.attivita || "Attività"} (${values.citta || "Città"})`
+      : `Quote request — ${values.attivita || "Business"} (${values.citta || "City"})`;
   const bodyLines = [
-    `Nome: ${values.nome}`,
+    `${locale === "it" ? "Nome" : "Name"}: ${values.nome}`,
     `Email: ${values.email}`,
-    `Telefono: ${values.telefono || "-"}`,
-    `Attività: ${values.attivita}`,
-    `Città: ${values.citta}`,
-    `Sito attuale: ${values.sito}`,
-    `Obiettivo: ${values.obiettivo}`,
+    `${locale === "it" ? "Telefono" : "Phone"}: ${values.telefono || "-"}`,
+    `${locale === "it" ? "Attività" : "Business"}: ${values.attivita}`,
+    `${locale === "it" ? "Città" : "City"}: ${values.citta}`,
+    `${locale === "it" ? "Sito attuale" : "Current website"}: ${values.sito}`,
+    `${locale === "it" ? "Obiettivo" : "Goal"}: ${values.obiettivo}`,
     "",
-    "Messaggio:",
+    `${locale === "it" ? "Messaggio" : "Message"}:`,
     values.messaggio,
   ];
 
@@ -123,6 +131,7 @@ function buildMailto(values: FormState) {
 }
 
 export function FinalCTA() {
+  const { locale } = useLanguage();
   const reduce = useReducedMotion();
   const router = useRouter();
   const [values, setValues] = useState<FormState>(initial);
@@ -135,13 +144,13 @@ export function FinalCTA() {
     {},
   );
   const [startedAt] = useState(() => Date.now());
-  const mailto = useMemo(() => buildMailto(values), [values]);
+  const mailto = useMemo(() => buildMailto(values, locale), [locale, values]);
 
   const setCampo = (campo: CampoForm, valore: string) => {
     setValues((v) => ({ ...v, [campo]: valore }));
 
     if (touched[campo]) {
-      const errore = validaCampo(campo, valore);
+      const errore = validaCampo(campo, valore, locale);
       setFieldErrors((prev) => ({ ...prev, [campo]: errore }));
       trackValidazioneModulo({
         campo,
@@ -152,7 +161,7 @@ export function FinalCTA() {
 
   const onBlurCampo = (campo: CampoForm) => {
     setTouched((prev) => ({ ...prev, [campo]: true }));
-    const errore = validaCampo(campo, values[campo]);
+    const errore = validaCampo(campo, values[campo], locale);
     setFieldErrors((prev) => ({ ...prev, [campo]: errore }));
     trackValidazioneModulo({
       campo,
@@ -180,7 +189,7 @@ export function FinalCTA() {
     e.preventDefault();
     setErrorMessage(null);
 
-    const errori = validaTutto(values);
+    const errori = validaTutto(values, locale);
     setFieldErrors(errori);
     setTouched({
       nome: true,
@@ -194,7 +203,11 @@ export function FinalCTA() {
     });
 
     if (Object.values(errori).some(Boolean)) {
-      setErrorMessage("Controlla i campi evidenziati e riprova.");
+      setErrorMessage(
+        locale === "it"
+          ? "Controlla i campi evidenziati e riprova."
+          : "Check the highlighted fields and try again.",
+      );
       return;
     }
 
@@ -220,7 +233,10 @@ export function FinalCTA() {
         const body = (await response.json().catch(() => null)) as {
           message?: string;
         } | null;
-        throw new Error(body?.message ?? "Invio non riuscito.");
+        throw new Error(
+          body?.message ??
+            (locale === "it" ? "Invio non riuscito." : "Submission failed."),
+        );
       }
 
       trackLeadSubmitSuccess({
@@ -237,7 +253,9 @@ export function FinalCTA() {
       const message =
         error instanceof Error
           ? error.message
-          : "Errore durante l'invio. Riprova.";
+          : locale === "it"
+            ? "Errore durante l'invio. Riprova."
+            : "Error while sending. Please try again.";
 
       setErrorMessage(message);
       trackLeadSubmitError({
@@ -275,12 +293,14 @@ export function FinalCTA() {
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-6">
               <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                Se il tuo sito non sta portando clienti, è un costo. Noi lo
-                trasformiamo in uno strumento che produce risultati.
+                {locale === "it"
+                  ? "Se il tuo sito non sta portando clienti, è un costo. Noi lo trasformiamo in uno strumento che produce risultati."
+                  : "If your website is not bringing customers, it is a cost. We turn it into a tool that generates results."}
               </h2>
               <p className="mt-4 text-lg leading-8 text-(--muted)">
-                Partiamo da una chiamata di 15 minuti: obiettivo chiaro, azione
-                principale, e la struttura giusta per far muovere le persone.
+                {locale === "it"
+                  ? "Partiamo da una chiamata di 15 minuti: obiettivo chiaro, azione principale, e la struttura giusta per far muovere le persone."
+                  : "We start with a 15-minute call: clear goal, primary action, and the right structure to drive action."}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -295,23 +315,31 @@ export function FinalCTA() {
                     })
                   }
                 >
-                  Prenota una chiamata (15 min)
+                  {locale === "it"
+                    ? "Prenota una chiamata (15 min)"
+                    : "Book a call (15 min)"}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a href="#preventivo" className="btn-secondary focus-ring">
-                  Richiedi un preventivo
+                  {locale === "it"
+                    ? "Richiedi un preventivo"
+                    : "Request a quote"}
                 </a>
               </div>
 
               {calendlyEmbedUrl ? (
                 <div className="mt-6 overflow-hidden rounded-2xl border border-white/15 bg-slate-950/70">
                   <p className="px-4 pt-4 text-xs font-semibold tracking-widest text-(--muted)">
-                    CALENDARIO RAPIDO
+                    {locale === "it" ? "CALENDARIO RAPIDO" : "QUICK CALENDAR"}
                   </p>
                   <iframe
-                    title="Calendario prenotazione chiamata"
+                    title={
+                      locale === "it"
+                        ? "Calendario prenotazione chiamata"
+                        : "Call booking calendar"
+                    }
                     src={calendlyEmbedUrl}
-                    className="h-[620px] w-full"
+                    className="h-155 w-full"
                     loading="lazy"
                   />
                 </div>
@@ -321,11 +349,14 @@ export function FinalCTA() {
             <div className="lg:col-span-6">
               <div id="preventivo" className="scroll-mt-28">
                 <h3 className="text-base font-semibold tracking-tight">
-                  Richiedi un preventivo
+                  {locale === "it"
+                    ? "Richiedi un preventivo"
+                    : "Request a quote"}
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-(--muted)">
-                  Compila i campi essenziali: prepariamo una prima proposta di
-                  struttura e le azioni da spingere.
+                  {locale === "it"
+                    ? "Compila i campi essenziali: prepariamo una prima proposta di struttura e le azioni da spingere."
+                    : "Fill in the essential fields: we prepare an initial structure proposal and the key actions to prioritize."}
                 </p>
 
                 <form onSubmit={onSubmit} className="lead-form mt-6 space-y-3">
@@ -347,7 +378,7 @@ export function FinalCTA() {
                   <div className="grid gap-3 sm:grid-cols-2">
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
-                        Nome
+                        {locale === "it" ? "Nome" : "Name"}
                       </span>
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
@@ -384,7 +415,9 @@ export function FinalCTA() {
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
-                        Telefono (opzionale)
+                        {locale === "it"
+                          ? "Telefono (opzionale)"
+                          : "Phone (optional)"}
                       </span>
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
@@ -402,7 +435,7 @@ export function FinalCTA() {
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
-                        Attività
+                        {locale === "it" ? "Attività" : "Business"}
                       </span>
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
@@ -420,7 +453,7 @@ export function FinalCTA() {
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
-                        Città
+                        {locale === "it" ? "Città" : "City"}
                       </span>
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
@@ -438,7 +471,7 @@ export function FinalCTA() {
                     </label>
                     <label className="space-y-1">
                       <span className="text-xs font-semibold text-(--muted)">
-                        Sito attuale
+                        {locale === "it" ? "Sito attuale" : "Current website"}
                       </span>
                       <input
                         className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
@@ -458,7 +491,7 @@ export function FinalCTA() {
 
                   <label className="space-y-1">
                     <span className="text-xs font-semibold text-(--muted)">
-                      Obiettivo
+                      {locale === "it" ? "Obiettivo" : "Goal"}
                     </span>
                     <input
                       className="focus-ring w-full rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
@@ -467,7 +500,11 @@ export function FinalCTA() {
                       onBlur={() => onBlurCampo("obiettivo")}
                       aria-invalid={Boolean(fieldErrors.obiettivo)}
                       required
-                      placeholder="Prenotazioni, chiamate, richieste…"
+                      placeholder={
+                        locale === "it"
+                          ? "Prenotazioni, chiamate, richieste…"
+                          : "Bookings, calls, leads…"
+                      }
                     />
                     {touched.obiettivo && fieldErrors.obiettivo ? (
                       <p className="mt-1 text-xs text-rose-300">
@@ -478,7 +515,7 @@ export function FinalCTA() {
 
                   <label className="space-y-1">
                     <span className="text-xs font-semibold text-(--muted)">
-                      Messaggio
+                      {locale === "it" ? "Messaggio" : "Message"}
                     </span>
                     <textarea
                       className="focus-ring min-h-28 w-full resize-none rounded-2xl border border-cyan-200/20 bg-slate-950/72 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400"
@@ -500,19 +537,28 @@ export function FinalCTA() {
                     className="btn-primary focus-ring w-full"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Invio in corso..." : "Invia richiesta"}
+                    {isSubmitting
+                      ? locale === "it"
+                        ? "Invio in corso..."
+                        : "Sending..."
+                      : locale === "it"
+                        ? "Invia richiesta"
+                        : "Send request"}
                     <Send className="h-4 w-4" />
                   </button>
 
                   <p className="text-xs text-(--muted)">
-                    Invio diretto dal sito. Se il server non è configurato puoi
-                    usare l&apos;alternativa via email qui sotto.
+                    {locale === "it"
+                      ? "Invio diretto dal sito. Se il server non è configurato puoi usare l'alternativa via email qui sotto."
+                      : "Direct website submission. If the server is not configured, you can use the email alternative below."}
                   </p>
                   <a
                     href={mailto}
                     className="text-xs font-semibold text-cyan-200 underline-offset-2 hover:text-cyan-100 hover:underline"
                   >
-                    Alternativa: apri email precompilata
+                    {locale === "it"
+                      ? "Alternativa: apri email precompilata"
+                      : "Alternative: open pre-filled email"}
                   </a>
 
                   {errorMessage ? (

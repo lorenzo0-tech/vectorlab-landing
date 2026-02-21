@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/components/LanguageProvider";
 import { CALENDLY_URL } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
 
@@ -129,18 +130,19 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
 }
 
 export function Hero() {
+  const { locale } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
   const particlesEnabled = !shouldReduceMotion;
 
   const pills = useMemo(
     () => [
-      "Prima su smartphone",
-      "Velocità reale",
-      "Menu in un tocco",
-      "SEO locale di base",
-      "Tracciamento dei clic",
+      locale === "it" ? "Prima su smartphone" : "Smartphone-first",
+      locale === "it" ? "Velocità reale" : "Real speed",
+      locale === "it" ? "Menu in un tocco" : "One-tap menu",
+      locale === "it" ? "SEO locale di base" : "Local SEO basics",
+      locale === "it" ? "Tracciamento dei clic" : "Click tracking",
     ],
-    [],
+    [locale],
   );
 
   return (
@@ -191,21 +193,23 @@ export function Hero() {
                 />
                 <h1 className="heading-display text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
                   <span className="hero-title-tech">
-                    Siti web per ristoranti e hotel, creati su misura.
+                    {locale === "it"
+                      ? "Siti web per ristoranti e hotel, creati su misura."
+                      : "Custom websites for restaurants and hotels."}
                   </span>
                 </h1>
               </div>
 
               <p className="mt-6 text-pretty text-lg leading-8 text-(--muted) sm:text-xl">
-                Siamo specializzati in creazione e sviluppo di siti web per
-                ristoranti e hotel: progettazione di alto livello, esperienza
-                utente prima da smartphone e tecnologia solida per trasformare
-                visite in prenotazioni e richieste.
+                {locale === "it"
+                  ? "Siamo specializzati in creazione e sviluppo di siti web per ristoranti e hotel: progettazione di alto livello, esperienza utente prima da smartphone e tecnologia solida per trasformare visite in prenotazioni e richieste."
+                  : "We specialize in custom websites for restaurants and hotels: premium design, smartphone-first UX, and solid technology to turn visits into bookings and leads."}
               </p>
 
               <p className="mt-3 text-sm font-semibold tracking-wide text-cyan-100/90">
-                Dalla strategia al lancio: un unico partner per immagine,
-                prestazioni e conversione.
+                {locale === "it"
+                  ? "Dalla strategia al lancio: un unico partner per immagine, prestazioni e conversione."
+                  : "From strategy to launch: one partner for brand, performance, and conversion."}
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
@@ -232,7 +236,9 @@ export function Hero() {
                     })
                   }
                 >
-                  Prenota una chiamata (15 min)
+                  {locale === "it"
+                    ? "Prenota una chiamata (15 min)"
+                    : "Book a call (15 min)"}
                   <ArrowUpRight className="h-4 w-4" />
                 </MagneticLink>
                 <MagneticLink
@@ -245,7 +251,9 @@ export function Hero() {
                     })
                   }
                 >
-                  Richiedi un preventivo
+                  {locale === "it"
+                    ? "Richiedi un preventivo"
+                    : "Request a quote"}
                   <Mail className="h-4 w-4" />
                 </MagneticLink>
               </div>
@@ -268,7 +276,11 @@ export function Hero() {
               <div className="glass-strong gradient-border panel-tech card-tech relative overflow-hidden rounded-3xl p-3">
                 <Image
                   src="/images/herosala.jpg"
-                  alt="Sala ristorante elegante, luce calda e profondità"
+                  alt={
+                    locale === "it"
+                      ? "Sala ristorante elegante, luce calda e profondità"
+                      : "Elegant restaurant room with warm light and depth"
+                  }
                   width={1400}
                   height={900}
                   priority
@@ -281,19 +293,23 @@ export function Hero() {
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <div className="glass gradient-border rounded-2xl px-4 py-3">
                   <p className="text-[11px] font-semibold tracking-widest text-(--muted)">
-                    SPECIALIZZAZIONE
+                    {locale === "it" ? "SPECIALIZZAZIONE" : "SPECIALIZATION"}
                   </p>
                   <p className="mt-1 text-sm font-semibold">
-                    Ristoranti · Pizzerie · Cocktail bar
+                    {locale === "it"
+                      ? "Ristoranti · Pizzerie · Cocktail bar"
+                      : "Restaurants · Pizzerias · Cocktail bars"}
                   </p>
                 </div>
 
                 <div className="glass gradient-border rounded-2xl px-4 py-3">
                   <p className="text-[11px] font-semibold tracking-widest text-(--muted)">
-                    OBIETTIVO
+                    {locale === "it" ? "OBIETTIVO" : "GOAL"}
                   </p>
                   <p className="mt-1 text-sm font-semibold">
-                    Prenotazioni, chiamate, richieste
+                    {locale === "it"
+                      ? "Prenotazioni, chiamate, richieste"
+                      : "Bookings, calls, leads"}
                   </p>
                 </div>
               </div>

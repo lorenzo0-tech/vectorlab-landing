@@ -1,6 +1,9 @@
+"use client";
+
 import { ArrowUpRight, Mail } from "lucide-react";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
+import { useLanguage } from "@/components/LanguageProvider";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -10,6 +13,8 @@ import {
 } from "@/lib/constants";
 
 export function Footer() {
+  const { locale } = useLanguage();
+
   return (
     <footer className="pb-28 sm:pb-10">
       <div className="container-pad">
@@ -24,11 +29,14 @@ export function Footer() {
                 {COMPANY_CITY} · P.IVA: {COMPANY_VAT}
               </p>
               <p className="mt-3 text-xs text-(--muted)">
-                Nota legale: le informazioni non costituiscono offerta
-                vincolante.
+                {locale === "it"
+                  ? "Nota legale: le informazioni non costituiscono offerta vincolante."
+                  : "Legal note: information does not constitute a binding offer."}
               </p>
               <p className="mt-4 inline-flex items-center rounded-full border border-cyan-200/60 bg-cyan-50/80 px-3 py-1 text-xs font-semibold text-cyan-900">
-                Disponibilità chiamata: 15 min
+                {locale === "it"
+                  ? "Disponibilità chiamata: 15 min"
+                  : "Call availability: 15 min"}
               </p>
             </div>
 
@@ -50,19 +58,25 @@ export function Footer() {
                   className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
                   href="/termini-condizioni"
                 >
-                  Termini e Condizioni
+                  {locale === "it"
+                    ? "Termini e Condizioni"
+                    : "Terms and Conditions"}
                 </Link>
                 <Link
                   className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
                   href="/siti-web-ristoranti-milano"
                 >
-                  Siti web ristoranti Milano
+                  {locale === "it"
+                    ? "Siti web ristoranti Milano"
+                    : "Restaurant websites Milan"}
                 </Link>
                 <Link
                   className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
                   href="/siti-web-hotel-milano"
                 >
-                  Siti web hotel Milano
+                  {locale === "it"
+                    ? "Siti web hotel Milano"
+                    : "Hotel websites Milan"}
                 </Link>
                 <CookiePreferencesButton />
               </div>
@@ -79,7 +93,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Prenota una chiamata
+                {locale === "it" ? "Prenota una chiamata" : "Book a call"}
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>

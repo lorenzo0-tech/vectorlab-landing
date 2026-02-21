@@ -421,6 +421,23 @@ body::before {
       brand-reveal 4.8s ease-in-out infinite;
   }
 
+  .brand-tech-shell {
+    display: inline-flex;
+    align-items: center;
+    isolation: isolate;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .brand-tech-wordmark--nova {
+    font-family: var(--font-display), var(--font-sans), system-ui;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-shadow:
+      0 0 18px color-mix(in srgb, var(--accent-cyan) 28%, transparent),
+      0 0 34px color-mix(in srgb, var(--accent-indigo) 24%, transparent);
+  }
+
   .brand-tech-wordmark::before,
   .brand-tech-wordmark::after {
     content: attr(data-text);
@@ -464,6 +481,300 @@ body::before {
     opacity: 0;
     filter: blur(3px);
     animation: brand-scan 1.9s ease-in-out infinite;
+  }
+
+  .brand-tech-spark {
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--accent-cyan) 66%, #ffffff 34%),
+      transparent 68%
+    );
+    filter: blur(0.4px);
+  }
+
+  .brand-tech-spark-a {
+    top: 2%;
+    right: 8%;
+    width: 7px;
+    height: 7px;
+    animation: brand-spark-a 2.8s ease-in-out infinite;
+  }
+
+  .brand-tech-spark-b {
+    bottom: 8%;
+    left: 3%;
+    width: 5px;
+    height: 5px;
+    animation: brand-spark-b 3.6s ease-in-out infinite;
+  }
+
+  .brand-mark-shell {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    isolation: isolate;
+    border-radius: 999px;
+    padding: 1px;
+  }
+
+  .brand-mark-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: conic-gradient(
+      from 0deg,
+      color-mix(in srgb, var(--accent-cyan) 56%, transparent),
+      color-mix(in srgb, var(--accent-indigo) 52%, transparent),
+      color-mix(in srgb, var(--accent-fuchsia) 54%, transparent),
+      color-mix(in srgb, var(--accent-cyan) 56%, transparent)
+    );
+    opacity: 0.82;
+    animation: brand-ring-spin 8.5s linear infinite;
+  }
+
+  .brand-mark-glow {
+    position: absolute;
+    inset: -12%;
+    border-radius: inherit;
+    background: radial-gradient(
+      68% 62% at 50% 50%,
+      color-mix(in srgb, var(--accent-cyan) 24%, transparent),
+      transparent 78%
+    );
+    filter: blur(12px);
+    opacity: 0.8;
+    animation: brand-mark-glow 3.6s ease-in-out infinite;
+  }
+
+  .brand-mark-core {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ink-deep) 86%, transparent);
+    padding: 0.26rem 0.3rem 0.26rem 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-cyan) 22%, transparent),
+      0 0 24px color-mix(in srgb, var(--accent-indigo) 20%, transparent);
+  }
+
+  .brand-mark-vetto {
+    font-family: var(--font-display), var(--font-sans), system-ui;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--fg) 94%, #ffffff 6%);
+    text-shadow: 0 0 12px
+      color-mix(in srgb, var(--accent-cyan) 28%, transparent);
+  }
+
+  .brand-mark-lab {
+    margin-left: 0.35rem;
+    border-radius: 999px;
+    padding: 0.06rem 0.45rem;
+    font-family: var(--font-display), var(--font-sans), system-ui;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--fg) 92%, #ffffff 8%);
+    background: linear-gradient(
+      130deg,
+      color-mix(in srgb, var(--accent-cyan) 42%, transparent),
+      color-mix(in srgb, var(--accent-indigo) 38%, transparent),
+      color-mix(in srgb, var(--accent-fuchsia) 34%, transparent)
+    );
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-cyan) 36%, transparent),
+      0 0 12px color-mix(in srgb, var(--accent-fuchsia) 20%, transparent);
+  }
+
+  .brand-mark-scan {
+    position: absolute;
+    z-index: 2;
+    left: 8%;
+    right: 8%;
+    top: 15%;
+    height: 34%;
+    border-radius: 999px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent-cyan) 42%, #ffffff 58%),
+      transparent
+    );
+    mix-blend-mode: screen;
+    opacity: 0;
+    filter: blur(2.5px);
+    animation: brand-mark-scan 2.4s ease-in-out infinite;
+  }
+
+  .nav-brand-cycle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(6.4rem, 8.5vw, 7.4rem);
+    height: clamp(2.45rem, 3.8vw, 2.9rem);
+    isolation: isolate;
+  }
+
+  .nav-brand-cycle--hyper {
+    filter: saturate(1.1) contrast(1.03);
+  }
+
+  .nav-brand-cycle--hyper::before {
+    content: "";
+    position: absolute;
+    inset: 2% -3%;
+    border-radius: 999px;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        68% 85% at 50% 50%,
+        color-mix(in srgb, var(--accent-cyan) 30%, transparent),
+        transparent 72%
+      ),
+      linear-gradient(
+        110deg,
+        color-mix(in srgb, var(--accent-cyan) 22%, transparent),
+        color-mix(in srgb, var(--accent-indigo) 20%, transparent),
+        color-mix(in srgb, var(--accent-fuchsia) 20%, transparent)
+      );
+    mix-blend-mode: screen;
+    opacity: 0.38;
+    filter: blur(3px);
+    animation: nav-brand-halo-hyper 5s ease-in-out infinite;
+  }
+
+  .nav-brand-logo,
+  .nav-brand-wordmark {
+    position: absolute;
+    inset: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform, opacity, filter;
+  }
+
+  .nav-brand-logo {
+    animation: nav-brand-logo-cycle 10s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
+
+  .nav-brand-logo-shell {
+    position: relative;
+    height: clamp(2.3rem, 3.5vw, 2.7rem);
+    width: clamp(2.3rem, 3.5vw, 2.7rem);
+    overflow: hidden;
+    border-radius: 22%;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent-cyan) 22%, transparent),
+      0 0 26px color-mix(in srgb, var(--accent-indigo) 28%, transparent);
+    animation: nav-brand-logo-shell-hyper 5s ease-in-out infinite;
+  }
+
+  .nav-brand-wordmark {
+    animation: nav-brand-wordmark-cycle 10s cubic-bezier(0.2, 0.8, 0.2, 1)
+      infinite;
+  }
+
+  .nav-brand-wordmark-core {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.36rem;
+    border-radius: 999px;
+    padding: 0.26rem 0.3rem 0.26rem 0.5rem;
+    text-transform: uppercase;
+    background: linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--ink-deep) 90%, transparent),
+      color-mix(in srgb, var(--ink-soft) 82%, transparent)
+    );
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-cyan) 24%, transparent),
+      0 0 24px color-mix(in srgb, var(--accent-indigo) 24%, transparent);
+    animation: nav-brand-wordmark-shell-hyper 5s ease-in-out infinite;
+  }
+
+  .nav-brand-wordmark-main {
+    font-family: var(--font-display), var(--font-sans), system-ui;
+    font-size: 0.89rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: color-mix(in srgb, var(--fg) 94%, #ffffff 6%);
+    text-shadow:
+      0 0 14px color-mix(in srgb, var(--accent-cyan) 36%, transparent),
+      0 0 28px color-mix(in srgb, var(--accent-indigo) 24%, transparent);
+    animation: nav-brand-text-hyper 5s steps(1, end) infinite;
+  }
+
+  .nav-brand-wordmark-accent {
+    border-radius: 999px;
+    padding: 0.07rem 0.45rem;
+    font-family: var(--font-display), var(--font-sans), system-ui;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: color-mix(in srgb, var(--fg) 92%, #ffffff 8%);
+    background: linear-gradient(
+      125deg,
+      color-mix(in srgb, var(--accent-cyan) 46%, transparent),
+      color-mix(in srgb, var(--accent-indigo) 40%, transparent),
+      color-mix(in srgb, var(--accent-fuchsia) 36%, transparent)
+    );
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-cyan) 36%, transparent),
+      0 0 14px color-mix(in srgb, var(--accent-fuchsia) 18%, transparent);
+    animation: nav-brand-accent-hyper 5s ease-in-out infinite;
+  }
+
+  .nav-brand-flare {
+    position: absolute;
+    inset: 8% -2%;
+    border-radius: 999px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent-cyan) 42%, #ffffff 58%),
+      color-mix(in srgb, var(--accent-fuchsia) 28%, #ffffff 72%),
+      transparent
+    );
+    mix-blend-mode: screen;
+    opacity: 0;
+    filter: blur(2px);
+    animation: nav-brand-flare 10s ease-in-out infinite;
+  }
+
+  .nav-brand-grid {
+    position: absolute;
+    inset: 7% 2%;
+    border-radius: 999px;
+    pointer-events: none;
+    opacity: 0;
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--accent-cyan) 18%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--accent-indigo) 16%, transparent) 1px,
+        transparent 1px
+      );
+    background-size:
+      8px 100%,
+      100% 8px;
+    mix-blend-mode: screen;
+    filter: blur(0.4px);
+    animation: nav-brand-grid-hyper 5s ease-in-out infinite;
   }
 
   .lead-form input:-webkit-autofill,
@@ -1048,6 +1359,249 @@ body::before {
   58% {
     transform: translate3d(38%, 0, 0);
     opacity: 0;
+  }
+}
+
+@keyframes brand-spark-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.7);
+    opacity: 0;
+  }
+  42% {
+    opacity: 0.78;
+  }
+  60% {
+    transform: translate3d(1px, -2px, 0) scale(1.16);
+    opacity: 0.24;
+  }
+}
+
+@keyframes brand-spark-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.8);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.54;
+  }
+  52% {
+    transform: translate3d(-1px, 2px, 0) scale(1.08);
+    opacity: 0.2;
+  }
+}
+
+@keyframes brand-ring-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes brand-mark-glow {
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes brand-mark-scan {
+  0%,
+  100% {
+    transform: translate3d(-34%, 0, 0);
+    opacity: 0;
+  }
+  46% {
+    opacity: 0;
+  }
+  56% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.52;
+  }
+  66% {
+    transform: translate3d(34%, 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes nav-brand-logo-cycle {
+  0%,
+  41% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  49% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate3d(0, -6px, 0) scale(0.76) rotate(-11deg);
+  }
+  51%,
+  91% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate3d(0, 5px, 0) scale(0.72) rotate(9deg);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes nav-brand-wordmark-cycle {
+  0%,
+  41% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate3d(0, 6px, 0) scale(0.74) rotate(7deg);
+  }
+  49% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  51%,
+  91% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate3d(0, -6px, 0) scale(0.74) rotate(-7deg);
+  }
+}
+
+@keyframes nav-brand-flare {
+  0%,
+  42%,
+  92%,
+  100% {
+    opacity: 0;
+    transform: translate3d(-22%, 0, 0) scaleX(0.86);
+  }
+  46% {
+    opacity: 0.65;
+    transform: translate3d(0, 0, 0) scaleX(1);
+  }
+  50% {
+    opacity: 0;
+    transform: translate3d(24%, 0, 0) scaleX(0.86);
+  }
+  96% {
+    opacity: 0.65;
+    transform: translate3d(0, 0, 0) scaleX(1);
+  }
+}
+
+@keyframes nav-brand-halo-hyper {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(0.98) translate3d(0, 0, 0);
+  }
+  44% {
+    opacity: 0.52;
+    transform: scale(1.02) translate3d(0.5px, 0, 0);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.05) translate3d(-0.8px, 0, 0);
+  }
+  56% {
+    opacity: 0.5;
+    transform: scale(1.01) translate3d(0.6px, 0, 0);
+  }
+}
+
+@keyframes nav-brand-logo-shell-hyper {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent-cyan) 28%, transparent),
+      0 0 24px color-mix(in srgb, var(--accent-indigo) 30%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent-fuchsia) 34%, transparent),
+      0 0 34px color-mix(in srgb, var(--accent-cyan) 38%, transparent);
+  }
+}
+
+@keyframes nav-brand-wordmark-shell-hyper {
+  0%,
+  100% {
+    transform: skewX(0deg);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-cyan) 24%, transparent),
+      0 0 24px color-mix(in srgb, var(--accent-indigo) 24%, transparent);
+  }
+  50% {
+    transform: skewX(-1.2deg);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent-fuchsia) 30%, transparent),
+      0 0 34px color-mix(in srgb, var(--accent-cyan) 32%, transparent);
+  }
+}
+
+@keyframes nav-brand-text-hyper {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    text-shadow:
+      0 0 14px color-mix(in srgb, var(--accent-cyan) 36%, transparent),
+      0 0 28px color-mix(in srgb, var(--accent-indigo) 24%, transparent);
+  }
+  46% {
+    transform: translate3d(0.6px, 0, 0);
+    text-shadow:
+      -1px 0 0 color-mix(in srgb, var(--accent-cyan) 44%, transparent),
+      1px 0 0 color-mix(in srgb, var(--accent-fuchsia) 36%, transparent),
+      0 0 30px color-mix(in srgb, var(--accent-indigo) 34%, transparent);
+  }
+  48% {
+    transform: translate3d(-0.7px, 0, 0);
+  }
+  52% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes nav-brand-accent-hyper {
+  0%,
+  100% {
+    transform: translateY(0);
+    filter: saturate(1);
+  }
+  50% {
+    transform: translateY(-0.5px);
+    filter: saturate(1.2);
+  }
+}
+
+@keyframes nav-brand-grid-hyper {
+  0%,
+  100% {
+    opacity: 0.04;
+    transform: translate3d(0, 0, 0);
+  }
+  45% {
+    opacity: 0.22;
+    transform: translate3d(1px, 0, 0);
+  }
+  55% {
+    opacity: 0.08;
+    transform: translate3d(-1px, 0, 0);
   }
 }
 

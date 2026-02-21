@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { cookies } from "next/headers";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -32,28 +33,54 @@ export const metadata: Metadata = {
   },
 };
 
-const punti = [
-  "Percorso prenotazione semplice, con CTA visibili su mobile",
-  "Messaggi orientati a richieste dirette e riduzione dispersione traffico",
-  "SEO locale di base per intercettare ricerche hotel su Milano",
-] as const;
+export default async function SitiWebHotelMilanoPage() {
+  const cookieStore = await cookies();
+  const locale =
+    cookieStore.get("site_locale_v1")?.value === "en" ? "en" : "it";
+  const punti =
+    locale === "it"
+      ? [
+          "Percorso prenotazione semplice, con CTA visibili su mobile",
+          "Messaggi orientati a richieste dirette e riduzione dispersione traffico",
+          "SEO locale di base per intercettare ricerche hotel su Milano",
+        ]
+      : [
+          "Simple booking path, with mobile-visible CTAs",
+          "Messaging aimed at direct requests and lower traffic leakage",
+          "Local SEO baseline to capture Milan hotel searches",
+        ];
 
-const faq = [
-  {
-    q: "Un sito hotel può aumentare le richieste dirette?",
-    a: "Sì, una struttura chiara con call to action evidenti e contenuti orientati all'utente riduce la dispersione e facilita richieste dirette.",
-  },
-  {
-    q: "Quanto conta la velocità su mobile per un hotel?",
-    a: "Conta molto: gli utenti valutano rapidamente struttura, camere e disponibilità da smartphone. Performance e chiarezza incidono sulla conversione.",
-  },
-  {
-    q: "Il sito è pensato anche per ricerche locali su Milano?",
-    a: "Sì, impostiamo una base SEO locale tecnica e contenutistica per intercettare intenti di ricerca legati a hotel e ospitalità nella città.",
-  },
-] as const;
+  const faq =
+    locale === "it"
+      ? [
+          {
+            q: "Un sito hotel può aumentare le richieste dirette?",
+            a: "Sì, una struttura chiara con call to action evidenti e contenuti orientati all'utente riduce la dispersione e facilita richieste dirette.",
+          },
+          {
+            q: "Quanto conta la velocità su mobile per un hotel?",
+            a: "Conta molto: gli utenti valutano rapidamente struttura, camere e disponibilità da smartphone. Performance e chiarezza incidono sulla conversione.",
+          },
+          {
+            q: "Il sito è pensato anche per ricerche locali su Milano?",
+            a: "Sì, impostiamo una base SEO locale tecnica e contenutistica per intercettare intenti di ricerca legati a hotel e ospitalità nella città.",
+          },
+        ]
+      : [
+          {
+            q: "Can a hotel website increase direct requests?",
+            a: "Yes, a clear structure with visible calls to action and user-oriented content reduces drop-off and improves direct requests.",
+          },
+          {
+            q: "How important is mobile speed for a hotel?",
+            a: "Very important: users evaluate structure, rooms, and availability quickly on smartphone. Performance and clarity affect conversion.",
+          },
+          {
+            q: "Is the site designed for local searches in Milan too?",
+            a: "Yes, we set a technical and content local SEO baseline to capture hospitality search intent in the city.",
+          },
+        ];
 
-export default function SitiWebHotelMilanoPage() {
   const cleanSiteUrl = SITE_URL.replace(/\/+$/, "");
   const pageUrl = `${cleanSiteUrl}/siti-web-hotel-milano`;
 
@@ -62,8 +89,14 @@ export default function SitiWebHotelMilanoPage() {
     "@graph": [
       {
         "@type": "Service",
-        name: "Siti web per hotel a Milano",
-        serviceType: "Creazione siti web per hotel",
+        name:
+          locale === "it"
+            ? "Siti web per hotel a Milano"
+            : "Hotel websites in Milan",
+        serviceType:
+          locale === "it"
+            ? "Creazione siti web per hotel"
+            : "Hotel website development",
         areaServed: {
           "@type": "City",
           name: COMPANY_CITY,
@@ -99,7 +132,10 @@ export default function SitiWebHotelMilanoPage() {
           {
             "@type": "ListItem",
             position: 2,
-            name: "Siti web per hotel a Milano",
+            name:
+              locale === "it"
+                ? "Siti web per hotel a Milano"
+                : "Hotel websites in Milan",
             item: pageUrl,
           },
         ],
@@ -118,16 +154,17 @@ export default function SitiWebHotelMilanoPage() {
             />
 
             <p className="text-xs font-semibold tracking-[0.16em] text-cyan-100/90 uppercase">
-              SEO Locale · Milano
+              {locale === "it" ? "SEO Locale · Milano" : "Local SEO · Milan"}
             </p>
             <h1 className="heading-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Siti web per hotel a Milano
+              {locale === "it"
+                ? "Siti web per hotel a Milano"
+                : "Hotel websites in Milan"}
             </h1>
             <p className="mt-4 text-(--muted)">
-              Progettiamo siti web per hotel con un percorso chiaro verso
-              prenotazione e contatto. Design premium, struttura orientata alla
-              conversione e scelte tecniche pensate per una presenza locale
-              solida.
+              {locale === "it"
+                ? "Progettiamo siti web per hotel con un percorso chiaro verso prenotazione e contatto. Design premium, struttura orientata alla conversione e scelte tecniche pensate per una presenza locale solida."
+                : "We design hotel websites with a clear path to booking and contact. Premium design, conversion-oriented structure, and technical choices built for a solid local presence."}
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-(--muted)">
@@ -141,7 +178,9 @@ export default function SitiWebHotelMilanoPage() {
 
             <div className="mt-8 rounded-2xl border border-cyan-200/20 bg-slate-900/45 p-5 sm:p-6">
               <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
-                FAQ su siti web per hotel a Milano
+                {locale === "it"
+                  ? "FAQ su siti web per hotel a Milano"
+                  : "FAQ about hotel websites in Milan"}
               </h2>
               <div className="mt-4 space-y-4">
                 {faq.map((item) => (
@@ -162,18 +201,20 @@ export default function SitiWebHotelMilanoPage() {
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring"
               >
-                Prenota una chiamata
+                {locale === "it" ? "Prenota una chiamata" : "Book a call"}
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />
-                Torna alla home
+                {locale === "it" ? "Torna alla home" : "Back to home"}
               </Link>
               <Link
                 href="/siti-web-ristoranti-milano"
                 className="btn-secondary focus-ring inline-flex"
               >
-                Vedi anche: siti web ristoranti Milano
+                {locale === "it"
+                  ? "Vedi anche: siti web ristoranti Milano"
+                  : "See also: restaurant websites Milan"}
               </Link>
             </div>
           </article>

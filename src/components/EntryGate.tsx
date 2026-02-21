@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 import { trackIntroComplete, trackIntroSkip } from "@/lib/analytics-events";
 import { COMPANY_NAME } from "@/lib/constants";
 
@@ -290,6 +291,7 @@ export function EntryGate({
   showSkip = false,
   durationMs = WARP_DURATION_MS,
 }: EntryGateProps) {
+  const { locale } = useLanguage();
   const [ready, setReady] = useState(nonBlocking || autoStart);
   const [jumping, setJumping] = useState(false);
   const completeTimeoutRef = useRef<number | null>(null);
@@ -426,7 +428,13 @@ export function EntryGate({
                   ease: "easeInOut",
                 }}
               />
-              {jumping ? "Ingresso in modalità immersiva" : "Accedi al sito"}
+              {jumping
+                ? locale === "it"
+                  ? "Ingresso in modalità immersiva"
+                  : "Entering immersive mode"
+                : locale === "it"
+                  ? "Accedi al sito"
+                  : "Enter website"}
               <ArrowRight className="h-4 w-4" />
             </motion.button>
           </motion.div>
@@ -438,9 +446,13 @@ export function EntryGate({
           type="button"
           onClick={handleSkip}
           className="btn-secondary pointer-events-auto absolute right-4 top-4 z-40 px-4 py-2 text-xs"
-          aria-label="Salta animazione iniziale"
+          aria-label={
+            locale === "it"
+              ? "Salta animazione iniziale"
+              : "Skip intro animation"
+          }
         >
-          Salta animazione
+          {locale === "it" ? "Salta animazione" : "Skip animation"}
         </button>
       ) : null}
 

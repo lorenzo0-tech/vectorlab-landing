@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { useLanguage } from "@/components/LanguageProvider";
 import {
   Gauge,
   MapPinned,
@@ -11,41 +12,75 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 
-const items = [
-  {
-    title: "Testata chiara",
-    desc: "Una promessa comprensibile in 3 secondi, con invito all’azione immediato.",
-    Icon: MousePointerClick,
-  },
-  {
-    title: "Pulsanti che convertono",
-    desc: "Chiama / Prenota / Indicazioni sempre visibili e facili da toccare.",
-    Icon: Smartphone,
-  },
-  {
-    title: "Menu in un tocco",
-    desc: "PDF + pagina web indicizzabile: utile per persone e Google.",
-    Icon: UtensilsCrossed,
-  },
-  {
-    title: "Foto ottimizzate",
-    desc: "Immagini leggere, nitide, con caricamento veloce su smartphone.",
-    Icon: Gauge,
-  },
-  {
-    title: "SEO locale base",
-    desc: "Struttura, testi e segnali fondamentali per essere trovati.",
-    Icon: Search,
-  },
-  {
-    title: "Tracciamento clic",
-    desc: "Misuriamo le azioni importanti per capire cosa porta contatti.",
-    Icon: MapPinned,
-  },
-];
-
 export function Solution() {
+  const { locale } = useLanguage();
   const reduce = useReducedMotion();
+  const items =
+    locale === "it"
+      ? [
+          {
+            title: "Testata chiara",
+            desc: "Una promessa comprensibile in 3 secondi, con invito all’azione immediato.",
+            Icon: MousePointerClick,
+          },
+          {
+            title: "Pulsanti che convertono",
+            desc: "Chiama / Prenota / Indicazioni sempre visibili e facili da toccare.",
+            Icon: Smartphone,
+          },
+          {
+            title: "Menu in un tocco",
+            desc: "PDF + pagina web indicizzabile: utile per persone e Google.",
+            Icon: UtensilsCrossed,
+          },
+          {
+            title: "Foto ottimizzate",
+            desc: "Immagini leggere, nitide, con caricamento veloce su smartphone.",
+            Icon: Gauge,
+          },
+          {
+            title: "SEO locale base",
+            desc: "Struttura, testi e segnali fondamentali per essere trovati.",
+            Icon: Search,
+          },
+          {
+            title: "Tracciamento clic",
+            desc: "Misuriamo le azioni importanti per capire cosa porta contatti.",
+            Icon: MapPinned,
+          },
+        ]
+      : [
+          {
+            title: "Clear hero section",
+            desc: "A clear promise in 3 seconds, with an immediate call to action.",
+            Icon: MousePointerClick,
+          },
+          {
+            title: "High-converting buttons",
+            desc: "Call / Book / Directions always visible and easy to tap.",
+            Icon: Smartphone,
+          },
+          {
+            title: "One-tap menu",
+            desc: "PDF + indexable web page: useful for people and Google.",
+            Icon: UtensilsCrossed,
+          },
+          {
+            title: "Optimized photos",
+            desc: "Light and sharp images with fast smartphone loading.",
+            Icon: Gauge,
+          },
+          {
+            title: "Local SEO basics",
+            desc: "Structure, copy and core signals to get discovered.",
+            Icon: Search,
+          },
+          {
+            title: "Click tracking",
+            desc: "We measure key actions to understand what generates leads.",
+            Icon: MapPinned,
+          },
+        ];
   const sequenceContainer = {
     hidden: {},
     show: {
@@ -71,8 +106,11 @@ export function Solution() {
   const gallery = [
     {
       src: "/images/herosala.jpg",
-      alt: "Testata sala completa con profondità e luce calda",
-      label: "Testata + prenota",
+      alt:
+        locale === "it"
+          ? "Testata sala completa con profondità e luce calda"
+          : "Main dining room hero with warm light and depth",
+      label: locale === "it" ? "Testata + prenota" : "Hero + book",
       mockHeader: true,
       className:
         "relative col-span-12 h-44 overflow-hidden rounded-2xl border border-white/15 sm:col-span-7 sm:h-64 lg:h-72",
@@ -80,8 +118,11 @@ export function Solution() {
     },
     {
       src: "/images/piattosignature.jpg",
-      alt: "Piatto simbolo in primo piano con servizio al tavolo",
-      label: "Piatto firma primo piano",
+      alt:
+        locale === "it"
+          ? "Piatto simbolo in primo piano con servizio al tavolo"
+          : "Signature dish close-up with table service",
+      label: locale === "it" ? "Piatto firma primo piano" : "Signature dish",
       mockHeader: false,
       className:
         "relative col-span-12 h-44 overflow-hidden rounded-2xl border border-white/15 sm:col-span-5 sm:h-64 lg:h-72",
@@ -89,8 +130,11 @@ export function Solution() {
     },
     {
       src: "/images/chefalpass.jpg",
-      alt: "Chef al pass durante il servizio",
-      label: "Chef al pass",
+      alt:
+        locale === "it"
+          ? "Chef al pass durante il servizio"
+          : "Chef at the pass during service",
+      label: locale === "it" ? "Chef al pass" : "Chef at the pass",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-4 sm:h-52",
@@ -98,8 +142,11 @@ export function Solution() {
     },
     {
       src: "/images/menudegustazione.jpeg",
-      alt: "Menu degustazione in primo piano",
-      label: "Menu degustazione",
+      alt:
+        locale === "it"
+          ? "Menu degustazione in primo piano"
+          : "Tasting menu close-up",
+      label: locale === "it" ? "Menu degustazione" : "Tasting menu",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-5 sm:h-52",
@@ -107,8 +154,11 @@ export function Solution() {
     },
     {
       src: "/images/tavoloreserved.jpg",
-      alt: "Dettaglio tavolo riservato",
-      label: "Prenotazione tavolo",
+      alt:
+        locale === "it"
+          ? "Dettaglio tavolo riservato"
+          : "Reserved table detail",
+      label: locale === "it" ? "Prenotazione tavolo" : "Table booking",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-3 sm:h-52",
@@ -126,10 +176,14 @@ export function Solution() {
           transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
         >
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            Un sito progettato per una cosa sola: far agire le persone.
+            {locale === "it"
+              ? "Un sito progettato per una cosa sola: far agire le persone."
+              : "A website designed for one thing only: driving action."}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
-            Elementi concreti, pensati per prenotazioni, chiamate e richieste.
+            {locale === "it"
+              ? "Elementi concreti, pensati per prenotazioni, chiamate e richieste."
+              : "Practical elements built for bookings, calls, and leads."}
           </p>
         </motion.div>
 
@@ -165,24 +219,26 @@ export function Solution() {
                   {shot.mockHeader ? (
                     <div className="absolute left-2 top-2 w-[58%] rounded-lg border border-cyan-100/30 bg-slate-950/72 p-1.5 shadow-[0_16px_44px_rgba(2,6,23,0.45)] backdrop-blur-md sm:left-3 sm:top-3 sm:w-[46%] sm:rounded-xl sm:p-2 lg:w-[42%]">
                       <p className="text-[10px] font-semibold tracking-[0.14em] text-cyan-100/85 uppercase">
-                        Anteprima testata
+                        {locale === "it" ? "Anteprima testata" : "Hero preview"}
                       </p>
                       <p className="mt-1 text-[10px] font-semibold leading-3.5 text-white/95 sm:text-[11px] sm:leading-4 lg:text-xs">
-                        Prenota il tavolo in 15 secondi.
+                        {locale === "it"
+                          ? "Prenota il tavolo in 15 secondi."
+                          : "Book your table in 15 seconds."}
                       </p>
                       <div className="mt-1.5 flex items-center gap-1.5 sm:mt-2 sm:gap-2">
                         <span className="rounded-full bg-cyan-300/20 px-1.5 py-0.5 text-[9px] font-semibold text-cyan-100 sm:px-2 sm:py-1 sm:text-[10px]">
-                          Chiama
+                          {locale === "it" ? "Chiama" : "Call"}
                         </span>
                         <span className="rounded-full bg-fuchsia-300/20 px-1.5 py-0.5 text-[9px] font-semibold text-fuchsia-100 sm:px-2 sm:py-1 sm:text-[10px]">
-                          Indicazioni
+                          {locale === "it" ? "Indicazioni" : "Directions"}
                         </span>
                       </div>
                       <button
                         type="button"
                         className="mt-1.5 w-full rounded-md bg-[linear-gradient(120deg,rgba(103,232,249,0.9),rgba(129,140,248,0.86),rgba(232,121,249,0.85))] px-2 py-1 text-[9px] font-semibold text-slate-950 sm:mt-2 sm:rounded-lg sm:py-1.5 sm:text-[10px]"
                       >
-                        Prenota ora
+                        {locale === "it" ? "Prenota ora" : "Book now"}
                       </button>
                     </div>
                   ) : null}

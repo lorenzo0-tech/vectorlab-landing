@@ -2,15 +2,26 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/components/LanguageProvider";
 import { CALENDLY_URL, COMPANY_NAME } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
 
-const navItems = [
-  { label: "Soluzione", href: "#soluzione" },
-  { label: "Pacchetti", href: "#pacchetti" },
-  { label: "Metodo", href: "#metodo" },
-  { label: "FAQ", href: "#faq" },
-];
+const navItemsByLocale = {
+  it: [
+    { label: "Soluzione", href: "#soluzione" },
+    { label: "Pacchetti", href: "#pacchetti" },
+    { label: "Metodo", href: "#metodo" },
+    { label: "FAQ", href: "#faq" },
+  ],
+  en: [
+    { label: "Solution", href: "#soluzione" },
+    { label: "Packages", href: "#pacchetti" },
+    { label: "Method", href: "#metodo" },
+    { label: "FAQ", href: "#faq" },
+  ],
+} as const;
 
 function useScrolled(threshold = 8) {
   const [scrolled, setScrolled] = useState(false);
@@ -26,6 +37,13 @@ function useScrolled(threshold = 8) {
 }
 
 export function Navbar() {
+  const { locale } = useLanguage();
+  const navItems = navItemsByLocale[locale];
+  const companyLower = COMPANY_NAME.toLowerCase();
+  const labIndex = companyLower.lastIndexOf("lab");
+  const brandPrimary =
+    labIndex > 0 ? COMPANY_NAME.slice(0, labIndex) : COMPANY_NAME;
+  const brandAccent = labIndex > 0 ? COMPANY_NAME.slice(labIndex) : "";
   const scrolled = useScrolled(10);
   const year = useMemo(() => new Date().getFullYear(), []);
   const [active, setActive] = useState<string>("#soluzione");
@@ -44,7 +62,7 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [navItems]);
 
   useEffect(() => {
     const sections = navItems
@@ -71,7 +89,7 @@ export function Navbar() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [navItems]);
 
   return (
     <>
@@ -92,25 +110,41 @@ export function Navbar() {
           >
             <a
               href="#top"
-              className="group heading-display inline-flex items-center gap-2 text-sm font-semibold leading-none tracking-tight text-foreground sm:text-base"
+              className="group inline-flex items-center"
+              aria-label={COMPANY_NAME}
             >
-              <span className="relative max-w-[54vw] truncate sm:max-w-none">
-                <span
-                  data-text={COMPANY_NAME}
-                  className="brand-tech-wordmark bg-[linear-gradient(108deg,rgba(240,249,255,0.98)_0%,rgba(103,232,249,0.94)_34%,rgba(165,180,252,0.93)_66%,rgba(232,121,249,0.9)_100%)] bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(34,211,238,0.36)]"
-                >
-                  {COMPANY_NAME}
+              <span
+                className="nav-brand-cycle nav-brand-cycle--hyper"
+                aria-hidden="true"
+              >
+                <span className="nav-brand-logo">
+                  <span className="nav-brand-logo-shell">
+                    <Image
+                      src="/icon.png"
+                      alt=""
+                      fill
+                      priority
+                      sizes="48px"
+                      className="object-cover"
+                    />
+                  </span>
                 </span>
-                <span
-                  aria-hidden="true"
-                  className="absolute -right-3 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.6)]"
-                />
-                <span
-                  aria-hidden="true"
-                  className="absolute -bottom-0.5 left-0 h-px w-full bg-linear-to-r from-cyan-300/0 via-cyan-200/70 to-fuchsia-300/0 opacity-55 transition-opacity group-hover:opacity-95"
-                />
-                <span aria-hidden="true" className="brand-tech-scanline" />
+                <span className="nav-brand-wordmark">
+                  <span className="nav-brand-wordmark-core">
+                    <span className="nav-brand-wordmark-main">
+                      {brandPrimary}
+                    </span>
+                    {brandAccent ? (
+                      <span className="nav-brand-wordmark-accent">
+                        {brandAccent}
+                      </span>
+                    ) : null}
+                  </span>
+                </span>
+                <span className="nav-brand-flare" />
+                <span className="nav-brand-grid" />
               </span>
+              <span className="sr-only">{COMPANY_NAME}</span>
             </a>
 
             <nav className="hidden items-center gap-5 text-sm font-medium text-(--muted) lg:flex">
@@ -132,12 +166,17 @@ export function Navbar() {
             </nav>
 
             <div className="flex items-center gap-2">
+              <LanguageToggle />
               <a
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring px-3.5 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
-                aria-label="Prenota una chiamata di 15 minuti su Calendly"
+                aria-label={
+                  locale === "it"
+                    ? "Prenota una chiamata di 15 minuti su Calendly"
+                    : "Book a 15-minute call on Calendly"
+                }
                 onClick={() =>
                   trackCtaClick({
                     posizione: "barra_nav",
@@ -145,8 +184,12 @@ export function Navbar() {
                   })
                 }
               >
-                <span className="sm:hidden">Prenota</span>
-                <span className="hidden sm:inline">Prenota una chiamata</span>
+                <span className="sm:hidden">
+                  {locale === "it" ? "Prenota" : "Book"}
+                </span>
+                <span className="hidden sm:inline">
+                  {locale === "it" ? "Prenota una chiamata" : "Book a call"}
+                </span>
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>
@@ -169,7 +212,7 @@ export function Navbar() {
                 })
               }
             >
-              Prenota una chiamata
+              {locale === "it" ? "Prenota una chiamata" : "Book a call"}
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
@@ -182,7 +225,7 @@ export function Navbar() {
                 })
               }
             >
-              Preventivo
+              {locale === "it" ? "Preventivo" : "Quote"}
             </a>
           </div>
           <p className="mt-2 text-center text-xs text-(--muted)">
