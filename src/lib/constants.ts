@@ -10,6 +10,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://vettolab.com";
 
 export const OG_IMAGE_PATH = "/images/og.jpg";
+export const LOGO_IMAGE_PATH = "/images/mock/logo_vettolab.png";
 
 export const COMPANY_CITY = process.env.NEXT_PUBLIC_COMPANY_CITY ?? "Milano";
 export const COMPANY_VAT = process.env.NEXT_PUBLIC_COMPANY_VAT ?? "14572400969";

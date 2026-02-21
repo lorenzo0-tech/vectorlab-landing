@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { trackIntroComplete, trackIntroSkip } from "@/lib/analytics-events";
 import { COMPANY_NAME } from "@/lib/constants";
@@ -230,6 +231,57 @@ function EntryWordmark({ companyName }: { companyName: string }) {
   );
 }
 
+function EntryBrandLogoBackground() {
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="relative z-10"
+      animate={{
+        y: [0, -5, 0],
+        opacity: [0.88, 1, 0.88],
+      }}
+      transition={{
+        duration: 5.8,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    >
+      <div className="relative">
+        <motion.div
+          className="absolute inset-[-26%] rounded-4xl bg-cyan-300/18 blur-3xl"
+          animate={{ scale: [0.94, 1.08, 0.94], opacity: [0.56, 1, 0.56] }}
+          transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute inset-[-20%] rounded-4xl bg-fuchsia-300/18 blur-3xl"
+          animate={{ scale: [1.08, 0.98, 1.08], opacity: [0.42, 0.8, 0.42] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute inset-[-12%] rounded-4xl bg-indigo-300/12 blur-2xl"
+          animate={{ opacity: [0.28, 0.55, 0.28] }}
+          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <Image
+          src="/images/mock/logo_vettolab.png"
+          alt=""
+          width={360}
+          height={240}
+          className="relative h-auto w-72 opacity-52 mix-blend-screen saturate-150 contrast-150 brightness-115 drop-shadow-[0_0_40px_rgba(56,189,248,0.45)] sm:w-96"
+          style={{
+            WebkitMaskImage:
+              "radial-gradient(ellipse 66% 58% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.86) 70%, rgba(0,0,0,0) 100%)",
+            maskImage:
+              "radial-gradient(ellipse 66% 58% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.86) 70%, rgba(0,0,0,0) 100%)",
+          }}
+          priority
+        />
+        <div className="absolute inset-0 rounded-3xl bg-background/16 blur-lg" />
+      </div>
+    </motion.div>
+  );
+}
+
 export function EntryGate({
   onEnterAction,
   onCompleteAction,
@@ -330,43 +382,56 @@ export function EntryGate({
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(82%_62%_at_20%_18%,rgba(6,182,212,0.36),transparent_62%),radial-gradient(74%_56%_at_84%_22%,rgba(99,102,241,0.32),transparent_64%),radial-gradient(70%_60%_at_50%_88%,rgba(217,70,239,0.24),transparent_66%)]" />
 
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_34%_at_50%_48%,rgba(14,165,233,0.12),transparent_72%)]" />
+
       {!nonBlocking ? <OrbsField /> : null}
 
-      <div className="pointer-events-none absolute top-10 left-0 right-0 z-10 px-4 text-center sm:top-14">
+      <div className="pointer-events-none absolute top-10 left-0 right-0 z-20 px-4 text-center sm:top-14">
         <EntryWordmark companyName={COMPANY_NAME} />
       </div>
 
-      {!nonBlocking && !autoStart ? (
-        <motion.button
-          type="button"
-          onClick={handleEnter}
-          disabled={!ready || jumping}
-          aria-disabled={!ready || jumping}
-          className={`btn-primary focus-ring relative z-20 ${ready && !jumping ? "" : "cursor-not-allowed opacity-70"}`}
-          whileHover={ready && !jumping ? { scale: 1.04 } : undefined}
-          whileTap={{ scale: 0.98 }}
-        >
-          <motion.span
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-2 -z-10 rounded-full bg-cyan-300/25 blur-md"
-            animate={
-              ready && !jumping
-                ? {
-                    scale: [1, 1.3, 1],
-                    opacity: [0.2, 0.7, 0.2],
-                  }
-                : undefined
-            }
-            transition={{
-              duration: 1.7,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          {jumping ? "Ingresso in modalità immersiva" : "Esplora il sito"}
-          <ArrowRight className="h-4 w-4" />
-        </motion.button>
-      ) : null}
+      <div className="pointer-events-none absolute left-1/2 top-[45%] z-20 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-3 sm:gap-4">
+        <EntryBrandLogoBackground />
+
+        {!nonBlocking && !autoStart ? (
+          <motion.div
+            className="pointer-events-auto relative z-20"
+            initial={{ opacity: 0.96 }}
+            animate={{ opacity: 1 }}
+          >
+            <div className="pointer-events-none absolute -inset-4 rounded-full bg-background/45 blur-xl" />
+            <motion.button
+              type="button"
+              onClick={handleEnter}
+              disabled={!ready || jumping}
+              aria-disabled={!ready || jumping}
+              className={`btn-primary focus-ring relative z-20 ${ready && !jumping ? "" : "cursor-not-allowed opacity-70"}`}
+              whileHover={ready && !jumping ? { scale: 1.045 } : undefined}
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.span
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-2 -z-10 rounded-full bg-cyan-300/25 blur-md"
+                animate={
+                  ready && !jumping
+                    ? {
+                        scale: [1, 1.34, 1],
+                        opacity: [0.22, 0.68, 0.22],
+                      }
+                    : undefined
+                }
+                transition={{
+                  duration: 1.9,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              {jumping ? "Ingresso in modalità immersiva" : "Accedi al sito"}
+              <ArrowRight className="h-4 w-4" />
+            </motion.button>
+          </motion.div>
+        ) : null}
+      </div>
 
       {nonBlocking && showSkip && jumping ? (
         <button

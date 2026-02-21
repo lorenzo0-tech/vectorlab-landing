@@ -5,6 +5,7 @@ import {
   CALENDLY_URL,
   COMPANY_CITY,
   COMPANY_NAME,
+  LOGO_IMAGE_PATH,
   SITE_URL,
 } from "@/lib/constants";
 
@@ -71,6 +72,7 @@ export default function SitiWebRistorantiMilanoPage() {
           "@type": "Organization",
           name: COMPANY_NAME,
           url: cleanSiteUrl,
+          logo: `${cleanSiteUrl}${LOGO_IMAGE_PATH}`,
         },
         url: pageUrl,
       },

@@ -20,8 +20,9 @@ import {
 import {
   COMPANY_CITY,
   COMPANY_NAME,
-  SITE_URL,
   COMPANY_VAT,
+  LOGO_IMAGE_PATH,
+  SITE_URL,
 } from "@/lib/constants";
 
 const homepageFaq = [
@@ -49,6 +50,7 @@ const structuredData = {
       "@type": "Organization",
       name: COMPANY_NAME,
       url: SITE_URL,
+      logo: `${SITE_URL.replace(/\/+$/, "")}${LOGO_IMAGE_PATH}`,
       vatID: COMPANY_VAT,
       address: {
         "@type": "PostalAddress",

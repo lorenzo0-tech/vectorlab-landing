@@ -84,7 +84,7 @@ export function Navbar() {
         <div className="container-pad">
           <div
             className={
-              "mt-4 flex items-center justify-between rounded-2xl px-4 py-3 transition-all sm:px-6 " +
+              "mt-3 flex items-center justify-between rounded-2xl px-3 py-2.5 transition-all sm:px-5 " +
               (scrolled
                 ? "glass-strong gradient-border panel-tech shadow-[0_14px_40px_rgba(2,6,23,0.08)]"
                 : "bg-transparent")
@@ -92,12 +92,8 @@ export function Navbar() {
           >
             <a
               href="#top"
-              className="group heading-display inline-flex items-center gap-2.5 text-base font-semibold leading-none tracking-tight text-foreground sm:text-lg"
+              className="group heading-display inline-flex items-center gap-2 text-sm font-semibold leading-none tracking-tight text-foreground sm:text-base"
             >
-              <span className="relative h-3 w-3 shrink-0">
-                <span className="absolute inset-0 rounded-full bg-cyan-300/90 shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
-                <span className="absolute inset-0 rounded-full bg-cyan-200/70 blur-[3px]" />
-              </span>
               <span className="relative max-w-[54vw] truncate sm:max-w-none">
                 <span
                   data-text={COMPANY_NAME}
@@ -105,6 +101,10 @@ export function Navbar() {
                 >
                   {COMPANY_NAME}
                 </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-3 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.6)]"
+                />
                 <span
                   aria-hidden="true"
                   className="absolute -bottom-0.5 left-0 h-px w-full bg-linear-to-r from-cyan-300/0 via-cyan-200/70 to-fuchsia-300/0 opacity-55 transition-opacity group-hover:opacity-95"
@@ -136,7 +136,7 @@ export function Navbar() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary focus-ring px-4 py-2.5 text-xs sm:px-5 sm:py-3 sm:text-sm"
+                className="btn-primary focus-ring px-3.5 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
                 aria-label="Prenota una chiamata di 15 minuti su Calendly"
                 onClick={() =>
                   trackCtaClick({

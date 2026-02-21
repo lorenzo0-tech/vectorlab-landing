@@ -71,6 +71,11 @@ export const metadata: Metadata = {
       "Creazione e sviluppo siti web su misura per ristoranti e hotel.",
     images: [OG_IMAGE_PATH],
   },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
+  },
   formatDetection: {
     telephone: false,
     email: false,
