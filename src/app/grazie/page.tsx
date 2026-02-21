@@ -1,7 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarCheck } from "lucide-react";
 import { AmbientBackdrop } from "@/components/AmbientBackdrop";
 import { CALENDLY_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Richiesta inviata",
+  description: "Conferma invio richiesta contatto.",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      "max-image-preview": "none",
+      "max-snippet": 0,
+      "max-video-preview": 0,
+    },
+  },
+};
 
 export default function GraziePage() {
   return (

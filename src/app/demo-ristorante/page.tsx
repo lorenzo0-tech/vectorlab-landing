@@ -1,5 +1,22 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ReservationCalendar } from "@/components/the_restaurant/ReservationCalendar";
+
+export const metadata: Metadata = {
+  title: "Demo ristorante",
+  description: "Pagina demo interna.",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      "max-image-preview": "none",
+      "max-snippet": 0,
+      "max-video-preview": 0,
+    },
+  },
+};
 
 export default function DemoRistorantePage() {
   const menuDegustazione = [

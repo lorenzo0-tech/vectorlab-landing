@@ -24,6 +24,24 @@ import {
   COMPANY_VAT,
 } from "@/lib/constants";
 
+const homepageFaq = [
+  {
+    question: "In quanto tempo consegnate?",
+    answer:
+      "In molti casi la consegna tipica è 14 giorni, in base alla complessità del progetto.",
+  },
+  {
+    question: "Il sito sarà adatto a Google?",
+    answer:
+      "Sì, la base include struttura SEO locale, performance e contenuti orientati alla ricerca.",
+  },
+  {
+    question: "Come misurate se sta funzionando?",
+    answer:
+      "Tracciamo le azioni principali come clic su call to action, contatti e richieste.",
+  },
+];
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -42,6 +60,11 @@ const structuredData = {
       "@type": "ProfessionalService",
       name: `${COMPANY_NAME} - Progettazione siti per ospitalità`,
       areaServed: "IT",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: COMPANY_CITY,
+        addressCountry: "IT",
+      },
       serviceType: [
         "Creazione siti web per ristoranti",
         "Creazione siti web per hotel",
@@ -52,6 +75,23 @@ const structuredData = {
         name: COMPANY_NAME,
       },
       url: SITE_URL,
+    },
+    {
+      "@type": "WebSite",
+      name: COMPANY_NAME,
+      url: SITE_URL,
+      inLanguage: "it-IT",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: homepageFaq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     },
   ],
 };
