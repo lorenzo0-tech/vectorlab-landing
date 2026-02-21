@@ -20,6 +20,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.4,
     },
     {
+      url: `${normalizedSiteUrl}/siti-web-ristoranti-milano`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${normalizedSiteUrl}/siti-web-hotel-milano`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
       url: `${normalizedSiteUrl}/cookie-policy`,
       lastModified: now,
       changeFrequency: "monthly",

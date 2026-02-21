@@ -52,6 +52,18 @@ export function Footer() {
                 >
                   Termini e Condizioni
                 </Link>
+                <Link
+                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  href="/siti-web-ristoranti-milano"
+                >
+                  Siti web ristoranti Milano
+                </Link>
+                <Link
+                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  href="/siti-web-hotel-milano"
+                >
+                  Siti web hotel Milano
+                </Link>
                 <CookiePreferencesButton />
               </div>
               <a
