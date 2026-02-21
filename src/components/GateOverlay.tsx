@@ -23,7 +23,7 @@ export function GateOverlay() {
 
   return (
     <div
-      className="fixed inset-0 z-[80] pointer-events-auto"
+      className="fixed inset-0 z-999 bg-background pointer-events-auto isolate"
       aria-hidden="true"
     >
       <EntryGate

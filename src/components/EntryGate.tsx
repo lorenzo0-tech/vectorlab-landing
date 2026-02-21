@@ -319,11 +319,15 @@ export function EntryGate({
     <section
       className={
         nonBlocking
-          ? "pointer-events-none fixed inset-0 z-[70] flex items-center justify-center overflow-hidden"
-          : "relative flex min-h-screen items-center justify-center overflow-hidden"
+          ? "pointer-events-none fixed inset-0 z-70 flex items-center justify-center overflow-hidden"
+          : "relative flex h-full w-full items-center justify-center overflow-hidden"
       }
       aria-hidden={nonBlocking ? "true" : undefined}
     >
+      {!nonBlocking ? (
+        <div className="pointer-events-none absolute inset-0 bg-background" />
+      ) : null}
+
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(82%_62%_at_20%_18%,rgba(6,182,212,0.36),transparent_62%),radial-gradient(74%_56%_at_84%_22%,rgba(99,102,241,0.32),transparent_64%),radial-gradient(70%_60%_at_50%_88%,rgba(217,70,239,0.24),transparent_66%)]" />
 
       {!nonBlocking ? <OrbsField /> : null}
