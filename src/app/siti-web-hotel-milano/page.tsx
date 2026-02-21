@@ -37,22 +37,72 @@ const punti = [
   "SEO locale di base per intercettare ricerche hotel su Milano",
 ] as const;
 
+const faq = [
+  {
+    q: "Un sito hotel può aumentare le richieste dirette?",
+    a: "Sì, una struttura chiara con call to action evidenti e contenuti orientati all'utente riduce la dispersione e facilita richieste dirette.",
+  },
+  {
+    q: "Quanto conta la velocità su mobile per un hotel?",
+    a: "Conta molto: gli utenti valutano rapidamente struttura, camere e disponibilità da smartphone. Performance e chiarezza incidono sulla conversione.",
+  },
+  {
+    q: "Il sito è pensato anche per ricerche locali su Milano?",
+    a: "Sì, impostiamo una base SEO locale tecnica e contenutistica per intercettare intenti di ricerca legati a hotel e ospitalità nella città.",
+  },
+] as const;
+
 export default function SitiWebHotelMilanoPage() {
+  const cleanSiteUrl = SITE_URL.replace(/\/+$/, "");
+  const pageUrl = `${cleanSiteUrl}/siti-web-hotel-milano`;
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: "Siti web per hotel a Milano",
-    serviceType: "Creazione siti web per hotel",
-    areaServed: {
-      "@type": "City",
-      name: COMPANY_CITY,
-    },
-    provider: {
-      "@type": "Organization",
-      name: COMPANY_NAME,
-      url: SITE_URL,
-    },
-    url: `${SITE_URL.replace(/\/+$/, "")}/siti-web-hotel-milano`,
+    "@graph": [
+      {
+        "@type": "Service",
+        name: "Siti web per hotel a Milano",
+        serviceType: "Creazione siti web per hotel",
+        areaServed: {
+          "@type": "City",
+          name: COMPANY_CITY,
+        },
+        provider: {
+          "@type": "Organization",
+          name: COMPANY_NAME,
+          url: cleanSiteUrl,
+        },
+        url: pageUrl,
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.a,
+          },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: cleanSiteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Siti web per hotel a Milano",
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -87,6 +137,22 @@ export default function SitiWebHotelMilanoPage() {
               ))}
             </ul>
 
+            <div className="mt-8 rounded-2xl border border-cyan-200/20 bg-slate-900/45 p-5 sm:p-6">
+              <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+                FAQ su siti web per hotel a Milano
+              </h2>
+              <div className="mt-4 space-y-4">
+                {faq.map((item) => (
+                  <div key={item.q}>
+                    <h3 className="text-sm font-semibold text-foreground sm:text-base">
+                      {item.q}
+                    </h3>
+                    <p className="mt-1 text-sm text-(--muted)">{item.a}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href={CALENDLY_URL}
@@ -100,6 +166,12 @@ export default function SitiWebHotelMilanoPage() {
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />
                 Torna alla home
+              </Link>
+              <Link
+                href="/siti-web-ristoranti-milano"
+                className="btn-secondary focus-ring inline-flex"
+              >
+                Vedi anche: siti web ristoranti Milano
               </Link>
             </div>
           </article>
