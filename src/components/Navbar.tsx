@@ -99,8 +99,8 @@ export function Navbar() {
                 <Image
                   src="/images/logo_vettolab.png"
                   alt={`${COMPANY_NAME} logo`}
-                  width={30}
-                  height={30}
+                  width={64}
+                  height={64}
                   className="logo-tech-image"
                   priority
                 />
