@@ -471,9 +471,9 @@ body::before {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
     background: radial-gradient(
       circle at 20% 20%,
       rgba(34, 211, 238, 0.24),
@@ -483,8 +483,21 @@ body::before {
       0 0 18px rgba(34, 211, 238, 0.32),
       0 0 26px rgba(232, 121, 249, 0.2),
       inset 0 0 0 1px rgba(165, 180, 252, 0.26);
-    padding: 3px;
+    padding: 2px;
     overflow: visible;
+  }
+
+  @media (min-width: 1024px) {
+    .logo-tech-shell {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      padding: 4px;
+      box-shadow:
+        0 0 22px rgba(34, 211, 238, 0.34),
+        0 0 30px rgba(232, 121, 249, 0.22),
+        inset 0 0 0 1px rgba(165, 180, 252, 0.3);
+    }
   }
 
   .logo-tech-shell::after {
@@ -512,8 +525,18 @@ body::before {
     height: 100%;
     object-fit: contain;
     object-position: center;
+    transform: scale(1.32);
+    transform-origin: center;
     filter: saturate(1.12) contrast(1.06)
       drop-shadow(0 0 8px rgba(34, 211, 238, 0.28));
+  }
+
+  @media (min-width: 1024px) {
+    .logo-tech-image {
+      transform: scale(1.42);
+      filter: saturate(1.16) contrast(1.08)
+        drop-shadow(0 0 10px rgba(34, 211, 238, 0.32));
+    }
   }
 
   .lead-form input:-webkit-autofill,
