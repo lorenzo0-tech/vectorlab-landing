@@ -3,7 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { GA_MEASUREMENT_ID } from "@/lib/constants";
+import { GA_MEASUREMENT_ID, GOOGLE_ADS_ID } from "@/lib/constants";
 import {
   COOKIE_CONSENT_EVENT,
   readCookieConsent,
@@ -19,6 +19,9 @@ declare global {
 export function AnalyticsProvider() {
   const pathname = usePathname();
   const [consent, setConsent] = useState<CookieConsentState | null>(null);
+  const hasGa = Boolean(GA_MEASUREMENT_ID);
+  const hasAds = Boolean(GOOGLE_ADS_ID);
+  const gtagBootstrapId = GA_MEASUREMENT_ID || GOOGLE_ADS_ID;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -38,11 +41,7 @@ export function AnalyticsProvider() {
   }, []);
 
   useEffect(() => {
-    if (
-      !GA_MEASUREMENT_ID ||
-      consent !== "accepted" ||
-      typeof window === "undefined"
-    ) {
+    if (!hasGa || consent !== "accepted" || typeof window === "undefined") {
       return;
     }
 
@@ -52,14 +51,14 @@ export function AnalyticsProvider() {
     window.gtag?.("config", GA_MEASUREMENT_ID, {
       page_path: pagePath,
     });
-  }, [consent, pathname]);
+  }, [consent, hasGa, pathname]);
 
-  if (!GA_MEASUREMENT_ID || consent !== "accepted") return null;
+  if (!gtagBootstrapId || consent !== "accepted") return null;
 
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtagBootstrapId}`}
         strategy="afterInteractive"
       />
       <Script id="ga4-init" strategy="afterInteractive">
@@ -67,7 +66,8 @@ export function AnalyticsProvider() {
 function gtag(){window.dataLayer.push(arguments);}
 window.gtag = gtag;
 gtag('js', new Date());
-gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });`}
+${hasGa ? `gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });` : ""}
+${hasAds ? `gtag('config', '${GOOGLE_ADS_ID}');` : ""}`}
       </Script>
     </>
   );

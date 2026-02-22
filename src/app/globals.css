@@ -1693,6 +1693,30 @@ body::before {
   }
 }
 
+@media (max-width: 767px) {
+  .aurora,
+  .main-ambient::after,
+  .section-tone::after,
+  .hero-title-tech,
+  .ambient-orb,
+  .ambient-line,
+  .ambient-particle,
+  .ambient-motion::before {
+    animation: none !important;
+  }
+
+  .ambient-network-canvas {
+    opacity: 0.45;
+  }
+
+  .glass,
+  .glass-strong,
+  .navbar-tech-shell {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
 .hyper-splash {
   position: fixed;
   inset: 0;

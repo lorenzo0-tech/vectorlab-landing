@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" viewBox="0 0 700 400" role="img" aria-label="VettoLab business card back">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#070a22"/>
+      <stop offset="55%" stop-color="#081742"/>
+      <stop offset="100%" stop-color="#1a0730"/>
+    </linearGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#47ecff"/>
+      <stop offset="100%" stop-color="#ff4ed1"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#68c9ff" opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <rect width="700" height="400" fill="url(#bg)"/>
+  <rect width="700" height="400" fill="url(#dots)" opacity="0.35"/>
+
+  <line x1="0" y1="58" x2="700" y2="58" stroke="#72c6ff" opacity="0.25"/>
+  <line x1="0" y1="360" x2="700" y2="360" stroke="url(#neon)" opacity="0.85" filter="url(#glow)"/>
+
+  <g font-family="Inter, Arial, sans-serif" fill="#f2f7ff">
+    <text x="42" y="88" font-size="50" font-weight="700">Lorenzo Vettore</text>
+    <text x="42" y="128" font-size="43" font-weight="600" fill="#5fd0ff">Web Developer</text>
+  </g>
+
+  <g font-family="Inter, Arial, sans-serif" fill="#f2f7ff" font-size="39" font-weight="500">
+    <text x="42" y="194" fill="#67deff">☎</text>
+    <text x="86" y="194">+39 347 7411035</text>
+
+    <text x="42" y="254" fill="#67deff">✉</text>
+    <text x="86" y="254">vettolab0@gmail.com</text>
+
+    <text x="42" y="314" fill="#67deff">⌖</text>
+    <text x="86" y="314">Monza e Brianza</text>
+
+    <text x="42" y="364" fill="#67deff">◉</text>
+    <text x="86" y="364">www.vettolab.com</text>
+  </g>
+
+  <g transform="translate(492 92)">
+    <rect x="0" y="0" width="170" height="230" rx="18" fill="#070815" stroke="url(#neon)" stroke-width="3" filter="url(#glow)"/>
+    <rect x="17" y="16" width="136" height="136" rx="10" fill="#ffffff"/>
+    <image href="../qr-vettolab.svg" x="24" y="23" width="122" height="122" preserveAspectRatio="xMidYMid meet"/>
+    <text x="85" y="198" text-anchor="middle" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="600" letter-spacing="1">SCAN ME</text>
+  </g>
+</svg>

@@ -19,14 +19,23 @@ function AmbientOrbsCanvas() {
     if (!canvas) return;
 
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    if (reduce?.matches) return;
+    const isMobile = window.matchMedia?.("(max-width: 767px)").matches;
+    const saveData =
+      "connection" in navigator &&
+      Boolean(
+        (navigator as Navigator & { connection?: { saveData?: boolean } })
+          .connection?.saveData,
+      );
+    if (reduce?.matches || isMobile || saveData) return;
 
     const context = canvas.getContext("2d");
     if (!context) return;
 
     let raf = 0;
+    let isRunning = true;
     let width = 0;
     let height = 0;
+    let lastFrameTime = 0;
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
     const nodes: OrbNode[] = [];
@@ -39,7 +48,7 @@ function AmbientOrbsCanvas() {
       canvas.height = Math.floor(height * dpr);
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const targetCount = Math.max(26, Math.min(54, Math.floor(width / 34)));
+      const targetCount = Math.max(16, Math.min(34, Math.floor(width / 48)));
       while (nodes.length < targetCount) {
         nodes.push({
           x: Math.random() * width,
@@ -58,7 +67,18 @@ function AmbientOrbsCanvas() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    const tick = () => {
+    const tick = (now: number) => {
+      if (!isRunning) {
+        raf = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      if (now - lastFrameTime < 1000 / 30) {
+        raf = window.requestAnimationFrame(tick);
+        return;
+      }
+      lastFrameTime = now;
+
       context.clearRect(0, 0, width, height);
 
       for (const node of nodes) {
@@ -130,11 +150,19 @@ function AmbientOrbsCanvas() {
       raf = window.requestAnimationFrame(tick);
     };
 
+    const handleVisibilityChange = () => {
+      isRunning = document.visibilityState === "visible";
+    };
+
+    handleVisibilityChange();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     raf = window.requestAnimationFrame(tick);
 
     return () => {
       window.cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
@@ -162,12 +190,6 @@ export function AmbientBackdrop() {
       <span className="ambient-particle ambient-particle-d" />
       <span className="ambient-particle ambient-particle-e" />
       <span className="ambient-particle ambient-particle-f" />
-      <span className="ambient-particle ambient-particle-g" />
-      <span className="ambient-particle ambient-particle-h" />
-      <span className="ambient-particle ambient-particle-i" />
-      <span className="ambient-particle ambient-particle-j" />
-      <span className="ambient-particle ambient-particle-k" />
-      <span className="ambient-particle ambient-particle-l" />
     </div>
   );
 }

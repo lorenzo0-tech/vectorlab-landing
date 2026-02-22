@@ -1,4 +1,5 @@
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackGoogleAdsConversion } from "@/lib/analytics";
+import { GOOGLE_ADS_LEAD_SEND_TO } from "@/lib/constants";
 
 export const EVENT_NAMES = {
   clicInvitoAzione: "clic_invito_azione",
@@ -88,4 +89,17 @@ export function trackAllertaConversione(payload: {
   erroriConsecutivi: number;
 }) {
   trackEvent(EVENT_NAMES.allertaConversioneInvio, payload);
+}
+
+export function trackLeadAdsConversion(payload?: {
+  value?: number;
+  currency?: string;
+}) {
+  if (!GOOGLE_ADS_LEAD_SEND_TO) return;
+
+  trackGoogleAdsConversion({
+    sendTo: GOOGLE_ADS_LEAD_SEND_TO,
+    value: payload?.value,
+    currency: payload?.currency ?? "EUR",
+  });
 }

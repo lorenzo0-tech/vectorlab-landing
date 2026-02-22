@@ -61,8 +61,10 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
     if (!ctx) return;
 
     let raf = 0;
+    let isRunning = true;
     let width = 0;
     let height = 0;
+    let lastFrameTime = 0;
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
     const resize = () => {
@@ -80,7 +82,7 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    const count = Math.max(14, Math.min(30, Math.floor(width / 38)));
+    const count = Math.max(10, Math.min(22, Math.floor(width / 50)));
     const particles = Array.from({ length: count }).map(() => {
       const speed = 0.18 + Math.random() * 0.4;
       return {
@@ -93,7 +95,18 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
       };
     });
 
-    const tick = () => {
+    const tick = (now: number) => {
+      if (!isRunning) {
+        raf = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      if (now - lastFrameTime < 1000 / 30) {
+        raf = window.requestAnimationFrame(tick);
+        return;
+      }
+      lastFrameTime = now;
+
       ctx.clearRect(0, 0, width, height);
 
       for (const p of particles) {
@@ -113,10 +126,18 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
       raf = window.requestAnimationFrame(tick);
     };
 
+    const handleVisibilityChange = () => {
+      isRunning = document.visibilityState === "visible";
+    };
+
+    handleVisibilityChange();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     raf = window.requestAnimationFrame(tick);
     return () => {
       window.cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [enabled]);
 
@@ -132,7 +153,19 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
 export function Hero() {
   const { locale } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
-  const particlesEnabled = !shouldReduceMotion;
+  const canRunParticles =
+    !shouldReduceMotion &&
+    typeof window !== "undefined" &&
+    !window.matchMedia("(max-width: 767px)").matches &&
+    !(
+      "connection" in navigator &&
+      Boolean(
+        (navigator as Navigator & { connection?: { saveData?: boolean } })
+          .connection?.saveData,
+      )
+    );
+
+  const particlesEnabled = !shouldReduceMotion && canRunParticles;
 
   const pills = useMemo(
     () => [

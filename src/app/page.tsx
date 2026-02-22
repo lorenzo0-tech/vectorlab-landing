@@ -1,19 +1,11 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import {
   AmbientBackdrop,
-  CaseStudies,
-  FAQ,
-  FinalCTA,
-  Footer,
   GateOverlay,
   Hero,
   Navbar,
-  Packages,
-  Problem,
-  Process,
-  Solution,
   TrustBar,
 } from "@/components";
 import {
@@ -24,6 +16,29 @@ import {
   SITE_URL,
 } from "@/lib/constants";
 import { useLanguage } from "@/components/LanguageProvider";
+
+const CaseStudies = dynamic(() =>
+  import("@/components/CaseStudies").then((mod) => mod.CaseStudies),
+);
+const Problem = dynamic(() =>
+  import("@/components/Problem").then((mod) => mod.Problem),
+);
+const Solution = dynamic(() =>
+  import("@/components/Solution").then((mod) => mod.Solution),
+);
+const Packages = dynamic(() =>
+  import("@/components/Packages").then((mod) => mod.Packages),
+);
+const Process = dynamic(() =>
+  import("@/components/Process").then((mod) => mod.Process),
+);
+const FAQ = dynamic(() => import("@/components/FAQ").then((mod) => mod.FAQ));
+const FinalCTA = dynamic(() =>
+  import("@/components/FinalCTA").then((mod) => mod.FinalCTA),
+);
+const Footer = dynamic(() =>
+  import("@/components/Footer").then((mod) => mod.Footer),
+);
 
 export default function Home() {
   const { locale } = useLanguage();
@@ -139,42 +154,35 @@ export default function Home() {
         />
         <AmbientBackdrop />
         <GateOverlay />
-        <AnimatePresence>
-          <motion.div
-            key="site"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
-          >
-            <Navbar />
-            <Hero />
-            <div className="section-tone pb-10">
-              <TrustBar />
-            </div>
-            <div className="divider-tech section-tone">
-              <CaseStudies />
-            </div>
-            <div className="divider-tech section-tone">
-              <Problem />
-            </div>
-            <div className="divider-tech section-tone">
-              <Solution />
-            </div>
-            <div className="divider-tech section-tone">
-              <Packages />
-            </div>
-            <div className="divider-tech section-tone">
-              <Process />
-            </div>
-            <div className="divider-tech section-tone">
-              <FAQ />
-            </div>
-            <div className="divider-tech section-tone">
-              <FinalCTA />
-            </div>
-            <Footer />
-          </motion.div>
-        </AnimatePresence>
+        <div>
+          <Navbar />
+          <Hero />
+          <div className="section-tone pb-10">
+            <TrustBar />
+          </div>
+          <div className="divider-tech section-tone">
+            <CaseStudies />
+          </div>
+          <div className="divider-tech section-tone">
+            <Problem />
+          </div>
+          <div className="divider-tech section-tone">
+            <Solution />
+          </div>
+          <div className="divider-tech section-tone">
+            <Packages />
+          </div>
+          <div className="divider-tech section-tone">
+            <Process />
+          </div>
+          <div className="divider-tech section-tone">
+            <FAQ />
+          </div>
+          <div className="divider-tech section-tone">
+            <FinalCTA />
+          </div>
+          <Footer />
+        </div>
       </main>
     </div>
   );

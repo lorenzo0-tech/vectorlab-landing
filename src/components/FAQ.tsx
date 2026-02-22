@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -9,7 +9,6 @@ import { trackFaqToggle } from "@/lib/analytics-events";
 export function FAQ() {
   const { locale } = useLanguage();
   const reduce = useReducedMotion();
-  const baseId = useId();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const faqs =
     locale === "it"
@@ -108,7 +107,7 @@ export function FAQ() {
         <div className="mt-10 space-y-3">
           {faqs.map((f, idx) => {
             const isOpen = openIndex === idx;
-            const contentId = `${baseId}-faq-${idx}`;
+            const contentId = `faq-item-${idx}`;
             return (
               <div
                 key={f.q}
@@ -137,28 +136,32 @@ export function FAQ() {
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-200/20 bg-slate-900/75 text-cyan-100">
                     <ChevronDown
                       className={
-                        "h-5 w-5 transition-transform duration-150 " +
+                        "h-5 w-5 transition-transform duration-200 " +
                         (isOpen ? "rotate-180" : "rotate-0")
                       }
                     />
                   </span>
                 </button>
-                <div
-                  id={contentId}
-                  className={
-                    "faq-item-content grid overflow-hidden transition-[grid-template-rows,opacity,transform] will-change-[grid-template-rows,opacity,transform] " +
-                    (reduce ? "duration-0" : "duration-150 ease-out") +
-                    (isOpen
-                      ? " grid-rows-[1fr] opacity-100 translate-y-0"
-                      : " grid-rows-[0fr] opacity-0 -translate-y-1")
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: isOpen ? "auto" : 0,
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                  transition={
+                    reduce
+                      ? { duration: 0 }
+                      : { duration: 0.24, ease: [0.22, 1, 0.36, 1] }
                   }
+                  id={contentId}
+                  className="faq-item-content overflow-hidden"
                 >
-                  <div className="min-h-0">
+                  <div>
                     <p className="px-6 pb-6 text-sm leading-7 text-(--muted)">
                       {f.a}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             );
           })}

@@ -39,9 +39,11 @@ function OrbsField() {
     if (!context) return;
 
     let raf = 0;
+    let isRunning = true;
     let width = 0;
     let height = 0;
     let nextId = 0;
+    let lastFrameTime = 0;
 
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
@@ -68,10 +70,21 @@ function OrbsField() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    const maxOrbs = 120;
-    const orbs: Orb[] = Array.from({ length: 42 }, () => createOrb());
+    const maxOrbs = 80;
+    const orbs: Orb[] = Array.from({ length: 30 }, () => createOrb());
 
-    const tick = () => {
+    const tick = (now: number) => {
+      if (!isRunning) {
+        raf = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      if (now - lastFrameTime < 1000 / 30) {
+        raf = window.requestAnimationFrame(tick);
+        return;
+      }
+      lastFrameTime = now;
+
       context.clearRect(0, 0, width, height);
 
       for (const orb of orbs) {
@@ -156,11 +169,19 @@ function OrbsField() {
       raf = window.requestAnimationFrame(tick);
     };
 
+    const handleVisibilityChange = () => {
+      isRunning = document.visibilityState === "visible";
+    };
+
+    handleVisibilityChange();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     raf = window.requestAnimationFrame(tick);
 
     return () => {
       window.cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
@@ -296,8 +317,8 @@ export function EntryGate({
   const [jumping, setJumping] = useState(false);
   const completeTimeoutRef = useRef<number | null>(null);
   const startTimeoutRef = useRef<number | null>(null);
-  const ringCount = nonBlocking ? 8 : 11;
-  const streakCount = nonBlocking ? 140 : 240;
+  const ringCount = nonBlocking ? 6 : 8;
+  const streakCount = nonBlocking ? 96 : 150;
 
   useEffect(() => {
     return () => {
@@ -429,9 +450,7 @@ export function EntryGate({
                 }}
               />
               {jumping
-                ? locale === "it"
-                  ? "Ingresso in modalità immersiva"
-                  : "Entering immersive mode"
+                ? "G'DAY MATE!"
                 : locale === "it"
                   ? "Accedi al sito"
                   : "Enter website"}

@@ -12,9 +12,25 @@ export function GateOverlay() {
     const seen = window.sessionStorage.getItem(GATE_SESSION_KEY) === "1";
     if (seen) return;
 
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const saveData =
+      "connection" in navigator &&
+      Boolean(
+        (navigator as Navigator & { connection?: { saveData?: boolean } })
+          .connection?.saveData,
+      );
+
+    if (prefersReducedMotion || isMobile || saveData) {
+      window.sessionStorage.setItem(GATE_SESSION_KEY, "1");
+      return;
+    }
+
     const timer = window.setTimeout(() => {
       setVisible(true);
-    }, 0);
+    }, 220);
 
     return () => window.clearTimeout(timer);
   }, []);

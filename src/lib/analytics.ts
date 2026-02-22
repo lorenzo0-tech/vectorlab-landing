@@ -3,17 +3,9 @@ type EventParams = Record<string, string | number | boolean | null | undefined>;
 declare global {
   interface Window {
     gtag?: {
-      (
-        command: "event",
-        eventName: string,
-        params?: Record<string, string | number | boolean>,
-      ): void;
-      (
-        command: "config",
-        targetId: string,
-        config?: Record<string, string | number | boolean>,
-      ): void;
       (command: "js", loadedAt: Date): void;
+      (command: "config", targetId: string, config?: EventParams): void;
+      (command: "event", eventName: string, params?: EventParams): void;
     };
     plausible?: (eventName: string, options?: { props?: EventParams }) => void;
   }
@@ -30,4 +22,18 @@ export function trackEvent(eventName: string, params: EventParams = {}) {
 
   window.gtag?.("event", eventName, cleanParams);
   window.plausible?.(eventName, { props: cleanParams });
+}
+
+export function trackGoogleAdsConversion(params: {
+  sendTo: string;
+  value?: number;
+  currency?: string;
+}) {
+  if (typeof window === "undefined" || !params.sendTo) return;
+
+  window.gtag?.("event", "conversion", {
+    send_to: params.sendTo,
+    value: params.value,
+    currency: params.currency,
+  });
 }

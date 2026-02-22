@@ -9,6 +9,7 @@ import { CALENDLY_URL, EMAIL_TO } from "@/lib/constants";
 import {
   trackAllertaConversione,
   trackCtaClick,
+  trackLeadAdsConversion,
   trackLeadSubmitAttempt,
   trackLeadSubmitError,
   trackLeadSubmitSuccess,
@@ -242,6 +243,11 @@ export function FinalCTA() {
       trackLeadSubmitSuccess({
         sorgente: "modulo_cta_finale",
         citta: values.citta,
+      });
+
+      trackLeadAdsConversion({
+        value: 1,
+        currency: "EUR",
       });
 
       if (typeof window !== "undefined") {
