@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { useLanguage } from "@/components/LanguageProvider";
+import { resetCookieConsent } from "@/lib/cookie-consent";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -27,6 +28,16 @@ export function Footer() {
               <div className="flex items-center gap-4">
                 <motion.div
                   className="relative h-16 w-16 overflow-hidden rounded-2xl border border-cyan-200/35 bg-[#060b16] shadow-[0_20px_50px_rgba(2,6,23,0.35)]"
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Apri preferenze cookie"
+                  onClick={resetCookieConsent}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      resetCookieConsent();
+                    }
+                  }}
                   animate={
                     reduce ? undefined : { y: [0, -3, 0], rotate: [0, 1.2, 0] }
                   }

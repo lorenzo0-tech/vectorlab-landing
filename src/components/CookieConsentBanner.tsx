@@ -2,19 +2,31 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { saveCookieConsent } from "@/lib/cookie-consent";
+import { COOKIE_CONSENT_EVENT, saveCookieConsent } from "@/lib/cookie-consent";
 
 export function CookieConsentBanner() {
   const [hydrated, setHydrated] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
+    const reopenBanner = () => {
+      setHydrated(true);
+      setDismissed(false);
+    };
+
     const timeout = window.setTimeout(() => {
       setHydrated(true);
       setDismissed(false);
     }, 0);
 
-    return () => window.clearTimeout(timeout);
+    window.addEventListener(COOKIE_CONSENT_EVENT, reopenBanner);
+    window.addEventListener("storage", reopenBanner);
+
+    return () => {
+      window.clearTimeout(timeout);
+      window.removeEventListener(COOKIE_CONSENT_EVENT, reopenBanner);
+      window.removeEventListener("storage", reopenBanner);
+    };
   }, []);
 
   if (!hydrated || dismissed) return null;
