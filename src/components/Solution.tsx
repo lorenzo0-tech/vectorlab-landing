@@ -105,11 +105,11 @@ export function Solution() {
 
   const gallery = [
     {
-      src: "/images/herosala.jpg",
+      src: "/images/restaurant-real/hero-dining.jpg",
       alt:
         locale === "it"
-          ? "Testata sala completa con profondità e luce calda"
-          : "Main dining room hero with warm light and depth",
+          ? "Sala ristorante con atmosfera calda e tavoli apparecchiati"
+          : "Restaurant dining room with warm atmosphere and set tables",
       label: locale === "it" ? "Testata + prenota" : "Hero + book",
       mockHeader: true,
       className:
@@ -117,48 +117,49 @@ export function Solution() {
       sizes: "(max-width: 640px) 100vw, 58vw",
     },
     {
-      src: "/images/piattosignature.jpg",
+      src: "/images/restaurant-real/dish-plating.jpg",
       alt:
         locale === "it"
-          ? "Piatto simbolo in primo piano con servizio al tavolo"
-          : "Signature dish close-up with table service",
-      label: locale === "it" ? "Piatto firma primo piano" : "Signature dish",
+          ? "Sala ristorante luminosa con tavoli pronti al servizio"
+          : "Bright dining room with tables ready for service",
+      label: locale === "it" ? "Sala ristorante" : "Dining room",
       mockHeader: false,
       className:
         "relative col-span-12 h-44 overflow-hidden rounded-2xl border border-white/15 sm:col-span-5 sm:h-64 lg:h-72",
       sizes: "(max-width: 640px) 100vw, 42vw",
     },
     {
-      src: "/images/chefalpass.jpg",
+      src: "/images/restaurant-real/chef-kitchen.jpg",
       alt:
         locale === "it"
-          ? "Chef al pass durante il servizio"
-          : "Chef at the pass during service",
-      label: locale === "it" ? "Chef al pass" : "Chef at the pass",
+          ? "Piatto in evidenza con cura dell'impiattamento"
+          : "Featured dish with careful plating",
+      label: locale === "it" ? "Piatto in evidenza" : "Featured dish",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-4 sm:h-52",
       sizes: "(max-width: 640px) 100vw, 34vw",
     },
     {
-      src: "/images/menudegustazione.jpeg",
+      src: "/images/restaurant-real/menu-fine-dining.jpg",
       alt:
         locale === "it"
-          ? "Menu degustazione in primo piano"
-          : "Tasting menu close-up",
-      label: locale === "it" ? "Menu degustazione" : "Tasting menu",
+          ? "Cocktail e abbinamenti serviti al tavolo"
+          : "Cocktails and pairings served at the table",
+      label:
+        locale === "it" ? "Cocktail e abbinamenti" : "Cocktails and pairings",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-5 sm:h-52",
       sizes: "(max-width: 640px) 100vw, 40vw",
     },
     {
-      src: "/images/tavoloreserved.jpg",
+      src: "/images/restaurant-real/reserved-table.jpg",
       alt:
         locale === "it"
-          ? "Dettaglio tavolo riservato"
-          : "Reserved table detail",
-      label: locale === "it" ? "Prenotazione tavolo" : "Table booking",
+          ? "Area bar e sala serale con illuminazione d'atmosfera"
+          : "Evening bar and dining area with ambient lighting",
+      label: locale === "it" ? "Atmosfera serale" : "Evening atmosphere",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-3 sm:h-52",

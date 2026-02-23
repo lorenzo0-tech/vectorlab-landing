@@ -29,6 +29,9 @@ const Solution = dynamic(() =>
 const Packages = dynamic(() =>
   import("@/components/Packages").then((mod) => mod.Packages),
 );
+const ProjectShowcase = dynamic(() =>
+  import("@/components/ProjectShowcase").then((mod) => mod.ProjectShowcase),
+);
 const Process = dynamic(() =>
   import("@/components/Process").then((mod) => mod.Process),
 );
@@ -162,6 +165,9 @@ export default function Home() {
           </div>
           <div className="divider-tech section-tone">
             <CaseStudies />
+          </div>
+          <div className="divider-tech section-tone">
+            <ProjectShowcase />
           </div>
           <div className="divider-tech section-tone">
             <Problem />

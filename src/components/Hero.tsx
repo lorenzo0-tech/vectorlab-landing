@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   type HTMLMotionProps,
   motion,
@@ -153,6 +153,7 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
 export function Hero() {
   const { locale } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
   const canRunParticles =
     !shouldReduceMotion &&
     typeof window !== "undefined" &&
@@ -177,6 +178,38 @@ export function Hero() {
     ],
     [locale],
   );
+
+  const heroImages = useMemo(
+    () => [
+      {
+        src: "/images/vettolab-free/hero-restaurant-luxury-v2.jpg",
+        alt:
+          locale === "it"
+            ? "Ristorante elegante con atmosfera premium"
+            : "Elegant premium restaurant interior",
+        label: locale === "it" ? "Ristorante premium" : "Premium restaurant",
+      },
+      {
+        src: "/images/vettolab-free/hero-hotel-luxury.jpg",
+        alt:
+          locale === "it"
+            ? "Hotel di lusso con piscina e architettura moderna"
+            : "Luxury hotel with pool and modern architecture",
+        label: locale === "it" ? "Hotel luxury" : "Luxury hotel",
+      },
+    ],
+    [locale],
+  );
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+
+    const timer = window.setInterval(() => {
+      setHeroImageIndex((current) => (current + 1) % heroImages.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [heroImages.length, shouldReduceMotion]);
 
   return (
     <section id="top" className="relative overflow-hidden">
@@ -289,6 +322,21 @@ export function Hero() {
                     : "Request a quote"}
                   <Mail className="h-4 w-4" />
                 </MagneticLink>
+                <MagneticLink
+                  href="/demo-hotel-villa"
+                  className="btn-secondary focus-ring"
+                  onClick={() =>
+                    trackCtaClick({
+                      posizione: "testata",
+                      destinazione: "demo-hotel-villa",
+                    })
+                  }
+                >
+                  {locale === "it"
+                    ? "Guarda demo hotel luxury"
+                    : "View luxury hotel demo"}
+                  <ArrowUpRight className="h-4 w-4" />
+                </MagneticLink>
               </div>
             </motion.div>
 
@@ -304,23 +352,32 @@ export function Hero() {
                 ease: [0.2, 0.8, 0.2, 1],
                 delay: 0.08,
               }}
-              className="relative hidden lg:col-span-5 lg:block"
+              className="relative lg:col-span-5"
             >
               <div className="glass-strong gradient-border panel-tech card-tech relative overflow-hidden rounded-3xl p-3">
-                <Image
-                  src="/images/herosala.jpg"
-                  alt={
-                    locale === "it"
-                      ? "Sala ristorante elegante, luce calda e profondità"
-                      : "Elegant restaurant room with warm light and depth"
-                  }
-                  width={1400}
-                  height={900}
-                  priority
-                  quality={75}
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="h-auto w-full rounded-2xl"
-                />
+                <div className="relative aspect-16/10 overflow-hidden rounded-2xl">
+                  {heroImages.map((image, index) => (
+                    <Image
+                      key={image.src}
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      priority={index === 0}
+                      quality={78}
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className={
+                        "absolute inset-0 object-cover transition-opacity duration-900 " +
+                        (index === heroImageIndex ? "opacity-100" : "opacity-0")
+                      }
+                    />
+                  ))}
+
+                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-slate-950/65 via-slate-950/20 to-transparent px-3 py-2">
+                    <p className="text-[11px] font-semibold tracking-[0.12em] text-cyan-100/95 uppercase">
+                      {heroImages[heroImageIndex]?.label}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-3">

@@ -20,7 +20,10 @@ export type PosizioneInvitoAzione =
   | "pacchetti"
   | "cta_finale";
 
-export type DestinazioneInvitoAzione = "calendly" | "preventivo";
+export type DestinazioneInvitoAzione =
+  | "calendly"
+  | "preventivo"
+  | "demo-hotel-villa";
 
 export type SorgenteContatto = "modulo_cta_finale";
 export type ModalitaIntro = "bloccante" | "non_bloccante";
