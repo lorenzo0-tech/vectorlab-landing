@@ -48,7 +48,7 @@ const quickSections = [
 export default function DemoRistoranteHomePage() {
   return (
     <main>
-      <section className="relative min-h-[72vh] overflow-hidden border-b border-[#7c5b35]/45">
+      <section className="relative min-h-[72svh] overflow-hidden border-b border-[#7c5b35]/45 sm:min-h-[72vh]">
         <Image
           src="/images/restaurant-real/hero-dining.jpg"
           alt="Ristorante di alta cucina con atmosfera calda"
@@ -58,7 +58,7 @@ export default function DemoRistoranteHomePage() {
         />
         <div className="absolute inset-0 bg-linear-to-r from-[#120b07]/78 via-[#1b120a]/52 to-[#2f2115]/25" />
 
-        <div className="container-pad relative z-10 flex min-h-[72vh] items-end py-16 sm:py-24">
+        <div className="container-pad relative z-10 flex min-h-[72svh] items-end py-16 sm:min-h-[72vh] sm:py-24">
           <div className="max-w-3xl space-y-6 text-[#f8ebd9]">
             <p className="text-xs uppercase tracking-[0.22em] text-[#dcb485]">
               Atelier Nove · Milano

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   type HTMLMotionProps,
   motion,
@@ -153,7 +153,6 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
 export function Hero() {
   const { locale } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
-  const [heroImageIndex, setHeroImageIndex] = useState(0);
   const canRunParticles =
     !shouldReduceMotion &&
     typeof window !== "undefined" &&
@@ -178,38 +177,6 @@ export function Hero() {
     ],
     [locale],
   );
-
-  const heroImages = useMemo(
-    () => [
-      {
-        src: "/images/vettolab-free/hero-restaurant-luxury-v2.jpg",
-        alt:
-          locale === "it"
-            ? "Ristorante elegante con atmosfera premium"
-            : "Elegant premium restaurant interior",
-        label: locale === "it" ? "Ristorante premium" : "Premium restaurant",
-      },
-      {
-        src: "/images/vettolab-free/hero-hotel-luxury.jpg",
-        alt:
-          locale === "it"
-            ? "Hotel di lusso con piscina e architettura moderna"
-            : "Luxury hotel with pool and modern architecture",
-        label: locale === "it" ? "Hotel luxury" : "Luxury hotel",
-      },
-    ],
-    [locale],
-  );
-
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-
-    const timer = window.setInterval(() => {
-      setHeroImageIndex((current) => (current + 1) % heroImages.length);
-    }, 5000);
-
-    return () => window.clearInterval(timer);
-  }, [heroImages.length, shouldReduceMotion]);
 
   return (
     <section id="top" className="relative overflow-hidden">
@@ -352,35 +319,94 @@ export function Hero() {
                 ease: [0.2, 0.8, 0.2, 1],
                 delay: 0.08,
               }}
-              className="relative lg:col-span-5"
+              className="relative mt-2 lg:col-span-5 lg:mt-0"
             >
               <div className="glass-strong gradient-border panel-tech card-tech relative overflow-hidden rounded-3xl p-3">
-                <div className="relative aspect-16/10 overflow-hidden rounded-2xl">
-                  {heroImages.map((image, index) => (
-                    <Image
-                      key={image.src}
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      priority={index === 0}
-                      quality={78}
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                      className={
-                        "absolute inset-0 object-cover transition-opacity duration-900 " +
-                        (index === heroImageIndex ? "opacity-100" : "opacity-0")
-                      }
-                    />
-                  ))}
+                <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-cyan-200/20 bg-[#060b16]">
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute -left-16 -top-16 h-52 w-52 rounded-full bg-cyan-400/20 blur-3xl"
+                    animate={
+                      shouldReduceMotion
+                        ? undefined
+                        : { x: [0, 24, -10, 0], y: [0, 18, -8, 0] }
+                    }
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute -bottom-16 -right-12 h-56 w-56 rounded-full bg-fuchsia-400/18 blur-3xl"
+                    animate={
+                      shouldReduceMotion
+                        ? undefined
+                        : { x: [0, -22, 10, 0], y: [0, -16, 8, 0] }
+                    }
+                    transition={{
+                      duration: 12,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
 
-                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-slate-950/65 via-slate-950/20 to-transparent px-3 py-2">
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/28"
+                    animate={shouldReduceMotion ? undefined : { rotate: 360 }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-fuchsia-200/26"
+                    animate={shouldReduceMotion ? undefined : { rotate: -360 }}
+                    transition={{
+                      duration: 14,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+
+                  <motion.div
+                    className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/30 bg-white/5 p-2 shadow-[0_20px_50px_rgba(2,6,23,0.45)] backdrop-blur-md"
+                    animate={
+                      shouldReduceMotion
+                        ? undefined
+                        : { y: [0, -6, 0], scale: [1, 1.02, 1] }
+                    }
+                    transition={{
+                      duration: 4.2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <Image
+                      src="/icon.png"
+                      alt={locale === "it" ? "Logo VettoLab" : "VettoLab logo"}
+                      width={96}
+                      height={96}
+                      priority
+                      className="h-full w-full object-cover"
+                    />
+                  </motion.div>
+
+                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-slate-950/75 via-slate-950/30 to-transparent px-3 py-2">
                     <p className="text-[11px] font-semibold tracking-[0.12em] text-cyan-100/95 uppercase">
-                      {heroImages[heroImageIndex]?.label}
+                      {locale === "it"
+                        ? "Esperienza digitale premium"
+                        : "Premium digital experience"}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div className="glass gradient-border rounded-2xl px-4 py-3">
                   <p className="text-[11px] font-semibold tracking-widest text-(--muted)">
                     {locale === "it" ? "SPECIALIZZAZIONE" : "SPECIALIZATION"}

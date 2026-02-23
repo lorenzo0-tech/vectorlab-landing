@@ -289,12 +289,12 @@ export function Packages() {
               : "Clear and transparent offers, with dedicated setups for restaurants and hospitality."}
           </p>
 
-          <div className="mt-6 inline-flex rounded-full border border-white/15 bg-black/10 p-1">
+          <div className="mt-6 flex w-full flex-wrap gap-2 rounded-2xl border border-white/15 bg-black/10 p-2 sm:inline-flex sm:w-auto sm:gap-0 sm:rounded-full sm:p-1">
             <button
               type="button"
               onClick={() => setSelectedCategory("ristoranti")}
               className={
-                "focus-ring rounded-full px-4 py-2 text-sm font-semibold transition " +
+                "focus-ring rounded-full px-4 py-2 text-xs font-semibold transition sm:text-sm " +
                 (selectedCategory === "ristoranti"
                   ? "bg-white/90 text-slate-900"
                   : "text-foreground/80 hover:text-foreground")
@@ -307,16 +307,21 @@ export function Packages() {
               type="button"
               onClick={() => setSelectedCategory("hotel")}
               className={
-                "focus-ring rounded-full px-4 py-2 text-sm font-semibold transition " +
+                "focus-ring rounded-full px-4 py-2 text-xs font-semibold transition sm:text-sm " +
                 (selectedCategory === "hotel"
                   ? "bg-white/90 text-slate-900"
                   : "text-foreground/80 hover:text-foreground")
               }
               aria-pressed={selectedCategory === "hotel"}
             >
-              {locale === "it"
-                ? "Hotel / Ville / B&B"
-                : "Hotels / Villas / B&B"}
+              <span className="sm:hidden">
+                {locale === "it" ? "Hotel / Ville" : "Hotels / Villas"}
+              </span>
+              <span className="hidden sm:inline">
+                {locale === "it"
+                  ? "Hotel / Ville / B&B"
+                  : "Hotels / Villas / B&B"}
+              </span>
             </button>
           </div>
         </motion.div>

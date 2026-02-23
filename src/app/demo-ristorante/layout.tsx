@@ -26,7 +26,7 @@ export default function DemoRistoranteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="min-h-screen bg-[#0f0a06] text-[#f5eee4]">
+    <div className="min-h-screen bg-[#0f0a06] pb-20 text-[#f5eee4] sm:pb-0">
       <header className="sticky top-0 z-40 border-b border-[#7c5b35]/40 bg-[#120d09]/92 backdrop-blur">
         <div className="container-pad flex items-center justify-between py-4">
           <Link

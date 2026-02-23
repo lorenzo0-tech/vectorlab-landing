@@ -199,12 +199,12 @@ export function Navbar() {
 
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 pb-[max(env(safe-area-inset-bottom),12px)] sm:hidden">
         <div className="container-pad pointer-events-auto">
-          <div className="glass-strong gradient-border flex items-center justify-between gap-2 rounded-2xl p-2">
+          <div className="glass-strong gradient-border grid grid-cols-2 gap-2 rounded-2xl p-2">
             <a
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary focus-ring w-full"
+              className="btn-primary focus-ring w-full px-3 py-2 text-xs"
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",
@@ -212,12 +212,12 @@ export function Navbar() {
                 })
               }
             >
-              {locale === "it" ? "Prenota una chiamata" : "Book a call"}
+              {locale === "it" ? "Chiamata 15 min" : "Book call"}
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
               href="#preventivo"
-              className="btn-secondary focus-ring w-full"
+              className="btn-secondary focus-ring w-full px-3 py-2 text-xs"
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",

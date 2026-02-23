@@ -26,7 +26,7 @@ export default function DemoHotelLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="min-h-screen bg-[#f8f5ef] text-[#32281d]">
+    <div className="min-h-screen bg-[#f8f5ef] pb-20 text-[#32281d] sm:pb-0">
       <header className="sticky top-0 z-40 border-b border-[#dfcfba] bg-[#fbf8f2]/92 backdrop-blur">
         <div className="container-pad flex items-center justify-between py-4">
           <Link

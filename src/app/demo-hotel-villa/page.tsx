@@ -68,7 +68,7 @@ const quickSections = [
 export default function DemoHotelVillaPage() {
   return (
     <main>
-      <section className="relative min-h-[72vh] overflow-hidden border-b border-[#dfcfba]">
+      <section className="relative min-h-[72svh] overflow-hidden border-b border-[#dfcfba] sm:min-h-[72vh]">
         <Image
           src="/images/luxury-real/hero-luxury.jpg"
           alt="Hotel di lusso con piscina panoramica"
@@ -77,7 +77,7 @@ export default function DemoHotelVillaPage() {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-r from-[#231a12]/60 via-[#3a2b1d]/46 to-[#594430]/20" />
-        <div className="container-pad relative z-10 flex min-h-[72vh] items-end py-16 sm:py-24">
+        <div className="container-pad relative z-10 flex min-h-[72svh] items-end py-16 sm:min-h-[72vh] sm:py-24">
           <div className="max-w-3xl space-y-6 text-[#fff8ee]">
             <p className="text-xs uppercase tracking-[0.22em] text-[#f4e6d1]">
               Villa Aurea · Lago di Como

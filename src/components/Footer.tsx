@@ -1,6 +1,8 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -14,6 +16,7 @@ import {
 
 export function Footer() {
   const { locale } = useLanguage();
+  const reduce = useReducedMotion();
 
   return (
     <footer className="pb-28 sm:pb-10">
@@ -21,10 +24,97 @@ export function Footer() {
         <div className="glass gradient-border panel-tech rounded-3xl p-6 sm:p-8">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="heading-display inline-flex items-center gap-2 text-lg font-semibold tracking-tight">
-                <span className="h-2 w-2 rounded-full bg-cyan-500/80 shadow-[0_0_14px_rgba(6,182,212,.6)]" />
-                {COMPANY_NAME}
-              </p>
+              <div className="flex items-center gap-4">
+                <motion.div
+                  className="relative h-16 w-16 overflow-hidden rounded-2xl border border-cyan-200/35 bg-[#060b16] shadow-[0_20px_50px_rgba(2,6,23,0.35)]"
+                  animate={
+                    reduce ? undefined : { y: [0, -3, 0], rotate: [0, 1.2, 0] }
+                  }
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute inset-0 opacity-35"
+                    style={{
+                      background:
+                        "repeating-linear-gradient(180deg, rgba(165,243,252,0.18) 0px, rgba(165,243,252,0.18) 1px, transparent 1px, transparent 4px)",
+                    }}
+                    animate={reduce ? undefined : { opacity: [0.2, 0.38, 0.2] }}
+                    transition={{
+                      duration: 3.2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute -left-6 -top-6 h-14 w-14 rounded-full bg-cyan-400/30 blur-2xl"
+                    animate={
+                      reduce ? undefined : { x: [0, 8, 0], y: [0, 6, 0] }
+                    }
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute -bottom-6 -right-6 h-14 w-14 rounded-full bg-fuchsia-400/30 blur-2xl"
+                    animate={
+                      reduce ? undefined : { x: [0, -8, 0], y: [0, -6, 0] }
+                    }
+                    transition={{
+                      duration: 6.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute top-[-120%] h-[240%] w-[34%] rotate-[18deg] bg-linear-to-r from-white/0 via-cyan-100/70 to-white/0 blur-[1px]"
+                    animate={reduce ? undefined : { x: ["-180%", "230%"] }}
+                    transition={{
+                      duration: 2.8,
+                      repeat: Infinity,
+                      repeatDelay: 1.8,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-100/40"
+                    animate={reduce ? undefined : { rotate: 360 }}
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+
+                  <div className="absolute inset-2 overflow-hidden rounded-xl border border-white/25 bg-white/8 p-1.5 backdrop-blur-sm">
+                    <Image
+                      src="/icon.png"
+                      alt="Logo VettoLab"
+                      width={64}
+                      height={64}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                </motion.div>
+
+                <p className="heading-display inline-flex items-center gap-2 text-lg font-semibold tracking-tight">
+                  <span className="h-2 w-2 rounded-full bg-cyan-500/80 shadow-[0_0_14px_rgba(6,182,212,.6)]" />
+                  {COMPANY_NAME}
+                </p>
+              </div>
               <p className="mt-2 text-sm text-(--muted)">
                 {COMPANY_CITY} · P.IVA: {COMPANY_VAT}
               </p>
