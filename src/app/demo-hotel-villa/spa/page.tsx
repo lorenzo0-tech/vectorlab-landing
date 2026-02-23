@@ -1,39 +1,50 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getServerLocale } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
   title: "Spa",
 };
 
-const rituals = [
-  {
-    nome: "Rituale Alba",
-    durata: "75 min",
-    descrizione:
-      "Percorso rilassante con massaggio drenante e aromaterapia agrumata.",
-  },
-  {
-    nome: "Percorso Seta",
-    durata: "110 min",
-    descrizione:
-      "Trattamento completo corpo-viso con tecniche lifting manuali.",
-  },
-  {
-    nome: "Coppia Lago",
-    durata: "90 min",
-    descrizione:
-      "Cabina doppia con vasca, tisana botanica e area relax riservata.",
-  },
-];
+export default async function SpaPage() {
+  const locale = await getServerLocale();
+  const isEn = locale === "en";
 
-export default function SpaPage() {
+  const rituals = [
+    {
+      name: isEn ? "Alba Ritual" : "Rituale Alba",
+      duration: "75 min",
+      description: isEn
+        ? "Relaxing ritual with draining massage and citrus aromatherapy."
+        : "Percorso rilassante con massaggio drenante e aromaterapia agrumata.",
+    },
+    {
+      name: isEn ? "Seta Journey" : "Percorso Seta",
+      duration: "110 min",
+      description: isEn
+        ? "Full body-face treatment with manual lifting techniques."
+        : "Trattamento completo corpo-viso con tecniche lifting manuali.",
+    },
+    {
+      name: isEn ? "Lake Couple" : "Coppia Lago",
+      duration: "90 min",
+      description: isEn
+        ? "Double suite with tub, botanical tea, and private relaxation area."
+        : "Cabina doppia con vasca, tisana botanica e area relax riservata.",
+    },
+  ];
+
   return (
     <main className="container-pad py-12 sm:py-16">
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="overflow-hidden rounded-3xl border border-[#deccb4]">
           <Image
             src="/images/luxury-real/page-spa.jpg"
-            alt="Area spa e benessere di hotel di lusso"
+            alt={
+              isEn
+                ? "Spa and wellness area in a luxury hotel"
+                : "Area spa e benessere di hotel di lusso"
+            }
             width={1400}
             height={900}
             className="h-full w-full object-cover"
@@ -44,29 +55,32 @@ export default function SpaPage() {
             Spa & Wellness
           </p>
           <h1 className="heading-display mt-3 text-4xl text-[#352617] sm:text-5xl">
-            Un santuario di benessere solo per te
+            {isEn
+              ? "A wellness sanctuary reserved for you"
+              : "Un santuario di benessere solo per te"}
           </h1>
           <p className="mt-4 text-[#5f4d3b]">
-            Rituali firmati, atmosfere avvolgenti e mani esperte per regalarti
-            una pausa profonda, elegante, rigenerante.
+            {isEn
+              ? "Signature rituals, enveloping atmospheres, and expert hands for a deep, elegant, regenerative pause."
+              : "Rituali firmati, atmosfere avvolgenti e mani esperte per regalarti una pausa profonda, elegante, rigenerante."}
           </p>
 
           <div className="mt-8 space-y-4">
             {rituals.map((ritual) => (
               <article
-                key={ritual.nome}
+                key={ritual.name}
                 className="rounded-2xl border border-[#deccb4] bg-[#fdf9f3] p-5"
               >
                 <div className="flex items-center justify-between">
                   <h2 className="heading-display text-2xl text-[#352617]">
-                    {ritual.nome}
+                    {ritual.name}
                   </h2>
                   <p className="text-xs uppercase tracking-[0.12em] text-[#7e5a36]">
-                    {ritual.durata}
+                    {ritual.duration}
                   </p>
                 </div>
                 <p className="mt-2 text-sm text-[#5f4d3b]">
-                  {ritual.descrizione}
+                  {ritual.description}
                 </p>
               </article>
             ))}

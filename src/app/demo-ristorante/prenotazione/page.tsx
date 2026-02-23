@@ -1,32 +1,40 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { percorsiMenu, restaurantMeta } from "../content";
+import { getRestaurantDemoContent } from "../content";
+import { getServerLocale } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
   title: "Prenotazione",
 };
 
-const occasioni = [
-  "Cena romantica",
-  "Compleanno",
-  "Anniversario",
-  "Cena aziendale",
-  "Degustazione privata",
-];
+export default async function PrenotazioneRistorantePage() {
+  const locale = await getServerLocale();
+  const isEn = locale === "en";
+  const { tastingMenus, restaurantMeta } = getRestaurantDemoContent(locale);
 
-export default function PrenotazioneRistorantePage() {
+  const occasions = [
+    isEn ? "Romantic dinner" : "Cena romantica",
+    isEn ? "Birthday" : "Compleanno",
+    isEn ? "Anniversary" : "Anniversario",
+    isEn ? "Corporate dinner" : "Cena aziendale",
+    isEn ? "Private tasting" : "Degustazione privata",
+  ];
+
   return (
     <main className="container-pad py-12 sm:py-16">
       <div className="max-w-3xl">
         <p className="text-xs uppercase tracking-[0.2em] text-[#c9a273]">
-          Prenotazione
+          {isEn ? "Booking" : "Prenotazione"}
         </p>
         <h1 className="heading-display mt-3 text-4xl text-[#f7e7d2] sm:text-5xl">
-          Prenota il tuo tavolo su misura
+          {isEn
+            ? "Book your tailor-made table"
+            : "Prenota il tuo tavolo su misura"}
         </h1>
         <p className="mt-4 text-[#d9c4a8]">
-          Indicaci preferenze e occasione: il nostro team ti risponderà
-          rapidamente con la migliore proposta.
+          {isEn
+            ? "Tell us your preferences and occasion: our team will reply quickly with the best proposal."
+            : "Indicaci preferenze e occasione: il nostro team ti risponderà rapidamente con la migliore proposta."}
         </p>
       </div>
 
@@ -34,18 +42,22 @@ export default function PrenotazioneRistorantePage() {
         <section className="rounded-3xl border border-[#7c5b35]/45 bg-[#17110b] p-7 sm:p-10">
           <form
             className="grid gap-5"
-            aria-label="Modulo prenotazione ristorante"
+            aria-label={
+              isEn
+                ? "Restaurant booking form"
+                : "Modulo prenotazione ristorante"
+            }
           >
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-sm text-[#cbb69a]">
-                Data
+                {isEn ? "Date" : "Data"}
                 <input
                   type="date"
                   className="rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none"
                 />
               </label>
               <label className="grid gap-2 text-sm text-[#cbb69a]">
-                Orario
+                {isEn ? "Time" : "Orario"}
                 <select className="rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none">
                   <option>19:15</option>
                   <option>19:45</option>
@@ -58,7 +70,7 @@ export default function PrenotazioneRistorantePage() {
 
             <div className="grid gap-4 sm:grid-cols-3">
               <label className="grid gap-2 text-sm text-[#cbb69a]">
-                Persone
+                {isEn ? "Guests" : "Persone"}
                 <select className="rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none">
                   {[2, 3, 4, 5, 6, 8, 10].map((v) => (
                     <option key={v}>{v}</option>
@@ -66,10 +78,10 @@ export default function PrenotazioneRistorantePage() {
                 </select>
               </label>
               <label className="grid gap-2 text-sm text-[#cbb69a] sm:col-span-2">
-                Percorso preferito
+                {isEn ? "Preferred tasting menu" : "Percorso preferito"}
                 <select className="rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none">
-                  {percorsiMenu.map((menu) => (
-                    <option key={menu.nome}>{menu.nome}</option>
+                  {tastingMenus.map((menu) => (
+                    <option key={menu.name}>{menu.name}</option>
                   ))}
                 </select>
               </label>
@@ -77,9 +89,9 @@ export default function PrenotazioneRistorantePage() {
 
             <fieldset className="grid gap-3 rounded-2xl border border-[#7c5b35]/45 bg-[#1d140c] p-4">
               <legend className="px-2 text-sm font-semibold text-[#e1b982]">
-                Occasione
+                {isEn ? "Occasion" : "Occasione"}
               </legend>
-              {occasioni.map((item) => (
+              {occasions.map((item) => (
                 <label
                   key={item}
                   className="flex items-center gap-3 text-sm text-[#cbb69a]"
@@ -91,10 +103,10 @@ export default function PrenotazioneRistorantePage() {
             </fieldset>
 
             <label className="grid gap-2 text-sm text-[#cbb69a]">
-              Nome e cognome
+              {isEn ? "Full name" : "Nome e cognome"}
               <input
                 className="rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none"
-                placeholder="Inserisci il tuo nome"
+                placeholder={isEn ? "Enter your name" : "Inserisci il tuo nome"}
               />
             </label>
 
@@ -104,11 +116,11 @@ export default function PrenotazioneRistorantePage() {
                 <input
                   type="email"
                   className="rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none"
-                  placeholder="nome@email.it"
+                  placeholder={isEn ? "name@email.com" : "nome@email.it"}
                 />
               </label>
               <label className="grid gap-2 text-sm text-[#cbb69a]">
-                Telefono
+                {isEn ? "Phone" : "Telefono"}
                 <input
                   className="rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none"
                   placeholder="+39"
@@ -117,10 +129,14 @@ export default function PrenotazioneRistorantePage() {
             </div>
 
             <label className="grid gap-2 text-sm text-[#cbb69a]">
-              Note
+              {isEn ? "Notes" : "Note"}
               <textarea
                 className="min-h-28 rounded-xl border border-[#7c5b35]/45 bg-[#0f0a06] px-4 py-3 text-sm text-[#f1e3cd] outline-none"
-                placeholder="Intolleranze, allergie, richieste speciali"
+                placeholder={
+                  isEn
+                    ? "Intolerances, allergies, special requests"
+                    : "Intolleranze, allergie, richieste speciali"
+                }
               />
             </label>
 
@@ -128,7 +144,7 @@ export default function PrenotazioneRistorantePage() {
               type="button"
               className="rounded-full bg-[#d8a86f] px-6 py-3 text-sm font-semibold text-[#2b1d11]"
             >
-              Invia richiesta prenotazione
+              {isEn ? "Send booking request" : "Invia richiesta prenotazione"}
             </button>
           </form>
         </section>
@@ -137,24 +153,45 @@ export default function PrenotazioneRistorantePage() {
           <div className="mb-5 overflow-hidden rounded-2xl border border-[#7c5b35]/45">
             <Image
               src="/images/restaurant-real/reserved-table.jpg"
-              alt="Tavolo elegante pronto per una prenotazione serale"
+              alt={
+                isEn
+                  ? "Elegant table ready for an evening reservation"
+                  : "Tavolo elegante pronto per una prenotazione serale"
+              }
               width={1000}
               height={700}
               className="h-full w-full object-cover"
             />
           </div>
           <h2 className="heading-display text-3xl text-[#f2debf]">
-            Accoglienza dedicata
+            {isEn ? "Dedicated front-of-house" : "Accoglienza dedicata"}
           </h2>
           <ul className="mt-5 space-y-3 text-sm text-[#cbb69a]">
-            <li>Risposta media: entro 2 ore</li>
-            <li>Conferma tavolo e percorso degustazione</li>
-            <li>Gestione allergie e richieste speciali</li>
-            <li>Supporto dedicato eventi privati</li>
+            <li>
+              {isEn
+                ? "Average response: within 2 hours"
+                : "Risposta media: entro 2 ore"}
+            </li>
+            <li>
+              {isEn
+                ? "Table and tasting menu confirmation"
+                : "Conferma tavolo e percorso degustazione"}
+            </li>
+            <li>
+              {isEn
+                ? "Allergy and special-request handling"
+                : "Gestione allergie e richieste speciali"}
+            </li>
+            <li>
+              {isEn
+                ? "Dedicated support for private events"
+                : "Supporto dedicato eventi privati"}
+            </li>
           </ul>
 
           <div className="mt-7 rounded-2xl border border-[#7c5b35]/45 bg-[#120d09] p-4 text-sm text-[#cbb69a]">
-            Contatti rapidi: {restaurantMeta.phone} · {restaurantMeta.email}
+            {isEn ? "Quick contacts" : "Contatti rapidi"}:{" "}
+            {restaurantMeta.phone} · {restaurantMeta.email}
           </div>
         </aside>
       </div>

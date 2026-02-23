@@ -41,6 +41,27 @@ export function AnalyticsProvider() {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const gtag = (
+      window as Window & {
+        gtag?: (...args: unknown[]) => void;
+      }
+    ).gtag;
+
+    if (!gtag) return;
+
+    const granted = consent === "accepted";
+
+    gtag("consent", "update", {
+      analytics_storage: granted ? "granted" : "denied",
+      ad_storage: granted && hasAds ? "granted" : "denied",
+      ad_user_data: granted && hasAds ? "granted" : "denied",
+      ad_personalization: granted && hasAds ? "granted" : "denied",
+    });
+  }, [consent, hasAds]);
+
+  useEffect(() => {
     if (!hasGa || consent !== "accepted" || typeof window === "undefined") {
       return;
     }

@@ -1,24 +1,32 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { gallery } from "../content";
+import { getHotelDemoContent } from "../content";
+import { getServerLocale } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
   title: "Galleria",
 };
 
-export default function GalleriaPage() {
+export default async function GalleriaPage() {
+  const locale = await getServerLocale();
+  const isEn = locale === "en";
+  const { gallery } = getHotelDemoContent(locale);
+
   return (
     <main className="container-pad py-12 sm:py-16">
       <div className="max-w-3xl">
         <p className="text-xs uppercase tracking-[0.2em] text-[#8a6a46]">
-          Galleria
+          {isEn ? "Gallery" : "Galleria"}
         </p>
         <h1 className="heading-display mt-3 text-4xl text-[#352617] sm:text-5xl">
-          Lasciati ispirare prima di arrivare
+          {isEn
+            ? "Get inspired before you arrive"
+            : "Lasciati ispirare prima di arrivare"}
         </h1>
         <p className="mt-4 text-[#5f4d3b]">
-          Ambienti luminosi, materiali preziosi e scorci esclusivi:
-          un&apos;anteprima della bellezza che ti aspetta a Villa Aurea.
+          {isEn
+            ? "Bright spaces, precious materials, and exclusive views: a preview of the beauty that awaits you at Villa Aurea."
+            : "Ambienti luminosi, materiali preziosi e scorci esclusivi: un&apos;anteprima della bellezza che ti aspetta a Villa Aurea."}
         </p>
       </div>
 
