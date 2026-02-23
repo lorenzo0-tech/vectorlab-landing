@@ -1,7 +1,12 @@
 export const COOKIE_CONSENT_KEY = "cookie_consent_v1";
+export const COOKIE_PREFERENCES_KEY = "cookie_preferences_v1";
 export const COOKIE_CONSENT_EVENT = "cookie-consent-updated";
 
 export type CookieConsentState = "accepted" | "rejected";
+export type CookiePreferences = {
+  analytics: boolean;
+  ads: boolean;
+};
 
 export function isCookieConsentState(
   value: string | null,
@@ -12,8 +17,35 @@ export function isCookieConsentState(
 export function readCookieConsent(): CookieConsentState | null {
   if (typeof window === "undefined") return null;
 
+  const preferences = readCookiePreferences();
+  if (preferences) {
+    return preferences.analytics || preferences.ads ? "accepted" : "rejected";
+  }
+
   const value = window.localStorage.getItem(COOKIE_CONSENT_KEY);
   return isCookieConsentState(value) ? value : null;
+}
+
+function isCookiePreferences(value: unknown): value is CookiePreferences {
+  if (!value || typeof value !== "object") return false;
+  const record = value as Record<string, unknown>;
+  return (
+    typeof record.analytics === "boolean" && typeof record.ads === "boolean"
+  );
+}
+
+export function readCookiePreferences(): CookiePreferences | null {
+  if (typeof window === "undefined") return null;
+
+  const raw = window.localStorage.getItem(COOKIE_PREFERENCES_KEY);
+  if (!raw) return null;
+
+  try {
+    const parsed = JSON.parse(raw);
+    return isCookiePreferences(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
 }
 
 function expireCookie(name: string, domain?: string) {
@@ -23,7 +55,7 @@ function expireCookie(name: string, domain?: string) {
   document.cookie = `${name}=; Max-Age=0; path=/; ${domainPart}SameSite=Lax`;
 }
 
-function clearAnalyticsCookies() {
+function clearCookiesByPrefixes(prefixes: string[]) {
   if (typeof window === "undefined" || typeof document === "undefined") {
     return;
   }
@@ -33,7 +65,6 @@ function clearAnalyticsCookies() {
     .map((entry) => entry.trim().split("=")[0])
     .filter(Boolean);
 
-  const prefixes = ["_ga", "_gid", "_gat", "_gac", "_gcl", "_dc_gtm"];
   const toDelete = cookieNames.filter((name) =>
     prefixes.some((prefix) => name === prefix || name.startsWith(`${prefix}_`)),
   );
@@ -52,32 +83,44 @@ function clearAnalyticsCookies() {
       expireCookie(cookieName, domain);
     }
   }
+}
 
-  const gtag = (
-    window as Window & {
-      gtag?: (...args: unknown[]) => void;
-    }
-  ).gtag;
+function clearCookiesForPreferences(preferences: CookiePreferences) {
+  if (!preferences.analytics) {
+    clearCookiesByPrefixes(["_ga", "_gid", "_gat", "_dc_gtm"]);
+  }
 
-  if (gtag) {
-    gtag("consent", "update", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-    });
+  if (!preferences.ads) {
+    clearCookiesByPrefixes(["_gac", "_gcl"]);
   }
 }
 
 export function saveCookieConsent(value: CookieConsentState) {
+  saveCookiePreferences({
+    analytics: value === "accepted",
+    ads: value === "accepted",
+  });
+}
+
+export function saveCookiePreferences(preferences: CookiePreferences) {
   if (typeof window === "undefined") return;
 
-  window.localStorage.setItem(COOKIE_CONSENT_KEY, value);
+  const consent: CookieConsentState =
+    preferences.analytics || preferences.ads ? "accepted" : "rejected";
 
-  if (value === "rejected") {
-    clearAnalyticsCookies();
-  }
+  window.localStorage.setItem(COOKIE_CONSENT_KEY, consent);
+  window.localStorage.setItem(
+    COOKIE_PREFERENCES_KEY,
+    JSON.stringify(preferences),
+  );
 
+  clearCookiesForPreferences(preferences);
+
+  window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
+}
+
+export function openCookiePreferences() {
+  if (typeof window === "undefined") return;
   window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
 }
 
@@ -85,6 +128,7 @@ export function resetCookieConsent() {
   if (typeof window === "undefined") return;
 
   window.localStorage.removeItem(COOKIE_CONSENT_KEY);
-  clearAnalyticsCookies();
+  window.localStorage.removeItem(COOKIE_PREFERENCES_KEY);
+  clearCookiesByPrefixes(["_ga", "_gid", "_gat", "_gac", "_gcl", "_dc_gtm"]);
   window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
 }

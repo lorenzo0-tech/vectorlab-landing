@@ -3,9 +3,17 @@ import Link from "next/link";
 import { getRestaurantDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Contatti",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Contacts" : "Contatti",
+    description:
+      locale === "en"
+        ? "Restaurant contact page for bookings, private events, and custom requests."
+        : "Pagina contatti ristorante per prenotazioni, eventi privati e richieste personalizzate.",
+  };
+}
 
 export default async function ContattiRistorantePage() {
   const locale = await getServerLocale();

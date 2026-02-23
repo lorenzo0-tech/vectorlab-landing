@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Spa",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: "Spa",
+    description:
+      locale === "en"
+        ? "Luxury spa and wellness rituals for deep relaxation and regeneration."
+        : "Rituali spa e wellness luxury per relax profondo e rigenerazione.",
+  };
+}
 
 export default async function SpaPage() {
   const locale = await getServerLocale();

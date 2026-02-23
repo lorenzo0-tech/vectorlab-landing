@@ -3,9 +3,17 @@ import Image from "next/image";
 import { getHotelDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Esperienze",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Experiences" : "Esperienze",
+    description:
+      locale === "en"
+        ? "Private and bespoke luxury experiences designed around your stay."
+        : "Esperienze private e su misura pensate per valorizzare il soggiorno.",
+  };
+}
 
 export default async function EsperienzePage() {
   const locale = await getServerLocale();

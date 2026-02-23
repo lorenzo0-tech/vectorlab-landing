@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import { getHotelDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Prenotazione",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Booking" : "Prenotazione",
+    description:
+      locale === "en"
+        ? "Tailor-made luxury hotel booking form with concierge assistance."
+        : "Modulo prenotazione su misura per hotel luxury con assistenza concierge.",
+  };
+}
 
 export default async function PrenotazionePage() {
   const locale = await getServerLocale();

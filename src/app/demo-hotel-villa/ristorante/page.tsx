@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Ristorante",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Restaurant" : "Ristorante",
+    description:
+      locale === "en"
+        ? "Signature Italian dining with curated wine pairing in a luxury setting."
+        : "Ristorante signature con cucina italiana contemporanea e wine pairing curato.",
+  };
+}
 
 export default async function RistorantePage() {
   const locale = await getServerLocale();

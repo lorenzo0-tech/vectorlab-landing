@@ -3,9 +3,17 @@ import Image from "next/image";
 import { getRestaurantDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Ambienti",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Spaces" : "Ambienti",
+    description:
+      locale === "en"
+        ? "Visual gallery of dining spaces, chef's table, and private room atmosphere."
+        : "Galleria visiva di sala, tavolo del cuoco e atmosfera degli ambienti riservati.",
+  };
+}
 
 export default async function AmbientiPage() {
   const locale = await getServerLocale();

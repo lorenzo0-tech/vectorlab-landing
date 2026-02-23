@@ -3,24 +3,33 @@ import Link from "next/link";
 import { getHotelDemoContent } from "./content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Villa Aurea — Demo Sito Hotel",
-    template: "%s — Villa Aurea",
-  },
-  description: "Demo sito completo per hotel e villa di lusso.",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  const isEn = locale === "en";
+
+  return {
+    title: {
+      default: isEn
+        ? "Villa Aurea — Hotel Website Demo"
+        : "Villa Aurea — Demo Sito Hotel",
+      template: "%s — Villa Aurea",
+    },
+    description: isEn
+      ? "Complete showcase demo for a luxury hotel and villa."
+      : "Demo sito completo per hotel e villa di lusso.",
+    robots: {
       index: false,
       follow: false,
-      "max-image-preview": "none",
-      "max-snippet": 0,
-      "max-video-preview": 0,
+      googleBot: {
+        index: false,
+        follow: false,
+        "max-image-preview": "none",
+        "max-snippet": 0,
+        "max-video-preview": 0,
+      },
     },
-  },
-};
+  };
+}
 
 export default async function DemoHotelLayout({
   children,

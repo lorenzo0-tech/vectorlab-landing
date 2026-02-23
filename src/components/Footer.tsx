@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { useLanguage } from "@/components/LanguageProvider";
-import { resetCookieConsent } from "@/lib/cookie-consent";
+import { openCookiePreferences } from "@/lib/cookie-consent";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -31,11 +31,11 @@ export function Footer() {
                   role="button"
                   tabIndex={0}
                   aria-label="Apri preferenze cookie"
-                  onClick={resetCookieConsent}
+                  onClick={openCookiePreferences}
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") {
                       event.preventDefault();
-                      resetCookieConsent();
+                      openCookiePreferences();
                     }
                   }}
                   animate={

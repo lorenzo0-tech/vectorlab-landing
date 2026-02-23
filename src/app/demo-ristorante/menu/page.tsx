@@ -3,9 +3,17 @@ import Image from "next/image";
 import { getRestaurantDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Menu",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: "Menu",
+    description:
+      locale === "en"
+        ? "Tasting menus with seasonal fine-dining courses and curated pairings."
+        : "Menu degustazione con portate stagionali fine dining e abbinamenti curati.",
+  };
+}
 
 export default async function MenuPage() {
   const locale = await getServerLocale();

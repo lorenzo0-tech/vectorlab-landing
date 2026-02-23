@@ -3,9 +3,17 @@ import Link from "next/link";
 import { getHotelDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Contatti",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Contacts" : "Contatti",
+    description:
+      locale === "en"
+        ? "Contact and availability request page for Villa Aurea concierge."
+        : "Pagina contatti e richiesta disponibilità con concierge Villa Aurea.",
+  };
+}
 
 export default async function ContattiPage() {
   const locale = await getServerLocale();

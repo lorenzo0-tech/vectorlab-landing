@@ -3,24 +3,33 @@ import Link from "next/link";
 import { getRestaurantDemoContent } from "./content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Atelier Nove — Vetrina Sito Ristorante",
-    template: "%s — Atelier Nove",
-  },
-  description: "Vetrina completa per ristorante di alta gamma.",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  const isEn = locale === "en";
+
+  return {
+    title: {
+      default: isEn
+        ? "Atelier Nove — Restaurant Website Demo"
+        : "Atelier Nove — Vetrina Sito Ristorante",
+      template: "%s — Atelier Nove",
+    },
+    description: isEn
+      ? "Complete showcase demo for a fine-dining restaurant."
+      : "Vetrina completa per ristorante di alta gamma.",
+    robots: {
       index: false,
       follow: false,
-      "max-image-preview": "none",
-      "max-snippet": 0,
-      "max-video-preview": 0,
+      googleBot: {
+        index: false,
+        follow: false,
+        "max-image-preview": "none",
+        "max-snippet": 0,
+        "max-video-preview": 0,
+      },
     },
-  },
-};
+  };
+}
 
 export default async function DemoRistoranteLayout({
   children,

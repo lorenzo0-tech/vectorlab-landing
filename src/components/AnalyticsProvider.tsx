@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { GA_MEASUREMENT_ID, GOOGLE_ADS_ID } from "@/lib/constants";
 import {
   COOKIE_CONSENT_EVENT,
-  readCookieConsent,
-  type CookieConsentState,
+  readCookiePreferences,
+  type CookiePreferences,
 } from "@/lib/cookie-consent";
 
 declare global {
@@ -18,7 +18,9 @@ declare global {
 
 export function AnalyticsProvider() {
   const pathname = usePathname();
-  const [consent, setConsent] = useState<CookieConsentState | null>(null);
+  const [preferences, setPreferences] = useState<CookiePreferences | null>(
+    null,
+  );
   const hasGa = Boolean(GA_MEASUREMENT_ID);
   const hasAds = Boolean(GOOGLE_ADS_ID);
   const gtagBootstrapId = GA_MEASUREMENT_ID || GOOGLE_ADS_ID;
@@ -27,7 +29,7 @@ export function AnalyticsProvider() {
     if (typeof window === "undefined") return;
 
     const syncConsent = () => {
-      setConsent(readCookieConsent());
+      setPreferences(readCookiePreferences());
     };
 
     syncConsent();
@@ -50,19 +52,19 @@ export function AnalyticsProvider() {
     ).gtag;
 
     if (!gtag) return;
-
-    const granted = consent === "accepted";
+    const analyticsGranted = Boolean(preferences?.analytics);
+    const adsGranted = Boolean(preferences?.ads);
 
     gtag("consent", "update", {
-      analytics_storage: granted ? "granted" : "denied",
-      ad_storage: granted && hasAds ? "granted" : "denied",
-      ad_user_data: granted && hasAds ? "granted" : "denied",
-      ad_personalization: granted && hasAds ? "granted" : "denied",
+      analytics_storage: analyticsGranted ? "granted" : "denied",
+      ad_storage: adsGranted && hasAds ? "granted" : "denied",
+      ad_user_data: adsGranted && hasAds ? "granted" : "denied",
+      ad_personalization: adsGranted && hasAds ? "granted" : "denied",
     });
-  }, [consent, hasAds]);
+  }, [preferences, hasAds]);
 
   useEffect(() => {
-    if (!hasGa || consent !== "accepted" || typeof window === "undefined") {
+    if (!hasGa || !preferences?.analytics || typeof window === "undefined") {
       return;
     }
 
@@ -72,9 +74,11 @@ export function AnalyticsProvider() {
     window.gtag?.("config", GA_MEASUREMENT_ID, {
       page_path: pagePath,
     });
-  }, [consent, hasGa, pathname]);
+  }, [preferences, hasGa, pathname]);
 
-  if (!gtagBootstrapId || consent !== "accepted") return null;
+  const shouldLoad = Boolean(preferences?.analytics || preferences?.ads);
+
+  if (!gtagBootstrapId || !shouldLoad) return null;
 
   return (
     <>

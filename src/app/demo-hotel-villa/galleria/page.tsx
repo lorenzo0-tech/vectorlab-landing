@@ -3,9 +3,17 @@ import Image from "next/image";
 import { getHotelDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Galleria",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Gallery" : "Galleria",
+    description:
+      locale === "en"
+        ? "Photo gallery of suites, architecture, and luxury spaces at Villa Aurea."
+        : "Galleria fotografica di suite, architettura e spazi luxury di Villa Aurea.",
+  };
+}
 
 export default async function GalleriaPage() {
   const locale = await getServerLocale();

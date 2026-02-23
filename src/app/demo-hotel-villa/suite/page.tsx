@@ -4,9 +4,17 @@ import Image from "next/image";
 import { getHotelDemoContent } from "../content";
 import { getServerLocale } from "@/lib/server-locale";
 
-export const metadata: Metadata = {
-  title: "Suite",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+
+  return {
+    title: locale === "en" ? "Suites" : "Suite",
+    description:
+      locale === "en"
+        ? "Showcase of luxury suites and villas with premium comfort and privacy."
+        : "Vetrina di suite e ville luxury con comfort premium e privacy assoluta.",
+  };
+}
 
 export default async function SuitePage() {
   const locale = await getServerLocale();
