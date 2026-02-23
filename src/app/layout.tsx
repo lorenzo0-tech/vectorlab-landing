@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { COMPANY_NAME, OG_IMAGE_PATH, SITE_URL } from "@/lib/constants";
 import "./globals.css";
@@ -96,6 +97,7 @@ export default function RootLayout({
       >
         <AnalyticsProvider />
         <LanguageProvider>{children}</LanguageProvider>
+        <CookiePreferencesButton floating />
         <CookieConsentBanner />
       </body>
     </html>

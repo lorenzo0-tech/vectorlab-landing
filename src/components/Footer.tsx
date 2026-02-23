@@ -110,8 +110,7 @@ export function Footer() {
                   </div>
                 </motion.div>
 
-                <p className="heading-display inline-flex items-center gap-2 text-lg font-semibold tracking-tight">
-                  <span className="h-2 w-2 rounded-full bg-cyan-500/80 shadow-[0_0_14px_rgba(6,182,212,.6)]" />
+                <p className="heading-display inline-flex items-center text-lg font-semibold tracking-tight">
                   {COMPANY_NAME}
                 </p>
               </div>

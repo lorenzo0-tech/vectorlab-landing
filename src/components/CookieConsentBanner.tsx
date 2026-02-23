@@ -2,35 +2,22 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {
-  COOKIE_CONSENT_EVENT,
-  readCookieConsent,
-  saveCookieConsent,
-  type CookieConsentState,
-} from "@/lib/cookie-consent";
+import { saveCookieConsent } from "@/lib/cookie-consent";
 
 export function CookieConsentBanner() {
-  const [consent, setConsent] = useState<CookieConsentState | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    const syncConsent = () => {
-      setConsent(readCookieConsent());
+    const timeout = window.setTimeout(() => {
       setHydrated(true);
-    };
+      setDismissed(false);
+    }, 0);
 
-    const timeout = window.setTimeout(syncConsent, 0);
-    window.addEventListener(COOKIE_CONSENT_EVENT, syncConsent);
-    window.addEventListener("storage", syncConsent);
-
-    return () => {
-      window.clearTimeout(timeout);
-      window.removeEventListener(COOKIE_CONSENT_EVENT, syncConsent);
-      window.removeEventListener("storage", syncConsent);
-    };
+    return () => window.clearTimeout(timeout);
   }, []);
 
-  if (!hydrated || consent) return null;
+  if (!hydrated || dismissed) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-60 pb-[max(env(safe-area-inset-bottom),12px)]">
@@ -54,7 +41,7 @@ export function CookieConsentBanner() {
               className="btn-secondary focus-ring px-4 py-2 text-xs sm:text-sm"
               onClick={() => {
                 saveCookieConsent("rejected");
-                setConsent("rejected");
+                setDismissed(true);
               }}
             >
               Rifiuta
@@ -64,7 +51,7 @@ export function CookieConsentBanner() {
               className="btn-primary focus-ring px-4 py-2 text-xs sm:text-sm"
               onClick={() => {
                 saveCookieConsent("accepted");
-                setConsent("accepted");
+                setDismissed(true);
               }}
             >
               Accetta
