@@ -64,13 +64,13 @@ export function ProjectShowcase() {
         >
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
-              ? "Progetti demo da mostrare ai clienti"
-              : "Demo projects to show clients"}
+              ? "Guarda subito come può vendere il tuo prossimo sito"
+              : "See how your next website can sell better"}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
-              ? "Due esempi reali, navigabili e pronti da condividere, per far vedere in modo concreto il livello del lavoro."
-              : "Two real, fully navigable examples ready to share, so clients can instantly see the work quality."}
+              ? "Due demo navigabili, immediate da valutare, per capire in pochi minuti qualità, posizionamento e potenziale di conversione del tuo progetto."
+              : "Two fully navigable demos to quickly evaluate quality, positioning, and conversion potential for your project."}
           </p>
         </motion.div>
 

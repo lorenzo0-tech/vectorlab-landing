@@ -285,7 +285,7 @@ export function Packages() {
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
-              ? "Offerte chiare e trasparenti, con differenze nette tra ristorazione e ospitalità."
+              ? "Offerte chiare e trasparenti, con differenze nette tra ristorazione e alberghi."
               : "Clear and transparent offers, with dedicated setups for restaurants and hospitality."}
           </p>
 

@@ -11,8 +11,8 @@ export function CaseStudies() {
       ? [
           {
             name: "Ristorante centro città · Milano",
-            metric: "+38% richieste tavolo",
-            detail: "45 giorni dopo il rilascio",
+            metric: "Più richieste tavolo qualificate",
+            detail: "KPI monitorato dopo ottimizzazione del percorso prenotazione",
             before:
               "Invito all’azione poco visibile e percorso prenotazione dispersivo",
             action:
@@ -20,15 +20,15 @@ export function CaseStudies() {
           },
           {
             name: "Pizzeria da asporto · Bergamo",
-            metric: "+52% clic su menu",
-            detail: "30 giorni dopo ottimizzazione testata e invito all’azione",
+            metric: "Più clic su menu e ordini",
+            detail: "KPI monitorato dopo ottimizzazione testata e invito all’azione",
             before: "Menu difficile da trovare da smartphone",
             action: "Menu in un tocco + gerarchia visiva orientata all’azione",
           },
           {
             name: "Bar di miscelazione eventi · Torino",
-            metric: "2.1x clic su prenota",
-            detail: "60 giorni con tracciamento eventi attivo",
+            metric: "Più clic su prenota",
+            detail: "KPI monitorato con tracciamento eventi attivo",
             before: "Traffico buono ma conversione bassa su smartphone",
             action:
               "Riduzione frizione sui tocchi e blocchi fiducia sopra la piega",
@@ -37,23 +37,23 @@ export function CaseStudies() {
       : [
           {
             name: "City-center restaurant · Milan",
-            metric: "+38% table requests",
-            detail: "45 days after launch",
+            metric: "More qualified table requests",
+            detail: "KPI monitored after booking-flow optimization",
             before: "Low-visibility CTA and scattered booking flow",
             action:
               "Simplified hero, sticky CTA, and linear smartphone journey",
           },
           {
             name: "Takeaway pizzeria · Bergamo",
-            metric: "+52% menu clicks",
-            detail: "30 days after hero and CTA optimization",
+            metric: "More menu clicks and orders",
+            detail: "KPI monitored after hero and CTA optimization",
             before: "Menu hard to find on smartphone",
             action: "One-tap menu + action-oriented visual hierarchy",
           },
           {
             name: "Event cocktail bar · Turin",
-            metric: "2.1x book-now clicks",
-            detail: "60 days with event tracking enabled",
+            metric: "More book-now clicks",
+            detail: "KPI monitored with event tracking enabled",
             before: "Good traffic but low smartphone conversion",
             action:
               "Reduced tap friction and added above-the-fold trust blocks",
@@ -71,13 +71,13 @@ export function CaseStudies() {
         >
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
-              ? "Risultati reali, non promesse."
-              : "Real results, not promises."}
+              ? "Più richieste, meno frizione nel percorso cliente."
+              : "More inquiries, less friction in the customer journey."}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
-              ? "Mini casi con contesto, intervento e risultato. Niente promesse vaghe: solo metriche di comportamento utili alla vendita."
-              : "Mini case studies with context, intervention, and outcome. No vague claims: only behavioral metrics useful for sales."}
+              ? "Esempi operativi con problema, intervento e KPI monitorato: un approccio concreto per trasformare più visite in contatti."
+              : "Operational examples with problem, intervention, and monitored KPI: a practical approach to turn more visits into leads."}
           </p>
         </motion.div>
 
