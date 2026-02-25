@@ -7,7 +7,7 @@ export const EMAIL_TO =
   process.env.NEXT_PUBLIC_EMAIL_TO ?? "vettolab0@gmail.com";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vettolab.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.vettolab.com";
 
 export const OG_IMAGE_PATH = "/images/og.jpg";
 export const LOGO_IMAGE_PATH = "/images/mock/logo_vettolab.png";
