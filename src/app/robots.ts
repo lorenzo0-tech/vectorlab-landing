@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/constants";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = SITE_URL;
 const isLocalEnvironment = /localhost|127\.0\.0\.1/i.test(siteUrl);
 const normalizedSiteUrl = siteUrl.replace(/\/+$/, "");
 
