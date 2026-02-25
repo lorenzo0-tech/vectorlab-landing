@@ -9,7 +9,7 @@ export const EMAIL_TO =
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.vettolab.com";
 
-export const OG_IMAGE_PATH = "/images/og.jpg";
+export const OG_IMAGE_PATH = "/images/og-fb.jpg";
 export const LOGO_IMAGE_PATH = "/images/mock/logo_vettolab.png";
 
 export const COMPANY_CITY = process.env.NEXT_PUBLIC_COMPANY_CITY ?? "Milano";
