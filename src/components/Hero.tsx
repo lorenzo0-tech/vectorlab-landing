@@ -270,8 +270,8 @@ export function Hero() {
                   }
                 >
                   {locale === "it"
-                    ? "Prenota una chiamata (15 min)"
-                    : "Book a call (15 min)"}
+                    ? "Prenota analisi gratuita (15 min)"
+                    : "Book a free strategy call (15 min)"}
                   <ArrowUpRight className="h-4 w-4" />
                 </MagneticLink>
                 <MagneticLink
@@ -285,8 +285,8 @@ export function Hero() {
                   }
                 >
                   {locale === "it"
-                    ? "Richiedi un preventivo"
-                    : "Request a quote"}
+                    ? "Ricevi una proposta su misura"
+                    : "Get a tailored proposal"}
                   <Mail className="h-4 w-4" />
                 </MagneticLink>
                 <MagneticLink
@@ -300,8 +300,8 @@ export function Hero() {
                   }
                 >
                   {locale === "it"
-                    ? "Guarda demo hotel luxury"
-                    : "View luxury hotel demo"}
+                    ? "Guarda demo hotel che converte"
+                    : "View high-converting hotel demo"}
                   <ArrowUpRight className="h-4 w-4" />
                 </MagneticLink>
               </div>

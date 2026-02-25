@@ -174,7 +174,7 @@ export function Navbar() {
                 className="btn-primary focus-ring px-3.5 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
                 aria-label={
                   locale === "it"
-                    ? "Prenota una chiamata di 15 minuti su Calendly"
+                    ? "Prenota un'analisi gratuita di 15 minuti su Calendly"
                     : "Book a 15-minute call on Calendly"
                 }
                 onClick={() =>
@@ -185,10 +185,12 @@ export function Navbar() {
                 }
               >
                 <span className="sm:hidden">
-                  {locale === "it" ? "Prenota" : "Book"}
+                  {locale === "it" ? "Analisi" : "Audit"}
                 </span>
                 <span className="hidden sm:inline">
-                  {locale === "it" ? "Prenota una chiamata" : "Book a call"}
+                  {locale === "it"
+                    ? "Prenota analisi gratis"
+                    : "Book free audit"}
                 </span>
                 <ArrowUpRight className="h-4 w-4" />
               </a>
@@ -212,7 +214,7 @@ export function Navbar() {
                 })
               }
             >
-              {locale === "it" ? "Chiamata 15 min" : "Book call"}
+              {locale === "it" ? "Analisi 15 min" : "Free audit"}
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
@@ -225,7 +227,7 @@ export function Navbar() {
                 })
               }
             >
-              {locale === "it" ? "Preventivo" : "Quote"}
+              {locale === "it" ? "Proposta" : "Proposal"}
             </a>
           </div>
           <p className="mt-2 text-center text-xs text-(--muted)">

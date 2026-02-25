@@ -322,14 +322,14 @@ export function FinalCTA() {
                   }
                 >
                   {locale === "it"
-                    ? "Prenota una chiamata (15 min)"
-                    : "Book a call (15 min)"}
+                    ? "Prenota analisi gratuita (15 min)"
+                    : "Book a free strategy call (15 min)"}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a href="#preventivo" className="btn-secondary focus-ring">
                   {locale === "it"
-                    ? "Richiedi un preventivo"
-                    : "Request a quote"}
+                    ? "Ricevi una proposta su misura"
+                    : "Get a tailored proposal"}
                 </a>
               </div>
 
@@ -356,8 +356,8 @@ export function FinalCTA() {
               <div id="preventivo" className="scroll-mt-28">
                 <h3 className="text-base font-semibold tracking-tight">
                   {locale === "it"
-                    ? "Richiedi un preventivo"
-                    : "Request a quote"}
+                    ? "Ricevi una proposta su misura"
+                    : "Get a tailored proposal"}
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-(--muted)">
                   {locale === "it"

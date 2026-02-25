@@ -409,7 +409,9 @@ export function Packages() {
                       })
                     }
                   >
-                    {locale === "it" ? "Prenota una chiamata" : "Book a call"}
+                    {locale === "it"
+                      ? "Prenota analisi gratuita"
+                      : "Book free audit"}
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                   <a
@@ -423,7 +425,7 @@ export function Packages() {
                       })
                     }
                   >
-                    {locale === "it" ? "Richiedi preventivo" : "Request quote"}
+                    {locale === "it" ? "Ricevi proposta" : "Get proposal"}
                   </a>
                 </div>
               </motion.div>

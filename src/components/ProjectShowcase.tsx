@@ -19,7 +19,7 @@ export function ProjectShowcase() {
               "Un sito premium con percorso completo: suite, esperienze, spa, ristorante, galleria, contatti e prenotazione.",
             href: "/demo-hotel-villa",
             image: "/images/vettolab-free/hotel-pro.jpg",
-            cta: "Apri progetto hotel",
+            cta: "Vedi demo hotel live",
           },
           {
             title: "Demo Ristorante Premium",
@@ -28,7 +28,7 @@ export function ProjectShowcase() {
               "Un concept completo per ristoranti: storytelling, menu, esperienze, atmosfera e inviti all'azione ottimizzati.",
             href: "/demo-ristorante",
             image: "/images/vettolab-free/hero-ristorante.jpg",
-            cta: "Apri progetto ristorante",
+            cta: "Vedi demo ristorante live",
           },
         ]
       : [
@@ -40,7 +40,7 @@ export function ProjectShowcase() {
               "A premium website with a full journey: suites, experiences, spa, restaurant, gallery, contacts, and booking.",
             href: "/demo-hotel-villa",
             image: "/images/vettolab-free/hotel-pro.jpg",
-            cta: "Open hotel project",
+            cta: "View live hotel demo",
           },
           {
             title: "Premium Restaurant Demo",
@@ -49,7 +49,7 @@ export function ProjectShowcase() {
               "A complete concept for restaurants: storytelling, menu, experiences, atmosphere, and optimized CTAs.",
             href: "/demo-ristorante",
             image: "/images/vettolab-free/hero-ristorante.jpg",
-            cta: "Open restaurant project",
+            cta: "View live restaurant demo",
           },
         ];
 
