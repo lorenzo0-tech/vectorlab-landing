@@ -289,21 +289,6 @@ export function Hero() {
                     : "Get a tailored proposal"}
                   <Mail className="h-4 w-4" />
                 </MagneticLink>
-                <MagneticLink
-                  href="/demo-hotel-villa"
-                  className="btn-secondary focus-ring"
-                  onClick={() =>
-                    trackCtaClick({
-                      posizione: "testata",
-                      destinazione: "demo-hotel-villa",
-                    })
-                  }
-                >
-                  {locale === "it"
-                    ? "Guarda demo hotel che converte"
-                    : "View high-converting hotel demo"}
-                  <ArrowUpRight className="h-4 w-4" />
-                </MagneticLink>
               </div>
             </motion.div>
 

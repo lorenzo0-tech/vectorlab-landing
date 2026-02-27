@@ -34,7 +34,10 @@ const navItems = [
 const tastingMenus = [
   {
     name: { it: "Percorso Alba", en: "Alba Journey" },
-    price: "€95",
+    price: {
+      it: "Disponibilità su richiesta",
+      en: "Availability on request",
+    },
     description: {
       it: "6 portate stagionali tra vegetali, pescato del giorno e dessert d'autore.",
       en: "6 seasonal courses featuring vegetables, catch of the day, and signature dessert.",
@@ -60,7 +63,10 @@ const tastingMenus = [
   },
   {
     name: { it: "Percorso Braci", en: "Braci Journey" },
-    price: "€125",
+    price: {
+      it: "Disponibilità su richiesta",
+      en: "Availability on request",
+    },
     description: {
       it: "7 portate con cotture al carbone, carni selezionate e fondi intensi.",
       en: "7 courses with charcoal cooking, selected meats, and intense reductions.",
@@ -88,7 +94,10 @@ const tastingMenus = [
   },
   {
     name: { it: "Percorso Icone", en: "Icone Journey" },
-    price: "€165",
+    price: {
+      it: "Disponibilità su richiesta",
+      en: "Availability on request",
+    },
     description: {
       it: "9 portate d'autore con abbinamento vini o percorso analcolico di alta gamma.",
       en: "9 signature courses with wine pairing or a premium non-alcoholic pairing.",
@@ -201,7 +210,7 @@ export function getRestaurantDemoContent(locale: SiteLocale) {
     })),
     tastingMenus: tastingMenus.map((menu) => ({
       name: menu.name[locale],
-      price: menu.price,
+      price: menu.price[locale],
       description: menu.description[locale],
       courses: menu.courses[locale],
     })),

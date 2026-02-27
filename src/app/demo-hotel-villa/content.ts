@@ -56,8 +56,8 @@ const suites = [
       en: "Private terrace, king bed, travertine marble bathroom, and an evening in-room ritual.",
     },
     price: {
-      it: "da €760 / notte",
-      en: "from €760 / night",
+      it: "Tariffa su richiesta",
+      en: "Rate on request",
     },
     image: "/images/luxury-real/suite-aria.jpg",
   },
@@ -71,8 +71,8 @@ const suites = [
       en: "Private entrance, reserved pool, outdoor living area, and butler service.",
     },
     price: {
-      it: "da €1.450 / notte",
-      en: "from €1,450 / night",
+      it: "Tariffa su richiesta",
+      en: "Rate on request",
     },
     image: "/images/luxury-real/suite-seta.jpg",
   },
@@ -86,8 +86,8 @@ const suites = [
       en: "Contemporary spaces with fireplace, reading nook, and signature breakfast on the veranda.",
     },
     price: {
-      it: "da €620 / notte",
-      en: "from €620 / night",
+      it: "Tariffa su richiesta",
+      en: "Rate on request",
     },
     image: "/images/luxury-real/suite-aurora.jpg",
   },

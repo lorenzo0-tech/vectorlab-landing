@@ -11,7 +11,6 @@ import { trackCtaClick } from "@/lib/analytics-events";
 type PackageCard = {
   name: string;
   trackingName: "BASE" | "VETRINA" | "CRESCITA";
-  price: string;
   tagline: string;
   points: string[];
   image: string;
@@ -45,7 +44,6 @@ export function Packages() {
               {
                 name: "STANDARD",
                 trackingName: "BASE",
-                price: "€1.200",
                 tagline: "Base solida per iniziare a vendere meglio online.",
                 points: [
                   "Sito professionale fino a 5 sezioni (home, menu, chi siamo, contatti, prenotazione)",
@@ -60,7 +58,6 @@ export function Packages() {
               {
                 name: "PRO",
                 trackingName: "VETRINA",
-                price: "€1.500",
                 tagline:
                   "Per locali che vogliono distinguersi e convertire di più.",
                 highlight: true,
@@ -78,7 +75,6 @@ export function Packages() {
               {
                 name: "ENTERPRISE",
                 trackingName: "CRESCITA",
-                price: "Su misura",
                 tagline:
                   "Pacchetto personalizzato per richieste complesse e obiettivi ambiziosi.",
                 points: [
@@ -102,7 +98,6 @@ export function Packages() {
               {
                 name: "STANDARD",
                 trackingName: "BASE",
-                price: "da €1.800",
                 tagline:
                   "Per presentare la struttura in modo elegante e chiaro.",
                 points: [
@@ -118,7 +113,6 @@ export function Packages() {
               {
                 name: "PRO",
                 trackingName: "VETRINA",
-                price: "da €2.500",
                 tagline:
                   "Per strutture che vogliono un'immagine luxury e più richieste dirette.",
                 highlight: true,
@@ -136,7 +130,6 @@ export function Packages() {
               {
                 name: "ENTERPRISE",
                 trackingName: "CRESCITA",
-                price: "Su misura",
                 tagline:
                   "Soluzione su richiesta per progetti hospitality complessi.",
                 points: [
@@ -162,7 +155,6 @@ export function Packages() {
               {
                 name: "STANDARD",
                 trackingName: "BASE",
-                price: "€1,200",
                 tagline: "Strong baseline to sell better online.",
                 points: [
                   "Professional website up to 5 sections",
@@ -177,7 +169,6 @@ export function Packages() {
               {
                 name: "PRO",
                 trackingName: "VETRINA",
-                price: "€1,500",
                 tagline:
                   "For venues that want higher positioning and conversion.",
                 highlight: true,
@@ -195,7 +186,6 @@ export function Packages() {
               {
                 name: "ENTERPRISE",
                 trackingName: "CRESCITA",
-                price: "Custom",
                 tagline: "Tailored package for complex requirements.",
                 points: [
                   "Custom architecture for multi-location brands",
@@ -218,7 +208,6 @@ export function Packages() {
               {
                 name: "STANDARD",
                 trackingName: "BASE",
-                price: "from €1,800",
                 tagline: "Elegant and clear online presence for your property.",
                 points: [
                   "Professional website up to 7 sections",
@@ -233,7 +222,6 @@ export function Packages() {
               {
                 name: "PRO",
                 trackingName: "VETRINA",
-                price: "from €2,500",
                 tagline: "For luxury positioning and higher direct demand.",
                 highlight: true,
                 points: [
@@ -250,7 +238,6 @@ export function Packages() {
               {
                 name: "ENTERPRISE",
                 trackingName: "CRESCITA",
-                price: "Custom",
                 tagline:
                   "Made-to-measure package for complex hospitality projects.",
                 points: [
@@ -370,9 +357,6 @@ export function Packages() {
 
                 <p className="text-xs font-semibold tracking-widest text-(--muted)">
                   {p.name}
-                </p>
-                <p className="mt-1 text-sm font-semibold text-cyan-900/85">
-                  {p.price}
                 </p>
                 <p className="mt-1 text-xs font-semibold text-(--muted)">
                   {p.target}

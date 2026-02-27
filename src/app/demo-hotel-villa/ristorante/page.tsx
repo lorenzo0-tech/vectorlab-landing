@@ -24,21 +24,21 @@ export default async function RistorantePage() {
       description: isEn
         ? "7 seasonal courses with a focus on premium Italian ingredients."
         : "7 portate stagionali, focus materie prime italiane.",
-      price: "€145",
+      price: isEn ? "Rate on request" : "Tariffa su richiesta",
     },
     {
       name: isEn ? "Villa Journey" : "Percorso Villa",
       description: isEn
         ? "9 signature courses with dedicated table service."
         : "9 portate signature con servizio dedicato al tavolo.",
-      price: "€185",
+      price: isEn ? "Rate on request" : "Tariffa su richiesta",
     },
     {
       name: "Wine Pairing",
       description: isEn
         ? "Sommelier-curated pairing with rare Italian labels."
         : "Abbinamento curato da sommelier con etichette italiane rare.",
-      price: "€80",
+      price: isEn ? "Rate on request" : "Tariffa su richiesta",
     },
   ];
 

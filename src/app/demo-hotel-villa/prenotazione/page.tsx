@@ -85,13 +85,14 @@ export default async function PrenotazionePage() {
                 {isEn ? "Budget range" : "Fascia budget"}
                 <select className="rounded-xl border border-[#d8c4a8] bg-white px-4 py-3 text-sm text-[#3a2f23] outline-none">
                   <option>
-                    {isEn ? "€500 - €900 / night" : "€500 - €900 / notte"}
+                    {isEn
+                      ? "Discuss budget with concierge"
+                      : "Concorda budget con concierge"}
                   </option>
                   <option>
-                    {isEn ? "€900 - €1,400 / night" : "€900 - €1.400 / notte"}
-                  </option>
-                  <option>
-                    {isEn ? "€1,400+ / night" : "€1.400+ / notte"}
+                    {isEn
+                      ? "Request custom proposal"
+                      : "Richiedi proposta personalizzata"}
                   </option>
                 </select>
               </label>
