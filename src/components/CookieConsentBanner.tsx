@@ -13,6 +13,7 @@ import {
 export function CookieConsentBanner() {
   const [hydrated, setHydrated] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const [showPreferences, setShowPreferences] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(true);
   const [adsEnabled, setAdsEnabled] = useState(true);
 
@@ -31,11 +32,16 @@ export function CookieConsentBanner() {
 
       setHydrated(true);
       setDismissed(false);
+      setShowPreferences(true);
     };
 
     const timeout = window.setTimeout(() => {
+      /* Don't show if consent was already recorded */
+      const existing = readCookieConsent();
+      if (existing !== null) {
+        setDismissed(true);
+      }
       setHydrated(true);
-      setDismissed(false);
     }, 0);
 
     window.addEventListener(COOKIE_CONSENT_EVENT, reopenBanner);
@@ -53,80 +59,93 @@ export function CookieConsentBanner() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-60 pb-[max(env(safe-area-inset-bottom),12px)]">
       <div className="container-pad">
-        <div className="glass-strong gradient-border panel-tech flex flex-col gap-3 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-          <div className="space-y-3">
+        <div className="glass-strong gradient-border panel-tech rounded-2xl p-4">
+          {/* ── Compact row: copy + actions ── */}
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <p className="text-xs text-(--muted) sm:text-sm">
               Usiamo cookie tecnici (sempre attivi) e, con il tuo consenso,
-              cookie analitici e pubblicitari. Leggi la{" "}
+              cookie analitici e pubblicitari.{" "}
               <Link
                 href="/cookie-policy"
                 className="focus-ring rounded px-1 py-0.5 text-foreground underline decoration-cyan-300/60 underline-offset-4"
               >
                 Cookie Policy
               </Link>
-              .
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <label className="inline-flex items-center gap-2 text-xs text-(--muted) sm:text-sm">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 accent-cyan-400"
-                  checked={analyticsEnabled}
-                  onChange={(event) =>
-                    setAnalyticsEnabled(event.target.checked)
-                  }
-                />
-                Google Analytics
-              </label>
-
-              <label className="inline-flex items-center gap-2 text-xs text-(--muted) sm:text-sm">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 accent-cyan-400"
-                  checked={adsEnabled}
-                  onChange={(event) => setAdsEnabled(event.target.checked)}
-                />
-                Google Ads
-              </label>
+            <div className="flex shrink-0 items-center gap-2">
+              <button
+                type="button"
+                className="btn-secondary focus-ring px-4 py-2 text-xs sm:text-sm"
+                onClick={() => setShowPreferences((prev) => !prev)}
+              >
+                {showPreferences ? "Chiudi" : "Personalizza"}
+              </button>
+              <button
+                type="button"
+                className="btn-secondary focus-ring px-4 py-2 text-xs sm:text-sm"
+                onClick={() => {
+                  saveCookieConsent("rejected");
+                  setDismissed(true);
+                }}
+              >
+                Rifiuta
+              </button>
+              <button
+                type="button"
+                className="btn-primary focus-ring px-4 py-2 text-xs sm:text-sm"
+                onClick={() => {
+                  saveCookieConsent("accepted");
+                  setDismissed(true);
+                }}
+              >
+                Accetta tutti
+              </button>
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2">
-            <button
-              type="button"
-              className="btn-secondary focus-ring px-4 py-2 text-xs sm:text-sm"
-              onClick={() => {
-                saveCookieConsent("rejected");
-                setDismissed(true);
-              }}
-            >
-              Rifiuta tutti
-            </button>
-            <button
-              type="button"
-              className="btn-secondary focus-ring px-4 py-2 text-xs sm:text-sm"
-              onClick={() => {
-                saveCookiePreferences({
-                  analytics: analyticsEnabled,
-                  ads: adsEnabled,
-                });
-                setDismissed(true);
-              }}
-            >
-              Salva scelte
-            </button>
-            <button
-              type="button"
-              className="btn-primary focus-ring px-4 py-2 text-xs sm:text-sm"
-              onClick={() => {
-                saveCookieConsent("accepted");
-                setDismissed(true);
-              }}
-            >
-              Accetta tutti
-            </button>
-          </div>
+          {/* ── Granular preferences (toggled) ── */}
+          {showPreferences ? (
+            <div className="mt-3 flex flex-col gap-3 border-t border-white/10 pt-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center gap-4">
+                <label className="inline-flex items-center gap-2 text-xs text-(--muted) sm:text-sm">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 accent-cyan-400"
+                    checked={analyticsEnabled}
+                    onChange={(event) =>
+                      setAnalyticsEnabled(event.target.checked)
+                    }
+                  />
+                  Google Analytics
+                </label>
+
+                <label className="inline-flex items-center gap-2 text-xs text-(--muted) sm:text-sm">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 accent-cyan-400"
+                    checked={adsEnabled}
+                    onChange={(event) => setAdsEnabled(event.target.checked)}
+                  />
+                  Google Ads
+                </label>
+              </div>
+
+              <button
+                type="button"
+                className="btn-primary focus-ring px-4 py-2 text-xs sm:text-sm"
+                onClick={() => {
+                  saveCookiePreferences({
+                    analytics: analyticsEnabled,
+                    ads: adsEnabled,
+                  });
+                  setDismissed(true);
+                }}
+              >
+                Salva preferenze
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

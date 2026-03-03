@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 import { trackIntroComplete, trackIntroSkip } from "@/lib/analytics-events";
 import { COMPANY_NAME } from "@/lib/constants";
@@ -35,7 +35,7 @@ function OrbsField() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d", { alpha: true });
     if (!context) return;
 
     let raf = 0;
@@ -46,6 +46,42 @@ function OrbsField() {
     let lastFrameTime = 0;
 
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+
+    /* ── Sprite cache: pre-render orb gradients once, reuse via drawImage ── */
+    const spriteCache = new Map<number, HTMLCanvasElement>();
+
+    const getSprite = (hue: number, radius: number): HTMLCanvasElement => {
+      const hBucket = Math.round(hue / 15) * 15;
+      const rBucket = Math.round(radius * 2);
+      const key = hBucket * 100 + rBucket;
+
+      let sprite = spriteCache.get(key);
+      if (sprite) return sprite;
+
+      const r = rBucket / 2;
+      const size = Math.ceil(r * 2.4 * 2) + 2;
+      sprite = document.createElement("canvas");
+      sprite.width = size;
+      sprite.height = size;
+      const ctx = sprite.getContext("2d")!;
+      const c = size / 2;
+
+      const gradient = ctx.createRadialGradient(c, c, 0, c, c, r * 2.4);
+      gradient.addColorStop(0, `hsla(${hBucket}, 95%, 72%, 0.95)`);
+      gradient.addColorStop(1, `hsla(${hBucket}, 100%, 65%, 0)`);
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(c, c, r * 2.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `hsla(${hBucket}, 100%, 84%, 0.95)`;
+      ctx.beginPath();
+      ctx.arc(c, c, r, 0, Math.PI * 2);
+      ctx.fill();
+
+      spriteCache.set(key, sprite);
+      return sprite;
+    };
 
     const createOrb = (x?: number, y?: number, radius?: number): Orb => ({
       id: nextId++,
@@ -70,17 +106,17 @@ function OrbsField() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    const maxOrbs = 80;
-    const orbs: Orb[] = Array.from({ length: 30 }, () => createOrb());
+    const maxOrbs = 45;
+    const orbs: Orb[] = Array.from({ length: 20 }, () => createOrb());
 
     const tick = (now: number) => {
       if (!isRunning) {
-        raf = window.requestAnimationFrame(tick);
+        raf = requestAnimationFrame(tick);
         return;
       }
 
       if (now - lastFrameTime < 1000 / 30) {
-        raf = window.requestAnimationFrame(tick);
+        raf = requestAnimationFrame(tick);
         return;
       }
       lastFrameTime = now;
@@ -139,34 +175,22 @@ function OrbsField() {
       }
 
       for (const orb of orbs) {
-        const gradient = context.createRadialGradient(
-          orb.x,
-          orb.y,
-          0,
-          orb.x,
-          orb.y,
-          orb.r * 2.4,
+        const sprite = getSprite(orb.hue, orb.r);
+        const drawSize = orb.r * 2.4 * 2;
+        context.drawImage(
+          sprite,
+          orb.x - drawSize / 2,
+          orb.y - drawSize / 2,
+          drawSize,
+          drawSize,
         );
-
-        gradient.addColorStop(0, `hsla(${orb.hue}, 95%, 72%, 0.95)`);
-        gradient.addColorStop(1, `hsla(${orb.hue}, 100%, 65%, 0)`);
-
-        context.fillStyle = gradient;
-        context.beginPath();
-        context.arc(orb.x, orb.y, orb.r * 2.4, 0, Math.PI * 2);
-        context.fill();
-
-        context.fillStyle = `hsla(${orb.hue}, 100%, 84%, 0.95)`;
-        context.beginPath();
-        context.arc(orb.x, orb.y, orb.r, 0, Math.PI * 2);
-        context.fill();
       }
 
       if (orbs.length > maxOrbs) {
         orbs.splice(0, orbs.length - maxOrbs);
       }
 
-      raf = window.requestAnimationFrame(tick);
+      raf = requestAnimationFrame(tick);
     };
 
     const handleVisibilityChange = () => {
@@ -176,12 +200,13 @@ function OrbsField() {
     handleVisibilityChange();
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    raf = window.requestAnimationFrame(tick);
+    raf = requestAnimationFrame(tick);
 
     return () => {
-      window.cancelAnimationFrame(raf);
+      cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      spriteCache.clear();
     };
   }, []);
 
@@ -202,51 +227,36 @@ function EntryWordmark({ companyName }: { companyName: string }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
     >
-      <motion.span
+      {/* Blur glow – CSS keyframe */}
+      <span
         aria-hidden="true"
-        className="absolute inset-0 blur-xl text-cyan-200/55"
-        animate={{ opacity: [0.38, 0.72, 0.38], scale: [1, 1.025, 1] }}
-        transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-0 blur-xl text-cyan-200/55 will-change-[opacity,transform] animate-[gate-blur-pulse_2.6s_ease-in-out_infinite]"
       >
         {companyName}
-      </motion.span>
+      </span>
 
-      <motion.span
+      {/* Chromatic aberration A – CSS keyframe */}
+      <span
         aria-hidden="true"
-        className="absolute inset-0 text-cyan-300/35"
-        animate={{
-          x: [-0.8, 0.6, -0.4, 0.8, -0.8],
-          opacity: [0.22, 0.45, 0.2],
-        }}
-        transition={{ duration: 1.9, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-0 text-cyan-300/35 will-change-[transform,opacity] animate-[gate-chromatic-a_1.9s_linear_infinite]"
       >
         {companyName}
-      </motion.span>
+      </span>
 
-      <motion.span
+      {/* Chromatic aberration B – CSS keyframe */}
+      <span
         aria-hidden="true"
-        className="absolute inset-0 text-fuchsia-300/25"
-        animate={{
-          x: [0.7, -0.7, 0.5, -0.5, 0.7],
-          opacity: [0.2, 0.34, 0.2],
-        }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-0 text-fuchsia-300/25 will-change-[transform,opacity] animate-[gate-chromatic-b_1.6s_linear_infinite]"
       >
         {companyName}
-      </motion.span>
+      </span>
 
       <span className="relative inline-block bg-[linear-gradient(110deg,rgba(240,249,255,0.98)_0%,rgba(125,211,252,0.94)_35%,rgba(165,180,252,0.94)_65%,rgba(232,121,249,0.92)_100%)] bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(34,211,238,0.45)]">
         {companyName}
-        <motion.span
+        {/* Sweep shine – CSS keyframe */}
+        <span
           aria-hidden="true"
-          className="absolute inset-y-0 left-[-26%] w-[26%] skew-x-[-18deg] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.72),transparent)] blur-md"
-          animate={{ left: ["-26%", "126%"], opacity: [0, 0.78, 0] }}
-          transition={{
-            duration: 3.2,
-            repeat: Infinity,
-            repeatDelay: 0.55,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          className="absolute inset-y-0 left-[-26%] w-[26%] skew-x-[-18deg] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.72),transparent)] blur-md will-change-[left,opacity] animate-[gate-sweep_3.75s_cubic-bezier(0.22,1,0.36,1)_infinite]"
         />
       </span>
     </motion.h1>
@@ -255,35 +265,14 @@ function EntryWordmark({ companyName }: { companyName: string }) {
 
 function EntryBrandLogoBackground() {
   return (
-    <motion.div
+    <div
       aria-hidden="true"
-      className="relative z-10"
-      animate={{
-        y: [0, -5, 0],
-        opacity: [0.88, 1, 0.88],
-      }}
-      transition={{
-        duration: 5.8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
+      className="relative z-10 will-change-transform animate-[gate-brand-bob_5.8s_ease-in-out_infinite]"
     >
       <div className="relative">
-        <motion.div
-          className="absolute inset-[-26%] rounded-4xl bg-cyan-300/18 blur-3xl"
-          animate={{ scale: [0.94, 1.08, 0.94], opacity: [0.56, 1, 0.56] }}
-          transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute inset-[-20%] rounded-4xl bg-fuchsia-300/18 blur-3xl"
-          animate={{ scale: [1.08, 0.98, 1.08], opacity: [0.42, 0.8, 0.42] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute inset-[-12%] rounded-4xl bg-indigo-300/12 blur-2xl"
-          animate={{ opacity: [0.28, 0.55, 0.28] }}
-          transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-        />
+        <div className="absolute inset-[-26%] rounded-4xl bg-cyan-300/18 blur-3xl will-change-[transform,opacity] animate-[gate-glow-a_6.2s_ease-in-out_infinite]" />
+        <div className="absolute inset-[-20%] rounded-4xl bg-fuchsia-300/18 blur-3xl will-change-[transform,opacity] animate-[gate-glow-b_7s_ease-in-out_infinite]" />
+        <div className="absolute inset-[-12%] rounded-4xl bg-indigo-300/12 blur-2xl will-change-[opacity] animate-[gate-glow-c_4.8s_ease-in-out_infinite]" />
         <Image
           src="/images/mock/logo_vettolab.png"
           alt=""
@@ -300,7 +289,7 @@ function EntryBrandLogoBackground() {
         />
         <div className="absolute inset-0 rounded-3xl bg-background/16 blur-lg" />
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -317,8 +306,26 @@ export function EntryGate({
   const [jumping, setJumping] = useState(false);
   const completeTimeoutRef = useRef<number | null>(null);
   const startTimeoutRef = useRef<number | null>(null);
-  const ringCount = nonBlocking ? 6 : 8;
-  const streakCount = nonBlocking ? 96 : 150;
+  const ringCount = nonBlocking ? 5 : 6;
+  const streakCount = nonBlocking ? 50 : 70;
+
+  const streaks = useMemo(
+    () =>
+      Array.from({ length: streakCount }, (_, index) => {
+        const angle = (index * 137.5 * Math.PI) / 180;
+        const distance = 420 + ((index * 67) % 2200);
+        const angleDeg = (angle * 180) / Math.PI;
+        return {
+          x: Math.cos(angle) * distance,
+          y: Math.sin(angle) * distance,
+          angleDeg,
+          width: 16 + (index % 8) * 12,
+          dur: 1.5 + (index % 12) * 0.08,
+          delay: (index % 55) * 0.016,
+        };
+      }),
+    [streakCount],
+  );
 
   useEffect(() => {
     return () => {
@@ -513,43 +520,36 @@ export function EntryGate({
               />
             ))}
 
-            {Array.from({ length: streakCount }).map((_, index) => {
-              const angle = (index * 137.5 * Math.PI) / 180;
-              const distance = 420 + ((index * 67) % 2200);
-              const angleDeg = (angle * 180) / Math.PI;
-              const x = Math.cos(angle) * distance;
-              const y = Math.sin(angle) * distance;
-              return (
-                <motion.span
-                  key={index}
-                  className="absolute left-1/2 top-1/2 rounded-full bg-cyan-100/95"
-                  style={{
-                    width: 16 + (index % 8) * 12,
-                    height: 1.8,
-                    rotate: `${angleDeg}deg`,
-                  }}
-                  initial={{
-                    x: 0,
-                    y: 0,
-                    opacity: 0,
-                    scaleX: 0.12,
-                    scaleY: 0.6,
-                  }}
-                  animate={{
-                    x,
-                    y,
-                    opacity: [0, 1, 0],
-                    scaleX: [0.12, 2.6, 0.2],
-                    scaleY: [0.6, 1.2, 0.35],
-                  }}
-                  transition={{
-                    duration: 1.5 + (index % 12) * 0.08,
-                    delay: (index % 55) * 0.016,
-                    ease: [0.08, 0.82, 0.2, 1],
-                  }}
-                />
-              );
-            })}
+            {streaks.map((s, index) => (
+              <motion.span
+                key={index}
+                className="absolute left-1/2 top-1/2 rounded-full bg-cyan-100/95"
+                style={{
+                  width: s.width,
+                  height: 1.8,
+                  rotate: `${s.angleDeg}deg`,
+                }}
+                initial={{
+                  x: 0,
+                  y: 0,
+                  opacity: 0,
+                  scaleX: 0.12,
+                  scaleY: 0.6,
+                }}
+                animate={{
+                  x: s.x,
+                  y: s.y,
+                  opacity: [0, 1, 0],
+                  scaleX: [0.12, 2.6, 0.2],
+                  scaleY: [0.6, 1.2, 0.35],
+                }}
+                transition={{
+                  duration: s.dur,
+                  delay: s.delay,
+                  ease: [0.08, 0.82, 0.2, 1],
+                }}
+              />
+            ))}
 
             <motion.div
               className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90 blur-2xl"

@@ -2482,3 +2482,109 @@ body::before {
     padding-bottom: calc(0.6rem + env(safe-area-inset-bottom) * 0.45);
   }
 }
+
+/* ── Gate CSS animations (replaces Framer Motion infinite loops) ── */
+
+@keyframes gate-blur-pulse {
+  0%,
+  100% {
+    opacity: 0.38;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.025);
+  }
+}
+
+@keyframes gate-chromatic-a {
+  0%,
+  100% {
+    transform: translateX(-0.8px);
+    opacity: 0.22;
+  }
+  33% {
+    transform: translateX(0.6px);
+    opacity: 0.45;
+  }
+  66% {
+    transform: translateX(-0.4px);
+    opacity: 0.2;
+  }
+}
+
+@keyframes gate-chromatic-b {
+  0%,
+  100% {
+    transform: translateX(0.7px);
+    opacity: 0.2;
+  }
+  33% {
+    transform: translateX(-0.7px);
+    opacity: 0.34;
+  }
+  66% {
+    transform: translateX(0.5px);
+    opacity: 0.2;
+  }
+}
+
+@keyframes gate-sweep {
+  0% {
+    left: -26%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.78;
+  }
+  100% {
+    left: 126%;
+    opacity: 0;
+  }
+}
+
+@keyframes gate-brand-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.88;
+  }
+  50% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+@keyframes gate-glow-a {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.56;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes gate-glow-b {
+  0%,
+  100% {
+    transform: scale(1.08);
+    opacity: 0.42;
+  }
+  50% {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+}
+
+@keyframes gate-glow-c {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
