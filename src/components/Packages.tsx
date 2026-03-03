@@ -12,6 +12,7 @@ type PackageCard = {
   name: string;
   trackingName: "BASE" | "VETRINA" | "CRESCITA";
   tagline: string;
+  price: string;
   points: string[];
   image: string;
   target: string;
@@ -45,6 +46,7 @@ export function Packages() {
                 name: "STANDARD",
                 trackingName: "BASE",
                 tagline: "Base solida per iniziare a vendere meglio online.",
+                price: "A partire da €1.290",
                 points: [
                   "Sito professionale fino a 5 sezioni (home, menu, chi siamo, contatti, prenotazione)",
                   "Menu digitale chiaro e facilmente aggiornabile",
@@ -60,6 +62,7 @@ export function Packages() {
                 trackingName: "VETRINA",
                 tagline:
                   "Per locali che vogliono distinguersi e convertire di più.",
+                price: "A partire da €2.490",
                 highlight: true,
                 points: [
                   "Tutto del piano Standard",
@@ -77,6 +80,7 @@ export function Packages() {
                 trackingName: "CRESCITA",
                 tagline:
                   "Pacchetto personalizzato per richieste complesse e obiettivi ambiziosi.",
+                price: "Da €4.200",
                 points: [
                   "Architettura su misura multi-sede o multi-brand",
                   "Funzionalità dedicate (CRM, booking avanzato, integrazioni esterne)",
@@ -100,6 +104,7 @@ export function Packages() {
                 trackingName: "BASE",
                 tagline:
                   "Per presentare la struttura in modo elegante e chiaro.",
+                price: "A partire da €1.490",
                 points: [
                   "Sito professionale fino a 7 sezioni (camere, servizi, location, contatti)",
                   "Presentazione camere/suite con gallery dedicata",
@@ -115,6 +120,7 @@ export function Packages() {
                 trackingName: "VETRINA",
                 tagline:
                   "Per strutture che vogliono un'immagine luxury e più richieste dirette.",
+                price: "A partire da €2.990",
                 highlight: true,
                 points: [
                   "Tutto del piano Standard",
@@ -132,6 +138,7 @@ export function Packages() {
                 trackingName: "CRESCITA",
                 tagline:
                   "Soluzione su richiesta per progetti hospitality complessi.",
+                price: "Da €5.500",
                 points: [
                   "Progetto custom per gruppi alberghieri o strutture multi-servizio",
                   "Integrazioni PMS/CRM/channel manager dove richiesto",
@@ -156,6 +163,7 @@ export function Packages() {
                 name: "STANDARD",
                 trackingName: "BASE",
                 tagline: "Strong baseline to sell better online.",
+                price: "From €1,290",
                 points: [
                   "Professional website up to 5 sections",
                   "Clear and editable digital menu",
@@ -171,6 +179,7 @@ export function Packages() {
                 trackingName: "VETRINA",
                 tagline:
                   "For venues that want higher positioning and conversion.",
+                price: "From €2,490",
                 highlight: true,
                 points: [
                   "Everything in Standard",
@@ -187,6 +196,7 @@ export function Packages() {
                 name: "ENTERPRISE",
                 trackingName: "CRESCITA",
                 tagline: "Tailored package for complex requirements.",
+                price: "From €4,200",
                 points: [
                   "Custom architecture for multi-location brands",
                   "Advanced integrations and custom features",
@@ -209,6 +219,7 @@ export function Packages() {
                 name: "STANDARD",
                 trackingName: "BASE",
                 tagline: "Elegant and clear online presence for your property.",
+                price: "From €1,490",
                 points: [
                   "Professional website up to 7 sections",
                   "Rooms/suites presentation with dedicated gallery",
@@ -223,6 +234,7 @@ export function Packages() {
                 name: "PRO",
                 trackingName: "VETRINA",
                 tagline: "For luxury positioning and higher direct demand.",
+                price: "From €2,990",
                 highlight: true,
                 points: [
                   "Everything in Standard",
@@ -240,6 +252,7 @@ export function Packages() {
                 trackingName: "CRESCITA",
                 tagline:
                   "Made-to-measure package for complex hospitality projects.",
+                price: "From €5,500",
                 points: [
                   "Custom project for groups and multi-service properties",
                   "PMS/CRM/channel manager integrations where needed",
@@ -275,13 +288,18 @@ export function Packages() {
               ? "Offerte chiare e trasparenti, con differenze nette tra ristorazione e alberghi."
               : "Clear and transparent offers, with dedicated setups for restaurants and hospitality."}
           </p>
+          <p className="mt-2 text-xs text-(--muted)">
+            {locale === "it"
+              ? "Prezzi IVA non applicata ai sensi dell'Art. 1, commi 54-89, L. 190/2014 (regime forfettario)."
+              : "Prices: VAT not applicable pursuant to Art. 1, paragraphs 54-89, Law 190/2014 (flat-rate regime)."}
+          </p>
 
           <div className="mt-6 flex w-full flex-wrap gap-2 rounded-2xl border border-white/15 bg-black/10 p-2 sm:inline-flex sm:w-auto sm:gap-0 sm:rounded-full sm:p-1">
             <button
               type="button"
               onClick={() => setSelectedCategory("ristoranti")}
               className={
-                "focus-ring rounded-full px-4 py-2 text-xs font-semibold transition sm:text-sm " +
+                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
                 (selectedCategory === "ristoranti"
                   ? "bg-white/90 text-slate-900"
                   : "text-foreground/80 hover:text-foreground")
@@ -294,7 +312,7 @@ export function Packages() {
               type="button"
               onClick={() => setSelectedCategory("hotel")}
               className={
-                "focus-ring rounded-full px-4 py-2 text-xs font-semibold transition sm:text-sm " +
+                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
                 (selectedCategory === "hotel"
                   ? "bg-white/90 text-slate-900"
                   : "text-foreground/80 hover:text-foreground")
@@ -352,6 +370,7 @@ export function Packages() {
                     width={900}
                     height={540}
                     className="h-full w-full object-cover"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                 </div>
 
@@ -361,7 +380,10 @@ export function Packages() {
                 <p className="mt-1 text-xs font-semibold text-(--muted)">
                   {p.target}
                 </p>
-                <p className="mt-3 text-lg font-semibold tracking-tight">
+                <p className="mt-3 text-2xl font-bold tracking-tight text-cyan-200">
+                  {p.price}
+                </p>
+                <p className="mt-2 text-lg font-semibold tracking-tight">
                   {p.tagline}
                 </p>
 

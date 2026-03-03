@@ -2340,7 +2340,7 @@ body::before {
 }
 
 .restaurant-demo .cal-nav {
-  @apply inline-flex h-8 w-8 items-center justify-center rounded-full border border-amber-100/20 text-amber-100 transition;
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-amber-100/20 text-amber-100 transition sm:h-8 sm:w-8;
 }
 
 .restaurant-demo .cal-nav:disabled {
@@ -2356,7 +2356,13 @@ body::before {
 .restaurant-demo .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 6px;
+  gap: 3px;
+}
+
+@media (min-width: 640px) {
+  .restaurant-demo .calendar-grid {
+    gap: 6px;
+  }
 }
 
 .restaurant-demo .calendar-weekdays {
@@ -2364,7 +2370,7 @@ body::before {
 }
 
 .restaurant-demo .cal-day {
-  @apply min-h-10 rounded-xl border border-transparent py-2 text-xs text-stone-300 transition;
+  @apply min-h-11 rounded-xl border border-transparent py-2 text-xs text-stone-300 transition sm:min-h-10;
 }
 
 .restaurant-demo .cal-day:hover:not(:disabled) {
@@ -2387,7 +2393,7 @@ body::before {
 }
 
 .restaurant-demo .time-chip {
-  @apply rounded-full border border-amber-100/25 px-3 py-2 text-xs text-stone-200 transition;
+  @apply min-h-[44px] rounded-full border border-amber-100/25 px-3 py-2.5 text-xs text-stone-200 transition sm:min-h-0 sm:py-2;
 }
 
 .restaurant-demo .time-chip:hover {

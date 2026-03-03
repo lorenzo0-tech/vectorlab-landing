@@ -1,13 +1,9 @@
-"use client";
-
 import dynamic from "next/dynamic";
-import {
-  AmbientBackdrop,
-  GateOverlay,
-  Hero,
-  Navbar,
-  TrustBar,
-} from "@/components";
+import { AmbientBackdrop } from "@/components/AmbientBackdrop";
+import { GateOverlay } from "@/components/GateOverlay";
+import { Hero } from "@/components/Hero";
+import { Navbar } from "@/components/Navbar";
+import { TrustBar } from "@/components/TrustBar";
 import {
   COMPANY_CITY,
   COMPANY_NAME,
@@ -15,7 +11,7 @@ import {
   LOGO_IMAGE_PATH,
   SITE_URL,
 } from "@/lib/constants";
-import { useLanguage } from "@/components/LanguageProvider";
+import { getServerLocale } from "@/lib/server-locale";
 
 const CaseStudies = dynamic(() =>
   import("@/components/CaseStudies").then((mod) => mod.CaseStudies),
@@ -28,6 +24,12 @@ const Solution = dynamic(() =>
 );
 const Packages = dynamic(() =>
   import("@/components/Packages").then((mod) => mod.Packages),
+);
+const Maintenance = dynamic(() =>
+  import("@/components/Maintenance").then((mod) => mod.Maintenance),
+);
+const AboutFounder = dynamic(() =>
+  import("@/components/AboutFounder").then((mod) => mod.AboutFounder),
 );
 const ProjectShowcase = dynamic(() =>
   import("@/components/ProjectShowcase").then((mod) => mod.ProjectShowcase),
@@ -43,8 +45,8 @@ const Footer = dynamic(() =>
   import("@/components/Footer").then((mod) => mod.Footer),
 );
 
-export default function Home() {
-  const { locale } = useLanguage();
+export default async function Home() {
+  const locale = await getServerLocale();
 
   const homepageFaq =
     locale === "it"
@@ -55,14 +57,39 @@ export default function Home() {
               "In molti casi la consegna tipica è 14 giorni, in base alla complessità del progetto.",
           },
           {
+            question: "Quanto costa un sito web per il mio ristorante o hotel?",
+            answer:
+              "I pacchetti partono da €1.290 per ristoranti e €1.490 per hotel (IVA non applicata, regime forfettario). Prenota un'analisi gratuita per un preventivo su misura.",
+          },
+          {
             question: "Il sito sarà adatto a Google?",
             answer:
               "Sì, la base include struttura SEO locale, performance e contenuti orientati alla ricerca.",
           },
           {
+            question: "Posso aggiornare il menu o i contenuti da solo?",
+            answer:
+              "Sì. Consegniamo il sito con una struttura facilmente aggiornabile. Offriamo anche piani di manutenzione mensile.",
+          },
+          {
+            question: "Il sito è di mia proprietà?",
+            answer:
+              "Assolutamente sì. Dominio, contenuti e immagini restano tuoi, senza vincoli di lock-in.",
+          },
+          {
+            question: "Cosa succede dopo la consegna?",
+            answer:
+              "Puoi gestire il sito in autonomia oppure attivare un piano di manutenzione: Essential, Business o Performance.",
+          },
+          {
             question: "Come misurate se sta funzionando?",
             answer:
               "Tracciamo le azioni principali come clic su call to action, contatti e richieste.",
+          },
+          {
+            question: "Lavorate solo a Milano?",
+            answer:
+              "Siamo basati a Milano, ma lavoriamo in tutta Italia e con strutture internazionali.",
           },
         ]
       : [
@@ -72,14 +99,40 @@ export default function Home() {
               "In many cases, typical delivery is 14 days depending on project complexity.",
           },
           {
+            question:
+              "How much does a website cost for my restaurant or hotel?",
+            answer:
+              "Packages start from €1,290 for restaurants and €1,490 for hotels (VAT not applicable, flat-rate regime). Book a free audit for a tailored quote.",
+          },
+          {
             question: "Will the website be Google-friendly?",
             answer:
               "Yes, the base includes local SEO structure, performance, and search-oriented content.",
           },
           {
+            question: "Can I update the menu or content myself?",
+            answer:
+              "Yes. We deliver the site with an easily updatable structure. We also offer monthly maintenance plans.",
+          },
+          {
+            question: "Do I own the website?",
+            answer:
+              "Absolutely. The domain, content, and images are yours, with no lock-in.",
+          },
+          {
+            question: "What happens after delivery?",
+            answer:
+              "You can manage the site yourself or activate a maintenance plan: Essential, Business, or Performance.",
+          },
+          {
             question: "How do you measure if it is working?",
             answer:
               "We track key actions such as CTA clicks, contacts, and lead requests.",
+          },
+          {
+            question: "Do you only work in Milan?",
+            answer:
+              "We're based in Milan, but we work across Italy and with international properties.",
           },
         ];
 
@@ -177,6 +230,12 @@ export default function Home() {
           </div>
           <div className="divider-tech section-tone">
             <Packages />
+          </div>
+          <div className="divider-tech section-tone">
+            <Maintenance />
+          </div>
+          <div className="divider-tech section-tone">
+            <AboutFounder />
           </div>
           <div className="divider-tech section-tone">
             <Process />

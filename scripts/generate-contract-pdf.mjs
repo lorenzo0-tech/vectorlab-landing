@@ -13,7 +13,13 @@ const outputPath = path.join(
   "docs",
   "Contratto-Servizi-VettoLab.pdf",
 );
-const logoPath = path.join(rootDir, "public", "images", "mock", "logo_vettolab.png");
+const logoPath = path.join(
+  rootDir,
+  "public",
+  "images",
+  "mock",
+  "logo_vettolab.png",
+);
 
 const palette = {
   bgDark: rgb(7 / 255, 11 / 255, 20 / 255),
@@ -30,8 +36,8 @@ const agreementSections = [
   {
     title: "1) Parti del contratto",
     paragraphs: [
-      "Il presente contratto di servizi digitali (\"Contratto\") è concluso tra:",
-      "Fornitore: VettoLab (\"Fornitore\"), con sede operativa in Milano, P.IVA 14572400969, email: vettolab0@gmail.com.",
+      'Il presente contratto di servizi digitali ("Contratto") è concluso tra:',
+      'Fornitore: VettoLab ("Fornitore"), con sede operativa in Milano, P.IVA 14572400969, email: vettolab0@gmail.com.',
       "Cliente: [Ragione sociale cliente], con sede in [indirizzo], P.IVA/C.F. [dato], email [email referente].",
     ],
   },
@@ -323,13 +329,16 @@ async function generatePdf() {
     color: palette.text,
   });
 
-  page.drawText("Cliente: [Nome cliente]   |   Progetto: [Sito ristorante/hotel]   |   Importo: [€____ + IVA]", {
-    x: margin + 12,
-    y: cursorY - 36,
-    size: 9.8,
-    font: fontRegular,
-    color: palette.muted,
-  });
+  page.drawText(
+    "Cliente: [Nome cliente]   |   Progetto: [Sito ristorante/hotel]   |   Importo: [€____ + IVA]",
+    {
+      x: margin + 12,
+      y: cursorY - 36,
+      size: 9.8,
+      font: fontRegular,
+      color: palette.muted,
+    },
+  );
 
   cursorY -= 84;
 
@@ -350,7 +359,12 @@ async function generatePdf() {
 
     if (section.paragraphs) {
       for (const paragraph of section.paragraphs) {
-        const lines = wrapText(paragraph, fontRegular, paragraphSize, contentWidth);
+        const lines = wrapText(
+          paragraph,
+          fontRegular,
+          paragraphSize,
+          contentWidth,
+        );
         ensureSpace(lines.length * lineHeight + 10);
         for (const line of lines) {
           page.drawText(line, {
@@ -368,7 +382,12 @@ async function generatePdf() {
 
     if (section.bullets) {
       for (const bullet of section.bullets) {
-        const bulletLines = wrapText(bullet, fontRegular, paragraphSize, contentWidth - 18);
+        const bulletLines = wrapText(
+          bullet,
+          fontRegular,
+          paragraphSize,
+          contentWidth - 18,
+        );
         ensureSpace(bulletLines.length * lineHeight + 8);
 
         page.drawCircle({

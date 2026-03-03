@@ -50,6 +50,7 @@ export default async function AmbientiPage() {
               width={1200}
               height={900}
               className="aspect-4/3 w-full object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           </figure>
         ))}

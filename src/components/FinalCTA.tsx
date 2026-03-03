@@ -345,7 +345,7 @@ export function FinalCTA() {
                         : "Call booking calendar"
                     }
                     src={calendlyEmbedUrl}
-                    className="h-155 w-full"
+                    className="h-[480px] w-full sm:h-155"
                     loading="lazy"
                   />
                 </div>
@@ -363,6 +363,12 @@ export function FinalCTA() {
                   {locale === "it"
                     ? "Compila i campi essenziali: prepariamo una prima proposta di struttura e le azioni da spingere."
                     : "Fill in the essential fields: we prepare an initial structure proposal and the key actions to prioritize."}
+                </p>
+                <p className="mt-3 inline-flex items-center gap-2 rounded-xl border border-cyan-200/20 bg-cyan-900/10 px-3 py-2 text-xs font-medium text-cyan-200">
+                  <span aria-hidden="true">🔒</span>
+                  {locale === "it"
+                    ? "Nessun impegno — rispondiamo entro 24h"
+                    : "No commitment — we reply within 24h"}
                 </p>
 
                 <form onSubmit={onSubmit} className="lead-form mt-6 space-y-3">
@@ -560,7 +566,7 @@ export function FinalCTA() {
                   </p>
                   <a
                     href={mailto}
-                    className="text-xs font-semibold text-cyan-200 underline-offset-2 hover:text-cyan-100 hover:underline"
+                    className="inline-flex min-h-[44px] items-center text-xs font-semibold text-cyan-200 underline-offset-2 hover:text-cyan-100 hover:underline sm:min-h-0"
                   >
                     {locale === "it"
                       ? "Alternativa: apri email precompilata"

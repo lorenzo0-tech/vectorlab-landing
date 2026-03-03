@@ -110,6 +110,7 @@ export default async function DemoHotelVillaPage() {
           fill
           priority
           className="object-cover"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-linear-to-r from-[#231a12]/60 via-[#3a2b1d]/46 to-[#594430]/20" />
         <div className="container-pad relative z-10 flex min-h-[72svh] items-end py-16 sm:min-h-[72vh] sm:py-24">
@@ -127,22 +128,22 @@ export default async function DemoHotelVillaPage() {
                 ? "At Villa Aurea, every stay is tailored for you: elegant suites, exclusive experiences, private wellness, and signature cuisine in a one-of-a-kind lake setting."
                 : "A Villa Aurea ogni soggiorno è creato su misura: suite eleganti, esperienze esclusive, benessere privato e cucina d&apos;autore in una cornice unica sul lago."}
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="/demo-hotel-villa/suite"
-                className="rounded-full bg-[#f2e2c7] px-6 py-3 text-sm font-semibold text-[#342719]"
+                className="min-h-[44px] inline-flex items-center justify-center rounded-full bg-[#f2e2c7] px-6 py-3 text-sm font-semibold text-[#342719]"
               >
                 {isEn ? "Explore suites" : "Esplora le suite"}
               </Link>
               <Link
                 href="/demo-hotel-villa/contatti"
-                className="rounded-full border border-[#f6ead9] px-6 py-3 text-sm font-semibold text-[#fff8ee]"
+                className="min-h-[44px] inline-flex items-center justify-center rounded-full border border-[#f6ead9] px-6 py-3 text-sm font-semibold text-[#fff8ee]"
               >
                 {isEn ? "Request availability" : "Richiedi disponibilità"}
               </Link>
               <Link
                 href="/demo-hotel-villa/prenotazione"
-                className="rounded-full border border-[#f6ead9] bg-[#f6ead9] px-6 py-3 text-sm font-semibold text-[#3a2c1d]"
+                className="min-h-[44px] inline-flex items-center justify-center rounded-full border border-[#f6ead9] bg-[#f6ead9] px-6 py-3 text-sm font-semibold text-[#3a2c1d]"
               >
                 {isEn ? "Start booking" : "Avvia prenotazione"}
               </Link>
@@ -201,7 +202,7 @@ export default async function DemoHotelVillaPage() {
             </p>
             <Link
               href="/demo-hotel-villa/contatti"
-              className="mt-6 inline-flex rounded-full border border-[#bda17f] px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#3d2e1f]"
+              className="mt-6 min-h-[44px] inline-flex items-center rounded-full border border-[#bda17f] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-[#3d2e1f]"
             >
               {isEn ? "Talk to our concierge" : "Parla con il concierge"}
             </Link>
@@ -220,6 +221,7 @@ export default async function DemoHotelVillaPage() {
                 width={1200}
                 height={900}
                 className="h-72 w-full object-cover transition duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#1f1710]/78 via-[#2d2218]/30 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 text-[#fff8ee]">
@@ -230,7 +232,7 @@ export default async function DemoHotelVillaPage() {
                 <p className="mt-2 text-sm text-[#f2e5d4]">{item.text}</p>
                 <Link
                   href={item.href}
-                  className="mt-4 inline-flex rounded-full border border-[#f6ead9] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#fff8ee]"
+                  className="mt-4 min-h-[44px] inline-flex items-center rounded-full border border-[#f6ead9] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-[#fff8ee]"
                 >
                   {item.cta}
                 </Link>
@@ -253,6 +255,7 @@ export default async function DemoHotelVillaPage() {
                 width={1200}
                 height={800}
                 className="aspect-4/3 w-full object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
               />
               <div className="p-5">
                 <h3 className="heading-display text-xl text-[#352617]">
@@ -297,6 +300,7 @@ export default async function DemoHotelVillaPage() {
                 width={800}
                 height={600}
                 className="h-full w-full rounded-2xl border border-[#deccb4] object-cover"
+                sizes="(max-width: 1024px) 50vw, 25vw"
               />
             ))}
           </div>

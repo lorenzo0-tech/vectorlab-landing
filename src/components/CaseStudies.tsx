@@ -10,25 +10,28 @@ export function CaseStudies() {
     locale === "it"
       ? [
           {
-            name: "Ristorante centro città · Milano",
-            metric: "Più richieste tavolo qualificate",
-            detail: "KPI monitorato dopo ottimizzazione del percorso prenotazione",
+            name: "Scenario tipo · Ristorante centro città",
+            metric: "Obiettivo: +prenotazioni",
+            detail:
+              "Scenario dimostrativo: come interveniamo su un sito con bassa conversione",
             before:
               "Invito all’azione poco visibile e percorso prenotazione dispersivo",
             action:
               "Testata semplificata, invito all’azione fisso e percorso smartphone lineare",
           },
           {
-            name: "Pizzeria da asporto · Bergamo",
-            metric: "Più clic su menu e ordini",
-            detail: "KPI monitorato dopo ottimizzazione testata e invito all’azione",
+            name: "Scenario tipo · Pizzeria da asporto",
+            metric: "Obiettivo: +clic su menu",
+            detail:
+              "Scenario dimostrativo: ottimizzazione testata e invito all'azione",
             before: "Menu difficile da trovare da smartphone",
             action: "Menu in un tocco + gerarchia visiva orientata all’azione",
           },
           {
-            name: "Bar di miscelazione eventi · Torino",
-            metric: "Più clic su prenota",
-            detail: "KPI monitorato con tracciamento eventi attivo",
+            name: "Scenario tipo · Cocktail bar eventi",
+            metric: "Obiettivo: +conversioni",
+            detail:
+              "Scenario dimostrativo: riduzione frizione e aumento fiducia",
             before: "Traffico buono ma conversione bassa su smartphone",
             action:
               "Riduzione frizione sui tocchi e blocchi fiducia sopra la piega",
@@ -36,24 +39,26 @@ export function CaseStudies() {
         ]
       : [
           {
-            name: "City-center restaurant · Milan",
-            metric: "More qualified table requests",
-            detail: "KPI monitored after booking-flow optimization",
+            name: "Typical scenario · City-center restaurant",
+            metric: "Goal: +bookings",
+            detail:
+              "Demonstrative scenario: how we improve a low-converting site",
             before: "Low-visibility CTA and scattered booking flow",
             action:
               "Simplified hero, sticky CTA, and linear smartphone journey",
           },
           {
-            name: "Takeaway pizzeria · Bergamo",
-            metric: "More menu clicks and orders",
-            detail: "KPI monitored after hero and CTA optimization",
+            name: "Typical scenario · Takeaway pizzeria",
+            metric: "Goal: +menu clicks",
+            detail: "Demonstrative scenario: hero and CTA optimization",
             before: "Menu hard to find on smartphone",
             action: "One-tap menu + action-oriented visual hierarchy",
           },
           {
-            name: "Event cocktail bar · Turin",
-            metric: "More book-now clicks",
-            detail: "KPI monitored with event tracking enabled",
+            name: "Typical scenario · Event cocktail bar",
+            metric: "Goal: +conversions",
+            detail:
+              "Demonstrative scenario: friction reduction and trust building",
             before: "Good traffic but low smartphone conversion",
             action:
               "Reduced tap friction and added above-the-fold trust blocks",
@@ -61,7 +66,7 @@ export function CaseStudies() {
         ];
 
   return (
-    <section className="section-pad" id="casi-reali">
+    <section className="section-pad" id="metodo">
       <div className="container-pad">
         <motion.div
           initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
@@ -71,13 +76,13 @@ export function CaseStudies() {
         >
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
-              ? "Più richieste, meno frizione nel percorso cliente."
-              : "More inquiries, less friction in the customer journey."}
+              ? "Il nostro metodo: analisi, intervento, misurazione."
+              : "Our method: analysis, intervention, measurement."}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
-              ? "Esempi operativi con problema, intervento e KPI monitorato: un approccio concreto per trasformare più visite in contatti."
-              : "Operational examples with problem, intervention, and monitored KPI: a practical approach to turn more visits into leads."}
+              ? "Scenari tipo con problema, intervento e obiettivo: ecco come progettiamo ogni sito per massimizzare le conversioni."
+              : "Typical scenarios with problem, intervention, and goal: this is how we design every site to maximize conversions."}
           </p>
         </motion.div>
 
@@ -94,7 +99,7 @@ export function CaseStudies() {
               <p className="text-xs font-semibold tracking-widest text-(--muted)">
                 {item.name}
               </p>
-              <p className="mt-3 text-2xl font-semibold tracking-tight">
+              <p className="mt-3 text-2xl font-semibold tracking-tight text-cyan-200">
                 {item.metric}
               </p>
               <p className="mt-2 text-sm text-(--muted)">{item.detail}</p>

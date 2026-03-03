@@ -91,6 +91,7 @@ export function ProjectShowcase() {
                   width={1400}
                   height={900}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
                 <p className="absolute bottom-4 left-4 rounded-full border border-white/35 bg-black/30 px-3 py-1 text-xs font-semibold tracking-wide text-white/95 backdrop-blur-sm">

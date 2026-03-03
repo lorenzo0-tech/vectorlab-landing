@@ -10,16 +10,16 @@ export function Problem() {
   const bullets =
     locale === "it"
       ? [
-          "Menu nascosto o scomodo: chi vuole prenotare abbandona.",
-          "Invito all’azione assente o debole: le persone non sanno cosa fare.",
+          "Menu nascosto o scomodo: il 53% degli utenti abbandona se non lo trova subito.",
+          "Invito all'azione assente o debole: le persone non sanno cosa fare e se ne vanno.",
           "Versione smartphone disastrosa: tocchi difficili, testi piccoli, pagina pesante.",
-          "Sito lento: perdi traffico e fiducia ancora prima di parlare del locale.",
+          "Sito lento (>3 secondi): perdi fino al 40% del traffico prima ancora di parlare del locale.",
         ]
       : [
-          "Hidden or awkward menu: people who want to book leave.",
-          "Weak or missing call to action: visitors do not know what to do next.",
+          "Hidden or awkward menu: 53% of users leave if they can't find it immediately.",
+          "Weak or missing call to action: visitors don't know what to do and leave.",
           "Poor smartphone experience: hard taps, tiny text, heavy page.",
-          "Slow website: you lose traffic and trust before showcasing your venue.",
+          "Slow website (>3s): you lose up to 40% of traffic before showcasing your venue.",
         ];
 
   return (

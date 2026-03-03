@@ -84,6 +84,7 @@ export default async function DemoRistoranteHomePage() {
           fill
           priority
           className="object-cover"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-linear-to-r from-[#120b07]/78 via-[#1b120a]/52 to-[#2f2115]/25" />
 
@@ -168,7 +169,7 @@ export default async function DemoRistoranteHomePage() {
             </p>
             <Link
               href="/demo-ristorante/contatti"
-              className="mt-6 inline-flex rounded-full border border-[#b98a55] px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#f2e1c8]"
+              className="mt-6 min-h-[44px] inline-flex items-center rounded-full border border-[#b98a55] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-[#f2e1c8]"
             >
               {isEn ? "Contact front-of-house" : "Contatta l&apos;accoglienza"}
             </Link>
@@ -187,6 +188,7 @@ export default async function DemoRistoranteHomePage() {
                 width={1200}
                 height={900}
                 className="h-72 w-full object-cover transition duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#120c07]/82 via-[#1f150d]/35 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 text-[#f7ead6]">
@@ -194,7 +196,7 @@ export default async function DemoRistoranteHomePage() {
                 <p className="mt-2 text-sm text-[#e4d0b4]">{item.text}</p>
                 <Link
                   href={item.href}
-                  className="mt-4 inline-flex rounded-full border border-[#f0dec2]/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em]"
+                  className="mt-4 min-h-[44px] inline-flex items-center rounded-full border border-[#f0dec2]/65 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em]"
                 >
                   {item.cta}
                 </Link>
@@ -256,6 +258,7 @@ export default async function DemoRistoranteHomePage() {
                 width={800}
                 height={600}
                 className="h-full w-full rounded-2xl border border-[#7c5b35]/45 object-cover"
+                sizes="(max-width: 1024px) 50vw, 25vw"
               />
             ))}
           </div>

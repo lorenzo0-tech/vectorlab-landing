@@ -51,6 +51,7 @@ export default async function SuitePage() {
               width={1400}
               height={900}
               className="aspect-16/10 w-full object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
             <div className="space-y-3 p-6">
               <h2 className="heading-display text-2xl text-[#352617]">

@@ -12,7 +12,7 @@ export function VetrinaRistorante() {
         <div className="glass-strong gradient-border panel-tech card-tech overflow-hidden rounded-3xl p-6 sm:p-10">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
-              <p className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-400/8 px-3 py-1 text-[10px] font-semibold tracking-[0.12em] text-cyan-100/90 uppercase sm:text-[11px] sm:tracking-[0.18em]">
+              <p className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-400/8 px-3 py-1 text-[11px] font-semibold tracking-[0.14em] text-cyan-100/90 uppercase sm:text-[11px] sm:tracking-[0.18em]">
                 <Sparkles className="h-3.5 w-3.5" />
                 {locale === "it"
                   ? "Esempio reale di progetto"

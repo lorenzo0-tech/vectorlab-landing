@@ -32,6 +32,8 @@ function AmbientOrbsCanvas() {
     if (!context) return;
 
     let raf = 0;
+    let startTimer = 0;
+    let started = false;
     let isRunning = true;
     let width = 0;
     let height = 0;
@@ -63,9 +65,6 @@ function AmbientOrbsCanvas() {
         nodes.splice(targetCount, nodes.length - targetCount);
       }
     };
-
-    resize();
-    window.addEventListener("resize", resize, { passive: true });
 
     const tick = (now: number) => {
       if (!isRunning) {
@@ -154,15 +153,29 @@ function AmbientOrbsCanvas() {
       isRunning = document.visibilityState === "visible";
     };
 
-    handleVisibilityChange();
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+    const startAnimation = () => {
+      started = true;
+      resize();
+      window.addEventListener("resize", resize, { passive: true });
+      handleVisibilityChange();
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      raf = window.requestAnimationFrame(tick);
+    };
 
-    raf = window.requestAnimationFrame(tick);
+    startTimer = window.setTimeout(startAnimation, 1200);
 
     return () => {
+      if (startTimer) {
+        window.clearTimeout(startTimer);
+      }
       window.cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (started) {
+        window.removeEventListener("resize", resize);
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibilityChange,
+        );
+      }
     };
   }, []);
 

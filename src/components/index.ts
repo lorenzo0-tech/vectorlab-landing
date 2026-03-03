@@ -5,6 +5,8 @@ export { Problem } from "./Problem";
 export { Solution } from "./Solution";
 export { EntryGate } from "./EntryGate";
 export { Packages } from "./Packages";
+export { Maintenance } from "./Maintenance";
+export { AboutFounder } from "./AboutFounder";
 export { Process } from "./Process";
 export { FAQ } from "./FAQ";
 export { FinalCTA } from "./FinalCTA";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   type HTMLMotionProps,
   motion,
@@ -153,6 +153,20 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
 export function Hero() {
   const { locale } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
+  const [showMotionEffects, setShowMotionEffects] = useState(false);
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setShowMotionEffects(true);
+    }, 900);
+
+    return () => window.clearTimeout(timer);
+  }, [shouldReduceMotion]);
+
   const canRunParticles =
     !shouldReduceMotion &&
     typeof window !== "undefined" &&
@@ -165,7 +179,8 @@ export function Hero() {
       )
     );
 
-  const particlesEnabled = !shouldReduceMotion && canRunParticles;
+  const particlesEnabled =
+    showMotionEffects && !shouldReduceMotion && canRunParticles;
 
   const pills = useMemo(
     () => [
@@ -201,30 +216,10 @@ export function Hero() {
           </div>
 
           <div className="grid w-full items-center gap-10 lg:grid-cols-12">
-            <motion.div
-              initial={
-                shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 18 }
-              }
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, ease: [0.2, 0.8, 0.2, 1] }}
-              className="max-w-3xl xl:col-span-7"
-            >
+            <div className="max-w-3xl xl:col-span-7">
               <div className="relative">
-                <motion.span
-                  aria-hidden="true"
-                  className="hero-title-glow"
-                  animate={
-                    shouldReduceMotion
-                      ? undefined
-                      : { opacity: [0.62, 0.82, 0.62], scale: [1, 1.04, 1] }
-                  }
-                  transition={{
-                    duration: 6.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <h1 className="heading-display text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+                <span aria-hidden="true" className="hero-title-glow" />
+                <h1 className="heading-display text-balance text-[1.85rem] font-semibold leading-[1.05] tracking-tight sm:text-4xl md:text-6xl">
                   <span className="hero-title-tech">
                     {locale === "it"
                       ? "Siti web per ristoranti e hotel, creati su misura."
@@ -290,29 +285,16 @@ export function Hero() {
                   <Mail className="h-4 w-4" />
                 </MagneticLink>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={
-                shouldReduceMotion
-                  ? { opacity: 1 }
-                  : { opacity: 0, y: 20, scale: 0.985 }
-              }
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                duration: 0.7,
-                ease: [0.2, 0.8, 0.2, 1],
-                delay: 0.08,
-              }}
-              className="relative mt-2 lg:col-span-5 lg:mt-0"
-            >
+            <div className="relative mt-2 hidden lg:col-span-5 lg:mt-0 lg:block">
               <div className="glass-strong gradient-border panel-tech card-tech relative overflow-hidden rounded-3xl p-3">
                 <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-cyan-200/20 bg-[#060b16]">
                   <motion.div
                     aria-hidden="true"
                     className="absolute -left-16 -top-16 h-52 w-52 rounded-full bg-cyan-400/20 blur-3xl"
                     animate={
-                      shouldReduceMotion
+                      shouldReduceMotion || !showMotionEffects
                         ? undefined
                         : { x: [0, 24, -10, 0], y: [0, 18, -8, 0] }
                     }
@@ -326,7 +308,7 @@ export function Hero() {
                     aria-hidden="true"
                     className="absolute -bottom-16 -right-12 h-56 w-56 rounded-full bg-fuchsia-400/18 blur-3xl"
                     animate={
-                      shouldReduceMotion
+                      shouldReduceMotion || !showMotionEffects
                         ? undefined
                         : { x: [0, -22, 10, 0], y: [0, -16, 8, 0] }
                     }
@@ -340,7 +322,11 @@ export function Hero() {
                   <motion.div
                     aria-hidden="true"
                     className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/28"
-                    animate={shouldReduceMotion ? undefined : { rotate: 360 }}
+                    animate={
+                      shouldReduceMotion || !showMotionEffects
+                        ? undefined
+                        : { rotate: 360 }
+                    }
                     transition={{
                       duration: 20,
                       repeat: Infinity,
@@ -350,7 +336,11 @@ export function Hero() {
                   <motion.div
                     aria-hidden="true"
                     className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-fuchsia-200/26"
-                    animate={shouldReduceMotion ? undefined : { rotate: -360 }}
+                    animate={
+                      shouldReduceMotion || !showMotionEffects
+                        ? undefined
+                        : { rotate: -360 }
+                    }
                     transition={{
                       duration: 14,
                       repeat: Infinity,
@@ -361,7 +351,7 @@ export function Hero() {
                   <motion.div
                     className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/30 bg-white/5 p-2 shadow-[0_20px_50px_rgba(2,6,23,0.45)] backdrop-blur-md"
                     animate={
-                      shouldReduceMotion
+                      shouldReduceMotion || !showMotionEffects
                         ? undefined
                         : { y: [0, -6, 0], scale: [1, 1.02, 1] }
                     }
@@ -414,7 +404,7 @@ export function Hero() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

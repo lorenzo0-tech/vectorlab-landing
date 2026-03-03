@@ -102,9 +102,9 @@ export default async function PrenotazioneRistorantePage() {
               {occasions.map((item) => (
                 <label
                   key={item}
-                  className="flex items-center gap-3 text-sm text-[#cbb69a]"
+                  className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl px-2 text-sm text-[#cbb69a] transition hover:bg-[#2a1e12] sm:min-h-0"
                 >
-                  <input type="checkbox" className="h-4 w-4 accent-[#d2a46d]" />
+                  <input type="checkbox" className="h-5 w-5 accent-[#d2a46d]" />
                   {item}
                 </label>
               ))}
@@ -169,6 +169,7 @@ export default async function PrenotazioneRistorantePage() {
               width={1000}
               height={700}
               className="h-full w-full object-cover"
+              sizes="(max-width: 1024px) 100vw, 40vw"
             />
           </div>
           <h2 className="heading-display text-3xl text-[#f2debf]">

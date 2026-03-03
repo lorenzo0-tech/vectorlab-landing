@@ -89,6 +89,7 @@ export default async function RistorantePage() {
             width={1400}
             height={1000}
             className="h-full w-full object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
       </div>

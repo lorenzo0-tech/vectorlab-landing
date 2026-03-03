@@ -18,6 +18,10 @@ export function FAQ() {
             a: "In molti casi la consegna tipica è 14 giorni (in base alla complessità). Se servono più pagine, contenuti extra o integrazioni, definiamo tempi chiari prima di partire.",
           },
           {
+            q: "Quanto costa un sito web per il mio ristorante o hotel?",
+            a: "I pacchetti partono da \u20ac1.290 per ristoranti e \u20ac1.490 per hotel. Il prezzo finale dipende da pagine, integrazioni e personalizzazione. Prenota un\u2019analisi gratuita per un preventivo su misura.",
+          },
+          {
             q: "Ci serve un sito “bello” o un sito che porta risultati?",
             a: "Noi progettiamo per l’azione: prenotazioni, chiamate, richieste. La progettazione è di alto livello, ma è al servizio della conversione: inviti all’azione visibili, percorso semplice, prima su smartphone, velocità reale.",
           },
@@ -30,14 +34,34 @@ export function FAQ() {
             a: "Sì. Mettiamo una base SEO locale pulita: struttura corretta, performance, heading e contenuti chiari. Non vendiamo “magie”, ma scelte tecniche che aiutano davvero a essere trovati.",
           },
           {
+            q: "Posso aggiornare il menu o i contenuti da solo?",
+            a: "S\u00ec. Consegniamo il sito con una struttura facilmente aggiornabile. Per chi preferisce non pensarci, offriamo piani di manutenzione mensile che includono aggiornamenti contenuti, menu e foto.",
+          },
+          {
+            q: "Il sito \u00e8 di mia propriet\u00e0?",
+            a: "Assolutamente s\u00ec. Il dominio, i contenuti e le immagini restano tuoi. Il sito viene consegnato completo e funzionante, senza vincoli di lock-in.",
+          },
+          {
+            q: "Cosa succede dopo la consegna?",
+            a: "Dopo il lancio puoi gestire il sito in autonomia oppure attivare un piano di manutenzione. Offriamo tre livelli: Essential (aggiornamenti tecnici e sicurezza), Business (contenuti e SEO light), Performance (ottimizzazione conversioni e report mensili).",
+          },
+          {
             q: "Come misurate se sta funzionando?",
-            a: "Tracciamo i clic sulle azioni importanti (inviti all’azione, menu, contatti, mappa). Così capiamo cosa genera richieste e cosa va ottimizzato.",
+            a: "Tracciamo i clic sulle azioni importanti (inviti all\u2019azione, menu, contatti, mappa). Cos\u00ec capiamo cosa genera richieste e cosa va ottimizzato.",
+          },
+          {
+            q: "Lavorate solo a Milano?",
+            a: "Siamo basati a Milano, ma lavoriamo in tutta Italia e con strutture internazionali. La maggior parte del processo \u00e8 da remoto, con call di allineamento e condivisione in tempo reale.",
           },
         ]
       : [
           {
             q: "How long does delivery take?",
             a: "In many cases, typical delivery is 14 days (depending on complexity). If extra pages, content, or integrations are needed, we define clear timelines before starting.",
+          },
+          {
+            q: "How much does a website cost for my restaurant or hotel?",
+            a: "Packages start from \u20ac1,290 for restaurants and \u20ac1,490 for hotels. The final price depends on pages, integrations, and customization level. Book a free audit to get a tailored quote.",
           },
           {
             q: "Do we need a beautiful site or a site that gets results?",
@@ -52,8 +76,24 @@ export function FAQ() {
             a: "Yes. We set a clean local SEO foundation: proper structure, performance, headings, and clear content. No magic promises, just technical choices that truly help discoverability.",
           },
           {
+            q: "Can I update the menu or content myself?",
+            a: "Yes. We deliver the site with an easily updatable structure. For those who prefer not to worry about it, we offer monthly maintenance plans that include content, menu, and photo updates.",
+          },
+          {
+            q: "Do I own the website?",
+            a: "Absolutely. The domain, content, and images are yours. The site is delivered complete and functional, with no lock-in.",
+          },
+          {
+            q: "What happens after delivery?",
+            a: "After launch you can manage the site yourself or activate a maintenance plan. We offer three levels: Essential (technical updates and security), Business (content and light SEO), Performance (conversion optimization and monthly reports).",
+          },
+          {
             q: "How do you measure if it works?",
             a: "We track clicks on key actions (CTAs, menu, contacts, map). This helps us understand what generates leads and what to optimize.",
+          },
+          {
+            q: "Do you only work in Milan?",
+            a: "We're based in Milan, but we work across Italy and with international properties. Most of the process is remote, with alignment calls and real-time sharing.",
           },
         ];
 
@@ -110,7 +150,7 @@ export function FAQ() {
             const contentId = `faq-item-${idx}`;
             return (
               <div
-                key={f.q}
+                key={`faq-${idx}`}
                 className={
                   "glass gradient-border card-tech rounded-3xl " +
                   (isOpen ? "panel-tech" : "")
@@ -142,26 +182,22 @@ export function FAQ() {
                     />
                   </span>
                 </button>
-                <motion.div
-                  initial={false}
-                  animate={{
-                    height: isOpen ? "auto" : 0,
-                    opacity: isOpen ? 1 : 0,
-                  }}
-                  transition={
-                    reduce
-                      ? { duration: 0 }
-                      : { duration: 0.24, ease: [0.22, 1, 0.36, 1] }
-                  }
+                <div
                   id={contentId}
-                  className="faq-item-content overflow-hidden"
+                  className={
+                    "faq-item-content grid overflow-hidden transition-[grid-template-rows,opacity] ease-out " +
+                    (reduce ? "duration-0 " : "duration-150 ") +
+                    (isOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0")
+                  }
                 >
-                  <div>
+                  <div className="min-h-0">
                     <p className="px-6 pb-6 text-sm leading-7 text-(--muted)">
                       {f.a}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </div>
             );
           })}

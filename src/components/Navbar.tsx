@@ -171,7 +171,7 @@ export function Navbar() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary focus-ring px-3.5 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
+                className="btn-primary focus-ring min-h-[44px] px-3.5 py-2.5 text-xs sm:px-4 sm:py-2.5 sm:text-sm"
                 aria-label={
                   locale === "it"
                     ? "Prenota un'analisi gratuita di 15 minuti su Calendly"
@@ -206,7 +206,7 @@ export function Navbar() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary focus-ring w-full px-3 py-2 text-xs"
+              className="btn-primary focus-ring w-full min-h-[44px] px-3 py-2.5 text-xs"
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",
@@ -219,7 +219,7 @@ export function Navbar() {
             </a>
             <a
               href="#preventivo"
-              className="btn-secondary focus-ring w-full px-3 py-2 text-xs"
+              className="btn-secondary focus-ring w-full min-h-[44px] px-3 py-2.5 text-xs"
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",

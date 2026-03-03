@@ -141,21 +141,21 @@ export function Footer() {
             </div>
 
             <div className="flex w-full flex-col gap-2 sm:w-auto">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-(--muted)">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-(--muted)">
                 <Link
-                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
                   href="/privacy-policy"
                 >
                   Privacy Policy
                 </Link>
                 <Link
-                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
                   href="/cookie-policy"
                 >
                   Cookie Policy
                 </Link>
                 <Link
-                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
                   href="/termini-condizioni"
                 >
                   {locale === "it"
@@ -163,7 +163,7 @@ export function Footer() {
                     : "Terms and Conditions"}
                 </Link>
                 <Link
-                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
                   href="/siti-web-ristoranti-milano"
                 >
                   {locale === "it"
@@ -171,17 +171,19 @@ export function Footer() {
                     : "Restaurant websites Milan"}
                 </Link>
                 <Link
-                  className="focus-ring rounded px-1 py-0.5 hover:text-foreground"
+                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
                   href="/siti-web-hotel-milano"
                 >
                   {locale === "it"
                     ? "Siti web hotel Milano"
                     : "Hotel websites Milan"}
                 </Link>
-                <CookiePreferencesButton />
+                <span className="inline-flex min-h-[44px] items-center sm:min-h-0">
+                  <CookiePreferencesButton />
+                </span>
               </div>
               <a
-                className="btn-secondary focus-ring w-full break-all text-xs sm:w-auto sm:text-sm"
+                className="btn-secondary focus-ring w-full overflow-wrap-anywhere text-xs sm:w-auto sm:text-sm"
                 href={`mailto:${EMAIL_TO}`}
               >
                 {EMAIL_TO}

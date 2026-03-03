@@ -60,15 +60,17 @@ function ComparisonPanel({
   afterImage: string;
   reduce: boolean;
 }) {
-  const [hovered, setHovered] = useState(false);
+  const [active, setActive] = useState(false);
 
-  const revealPercent = reduce ? 56 : hovered ? 82 : 56;
+  const revealPercent = reduce ? 56 : active ? 82 : 56;
 
   return (
     <motion.div
       className="mt-5"
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
+      onHoverStart={() => setActive(true)}
+      onHoverEnd={() => setActive(false)}
+      onTapStart={() => setActive(true)}
+      onTap={() => setActive((prev) => !prev)}
     >
       <div className="relative overflow-hidden rounded-2xl border border-black/12 bg-slate-950">
         <div className="relative aspect-[16/10]">
@@ -101,8 +103,8 @@ function ComparisonPanel({
           <motion.div
             className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-white/50 to-transparent blur-sm"
             animate={{
-              x: hovered ? ["-12%", "110%"] : "-12%",
-              opacity: hovered ? [0, 0.85, 0] : 0,
+              x: active ? ["-12%", "110%"] : "-12%",
+              opacity: active ? [0, 0.85, 0] : 0,
             }}
             transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
           />
@@ -114,7 +116,7 @@ function ComparisonPanel({
           >
             <motion.div
               className="absolute left-1/2 top-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/50 bg-slate-900/70 backdrop-blur"
-              animate={hovered ? { scale: [1, 1.06, 1] } : { scale: 1 }}
+              animate={active ? { scale: [1, 1.06, 1] } : { scale: 1 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <span className="inline-flex h-full w-full items-center justify-center text-white">
@@ -129,6 +131,14 @@ function ComparisonPanel({
           <div className="absolute right-3 top-3 rounded-full border border-white/25 bg-black/45 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-white/90">
             DOPO
           </div>
+
+          {!active && !reduce && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-3 text-center lg:hidden">
+              <span className="rounded-full bg-black/50 px-3 py-1 text-[10px] font-medium text-white/80 backdrop-blur-sm">
+                Tocca per confrontare
+              </span>
+            </div>
+          )}
 
           <div className="absolute inset-x-0 bottom-0 h-px bg-white/25" />
         </div>
@@ -188,7 +198,7 @@ export function ConceptRedesign() {
                 <h3 className="text-base font-semibold tracking-tight">
                   {card.title}
                 </h3>
-                <span className="rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[10px] font-semibold tracking-[0.18em] text-slate-600">
+                <span className="rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-slate-600">
                   {card.tag}
                 </span>
               </div>

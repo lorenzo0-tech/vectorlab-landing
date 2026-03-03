@@ -2,12 +2,14 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 
 const siteUrl = SITE_URL;
-const isLocalEnvironment = /localhost|127\.0\.0\.1/i.test(siteUrl);
 const normalizedSiteUrl = siteUrl.replace(/\/+$/, "");
+const indexingDisabled = /^(1|true)$/i.test(
+  process.env.BLOCK_INDEXING ?? process.env.NEXT_PUBLIC_BLOCK_INDEXING ?? "",
+);
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: isLocalEnvironment
+    rules: indexingDisabled
       ? {
           userAgent: "*",
           disallow: "/",
@@ -18,6 +20,6 @@ export default function robots(): MetadataRoute.Robots {
           disallow: ["/grazie", "/anteprima-soluzione", "/demo-ristorante"],
         },
     sitemap: `${normalizedSiteUrl}/sitemap.xml`,
-    host: isLocalEnvironment ? undefined : normalizedSiteUrl,
+    host: normalizedSiteUrl,
   };
 }

@@ -114,9 +114,9 @@ export default async function PrenotazionePage() {
               {extraServices.map((item) => (
                 <label
                   key={item}
-                  className="flex items-center gap-3 text-sm text-[#5f4d3b]"
+                  className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl px-2 text-sm text-[#5f4d3b] transition hover:bg-[#f0e6d4] sm:min-h-0"
                 >
-                  <input type="checkbox" className="h-4 w-4 accent-[#6f5232]" />
+                  <input type="checkbox" className="h-5 w-5 accent-[#6f5232]" />
                   {item}
                 </label>
               ))}

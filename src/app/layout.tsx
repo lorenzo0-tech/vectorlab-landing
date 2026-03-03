@@ -9,13 +9,13 @@ import "./globals.css";
 
 const fontSans = Inter({
   variable: "--font-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
 const fontDisplay = Space_Grotesk({
   variable: "--font-display",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
