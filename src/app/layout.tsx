@@ -76,19 +76,18 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon-48x48.png",
-        sizes: "48x48",
-        type: "image/png",
+        url: "/favicon.ico",
       },
       {
-        url: "/icon.png",
-        sizes: "512x512",
+        url: "/favicon-48x48.png",
+        sizes: "48x48",
         type: "image/png",
       },
     ],
     shortcut: "/favicon.ico",
     apple: "/apple-icon.png",
   },
+  manifest: "/site.webmanifest",
   formatDetection: {
     telephone: false,
     email: false,
