@@ -1,23 +1,10 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
-import { useLanguage } from "@/components/LanguageProvider";
 import { COMPANY_NAME, COMPANY_CITY } from "@/lib/constants";
 
-export function AboutFounder() {
-  const { locale } = useLanguage();
-  const reduce = useReducedMotion();
-
+export function AboutFounder({ locale }: { locale: string }) {
   return (
     <section id="chi-siamo" className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-          className="mx-auto max-w-3xl text-center"
-        >
+        <div className="mx-auto max-w-3xl text-center reveal">
           <p className="text-xs font-semibold tracking-widest text-(--muted) uppercase">
             {locale === "it"
               ? `Chi c'è dietro ${COMPANY_NAME}`
@@ -69,7 +56,7 @@ export function AboutFounder() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

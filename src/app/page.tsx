@@ -4,6 +4,11 @@ import { GateOverlay } from "@/components/GateOverlay";
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
 import { TrustBar } from "@/components/TrustBar";
+import { CaseStudies } from "@/components/CaseStudies";
+import { Problem } from "@/components/Problem";
+import { AboutFounder } from "@/components/AboutFounder";
+import { ProjectShowcase } from "@/components/ProjectShowcase";
+import { Process } from "@/components/Process";
 import {
   COMPANY_CITY,
   COMPANY_NAME,
@@ -13,12 +18,6 @@ import {
 } from "@/lib/constants";
 import { getServerLocale } from "@/lib/server-locale";
 
-const CaseStudies = dynamic(() =>
-  import("@/components/CaseStudies").then((mod) => mod.CaseStudies),
-);
-const Problem = dynamic(() =>
-  import("@/components/Problem").then((mod) => mod.Problem),
-);
 const Solution = dynamic(() =>
   import("@/components/Solution").then((mod) => mod.Solution),
 );
@@ -27,15 +26,6 @@ const Packages = dynamic(() =>
 );
 const Maintenance = dynamic(() =>
   import("@/components/Maintenance").then((mod) => mod.Maintenance),
-);
-const AboutFounder = dynamic(() =>
-  import("@/components/AboutFounder").then((mod) => mod.AboutFounder),
-);
-const ProjectShowcase = dynamic(() =>
-  import("@/components/ProjectShowcase").then((mod) => mod.ProjectShowcase),
-);
-const Process = dynamic(() =>
-  import("@/components/Process").then((mod) => mod.Process),
 );
 const FAQ = dynamic(() => import("@/components/FAQ").then((mod) => mod.FAQ));
 const FinalCTA = dynamic(() =>
@@ -214,16 +204,16 @@ export default async function Home() {
           <Navbar />
           <Hero />
           <div className="section-tone pb-10">
-            <TrustBar />
+            <TrustBar locale={locale} />
           </div>
           <div className="divider-tech section-tone">
-            <CaseStudies />
+            <CaseStudies locale={locale} />
           </div>
           <div className="divider-tech section-tone">
-            <ProjectShowcase />
+            <ProjectShowcase locale={locale} />
           </div>
           <div className="divider-tech section-tone">
-            <Problem />
+            <Problem locale={locale} />
           </div>
           <div className="divider-tech section-tone">
             <Solution />
@@ -235,10 +225,10 @@ export default async function Home() {
             <Maintenance />
           </div>
           <div className="divider-tech section-tone">
-            <AboutFounder />
+            <AboutFounder locale={locale} />
           </div>
           <div className="divider-tech section-tone">
-            <Process />
+            <Process locale={locale} />
           </div>
           <div className="divider-tech section-tone">
             <FAQ />

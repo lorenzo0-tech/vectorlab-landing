@@ -1,12 +1,6 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
-import { useLanguage } from "@/components/LanguageProvider";
 
-export function TrustBar() {
-  const { locale } = useLanguage();
-  const reduce = useReducedMotion();
+export function TrustBar({ locale }: { locale: string }) {
   const checks =
     locale === "it"
       ? [
@@ -27,13 +21,7 @@ export function TrustBar() {
         ];
 
   return (
-    <motion.section
-      className="container-pad"
-      initial={reduce ? { opacity: 1 } : { opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-    >
+    <section className="container-pad reveal">
       <div className="glass-strong gradient-border panel-tech relative overflow-hidden rounded-3xl p-6 sm:p-8">
         <p className="text-sm font-semibold tracking-tight sm:text-base">
           {locale === "it"
@@ -56,6 +44,6 @@ export function TrustBar() {
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

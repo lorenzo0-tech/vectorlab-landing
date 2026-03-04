@@ -2,7 +2,6 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Send } from "lucide-react";
 import { Locale, useLanguage } from "@/components/LanguageProvider";
 import { CALENDLY_URL, EMAIL_TO } from "@/lib/constants";
@@ -133,7 +132,6 @@ function buildMailto(values: FormState, locale: Locale) {
 
 export function FinalCTA() {
   const { locale } = useLanguage();
-  const reduce = useReducedMotion();
   const router = useRouter();
   const [values, setValues] = useState<FormState>(initial);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -289,13 +287,7 @@ export function FinalCTA() {
   return (
     <section className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-          className="glass-strong gradient-border panel-tech card-tech rounded-3xl p-6 sm:p-10"
-        >
+        <div className="glass-strong gradient-border panel-tech card-tech rounded-3xl p-6 sm:p-10 reveal">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-6">
               <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -582,7 +574,7 @@ export function FinalCTA() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

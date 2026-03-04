@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import { trackFaqToggle } from "@/lib/analytics-events";
 
 export function FAQ() {
   const { locale } = useLanguage();
-  const reduce = useReducedMotion();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const faqs =
     locale === "it"
@@ -113,12 +111,7 @@ export function FAQ() {
   return (
     <section id="faq" className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        >
+        <div className="reveal">
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
               ? "Domande frequenti"
@@ -142,7 +135,7 @@ export function FAQ() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         <div className="mt-10 space-y-3">
           {faqs.map((f, idx) => {
@@ -186,7 +179,6 @@ export function FAQ() {
                   id={contentId}
                   className={
                     "faq-item-content grid overflow-hidden transition-[grid-template-rows,opacity] ease-out " +
-                    (reduce ? "duration-0 " : "duration-150 ") +
                     (isOpen
                       ? "grid-rows-[1fr] opacity-100"
                       : "grid-rows-[0fr] opacity-0")

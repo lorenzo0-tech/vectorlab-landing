@@ -285,6 +285,7 @@ function EntryBrandLogoBackground() {
             maskImage:
               "radial-gradient(ellipse 66% 58% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.86) 70%, rgba(0,0,0,0) 100%)",
           }}
+          sizes="(max-width: 640px) 288px, 384px"
           priority
         />
         <div className="absolute inset-0 rounded-3xl bg-background/16 blur-lg" />

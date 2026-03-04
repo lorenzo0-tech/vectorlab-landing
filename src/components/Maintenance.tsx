@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import { Check, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import { CALENDLY_URL } from "@/lib/constants";
@@ -17,7 +16,6 @@ type MaintenancePlan = {
 
 export function Maintenance() {
   const { locale } = useLanguage();
-  const reduce = useReducedMotion();
 
   const plans: MaintenancePlan[] =
     locale === "it"
@@ -112,12 +110,7 @@ export function Maintenance() {
   return (
     <section id="manutenzione" className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        >
+        <div className="reveal">
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it" ? "Piani di manutenzione" : "Maintenance plans"}
           </h2>
@@ -131,23 +124,18 @@ export function Maintenance() {
               ? "Prezzi IVA non applicata ai sensi dell'Art. 1, commi 54-89, L. 190/2014 (regime forfettario)."
               : "Prices: VAT not applicable pursuant to Art. 1, paragraphs 54-89, Law 190/2014 (flat-rate regime)."}
           </p>
-        </motion.div>
+        </div>
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 lg:grid-cols-3 reveal-stagger">
           {plans.map((plan) => (
-            <motion.div
+            <div
               key={plan.name}
               className={
-                "group card-tech relative overflow-hidden rounded-3xl p-6 transition-transform " +
+                "group card-tech relative overflow-hidden rounded-3xl p-6 reveal " +
                 (plan.highlight
                   ? "glass-strong gradient-border"
                   : "glass gradient-border")
               }
-              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-              whileHover={reduce ? undefined : { y: -2 }}
             >
               <span aria-hidden="true" className="sweep-strip" />
 
@@ -197,7 +185,7 @@ export function Maintenance() {
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

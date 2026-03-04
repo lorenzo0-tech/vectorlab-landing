@@ -1,12 +1,6 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { ClipboardCheck, DraftingCompass, Rocket, Zap } from "lucide-react";
-import { useLanguage } from "@/components/LanguageProvider";
 
-export function Process() {
-  const { locale } = useLanguage();
-  const reduce = useReducedMotion();
+export function Process({ locale }: { locale: string }) {
   const steps =
     locale === "it"
       ? [
@@ -19,7 +13,7 @@ export function Process() {
           {
             n: "02",
             title: "Struttura e testi",
-            desc: "Testata, inviti all’azione, menu e sezioni: ordine logico, frizione minima.",
+            desc: "Testata, inviti all'azione, menu e sezioni: ordine logico, frizione minima.",
             Icon: DraftingCompass,
           },
           {
@@ -31,7 +25,7 @@ export function Process() {
           {
             n: "04",
             title: "Pubblicazione e misurazione",
-            desc: "Mettiamo online e tracciamo i clic su inviti all’azione, menu e contatti.",
+            desc: "Mettiamo online e tracciamo i clic su inviti all'azione, menu e contatti.",
             Icon: ClipboardCheck,
           },
         ]
@@ -65,48 +59,36 @@ export function Process() {
   return (
     <section id="metodo" className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        >
+        <div className="reveal">
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
               ? "Metodo rapido. Decisioni rapide. Risultati rapidi."
               : "Fast method. Fast decisions. Fast results."}
           </h2>
-        </motion.div>
+        </div>
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 lg:grid-cols-4 reveal-stagger">
           {steps.map(({ n, title, desc, Icon }) => (
-            <motion.div
+            <div
               key={n}
-              className="glass gradient-border card-tech group rounded-3xl p-6"
-              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-              whileHover={reduce ? undefined : { y: -2 }}
+              className="glass gradient-border card-tech group rounded-3xl p-6 reveal"
             >
               <div className="flex items-center justify-between">
                 <p className="text-xs font-semibold tracking-widest text-(--muted)">
                   {n}
                 </p>
-                <motion.span
+                <span
                   aria-hidden="true"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-black/5"
-                  whileHover={reduce ? undefined : { rotate: 2, scale: 1.03 }}
-                  transition={{ duration: 0.25 }}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-black/5 transition-transform duration-250 group-hover:rotate-2 group-hover:scale-[1.03]"
                 >
                   <Icon className="h-5 w-5" />
-                </motion.span>
+                </span>
               </div>
               <h3 className="mt-4 text-base font-semibold tracking-tight">
                 {title}
               </h3>
               <p className="mt-2 text-sm leading-7 text-(--muted)">{desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

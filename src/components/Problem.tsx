@@ -1,12 +1,6 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { TriangleAlert } from "lucide-react";
-import { useLanguage } from "@/components/LanguageProvider";
 
-export function Problem() {
-  const { locale } = useLanguage();
-  const reduce = useReducedMotion();
+export function Problem({ locale }: { locale: string }) {
   const bullets =
     locale === "it"
       ? [
@@ -23,13 +17,7 @@ export function Problem() {
         ];
 
   return (
-    <motion.section
-      className="section-pad"
-      initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-    >
+    <section className="section-pad reveal">
       <div className="container-pad">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
@@ -65,6 +53,6 @@ export function Problem() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

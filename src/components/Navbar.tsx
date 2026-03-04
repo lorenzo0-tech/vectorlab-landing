@@ -207,6 +207,11 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary focus-ring w-full min-h-[44px] px-3 py-2.5 text-xs"
+              aria-label={
+                locale === "it"
+                  ? "Prenota analisi gratuita di 15 minuti"
+                  : "Book a free 15-minute audit"
+              }
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",
@@ -220,6 +225,11 @@ export function Navbar() {
             <a
               href="#preventivo"
               className="btn-secondary focus-ring w-full min-h-[44px] px-3 py-2.5 text-xs"
+              aria-label={
+                locale === "it"
+                  ? "Vai alla sezione proposta"
+                  : "Go to proposal section"
+              }
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",

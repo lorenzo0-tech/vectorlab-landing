@@ -366,6 +366,7 @@ export function Hero() {
                       alt={locale === "it" ? "Logo VettoLab" : "VettoLab logo"}
                       width={96}
                       height={96}
+                      sizes="96px"
                       priority
                       className="h-full w-full object-cover"
                     />

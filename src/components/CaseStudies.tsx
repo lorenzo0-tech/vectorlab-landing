@@ -1,11 +1,4 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
-import { useLanguage } from "@/components/LanguageProvider";
-
-export function CaseStudies() {
-  const { locale } = useLanguage();
-  const reduce = useReducedMotion();
+export function CaseStudies({ locale }: { locale: string }) {
   const cases =
     locale === "it"
       ? [
@@ -15,9 +8,9 @@ export function CaseStudies() {
             detail:
               "Scenario dimostrativo: come interveniamo su un sito con bassa conversione",
             before:
-              "Invito all’azione poco visibile e percorso prenotazione dispersivo",
+              "Invito all'azione poco visibile e percorso prenotazione dispersivo",
             action:
-              "Testata semplificata, invito all’azione fisso e percorso smartphone lineare",
+              "Testata semplificata, invito all'azione fisso e percorso smartphone lineare",
           },
           {
             name: "Scenario tipo · Pizzeria da asporto",
@@ -25,7 +18,7 @@ export function CaseStudies() {
             detail:
               "Scenario dimostrativo: ottimizzazione testata e invito all'azione",
             before: "Menu difficile da trovare da smartphone",
-            action: "Menu in un tocco + gerarchia visiva orientata all’azione",
+            action: "Menu in un tocco + gerarchia visiva orientata all'azione",
           },
           {
             name: "Scenario tipo · Cocktail bar eventi",
@@ -68,12 +61,7 @@ export function CaseStudies() {
   return (
     <section className="section-pad" id="metodo">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        >
+        <div className="reveal">
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
               ? "Il nostro metodo: analisi, intervento, misurazione."
@@ -84,17 +72,13 @@ export function CaseStudies() {
               ? "Scenari tipo con problema, intervento e obiettivo: ecco come progettiamo ogni sito per massimizzare le conversioni."
               : "Typical scenarios with problem, intervention, and goal: this is how we design every site to maximize conversions."}
           </p>
-        </motion.div>
+        </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 reveal-stagger">
           {cases.map((item, index) => (
-            <motion.article
+            <article
               key={`case-${index}`}
-              className="glass gradient-border card-tech rounded-3xl p-6"
-              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
+              className="glass gradient-border card-tech rounded-3xl p-6 reveal"
             >
               <p className="text-xs font-semibold tracking-widest text-(--muted)">
                 {item.name}
@@ -115,7 +99,7 @@ export function CaseStudies() {
                 </span>{" "}
                 {item.action}
               </p>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

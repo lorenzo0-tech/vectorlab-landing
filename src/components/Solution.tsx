@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useLanguage } from "@/components/LanguageProvider";
 import {
@@ -14,7 +13,6 @@ import {
 
 export function Solution() {
   const { locale } = useLanguage();
-  const reduce = useReducedMotion();
   const items =
     locale === "it"
       ? [
@@ -81,28 +79,6 @@ export function Solution() {
             Icon: MapPinned,
           },
         ];
-  const sequenceContainer = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: reduce ? 0 : 0.12,
-        delayChildren: reduce ? 0 : 0.05,
-      },
-    },
-  } as const;
-
-  const sequenceItem = {
-    hidden: reduce
-      ? { opacity: 1, y: 0, scale: 1 }
-      : { opacity: 0, y: 14, scale: 0.99 },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.48, ease: [0.2, 0.8, 0.2, 1] },
-    },
-  } as const;
-
   const gallery = [
     {
       src: "/images/restaurant-real/hero-dining.jpg",
@@ -170,12 +146,7 @@ export function Solution() {
   return (
     <section id="soluzione" className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        >
+        <div className="reveal">
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
               ? "Un sito progettato per una cosa sola: far agire le persone."
@@ -186,29 +157,13 @@ export function Solution() {
               ? "Elementi concreti, pensati per prenotazioni, chiamate e richieste."
               : "Practical elements built for bookings, calls, and leads."}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-          className="glass-strong gradient-border panel-tech mt-8 overflow-hidden rounded-3xl p-3"
-        >
+        <div className="glass-strong gradient-border panel-tech mt-8 overflow-hidden rounded-3xl p-3 reveal">
           <div className="rounded-2xl border border-white/15 bg-slate-900/80 p-4">
-            <motion.div
-              className="grid grid-cols-12 gap-3"
-              variants={sequenceContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+            <div className="grid grid-cols-12 gap-3 reveal-stagger">
               {gallery.map((shot) => (
-                <motion.div
-                  key={shot.src}
-                  className={shot.className}
-                  variants={sequenceItem}
-                >
+                <div key={shot.src} className={`${shot.className} reveal`}>
                   <Image
                     src={shot.src}
                     alt={shot.alt}
@@ -249,28 +204,17 @@ export function Solution() {
                       {shot.label}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 reveal-stagger">
           {items.map(({ title, desc, Icon }, index) => (
-            <motion.div
+            <div
               key={`solution-item-${index}`}
-              className="glass gradient-border card-tech group rounded-3xl p-6 transition-transform will-change-transform"
-              initial={
-                reduce ? { opacity: 1 } : { opacity: 0, y: 14, scale: 0.99 }
-              }
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.45,
-                ease: [0.2, 0.8, 0.2, 1],
-                delay: reduce ? 0 : index * 0.05,
-              }}
-              whileHover={reduce ? undefined : { y: -2 }}
+              className="glass gradient-border card-tech group rounded-3xl p-6 transition-transform will-change-transform reveal hover:-translate-y-0.5"
             >
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-black/5">
@@ -281,9 +225,9 @@ export function Solution() {
                 </h3>
               </div>
               <p className="mt-3 text-sm leading-7 text-(--muted)">{desc}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

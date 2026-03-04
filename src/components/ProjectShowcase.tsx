@@ -1,14 +1,7 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useLanguage } from "@/components/LanguageProvider";
 
-export function ProjectShowcase() {
-  const { locale } = useLanguage();
-  const reduce = useReducedMotion();
-
+export function ProjectShowcase({ locale }: { locale: string }) {
   const projects =
     locale === "it"
       ? [
@@ -56,12 +49,7 @@ export function ProjectShowcase() {
   return (
     <section id="progetti" className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        >
+        <div className="reveal">
           <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
             {locale === "it"
               ? "Guarda subito come può vendere il tuo prossimo sito"
@@ -72,17 +60,13 @@ export function ProjectShowcase() {
               ? "Due demo navigabili, immediate da valutare, per capire in pochi minuti qualità, posizionamento e potenziale di conversione del tuo progetto."
               : "Two fully navigable demos to quickly evaluate quality, positioning, and conversion potential for your project."}
           </p>
-        </motion.div>
+        </div>
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+        <div className="mt-10 grid gap-4 lg:grid-cols-2 reveal-stagger">
           {projects.map((project) => (
-            <motion.article
+            <article
               key={project.href}
-              className="group glass-strong gradient-border card-tech overflow-hidden rounded-3xl"
-              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
+              className="group glass-strong gradient-border card-tech overflow-hidden rounded-3xl reveal"
             >
               <div className="relative aspect-16/10 overflow-hidden">
                 <Image
@@ -114,7 +98,7 @@ export function ProjectShowcase() {
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

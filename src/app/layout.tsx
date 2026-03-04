@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { COMPANY_NAME, OG_IMAGE_PATH, SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
@@ -48,6 +49,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    languages: {
+      it: "/",
+      "x-default": "/",
+    },
   },
   openGraph: {
     type: "website",
@@ -59,8 +64,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE_PATH,
-        width: 494,
-        height: 462,
+        width: 1200,
+        height: 630,
         alt: `${COMPANY_NAME} — Pagina principale`,
       },
     ],
@@ -120,6 +125,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#070b14",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -131,6 +140,7 @@ export default function RootLayout({
         className={`${fontSans.variable} ${fontDisplay.variable} h-full antialiased`}
       >
         <AnalyticsProvider />
+        <ScrollReveal />
         <LanguageProvider>{children}</LanguageProvider>
         <CookiePreferencesButton floating />
         <CookieConsentBanner />

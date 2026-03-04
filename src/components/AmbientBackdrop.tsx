@@ -196,13 +196,9 @@ export function AmbientBackdrop() {
       <span className="ambient-orb ambient-orb-indigo" />
       <span className="ambient-orb ambient-orb-fuchsia" />
       <span className="ambient-line ambient-line-a" />
-      <span className="ambient-line ambient-line-b" />
       <span className="ambient-particle ambient-particle-a" />
-      <span className="ambient-particle ambient-particle-b" />
       <span className="ambient-particle ambient-particle-c" />
-      <span className="ambient-particle ambient-particle-d" />
       <span className="ambient-particle ambient-particle-e" />
-      <span className="ambient-particle ambient-particle-f" />
     </div>
   );
 }

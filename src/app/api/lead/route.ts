@@ -23,6 +23,15 @@ function normalize(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function validateLead(payload: LeadPayload) {
   const required: Array<
     "nome" | "email" | "attivita" | "citta" | "obiettivo" | "messaggio"
@@ -169,14 +178,14 @@ export async function POST(req: Request) {
       ].join("\n"),
       html: `
         <h2>Nuova richiesta preventivo</h2>
-        <p><strong>Nome:</strong> ${payload.nome}</p>
-        <p><strong>Email:</strong> ${payload.email}</p>
-        <p><strong>Telefono:</strong> ${payload.telefono || "-"}</p>
-        <p><strong>Attività:</strong> ${payload.attivita}</p>
-        <p><strong>Città:</strong> ${payload.citta}</p>
-        <p><strong>Sito attuale:</strong> ${payload.sito || "-"}</p>
-        <p><strong>Obiettivo:</strong> ${payload.obiettivo}</p>
-        <p><strong>Messaggio:</strong><br/>${payload.messaggio.replace(/\n/g, "<br/>")}</p>
+        <p><strong>Nome:</strong> ${escapeHtml(payload.nome)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
+        <p><strong>Telefono:</strong> ${escapeHtml(payload.telefono || "-")}</p>
+        <p><strong>Attività:</strong> ${escapeHtml(payload.attivita)}</p>
+        <p><strong>Città:</strong> ${escapeHtml(payload.citta)}</p>
+        <p><strong>Sito attuale:</strong> ${escapeHtml(payload.sito || "-")}</p>
+        <p><strong>Obiettivo:</strong> ${escapeHtml(payload.obiettivo)}</p>
+        <p><strong>Messaggio:</strong><br/>${escapeHtml(payload.messaggio).replace(/\n/g, "<br/>")}</p>
       `,
     });
 
