@@ -50,10 +50,18 @@ export function ProjectShowcase({ locale }: { locale: string }) {
     <section id="progetti" className="section-pad">
       <div className="container-pad">
         <div className="reveal">
-          <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            {locale === "it"
-              ? "Guarda subito come può vendere il tuo prossimo sito"
-              : "See how your next website can sell better"}
+          <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
+            {locale === "it" ? (
+              <>
+                Guarda subito come può vendere{" "}
+                <span className="heading-accent">il tuo prossimo sito</span>
+              </>
+            ) : (
+              <>
+                See how your next website{" "}
+                <span className="heading-accent">can sell better</span>
+              </>
+            )}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
@@ -69,6 +77,18 @@ export function ProjectShowcase({ locale }: { locale: string }) {
               className="group glass-strong gradient-border card-tech overflow-hidden rounded-3xl reveal"
             >
               <div className="relative aspect-16/10 overflow-hidden">
+                {/* Browser chrome mockup */}
+                <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-1.5 bg-slate-900/90 px-3 py-2 backdrop-blur-sm">
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-400/80 transition-colors group-hover:bg-red-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80 transition-colors group-hover:bg-yellow-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-green-400/80 transition-colors group-hover:bg-green-400" />
+                  <span className="ml-2 flex-1 rounded-md bg-white/8 px-3 py-0.5 text-[10px] text-white/40 font-mono">
+                    {project.href === "/demo-hotel-villa"
+                      ? "vettolab.com/demo-hotel-villa"
+                      : "vettolab.com/demo-ristorante"}
+                  </span>
+                </div>
+
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -92,7 +112,7 @@ export function ProjectShowcase({ locale }: { locale: string }) {
                 </p>
                 <a
                   href={project.href}
-                  className="btn-primary focus-ring mt-6 inline-flex"
+                  className="btn-primary focus-ring mt-6 inline-flex text-base px-6 py-3"
                 >
                   {project.cta}
                   <ArrowUpRight className="h-4 w-4" />

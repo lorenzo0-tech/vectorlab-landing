@@ -112,10 +112,17 @@ export function FAQ() {
     <section id="faq" className="section-pad">
       <div className="container-pad">
         <div className="reveal">
-          <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            {locale === "it"
-              ? "Domande frequenti"
-              : "Frequently asked questions"}
+          <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+            {locale === "it" ? (
+              <>
+                Domande <span className="heading-accent">frequenti</span>
+              </>
+            ) : (
+              <>
+                Frequently asked{" "}
+                <span className="heading-accent">questions</span>
+              </>
+            )}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
@@ -128,7 +135,7 @@ export function FAQ() {
                 key={prova.etichetta}
                 className="glass gradient-border rounded-2xl px-4 py-3"
               >
-                <p className="text-lg font-semibold tracking-tight text-foreground">
+                <p className="text-lg font-semibold tracking-tight text-cyan-300">
                   {prova.valore}
                 </p>
                 <p className="text-xs text-(--muted)">{prova.etichetta}</p>
@@ -145,13 +152,15 @@ export function FAQ() {
               <div
                 key={`faq-${idx}`}
                 className={
-                  "glass gradient-border card-tech rounded-3xl " +
-                  (isOpen ? "panel-tech" : "")
+                  "glass gradient-border card-tech rounded-3xl transition-shadow duration-300 " +
+                  (isOpen
+                    ? "panel-tech ring-1 ring-cyan-400/20 shadow-[0_0_24px_rgba(6,182,212,0.08)]"
+                    : "")
                 }
               >
                 <button
                   type="button"
-                  className="focus-ring flex w-full items-center justify-between gap-4 rounded-3xl px-6 py-5 text-left"
+                  className="focus-ring flex w-full items-center justify-between gap-3 rounded-3xl px-4 py-4 text-left transition-colors hover:bg-white/3 sm:gap-4 sm:px-6 sm:py-5"
                   onClick={() => {
                     const nextOpen = isOpen ? null : idx;
                     setOpenIndex(nextOpen);
@@ -166,7 +175,9 @@ export function FAQ() {
                   <span className="text-sm font-semibold tracking-tight sm:text-base">
                     {f.q}
                   </span>
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-200/20 bg-slate-900/75 text-cyan-100">
+                  <span
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-200/20 bg-slate-900/75 transition-colors duration-200 ${isOpen ? "text-cyan-300 border-cyan-300/40" : "text-cyan-100"}`}
+                  >
                     <ChevronDown
                       className={
                         "h-5 w-5 transition-transform duration-200 " +
@@ -185,7 +196,7 @@ export function FAQ() {
                   }
                 >
                   <div className="min-h-0">
-                    <p className="px-6 pb-6 text-sm leading-7 text-(--muted)">
+                    <p className="px-6 pb-6 text-sm leading-7 text-(--muted) border-l-2 border-cyan-400/20 ml-4 sm:ml-6">
                       {f.a}
                     </p>
                   </div>

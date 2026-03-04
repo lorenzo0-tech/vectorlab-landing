@@ -206,34 +206,34 @@ export default async function Home() {
           <div className="section-tone pb-10">
             <TrustBar locale={locale} />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="cyan">
             <CaseStudies locale={locale} />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="indigo">
             <ProjectShowcase locale={locale} />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="warning">
             <Problem locale={locale} />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="cyan">
             <Solution />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="fuchsia">
             <Packages />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="emerald">
             <Maintenance />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="indigo">
             <AboutFounder locale={locale} />
           </div>
           <div className="divider-tech section-tone">
             <Process locale={locale} />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="cyan">
             <FAQ />
           </div>
-          <div className="divider-tech section-tone">
+          <div className="divider-tech section-tone" data-tone="fuchsia">
             <FinalCTA />
           </div>
           <Footer />

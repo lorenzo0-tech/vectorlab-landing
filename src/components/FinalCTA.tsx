@@ -290,10 +290,20 @@ export function FinalCTA() {
         <div className="glass-strong gradient-border panel-tech card-tech rounded-3xl p-6 sm:p-10 reveal">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-6">
-              <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                {locale === "it"
-                  ? "Se il tuo sito non sta portando clienti, è un costo. Noi lo trasformiamo in uno strumento che produce risultati."
-                  : "If your website is not bringing customers, it is a cost. We turn it into a tool that generates results."}
+              <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+                {locale === "it" ? (
+                  <>
+                    Se il tuo sito non sta portando clienti,{" "}
+                    <span className="heading-accent">è un costo.</span> Noi lo
+                    trasformiamo in uno strumento che produce risultati.
+                  </>
+                ) : (
+                  <>
+                    If your website is not bringing customers,{" "}
+                    <span className="heading-accent">it is a cost.</span> We
+                    turn it into a tool that generates results.
+                  </>
+                )}
               </h2>
               <p className="mt-4 text-lg leading-8 text-(--muted)">
                 {locale === "it"
@@ -538,7 +548,7 @@ export function FinalCTA() {
 
                   <button
                     type="submit"
-                    className="btn-primary focus-ring w-full"
+                    className="btn-primary focus-ring w-full min-h-[48px]"
                     disabled={isSubmitting}
                   >
                     {isSubmitting
@@ -566,7 +576,7 @@ export function FinalCTA() {
                   </a>
 
                   {errorMessage ? (
-                    <p className="mt-2 text-sm font-semibold text-rose-700">
+                    <p className="mt-2 text-sm font-semibold text-rose-400">
                       {errorMessage}
                     </p>
                   ) : null}

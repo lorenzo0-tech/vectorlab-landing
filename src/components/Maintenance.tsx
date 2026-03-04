@@ -111,8 +111,16 @@ export function Maintenance() {
     <section id="manutenzione" className="section-pad">
       <div className="container-pad">
         <div className="reveal">
-          <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            {locale === "it" ? "Piani di manutenzione" : "Maintenance plans"}
+          <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl">
+            {locale === "it" ? (
+              <>
+                Piani di <span className="heading-accent">manutenzione</span>
+              </>
+            ) : (
+              <>
+                <span className="heading-accent">Maintenance</span> plans
+              </>
+            )}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
@@ -133,7 +141,7 @@ export function Maintenance() {
               className={
                 "group card-tech relative overflow-hidden rounded-3xl p-6 reveal " +
                 (plan.highlight
-                  ? "glass-strong gradient-border"
+                  ? "glass-strong gradient-border card-highlight-glow lg:scale-[1.02] lg:-my-2 z-10"
                   : "glass gradient-border")
               }
             >
@@ -142,8 +150,13 @@ export function Maintenance() {
               <p className="text-xs font-semibold tracking-widest text-(--muted)">
                 {plan.name}
               </p>
+              {plan.highlight && (
+                <span className="mt-2 inline-block rounded-full bg-gradient-to-r from-emerald-400 to-cyan-500 px-3 py-1 text-[10px] font-bold tracking-wider text-slate-950 uppercase">
+                  {locale === "it" ? "Consigliato" : "Recommended"}
+                </span>
+              )}
               <p className="mt-3 flex items-baseline gap-1">
-                <span className="text-3xl font-bold tracking-tight text-cyan-200">
+                <span className="text-3xl font-bold tracking-tight bg-gradient-to-r from-emerald-300 to-cyan-300 bg-clip-text text-transparent">
                   {plan.price}
                 </span>
                 <span className="text-sm text-(--muted)">{plan.period}</span>
@@ -158,7 +171,7 @@ export function Maintenance() {
                     key={pt}
                     className="flex items-start gap-2 text-sm leading-7"
                   >
-                    <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-black/5">
+                    <span className="mt-0.5 icon-chip-cyan h-6 w-6">
                       <Check className="h-4 w-4" />
                     </span>
                     <span className="text-(--muted)">{pt}</span>

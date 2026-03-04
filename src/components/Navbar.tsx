@@ -199,14 +199,14 @@ export function Navbar() {
         </div>
       </header>
 
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 pb-[max(env(safe-area-inset-bottom),12px)] sm:hidden">
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 pb-[max(env(safe-area-inset-bottom),16px)] sm:hidden">
         <div className="container-pad pointer-events-auto">
           <div className="glass-strong gradient-border grid grid-cols-2 gap-2 rounded-2xl p-2">
             <a
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary focus-ring w-full min-h-[44px] px-3 py-2.5 text-xs"
+              className="btn-primary focus-ring w-full min-h-[48px] px-3 py-2.5 text-xs"
               aria-label={
                 locale === "it"
                   ? "Prenota analisi gratuita di 15 minuti"
@@ -224,7 +224,7 @@ export function Navbar() {
             </a>
             <a
               href="#preventivo"
-              className="btn-secondary focus-ring w-full min-h-[44px] px-3 py-2.5 text-xs"
+              className="btn-secondary focus-ring w-full min-h-[48px] px-3 py-2.5 text-xs"
               aria-label={
                 locale === "it"
                   ? "Vai alla sezione proposta"

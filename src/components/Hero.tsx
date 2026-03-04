@@ -210,7 +210,7 @@ export function Hero() {
       />
 
       <div className="container-pad">
-        <div className="relative flex min-h-[78vh] items-center pb-28 pt-14 sm:min-h-[86vh] sm:pb-24 sm:pt-20">
+        <div className="relative flex min-h-[70vh] items-center pb-20 pt-10 sm:min-h-[86vh] sm:pb-24 sm:pt-20">
           <div className="absolute inset-0 -z-10">
             <ParticlesCanvas enabled={particlesEnabled} />
           </div>
@@ -228,7 +228,7 @@ export function Hero() {
                 </h1>
               </div>
 
-              <p className="mt-6 text-pretty text-lg leading-8 text-(--muted) sm:text-xl">
+              <p className="mt-6 text-pretty text-base leading-7 text-(--muted) sm:text-lg sm:leading-8 md:text-xl">
                 {locale === "it"
                   ? "Siamo specializzati in creazione e sviluppo di siti web per ristoranti e hotel: progettazione di alto livello, esperienza utente prima da smartphone e tecnologia solida per trasformare visite in prenotazioni e richieste."
                   : "We specialize in custom websites for restaurants and hotels: premium design, smartphone-first UX, and solid technology to turn visits into bookings and leads."}
@@ -244,7 +244,7 @@ export function Hero() {
                 {pills.map((p) => (
                   <span
                     key={p}
-                    className="glass gradient-border rounded-full px-3 py-1 text-xs font-semibold text-foreground"
+                    className="glass gradient-border rounded-full px-3 py-1 text-xs font-semibold text-foreground transition-all duration-200 hover:border-cyan-400/30 hover:bg-cyan-400/8 hover:scale-[1.03]"
                   >
                     {p}
                   </span>
@@ -256,7 +256,7 @@ export function Hero() {
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary focus-ring"
+                  className="btn-primary focus-ring text-base px-7 py-4"
                   onClick={() =>
                     trackCtaClick({
                       posizione: "testata",
@@ -271,7 +271,7 @@ export function Hero() {
                 </MagneticLink>
                 <MagneticLink
                   href="#preventivo"
-                  className="btn-secondary focus-ring"
+                  className="btn-secondary focus-ring text-base px-7 py-4"
                   onClick={() =>
                     trackCtaClick({
                       posizione: "testata",
@@ -383,7 +383,7 @@ export function Hero() {
               </div>
 
               <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div className="glass gradient-border rounded-2xl px-4 py-3">
+                <div className="glass gradient-border card-tech rounded-2xl px-4 py-3">
                   <p className="text-[11px] font-semibold tracking-widest text-(--muted)">
                     {locale === "it" ? "SPECIALIZZAZIONE" : "SPECIALIZATION"}
                   </p>
@@ -394,7 +394,7 @@ export function Hero() {
                   </p>
                 </div>
 
-                <div className="glass gradient-border rounded-2xl px-4 py-3">
+                <div className="glass gradient-border card-tech rounded-2xl px-4 py-3">
                   <p className="text-[11px] font-semibold tracking-widest text-(--muted)">
                     {locale === "it" ? "OBIETTIVO" : "GOAL"}
                   </p>

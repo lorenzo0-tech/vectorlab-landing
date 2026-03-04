@@ -143,14 +143,31 @@ export function Solution() {
     },
   ] as const;
 
+  const iconColors = [
+    "icon-chip-cyan",
+    "icon-chip-indigo",
+    "icon-chip-fuchsia",
+    "icon-chip-cyan",
+    "icon-chip-indigo",
+    "icon-chip-fuchsia",
+  ];
+
   return (
     <section id="soluzione" className="section-pad">
       <div className="container-pad">
         <div className="reveal">
-          <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            {locale === "it"
-              ? "Un sito progettato per una cosa sola: far agire le persone."
-              : "A website designed for one thing only: driving action."}
+          <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
+            {locale === "it" ? (
+              <>
+                Un sito progettato per una cosa sola:{" "}
+                <span className="heading-accent">far agire le persone.</span>
+              </>
+            ) : (
+              <>
+                A website designed for one thing only:{" "}
+                <span className="heading-accent">driving action.</span>
+              </>
+            )}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
@@ -163,12 +180,15 @@ export function Solution() {
           <div className="rounded-2xl border border-white/15 bg-slate-900/80 p-4">
             <div className="grid grid-cols-12 gap-3 reveal-stagger">
               {gallery.map((shot) => (
-                <div key={shot.src} className={`${shot.className} reveal`}>
+                <div
+                  key={shot.src}
+                  className={`${shot.className} group reveal`}
+                >
                   <Image
                     src={shot.src}
                     alt={shot.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes={shot.sizes}
                   />
 
@@ -214,10 +234,12 @@ export function Solution() {
           {items.map(({ title, desc, Icon }, index) => (
             <div
               key={`solution-item-${index}`}
-              className="glass gradient-border card-tech group rounded-3xl p-6 transition-transform will-change-transform reveal hover:-translate-y-0.5"
+              className="glass gradient-border card-tech group rounded-3xl p-6 will-change-transform reveal"
             >
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-black/5">
+                <span
+                  className={`h-10 w-10 ${iconColors[index % iconColors.length]}`}
+                >
                   <Icon className="h-5 w-5" />
                 </span>
                 <h3 className="text-base font-semibold tracking-tight">

@@ -280,8 +280,16 @@ export function Packages() {
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
         >
-          <h2 className="heading-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            {locale === "it" ? "Pacchetti" : "Packages"}
+          <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
+            {locale === "it" ? (
+              <>
+                <span className="heading-accent">Pacchetti</span>
+              </>
+            ) : (
+              <>
+                <span className="heading-accent">Packages</span>
+              </>
+            )}
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
@@ -299,10 +307,10 @@ export function Packages() {
               type="button"
               onClick={() => setSelectedCategory("ristoranti")}
               className={
-                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
+                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition-all duration-200 sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
                 (selectedCategory === "ristoranti"
-                  ? "bg-white/90 text-slate-900"
-                  : "text-foreground/80 hover:text-foreground")
+                  ? "bg-white/90 text-slate-900 shadow-md"
+                  : "text-foreground/80 hover:text-foreground hover:bg-white/8")
               }
               aria-pressed={selectedCategory === "ristoranti"}
             >
@@ -312,10 +320,10 @@ export function Packages() {
               type="button"
               onClick={() => setSelectedCategory("hotel")}
               className={
-                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
+                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition-all duration-200 sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
                 (selectedCategory === "hotel"
-                  ? "bg-white/90 text-slate-900"
-                  : "text-foreground/80 hover:text-foreground")
+                  ? "bg-white/90 text-slate-900 shadow-md"
+                  : "text-foreground/80 hover:text-foreground hover:bg-white/8")
               }
               aria-pressed={selectedCategory === "hotel"}
             >
@@ -348,7 +356,7 @@ export function Packages() {
                 className={
                   "group card-tech relative overflow-hidden rounded-3xl p-6 transition-transform " +
                   (p.highlight
-                    ? "glass-strong gradient-border"
+                    ? "glass-strong gradient-border card-highlight-glow"
                     : "glass gradient-border")
                 }
                 initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
@@ -369,7 +377,7 @@ export function Packages() {
                     }
                     width={900}
                     height={540}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                 </div>
@@ -377,6 +385,11 @@ export function Packages() {
                 <p className="text-xs font-semibold tracking-widest text-(--muted)">
                   {p.name}
                 </p>
+                {p.highlight && (
+                  <span className="mt-2 inline-block rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 px-3 py-1 text-[10px] font-bold tracking-wider text-slate-950 uppercase">
+                    {locale === "it" ? "Consigliato" : "Recommended"}
+                  </span>
+                )}
                 <p className="mt-1 text-xs font-semibold text-(--muted)">
                   {p.target}
                 </p>
@@ -393,7 +406,7 @@ export function Packages() {
                       key={pt}
                       className="flex items-start gap-2 text-sm leading-7"
                     >
-                      <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-black/5">
+                      <span className="mt-0.5 icon-chip-cyan h-6 w-6">
                         <Check className="h-4 w-4" />
                       </span>
                       <span className="text-(--muted)">{pt}</span>

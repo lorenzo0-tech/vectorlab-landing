@@ -23,16 +23,24 @@ export function TrustBar({ locale }: { locale: string }) {
   return (
     <section className="container-pad reveal">
       <div className="glass-strong gradient-border panel-tech relative overflow-hidden rounded-3xl p-6 sm:p-8">
-        <p className="text-sm font-semibold tracking-tight sm:text-base">
-          {locale === "it"
-            ? "Niente promesse vaghe. Solo scelte che aumentano le conversioni."
-            : "No vague promises. Only choices that increase conversion."}
+        <p className="text-base font-semibold tracking-tight sm:text-lg">
+          {locale === "it" ? (
+            <>
+              Niente promesse vaghe. Solo scelte che aumentano le{" "}
+              <span className="heading-accent">conversioni.</span>
+            </>
+          ) : (
+            <>
+              No vague promises. Only choices that increase{" "}
+              <span className="heading-accent">conversion.</span>
+            </>
+          )}
         </p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 reveal-stagger">
           {checks.map((c) => (
             <div
               key={c}
-              className="glass trust-chip rounded-2xl px-3 py-3 transition-colors"
+              className="glass trust-chip rounded-2xl px-3 py-3 reveal"
             >
               <div className="flex items-start gap-2">
                 <span className="icon-chip mt-0.5 h-6 w-6">
