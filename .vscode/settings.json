@@ -1,4 +1,6 @@
 {
   "terminal.integrated.cwd": "${workspaceFolder}",
-  "tailwindCSS.lint.suggestCanonicalClasses": "ignore"
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
+  "css.lint.unknownAtRules": "ignore",
+  "css.lint.vendorPrefix": "ignore"
 }
