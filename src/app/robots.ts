@@ -17,7 +17,12 @@ export default function robots(): MetadataRoute.Robots {
       : {
           userAgent: "*",
           allow: "/",
-          disallow: ["/grazie", "/anteprima-soluzione", "/demo-ristorante"],
+          disallow: [
+            "/grazie",
+            "/anteprima-soluzione",
+            "/demo-ristorante",
+            "/demo-hotel-villa",
+          ],
         },
     sitemap: `${normalizedSiteUrl}/sitemap.xml`,
     host: normalizedSiteUrl,
