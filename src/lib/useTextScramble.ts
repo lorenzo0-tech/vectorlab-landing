@@ -30,9 +30,7 @@ export function useTextScramble(
     let scrambled = "";
     for (let i = 0; i < text.length; i++) {
       scrambled +=
-        text[i] === " "
-          ? " "
-          : CHARS[Math.floor(Math.random() * CHARS.length)];
+        text[i] === " " ? " " : CHARS[Math.floor(Math.random() * CHARS.length)];
     }
     setDisplayed(scrambled);
 
