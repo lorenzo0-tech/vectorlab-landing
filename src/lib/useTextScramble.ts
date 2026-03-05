@@ -26,6 +26,16 @@ export function useTextScramble(
     let frame = 0;
     const totalFrames = text.length;
 
+    // Immediately show fully-scrambled text (no flash of plain text)
+    let scrambled = "";
+    for (let i = 0; i < text.length; i++) {
+      scrambled +=
+        text[i] === " "
+          ? " "
+          : CHARS[Math.floor(Math.random() * CHARS.length)];
+    }
+    setDisplayed(scrambled);
+
     const tick = () => {
       let output = "";
       for (let i = 0; i < text.length; i++) {

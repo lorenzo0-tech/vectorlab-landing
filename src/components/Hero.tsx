@@ -192,7 +192,7 @@ export function Hero() {
   const { displayed: scrambledTitle, scramble: triggerScramble } =
     useTextScramble(heroText, {
       speed: 25,
-      delay: 600,
+      delay: 0,
       enabled: !shouldReduceMotion,
     });
 
