@@ -9,7 +9,7 @@ export function TrustBar({ locale }: { locale: string }) {
           "Prestazioni e struttura adatte a Google",
           "Struttura pensata per cellulare",
           "Tempi chiari, consegna tipica 14 giorni",
-          "Pacchetti da €1.290, IVA non applicata",
+          "Pacchetti da €1.290",
         ]
       : [
           "Always-visible CTAs (Call / Book / Directions)",
@@ -17,7 +17,7 @@ export function TrustBar({ locale }: { locale: string }) {
           "Performance and structure aligned with Google",
           "Smartphone-first structure",
           "Clear timelines, typical delivery in 14 days",
-          "Packages from €1,290, VAT not applicable",
+          "Packages from €1,290",
         ];
 
   return (

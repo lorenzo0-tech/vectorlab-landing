@@ -296,11 +296,6 @@ export function Packages() {
               ? "Offerte chiare e trasparenti, con differenze nette tra ristorazione e alberghi."
               : "Clear and transparent offers, with dedicated setups for restaurants and hospitality."}
           </p>
-          <p className="mt-2 text-xs text-(--muted)">
-            {locale === "it"
-              ? "Prezzi IVA non applicata ai sensi dell'Art. 1, commi 54-89, L. 190/2014 (regime forfettario)."
-              : "Prices: VAT not applicable pursuant to Art. 1, paragraphs 54-89, Law 190/2014 (flat-rate regime)."}
-          </p>
 
           <div className="mt-6 flex w-full flex-wrap gap-2 rounded-2xl border border-white/15 bg-black/10 p-2 sm:inline-flex sm:w-auto sm:gap-0 sm:rounded-full sm:p-1">
             <button

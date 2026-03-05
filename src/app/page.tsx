@@ -49,7 +49,7 @@ export default async function Home() {
           {
             question: "Quanto costa un sito web per il mio ristorante o hotel?",
             answer:
-              "I pacchetti partono da €1.290 per ristoranti e €1.490 per hotel (IVA non applicata, regime forfettario). Prenota un'analisi gratuita per un preventivo su misura.",
+              "I pacchetti partono da €1.290 per ristoranti e €1.490 per hotel. Prenota un'analisi gratuita per un preventivo su misura.",
           },
           {
             question: "Il sito sarà adatto a Google?",

@@ -68,13 +68,13 @@ export default async function TerminiCondizioniPage() {
               <section>
                 <h2 className="text-base font-semibold text-foreground">
                   {locale === "it"
-                    ? "3. Regime fiscale e prezzi"
-                    : "3. Tax Regime and Pricing"}
+                    ? "3. Prezzi"
+                    : "3. Pricing"}
                 </h2>
                 <p className="mt-2">
                   {locale === "it"
-                    ? `${COMPANY_NAME} opera in regime forfettario ai sensi dell'Art. 1, commi 54-89, Legge 23 dicembre 2014, n. 190. Pertanto, i prezzi indicati sul sito si intendono IVA non applicata. I prezzi pubblicati hanno valore indicativo e non costituiscono offerta al pubblico ai sensi dell'Art. 1336 c.c. Le condizioni economiche definitive sono stabilite nel preventivo o contratto individuale.`
-                    : `${COMPANY_NAME} operates under the Italian flat-rate regime pursuant to Art. 1, paragraphs 54-89, Law no. 190 of 23 December 2014. Therefore, prices shown on the website are VAT-exclusive (VAT not applicable). Published prices are indicative and do not constitute a public offer under Art. 1336 of the Italian Civil Code. Final economic conditions are established in the individual quote or contract.`}
+                    ? `I prezzi pubblicati sul sito di ${COMPANY_NAME} hanno valore indicativo e non costituiscono offerta al pubblico ai sensi dell'Art. 1336 c.c. Le condizioni economiche definitive sono stabilite nel preventivo o contratto individuale.`
+                    : `Prices published on the ${COMPANY_NAME} website are indicative and do not constitute a public offer under Art. 1336 of the Italian Civil Code. Final economic conditions are established in the individual quote or contract.`}
                 </p>
               </section>
 

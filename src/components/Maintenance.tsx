@@ -127,11 +127,6 @@ export function Maintenance() {
               ? "Il sito non finisce alla consegna. Tienilo veloce, sicuro e sempre aggiornato."
               : "Your site doesn\u2019t end at launch. Keep it fast, secure, and always up to date."}
           </p>
-          <p className="mt-2 text-xs text-(--muted)">
-            {locale === "it"
-              ? "Prezzi IVA non applicata ai sensi dell'Art. 1, commi 54-89, L. 190/2014 (regime forfettario)."
-              : "Prices: VAT not applicable pursuant to Art. 1, paragraphs 54-89, Law 190/2014 (flat-rate regime)."}
-          </p>
         </div>
 
         <div className="mt-10 grid gap-4 lg:grid-cols-3 reveal-stagger">
