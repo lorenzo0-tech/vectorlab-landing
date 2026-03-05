@@ -31,6 +31,9 @@ export const RESTAURANT_VETRINA_URL =
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "";
 
+export const GOOGLE_REVIEW_URL =
+  process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL ?? "";
+
 export const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "";
 export const GOOGLE_ADS_LEAD_CONVERSION_LABEL =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_CONVERSION_LABEL ?? "";

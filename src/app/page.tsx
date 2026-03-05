@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import { AmbientBackdrop } from "@/components/AmbientBackdrop";
-import { GateOverlay } from "@/components/GateOverlay";
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
 import { TrustBar } from "@/components/TrustBar";
@@ -28,11 +27,17 @@ const Maintenance = dynamic(() =>
   import("@/components/Maintenance").then((mod) => mod.Maintenance),
 );
 const FAQ = dynamic(() => import("@/components/FAQ").then((mod) => mod.FAQ));
+// const GoogleReviews = dynamic(() =>
+//   import("@/components/GoogleReviews").then((mod) => mod.GoogleReviews),
+// );
 const FinalCTA = dynamic(() =>
   import("@/components/FinalCTA").then((mod) => mod.FinalCTA),
 );
 const Footer = dynamic(() =>
   import("@/components/Footer").then((mod) => mod.Footer),
+);
+const Marquee = dynamic(() =>
+  import("@/components/Marquee").then((mod) => mod.Marquee),
 );
 
 export default async function Home() {
@@ -199,13 +204,13 @@ export default async function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <AmbientBackdrop />
-        <GateOverlay />
         <div>
           <Navbar />
           <Hero />
           <div className="section-tone pb-10">
             <TrustBar locale={locale} />
           </div>
+          <Marquee />
           <div className="divider-tech section-tone" data-tone="cyan">
             <CaseStudies locale={locale} />
           </div>
@@ -233,6 +238,9 @@ export default async function Home() {
           <div className="divider-tech section-tone" data-tone="cyan">
             <FAQ />
           </div>
+          {/* <div className="divider-tech section-tone" data-tone="emerald">
+            <GoogleReviews />
+          </div> */}
           <div className="divider-tech section-tone" data-tone="fuchsia">
             <FinalCTA />
           </div>

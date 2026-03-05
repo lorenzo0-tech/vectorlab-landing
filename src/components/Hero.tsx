@@ -11,8 +11,10 @@ import {
 import { ArrowUpRight, Mail } from "lucide-react";
 import Image from "next/image";
 import { useLanguage } from "@/components/LanguageProvider";
+import { Parallax } from "@/components/Parallax";
 import { CALENDLY_URL } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
+import { useTextScramble } from "@/lib/useTextScramble";
 
 type MagneticLinkProps = HTMLMotionProps<"a">;
 
@@ -182,6 +184,22 @@ export function Hero() {
   const particlesEnabled =
     showMotionEffects && !shouldReduceMotion && canRunParticles;
 
+  const heroText =
+    locale === "it"
+      ? "Siti web per ristoranti e hotel, creati su misura."
+      : "Custom websites for restaurants and hotels.";
+
+  const { displayed: scrambledTitle, scramble: triggerScramble } =
+    useTextScramble(heroText, {
+      speed: 25,
+      delay: 600,
+      enabled: !shouldReduceMotion,
+    });
+
+  useEffect(() => {
+    triggerScramble();
+  }, [triggerScramble]);
+
   const pills = useMemo(
     () => [
       locale === "it" ? "Prima su smartphone" : "Smartphone-first",
@@ -220,10 +238,8 @@ export function Hero() {
               <div className="relative">
                 <span aria-hidden="true" className="hero-title-glow" />
                 <h1 className="heading-display text-balance text-[1.85rem] font-semibold leading-[1.05] tracking-tight sm:text-4xl md:text-6xl">
-                  <span className="hero-title-tech">
-                    {locale === "it"
-                      ? "Siti web per ristoranti e hotel, creati su misura."
-                      : "Custom websites for restaurants and hotels."}
+                  <span className="hero-title-tech" aria-label={heroText}>
+                    {scrambledTitle}
                   </span>
                 </h1>
               </div>
@@ -244,7 +260,7 @@ export function Hero() {
                 {pills.map((p) => (
                   <span
                     key={p}
-                    className="glass gradient-border rounded-full px-3 py-1 text-xs font-semibold text-foreground transition-all duration-200 hover:border-cyan-400/30 hover:bg-cyan-400/8 hover:scale-[1.03]"
+                    className="glass gradient-border rounded-full px-3 py-1 text-xs font-semibold text-foreground transition-all duration-200 sm:hover:border-cyan-400/30 sm:hover:bg-cyan-400/8 sm:hover:scale-[1.03]"
                   >
                     {p}
                   </span>
@@ -287,7 +303,10 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="relative mt-2 hidden lg:col-span-5 lg:mt-0 lg:block">
+            <Parallax
+              speed={0.06}
+              className="relative mt-2 hidden lg:col-span-5 lg:mt-0 lg:block"
+            >
               <div className="glass-strong gradient-border panel-tech card-tech relative overflow-hidden rounded-3xl p-3">
                 <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-cyan-200/20 bg-[#060b16]">
                   <motion.div
@@ -405,7 +424,7 @@ export function Hero() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Parallax>
           </div>
         </div>
       </div>

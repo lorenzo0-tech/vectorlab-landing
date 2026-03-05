@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useLanguage } from "@/components/LanguageProvider";
+import { StaggerText } from "@/components/StaggerText";
 import {
   Gauge,
   MapPinned,
@@ -156,7 +157,10 @@ export function Solution() {
     <section id="soluzione" className="section-pad">
       <div className="container-pad">
         <div className="reveal">
-          <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
+          <StaggerText
+            as="h2"
+            className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl"
+          >
             {locale === "it" ? (
               <>
                 Un sito progettato per una cosa sola:{" "}
@@ -168,7 +172,7 @@ export function Solution() {
                 <span className="heading-accent">driving action.</span>
               </>
             )}
-          </h2>
+          </StaggerText>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
               ? "Elementi concreti, pensati per prenotazioni, chiamate e richieste."
@@ -182,7 +186,7 @@ export function Solution() {
               {gallery.map((shot) => (
                 <div
                   key={shot.src}
-                  className={`${shot.className} group reveal`}
+                  className={`${shot.className} group img-reveal reveal`}
                 >
                   <Image
                     src={shot.src}
@@ -234,7 +238,7 @@ export function Solution() {
           {items.map(({ title, desc, Icon }, index) => (
             <div
               key={`solution-item-${index}`}
-              className="glass gradient-border card-tech group rounded-3xl p-6 will-change-transform reveal"
+              className="glass gradient-border card-tech group rounded-3xl p-6 reveal"
             >
               <div className="flex items-center gap-3">
                 <span

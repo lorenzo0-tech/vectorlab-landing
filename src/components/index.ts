@@ -17,3 +17,4 @@ export { VetrinaRistorante } from "./VetrinaRistorante";
 export { CaseStudies } from "./CaseStudies";
 export { AnalyticsProvider } from "./AnalyticsProvider";
 export { ProjectShowcase } from "./ProjectShowcase";
+export { GoogleReviews } from "./GoogleReviews";

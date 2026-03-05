@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Sora } from "next/font/google";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { COMPANY_NAME, OG_IMAGE_PATH, SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
@@ -14,7 +15,7 @@ const fontSans = Inter({
   display: "swap",
 });
 
-const fontDisplay = Space_Grotesk({
+const fontDisplay = Sora({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
   display: "swap",
@@ -126,6 +127,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#070b14",
 };
 
@@ -141,6 +144,7 @@ export default function RootLayout({
       >
         <AnalyticsProvider />
         <ScrollReveal />
+        <SmoothScroll />
         <LanguageProvider>{children}</LanguageProvider>
         <CookiePreferencesButton floating />
         <CookieConsentBanner />

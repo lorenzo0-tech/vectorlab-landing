@@ -38,7 +38,7 @@ export function AboutFounder({ locale }: { locale: string }) {
                   <span className="text-foreground font-semibold">
                     {COMPANY_NAME}
                   </span>
-                  . Lavoro da {COMPANY_CITY} con un'unica specializzazione:
+                  . Lavoro da {COMPANY_CITY} con un&apos;unica specializzazione:
                   creare{" "}
                   <span className="text-foreground font-semibold">
                     siti web per ristoranti e hotel
@@ -47,7 +47,7 @@ export function AboutFounder({ locale }: { locale: string }) {
                 </>
               ) : (
                 <>
-                  I'm Lorenzo, founder of{" "}
+                  I&apos;m Lorenzo, founder of{" "}
                   <span className="text-foreground font-semibold">
                     {COMPANY_NAME}
                   </span>
@@ -63,8 +63,9 @@ export function AboutFounder({ locale }: { locale: string }) {
             <p>
               {locale === "it" ? (
                 <>
-                  Non faccio siti per tutti. Ogni progetto nasce dall'analisi
-                  del locale, del suo posizionamento e dei suoi{" "}
+                  Non faccio siti per tutti. Ogni progetto nasce
+                  dall&apos;analisi del locale, del suo posizionamento e dei
+                  suoi{" "}
                   <span className="text-foreground font-semibold">
                     obiettivi concreti
                   </span>
@@ -76,8 +77,8 @@ export function AboutFounder({ locale }: { locale: string }) {
                 </>
               ) : (
                 <>
-                  I don't build sites for everyone. Every project starts from
-                  analyzing the venue, its positioning, and its{" "}
+                  I don&apos;t build sites for everyone. Every project starts
+                  from analyzing the venue, its positioning, and its{" "}
                   <span className="text-foreground font-semibold">
                     concrete goals
                   </span>

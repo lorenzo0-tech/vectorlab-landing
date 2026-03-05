@@ -142,7 +142,7 @@ export function CaseStudies({ locale }: { locale: string }) {
                     <span className="mt-0.5 text-xs font-bold text-red-400 shrink-0">
                       {locale === "it" ? "Prima" : "Before"}
                     </span>
-                    <p className="text-xs leading-5 text-(--muted)">
+                    <p className="text-sm leading-5 text-(--muted)">
                       {item.before}
                     </p>
                   </div>
@@ -150,7 +150,7 @@ export function CaseStudies({ locale }: { locale: string }) {
                     <span className="mt-0.5 text-xs font-bold text-emerald-400 shrink-0">
                       {locale === "it" ? "Dopo" : "After"}
                     </span>
-                    <p className="text-xs leading-5 text-(--muted)">
+                    <p className="text-sm leading-5 text-(--muted)">
                       {item.action}
                     </p>
                   </div>

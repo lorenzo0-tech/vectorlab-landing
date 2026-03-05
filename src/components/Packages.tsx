@@ -362,7 +362,7 @@ export function Packages() {
               >
                 <span aria-hidden="true" className="sweep-strip" />
 
-                <div className="mb-4 aspect-5/3 overflow-hidden rounded-2xl border border-black/10">
+                <div className="mb-4 aspect-5/3 overflow-hidden rounded-2xl border border-black/10 img-reveal reveal">
                   <Image
                     src={p.image}
                     alt={

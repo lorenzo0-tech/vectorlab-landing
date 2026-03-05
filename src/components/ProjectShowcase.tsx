@@ -1,5 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { TiltCard } from "@/components/TiltCard";
+import { StaggerText } from "@/components/StaggerText";
 
 export function ProjectShowcase({ locale }: { locale: string }) {
   const projects =
@@ -50,7 +52,10 @@ export function ProjectShowcase({ locale }: { locale: string }) {
     <section id="progetti" className="section-pad">
       <div className="container-pad">
         <div className="reveal">
-          <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
+          <StaggerText
+            as="h2"
+            className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl"
+          >
             {locale === "it" ? (
               <>
                 Guarda subito come può vendere{" "}
@@ -62,7 +67,7 @@ export function ProjectShowcase({ locale }: { locale: string }) {
                 <span className="heading-accent">can sell better</span>
               </>
             )}
-          </h2>
+          </StaggerText>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
               ? "Due demo navigabili, immediate da valutare, per capire in pochi minuti qualità, posizionamento e potenziale di conversione del tuo progetto."
@@ -72,11 +77,11 @@ export function ProjectShowcase({ locale }: { locale: string }) {
 
         <div className="mt-10 grid gap-4 lg:grid-cols-2 reveal-stagger">
           {projects.map((project) => (
-            <article
+            <TiltCard
               key={project.href}
               className="group glass-strong gradient-border card-tech overflow-hidden rounded-3xl reveal"
             >
-              <div className="relative aspect-16/10 overflow-hidden">
+              <div className="relative aspect-16/10 overflow-hidden img-reveal reveal">
                 {/* Browser chrome mockup */}
                 <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-1.5 bg-slate-900/90 px-3 py-2 backdrop-blur-sm">
                   <span className="h-2.5 w-2.5 rounded-full bg-red-400/80 transition-colors group-hover:bg-red-400" />
@@ -118,7 +123,7 @@ export function ProjectShowcase({ locale }: { locale: string }) {
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
-            </article>
+            </TiltCard>
           ))}
         </div>
       </div>

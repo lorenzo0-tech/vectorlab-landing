@@ -43,7 +43,9 @@ export default async function TerminiCondizioniPage() {
             <div className="mt-8 space-y-6 text-sm leading-relaxed text-(--muted)">
               <section>
                 <h2 className="text-base font-semibold text-foreground">
-                  {locale === "it" ? "1. Oggetto e accettazione" : "1. Scope and Acceptance"}
+                  {locale === "it"
+                    ? "1. Oggetto e accettazione"
+                    : "1. Scope and Acceptance"}
                 </h2>
                 <p className="mt-2">
                   {locale === "it"
@@ -67,9 +69,7 @@ export default async function TerminiCondizioniPage() {
 
               <section>
                 <h2 className="text-base font-semibold text-foreground">
-                  {locale === "it"
-                    ? "3. Prezzi"
-                    : "3. Pricing"}
+                  {locale === "it" ? "3. Prezzi" : "3. Pricing"}
                 </h2>
                 <p className="mt-2">
                   {locale === "it"
@@ -86,8 +86,8 @@ export default async function TerminiCondizioniPage() {
                 </h2>
                 <p className="mt-2">
                   {locale === "it"
-                    ? "Le sezioni demo presenti sul sito (es. \"demo-ristorante\" e \"demo-hotel-villa\") sono esempi illustrativi creati esclusivamente per mostrare le capacità progettuali e lo stile di lavoro. Tutti i nomi, indirizzi, numeri di telefono, recensioni e contenuti presenti nelle demo sono fittizi e non si riferiscono a persone, attività o luoghi reali. Qualsiasi somiglianza è puramente casuale."
-                    : "The demo sections on the website (e.g. \"demo-ristorante\" and \"demo-hotel-villa\") are illustrative examples created exclusively to showcase design capabilities and working style. All names, addresses, phone numbers, reviews, and content in the demos are fictitious and do not refer to real people, businesses, or places. Any resemblance is purely coincidental."}
+                    ? 'Le sezioni demo presenti sul sito (es. "demo-ristorante" e "demo-hotel-villa") sono esempi illustrativi creati esclusivamente per mostrare le capacità progettuali e lo stile di lavoro. Tutti i nomi, indirizzi, numeri di telefono, recensioni e contenuti presenti nelle demo sono fittizi e non si riferiscono a persone, attività o luoghi reali. Qualsiasi somiglianza è puramente casuale.'
+                    : 'The demo sections on the website (e.g. "demo-ristorante" and "demo-hotel-villa") are illustrative examples created exclusively to showcase design capabilities and working style. All names, addresses, phone numbers, reviews, and content in the demos are fictitious and do not refer to real people, businesses, or places. Any resemblance is purely coincidental.'}
                 </p>
               </section>
 

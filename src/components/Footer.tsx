@@ -84,6 +84,12 @@ export function Footer() {
               <p className="mt-2 text-sm text-(--muted)">
                 {COMPANY_CITY} · P.IVA: {COMPANY_VAT}
               </p>
+              <a
+                href={`mailto:${EMAIL_TO}`}
+                className="mt-1 inline-block text-sm text-(--muted) hover:text-foreground transition-colors"
+              >
+                ✉ {EMAIL_TO}
+              </a>
               <p className="mt-3 text-xs text-(--muted)">
                 {locale === "it"
                   ? "Nota legale: le informazioni non costituiscono offerta vincolante."
