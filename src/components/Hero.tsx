@@ -1,13 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  type HTMLMotionProps,
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-} from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 import Image from "next/image";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -16,37 +9,34 @@ import { CALENDLY_URL } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
 import { useTextScramble } from "@/lib/useTextScramble";
 
-type MagneticLinkProps = HTMLMotionProps<"a">;
-
-function MagneticLink({ className, children, ...props }: MagneticLinkProps) {
-  const reduce = useReducedMotion();
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const x = useSpring(mx, { stiffness: 260, damping: 22, mass: 0.3 });
-  const y = useSpring(my, { stiffness: 260, damping: 22, mass: 0.3 });
+function MagneticLink({
+  className,
+  children,
+  ...props
+}: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const ref = useRef<HTMLAnchorElement>(null);
 
   return (
-    <motion.a
-      {...props}
+    <a
+      ref={ref}
       className={className}
-      style={reduce ? undefined : { x, y }}
+      {...props}
+      style={{ transition: "transform 0.25s cubic-bezier(0.2,0.8,0.2,1)" }}
       onMouseMove={(event) => {
-        if (reduce) return;
-        const rect = event.currentTarget.getBoundingClientRect();
+        const el = ref.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
         const nx = (event.clientX - (rect.left + rect.width / 2)) / rect.width;
         const ny = (event.clientY - (rect.top + rect.height / 2)) / rect.height;
-        mx.set(nx * 7);
-        my.set(ny * 7);
+        el.style.transform = `translate(${nx * 7}px, ${ny * 7}px)`;
       }}
       onMouseLeave={() => {
-        mx.set(0);
-        my.set(0);
+        const el = ref.current;
+        if (el) el.style.transform = "";
       }}
-      whileHover={reduce ? undefined : { scale: 1.01 }}
-      whileTap={reduce ? undefined : { scale: 0.99 }}
     >
       {children}
-    </motion.a>
+    </a>
   );
 }
 
@@ -154,20 +144,23 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
 
 export function Hero() {
   const { locale } = useLanguage();
-  const shouldReduceMotion = useReducedMotion();
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(true);
   const [showMotionEffects, setShowMotionEffects] = useState(false);
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      return;
-    }
+    const reduced = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    setShouldReduceMotion(reduced);
+
+    if (reduced) return;
 
     const timer = window.setTimeout(() => {
       setShowMotionEffects(true);
     }, 900);
 
     return () => window.clearTimeout(timer);
-  }, [shouldReduceMotion]);
+  }, []);
 
   const canRunParticles =
     !shouldReduceMotion &&
@@ -186,8 +179,8 @@ export function Hero() {
 
   const heroText =
     locale === "it"
-      ? "Siti web per ristoranti e hotel, creati su misura."
-      : "Custom websites for restaurants and hotels.";
+      ? "Siti web su misura per far crescere la tua azienda."
+      : "Custom websites built to grow your business.";
 
   const { displayed: scrambledTitle, scramble: triggerScramble } =
     useTextScramble(heroText, {
@@ -204,8 +197,8 @@ export function Hero() {
     () => [
       locale === "it" ? "Prima su smartphone" : "Smartphone-first",
       locale === "it" ? "Velocità reale" : "Real speed",
-      locale === "it" ? "Menu in un tocco" : "One-tap menu",
-      locale === "it" ? "SEO locale di base" : "Local SEO basics",
+      locale === "it" ? "Orientato alla conversione" : "Conversion-driven",
+      locale === "it" ? "SEO di base" : "SEO fundamentals",
       locale === "it" ? "Tracciamento dei clic" : "Click tracking",
     ],
     [locale],
@@ -246,14 +239,14 @@ export function Hero() {
 
               <p className="mt-6 text-pretty text-base leading-7 text-(--muted) sm:text-lg sm:leading-8 md:text-xl">
                 {locale === "it"
-                  ? "Siamo specializzati in creazione e sviluppo di siti web per ristoranti e hotel: progettazione di alto livello, esperienza utente prima da smartphone e tecnologia solida per trasformare visite in prenotazioni e richieste."
-                  : "We specialize in custom websites for restaurants and hotels: premium design, smartphone-first UX, and solid technology to turn visits into bookings and leads."}
+                  ? "Progettiamo e sviluppiamo siti web per aziende di ogni settore: design di alto livello, esperienza utente prima da smartphone e tecnologia solida per trasformare visite in clienti e richieste."
+                  : "We design and build websites for businesses across every industry: premium design, smartphone-first UX, and solid technology to turn visits into customers and leads."}
               </p>
 
               <p className="mt-3 text-sm font-semibold tracking-wide text-cyan-100/90">
                 {locale === "it"
-                  ? "Dalla strategia al lancio: un unico partner per immagine, prestazioni e conversione."
-                  : "From strategy to launch: one partner for brand, performance, and conversion."}
+                  ? "Dalla strategia al lancio: un unico partner per immagine, prestazioni e risultati."
+                  : "From strategy to launch: one partner for brand, performance, and results."}
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
@@ -309,76 +302,49 @@ export function Hero() {
             >
               <div className="glass-strong gradient-border panel-tech card-tech relative overflow-hidden rounded-3xl p-3">
                 <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-cyan-200/20 bg-[#060b16]">
-                  <motion.div
-                    aria-hidden="true"
-                    className="absolute -left-16 -top-16 h-52 w-52 rounded-full bg-cyan-400/20 blur-3xl"
-                    animate={
-                      shouldReduceMotion || !showMotionEffects
-                        ? undefined
-                        : { x: [0, 24, -10, 0], y: [0, 18, -8, 0] }
-                    }
-                    transition={{
-                      duration: 10,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                  <motion.div
-                    aria-hidden="true"
-                    className="absolute -bottom-16 -right-12 h-56 w-56 rounded-full bg-fuchsia-400/18 blur-3xl"
-                    animate={
-                      shouldReduceMotion || !showMotionEffects
-                        ? undefined
-                        : { x: [0, -22, 10, 0], y: [0, -16, 8, 0] }
-                    }
-                    transition={{
-                      duration: 12,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
+                  {showMotionEffects && (
+                    <>
+                      <div
+                        aria-hidden="true"
+                        className="hero-blob-a absolute -left-16 -top-16 h-52 w-52 rounded-full bg-cyan-400/20 blur-3xl"
+                        style={{
+                          animation: "hero-blob-a 10s ease-in-out infinite",
+                        }}
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="hero-blob-b absolute -bottom-16 -right-12 h-56 w-56 rounded-full bg-fuchsia-400/18 blur-3xl"
+                        style={{
+                          animation: "hero-blob-b 12s ease-in-out infinite",
+                        }}
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="hero-ring-cw absolute left-1/2 top-1/2 h-52 w-52 rounded-full border border-cyan-200/28"
+                        style={{
+                          animation: "hero-ring-cw 20s linear infinite",
+                        }}
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="hero-ring-ccw absolute left-1/2 top-1/2 h-36 w-36 rounded-full border border-fuchsia-200/26"
+                        style={{
+                          animation: "hero-ring-ccw 14s linear infinite",
+                        }}
+                      />
+                    </>
+                  )}
 
-                  <motion.div
-                    aria-hidden="true"
-                    className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/28"
-                    animate={
-                      shouldReduceMotion || !showMotionEffects
-                        ? undefined
-                        : { rotate: 360 }
+                  <div
+                    className="hero-logo-bob absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/30 bg-white/5 p-2 shadow-[0_20px_50px_rgba(2,6,23,0.45)] backdrop-blur-md"
+                    style={
+                      showMotionEffects
+                        ? {
+                            animation:
+                              "hero-logo-bob 4.2s ease-in-out infinite",
+                          }
+                        : undefined
                     }
-                    transition={{
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
-                  <motion.div
-                    aria-hidden="true"
-                    className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-fuchsia-200/26"
-                    animate={
-                      shouldReduceMotion || !showMotionEffects
-                        ? undefined
-                        : { rotate: -360 }
-                    }
-                    transition={{
-                      duration: 14,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
-
-                  <motion.div
-                    className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/30 bg-white/5 p-2 shadow-[0_20px_50px_rgba(2,6,23,0.45)] backdrop-blur-md"
-                    animate={
-                      shouldReduceMotion || !showMotionEffects
-                        ? undefined
-                        : { y: [0, -6, 0], scale: [1, 1.02, 1] }
-                    }
-                    transition={{
-                      duration: 4.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
                   >
                     <Image
                       src="/icon.png"
@@ -389,7 +355,7 @@ export function Hero() {
                       priority
                       className="h-full w-full object-cover"
                     />
-                  </motion.div>
+                  </div>
 
                   <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-slate-950/75 via-slate-950/30 to-transparent px-3 py-2">
                     <p className="text-[11px] font-semibold tracking-[0.12em] text-cyan-100/95 uppercase">
@@ -404,12 +370,12 @@ export function Hero() {
               <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div className="glass gradient-border card-tech rounded-2xl px-4 py-3">
                   <p className="text-[11px] font-semibold tracking-widest text-(--muted)">
-                    {locale === "it" ? "SPECIALIZZAZIONE" : "SPECIALIZATION"}
+                    {locale === "it" ? "PER CHI" : "FOR"}
                   </p>
                   <p className="mt-1 text-sm font-semibold">
                     {locale === "it"
-                      ? "Ristoranti · Pizzerie · Cocktail bar"
-                      : "Restaurants · Pizzerias · Cocktail bars"}
+                      ? "Aziende · Professionisti · Brand"
+                      : "Businesses · Professionals · Brands"}
                   </p>
                 </div>
 
@@ -419,8 +385,8 @@ export function Hero() {
                   </p>
                   <p className="mt-1 text-sm font-semibold">
                     {locale === "it"
-                      ? "Prenotazioni, chiamate, richieste"
-                      : "Bookings, calls, leads"}
+                      ? "Contatti, vendite, richieste"
+                      : "Leads, sales, inquiries"}
                   </p>
                 </div>
               </div>

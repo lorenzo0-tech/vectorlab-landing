@@ -3,30 +3,31 @@ export function CaseStudies({ locale }: { locale: string }) {
     locale === "it"
       ? [
           {
-            name: "Scenario tipo · Ristorante centro città",
-            metric: "+prenotazioni",
+            name: "Scenario tipo · Studio professionale",
+            metric: "+contatti",
             goal: "Obiettivo",
             detail:
               "Scenario dimostrativo: come interveniamo su un sito con bassa conversione",
             before:
-              "Invito all'azione poco visibile e percorso prenotazione dispersivo",
+              "Invito all'azione poco visibile e percorso di contatto dispersivo",
             action:
               "Testata semplificata, invito all'azione fisso e percorso smartphone lineare",
             accent: "cyan",
           },
           {
-            name: "Scenario tipo · Pizzeria da asporto",
-            metric: "+clic su menu",
+            name: "Scenario tipo · E-commerce locale",
+            metric: "+vendite online",
             goal: "Obiettivo",
             detail:
               "Scenario dimostrativo: ottimizzazione testata e invito all'azione",
-            before: "Menu difficile da trovare da smartphone",
-            action: "Menu in un tocco + gerarchia visiva orientata all'azione",
+            before: "Catalogo confuso e difficile da navigare da smartphone",
+            action:
+              "Navigazione semplificata + gerarchia visiva orientata all'acquisto",
             accent: "indigo",
           },
           {
-            name: "Scenario tipo · Cocktail bar eventi",
-            metric: "+conversioni",
+            name: "Scenario tipo · Azienda di servizi",
+            metric: "+richieste",
             goal: "Obiettivo",
             detail:
               "Scenario dimostrativo: riduzione frizione e aumento fiducia",
@@ -38,28 +39,29 @@ export function CaseStudies({ locale }: { locale: string }) {
         ]
       : [
           {
-            name: "Typical scenario · City-center restaurant",
-            metric: "+bookings",
+            name: "Typical scenario · Professional firm",
+            metric: "+leads",
             goal: "Goal",
             detail:
               "Demonstrative scenario: how we improve a low-converting site",
-            before: "Low-visibility CTA and scattered booking flow",
+            before: "Low-visibility CTA and scattered contact flow",
             action:
               "Simplified hero, sticky CTA, and linear smartphone journey",
             accent: "cyan",
           },
           {
-            name: "Typical scenario · Takeaway pizzeria",
-            metric: "+menu clicks",
+            name: "Typical scenario · Local e-commerce",
+            metric: "+online sales",
             goal: "Goal",
             detail: "Demonstrative scenario: hero and CTA optimization",
-            before: "Menu hard to find on smartphone",
-            action: "One-tap menu + action-oriented visual hierarchy",
+            before: "Confusing catalog, hard to navigate on smartphone",
+            action:
+              "Simplified navigation + purchase-oriented visual hierarchy",
             accent: "indigo",
           },
           {
-            name: "Typical scenario · Event cocktail bar",
-            metric: "+conversions",
+            name: "Typical scenario · Service company",
+            metric: "+inquiries",
             goal: "Goal",
             detail:
               "Demonstrative scenario: friction reduction and trust building",

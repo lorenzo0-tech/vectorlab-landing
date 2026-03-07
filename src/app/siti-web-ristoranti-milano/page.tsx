@@ -11,22 +11,22 @@ import {
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Siti Web per Ristoranti a Milano",
+  title: "Siti Web Professionali a Milano",
   description:
-    "Progettazione siti web per ristoranti a Milano: strategia, UX mobile-first, menu chiaro e percorso orientato a prenotazioni e richieste.",
+    "Progettazione siti web professionali a Milano: strategia, UX mobile-first e struttura orientata alla conversione per aziende di ogni settore.",
   keywords: [
-    "siti web ristoranti Milano",
-    "creazione sito ristorante Milano",
-    "agenzia web ristoranti Milano",
-    "landing page ristorante Milano",
+    "siti web professionali Milano",
+    "creazione sito aziendale Milano",
+    "web agency Milano",
+    "sviluppo siti web Milano",
   ],
   alternates: {
     canonical: "/siti-web-ristoranti-milano",
   },
   openGraph: {
-    title: `Siti Web per Ristoranti a Milano | ${COMPANY_NAME}`,
+    title: `Siti Web Professionali a Milano | ${COMPANY_NAME}`,
     description:
-      "Siti web per ristoranti a Milano orientati a prenotazioni e conversione.",
+      "Siti web professionali a Milano orientati alla conversione e ai risultati concreti.",
     url: "/siti-web-ristoranti-milano",
     type: "article",
     locale: "it_IT",
@@ -54,12 +54,12 @@ export default async function SitiWebRistorantiMilanoPage() {
     locale === "it"
       ? [
           {
-            q: "Quanto tempo serve per pubblicare un sito ristorante a Milano?",
+            q: "Quanto tempo serve per pubblicare un sito professionale a Milano?",
             a: "In molti casi servono circa 2-4 settimane, in base a contenuti disponibili, numero di pagine e integrazioni richieste.",
           },
           {
-            q: "Il menu viene gestito in modo semplice anche da smartphone?",
-            a: "Sì, progettiamo una struttura menu veloce da consultare, con percorsi chiari per prenotazione, chiamata e richiesta informazioni.",
+            q: "I contenuti vengono gestiti in modo semplice anche da smartphone?",
+            a: "Sì, progettiamo una struttura chiara e veloce da consultare, con percorsi diretti verso contatto, chiamata e richiesta informazioni.",
           },
           {
             q: "Il sito aiuta davvero la visibilità locale su Milano?",
@@ -68,12 +68,12 @@ export default async function SitiWebRistorantiMilanoPage() {
         ]
       : [
           {
-            q: "How long does it take to publish a restaurant website in Milan?",
+            q: "How long does it take to publish a professional website in Milan?",
             a: "In many cases it takes about 2-4 weeks, depending on available content, number of pages, and required integrations.",
           },
           {
-            q: "Can the menu be managed easily on smartphone too?",
-            a: "Yes, we design a fast menu structure with clear paths for booking, calling, and requesting information.",
+            q: "Can the content be managed easily on smartphone too?",
+            a: "Yes, we design a clear and fast structure with direct paths for contact, calling, and requesting information.",
           },
           {
             q: "Does the site really help local visibility in Milan?",
@@ -91,12 +91,12 @@ export default async function SitiWebRistorantiMilanoPage() {
         "@type": "Service",
         name:
           locale === "it"
-            ? "Siti web per ristoranti a Milano"
-            : "Restaurant websites in Milan",
+            ? "Siti web professionali a Milano"
+            : "Professional websites in Milan",
         serviceType:
           locale === "it"
-            ? "Creazione siti web per ristoranti"
-            : "Restaurant website development",
+            ? "Creazione siti web professionali"
+            : "Professional website development",
         areaServed: {
           "@type": "City",
           name: COMPANY_CITY,
@@ -134,8 +134,8 @@ export default async function SitiWebRistorantiMilanoPage() {
             position: 2,
             name:
               locale === "it"
-                ? "Siti web per ristoranti a Milano"
-                : "Restaurant websites in Milan",
+                ? "Siti web professionali a Milano"
+                : "Professional websites in Milan",
             item: pageUrl,
           },
         ],
@@ -158,13 +158,13 @@ export default async function SitiWebRistorantiMilanoPage() {
             </p>
             <h1 className="heading-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
               {locale === "it"
-                ? "Siti web per ristoranti a Milano"
-                : "Restaurant websites in Milan"}
+                ? "Siti web professionali a Milano"
+                : "Professional websites in Milan"}
             </h1>
             <p className="mt-4 text-(--muted)">
               {locale === "it"
-                ? "Realizziamo siti web per ristoranti con un approccio orientato a prenotazioni, chiamate e richieste reali. Layout pulito, performance solide e messaggi chiari per chi cerca un locale a Milano."
-                : "We build restaurant websites with a booking-, call-, and lead-focused approach. Clean layout, solid performance, and clear messaging for people searching in Milan."}
+                ? "Realizziamo siti web per aziende e professionisti con un approccio orientato a contatti, richieste e risultati reali. Layout pulito, performance solide e messaggi chiari per chi cerca i tuoi servizi a Milano."
+                : "We build websites for businesses and professionals with a lead-focused approach. Clean layout, solid performance, and clear messaging for people searching in Milan."}
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-(--muted)">
@@ -179,8 +179,8 @@ export default async function SitiWebRistorantiMilanoPage() {
             <div className="mt-8 rounded-2xl border border-cyan-200/20 bg-slate-900/45 p-5 sm:p-6">
               <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
                 {locale === "it"
-                  ? "FAQ su siti web per ristoranti a Milano"
-                  : "FAQ about restaurant websites in Milan"}
+                  ? "FAQ su siti web professionali a Milano"
+                  : "FAQ about professional websites in Milan"}
               </h2>
               <div className="mt-4 space-y-4">
                 {faq.map((item) => (
@@ -213,8 +213,8 @@ export default async function SitiWebRistorantiMilanoPage() {
                 className="btn-secondary focus-ring inline-flex"
               >
                 {locale === "it"
-                  ? "Vedi anche: siti web hotel Milano"
-                  : "See also: hotel websites Milan"}
+                  ? "Vedi anche: siti web aziende Milano"
+                  : "See also: business websites Milan"}
               </Link>
             </div>
           </article>

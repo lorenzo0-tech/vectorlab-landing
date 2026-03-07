@@ -3,26 +3,26 @@
 import { useLanguage } from "@/components/LanguageProvider";
 
 const ITEMS_IT = [
-  "Siti per ristoranti",
-  "Siti per hotel",
+  "Siti per aziende",
+  "Siti professionali",
   "Smartphone-first",
   "SEO locale",
   "Velocità reale",
-  "Menu in un tocco",
-  "Prenotazioni dirette",
+  "Contenuti strutturati",
+  "Contatti diretti",
   "Design premium",
   "Tracciamento clic",
   "Consegna 14 giorni",
 ];
 
 const ITEMS_EN = [
-  "Restaurant websites",
-  "Hotel websites",
+  "Business websites",
+  "Professional websites",
   "Smartphone-first",
   "Local SEO",
   "Real speed",
-  "One-tap menu",
-  "Direct bookings",
+  "Structured content",
+  "Direct leads",
   "Premium design",
   "Click tracking",
   "14-day delivery",

@@ -24,17 +24,17 @@ const fontDisplay = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${COMPANY_NAME} — Siti web per ristoranti e hotel`,
+    default: `${COMPANY_NAME} — Siti web professionali per aziende`,
     template: `%s — ${COMPANY_NAME}`,
   },
   description:
-    "Creazione e sviluppo siti web su misura per ristoranti e hotel. Progettazione di alto livello, esperienza utente prima da smartphone e struttura orientata alla conversione.",
+    "Creazione e sviluppo siti web su misura per aziende. Progettazione di alto livello, esperienza utente prima da smartphone e struttura orientata alla conversione.",
   keywords: [
-    "siti web ristoranti",
-    "siti web hotel",
-    "progettazione siti ristoranti",
-    "sviluppo siti hotel",
-    "pagina di atterraggio ospitalità",
+    "siti web aziendali",
+    "creazione siti web professionali",
+    "sviluppo siti web Milano",
+    "web agency Milano",
+    "siti web per aziende",
   ],
   category: "attività",
   robots: {
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: COMPANY_NAME,
-    title: `${COMPANY_NAME} — Siti web per ristoranti e hotel`,
+    title: `${COMPANY_NAME} — Siti web professionali per aziende`,
     description:
-      "Creiamo siti web su misura per ristoranti e hotel: progettazione di alto livello, prestazioni ed esperienza utente orientata ai risultati.",
+      "Creiamo siti web su misura per aziende: progettazione di alto livello, prestazioni ed esperienza utente orientata ai risultati.",
     images: [
       {
         url: OG_IMAGE_PATH,
@@ -74,9 +74,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${COMPANY_NAME} — Siti web per ristoranti e hotel`,
+    title: `${COMPANY_NAME} — Siti web professionali per aziende`,
     description:
-      "Creazione e sviluppo siti web su misura per ristoranti e hotel.",
+      "Creazione e sviluppo siti web su misura per aziende e professionisti.",
     images: [OG_IMAGE_PATH],
   },
   icons: {
@@ -145,9 +145,11 @@ export default function RootLayout({
         <AnalyticsProvider />
         <ScrollReveal />
         <SmoothScroll />
-        <LanguageProvider>{children}</LanguageProvider>
-        <CookiePreferencesButton floating />
-        <CookieConsentBanner />
+        <LanguageProvider>
+          {children}
+          <CookiePreferencesButton floating />
+          <CookieConsentBanner />
+        </LanguageProvider>
       </body>
     </html>
   );

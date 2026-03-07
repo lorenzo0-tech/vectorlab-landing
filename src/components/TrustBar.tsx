@@ -9,8 +9,8 @@ export function TrustBar({ locale }: { locale: string }) {
   const checks: CheckItem[] =
     locale === "it"
       ? [
-          "Inviti all'azione sempre visibili (Chiama / Prenota / Indicazioni)",
-          "Menu immediato (PDF + pagina web indicizzabile)",
+          "Inviti all'azione sempre visibili (Chiama / Contatta / Richiedi)",
+          "Contenuti chiari e ben strutturati",
           "Prestazioni e struttura adatte a Google",
           "Struttura pensata per cellulare",
           {
@@ -18,11 +18,11 @@ export function TrustBar({ locale }: { locale: string }) {
             count: 14,
             after: " giorni",
           },
-          { before: "Pacchetti da \u20ac", count: 1290, after: "" },
+          { before: "Pacchetti da \u20ac", count: 1490, after: "" },
         ]
       : [
-          "Always-visible CTAs (Call / Book / Directions)",
-          "Instant menu access (PDF + indexable web page)",
+          "Always-visible CTAs (Call / Contact / Inquire)",
+          "Clear and well-structured content",
           "Performance and structure aligned with Google",
           "Smartphone-first structure",
           {
@@ -30,7 +30,7 @@ export function TrustBar({ locale }: { locale: string }) {
             count: 14,
             after: " days",
           },
-          { before: "Packages from \u20ac", count: 1290, after: "" },
+          { before: "Packages from \u20ac", count: 1490, after: "" },
         ];
 
   return (

@@ -1,7 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { EntryGate } from "@/components/EntryGate";
+
+const EntryGate = dynamic(
+  () => import("@/components/EntryGate").then((mod) => mod.EntryGate),
+  { ssr: false },
+);
 
 const GATE_SESSION_KEY = "entry_gate_seen_v1";
 

@@ -52,9 +52,9 @@ export default async function Home() {
               "In molti casi la consegna tipica è 14 giorni, in base alla complessità del progetto.",
           },
           {
-            question: "Quanto costa un sito web per il mio ristorante o hotel?",
+            question: "Quanto costa un sito web per la mia azienda?",
             answer:
-              "I pacchetti partono da €1.290 per ristoranti e €1.490 per hotel. Prenota un'analisi gratuita per un preventivo su misura.",
+              "I pacchetti partono da \u20ac1.490. Prenota un'analisi gratuita per un preventivo su misura.",
           },
           {
             question: "Il sito sarà adatto a Google?",
@@ -62,7 +62,7 @@ export default async function Home() {
               "Sì, la base include struttura SEO locale, performance e contenuti orientati alla ricerca.",
           },
           {
-            question: "Posso aggiornare il menu o i contenuti da solo?",
+            question: "Posso aggiornare i contenuti da solo?",
             answer:
               "Sì. Consegniamo il sito con una struttura facilmente aggiornabile. Offriamo anche piani di manutenzione mensile.",
           },
@@ -84,7 +84,7 @@ export default async function Home() {
           {
             question: "Lavorate solo a Milano?",
             answer:
-              "Siamo basati a Milano, ma lavoriamo in tutta Italia e con strutture internazionali.",
+              "Siamo basati a Milano, ma lavoriamo in tutta Italia e con aziende internazionali.",
           },
         ]
       : [
@@ -94,10 +94,9 @@ export default async function Home() {
               "In many cases, typical delivery is 14 days depending on project complexity.",
           },
           {
-            question:
-              "How much does a website cost for my restaurant or hotel?",
+            question: "How much does a website cost for my business?",
             answer:
-              "Packages start from €1,290 for restaurants and €1,490 for hotels (VAT not applicable, flat-rate regime). Book a free audit for a tailored quote.",
+              "Packages start from \u20ac1,490. Book a free audit for a tailored quote.",
           },
           {
             question: "Will the website be Google-friendly?",
@@ -105,7 +104,7 @@ export default async function Home() {
               "Yes, the base includes local SEO structure, performance, and search-oriented content.",
           },
           {
-            question: "Can I update the menu or content myself?",
+            question: "Can I update the content myself?",
             answer:
               "Yes. We deliver the site with an easily updatable structure. We also offer monthly maintenance plans.",
           },
@@ -127,7 +126,7 @@ export default async function Home() {
           {
             question: "Do you only work in Milan?",
             answer:
-              "We're based in Milan, but we work across Italy and with international properties.",
+              "We're based in Milan, but we work across Italy and with international businesses.",
           },
         ];
 
@@ -150,8 +149,8 @@ export default async function Home() {
         "@type": "ProfessionalService",
         name:
           locale === "it"
-            ? `${COMPANY_NAME} - Progettazione siti per ospitalità`
-            : `${COMPANY_NAME} - Hospitality website design`,
+            ? `${COMPANY_NAME} - Progettazione siti web per aziende`
+            : `${COMPANY_NAME} - Business website design`,
         areaServed: "IT",
         address: {
           "@type": "PostalAddress",
@@ -161,13 +160,13 @@ export default async function Home() {
         serviceType:
           locale === "it"
             ? [
-                "Creazione siti web per ristoranti",
-                "Creazione siti web per hotel",
+                "Creazione siti web per aziende",
+                "Sviluppo siti web professionali",
                 "Sviluppo pagina di atterraggio per conversione",
               ]
             : [
-                "Website design for restaurants",
-                "Website design for hotels",
+                "Website design for businesses",
+                "Professional website development",
                 "Conversion-focused landing page development",
               ],
         provider: {

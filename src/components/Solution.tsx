@@ -9,7 +9,7 @@ import {
   MousePointerClick,
   Search,
   Smartphone,
-  UtensilsCrossed,
+  LayoutDashboard,
 } from "lucide-react";
 
 export function Solution() {
@@ -24,13 +24,13 @@ export function Solution() {
           },
           {
             title: "Pulsanti che convertono",
-            desc: "Chiama / Prenota / Indicazioni sempre visibili e facili da toccare.",
+            desc: "Chiama / Contatta / Richiedi sempre visibili e facili da toccare.",
             Icon: Smartphone,
           },
           {
-            title: "Menu in un tocco",
-            desc: "PDF + pagina web indicizzabile: utile per persone e Google.",
-            Icon: UtensilsCrossed,
+            title: "Contenuti strutturati",
+            desc: "Pagine ben organizzate e indicizzabili: utili per utenti e Google.",
+            Icon: LayoutDashboard,
           },
           {
             title: "Foto ottimizzate",
@@ -56,13 +56,13 @@ export function Solution() {
           },
           {
             title: "High-converting buttons",
-            desc: "Call / Book / Directions always visible and easy to tap.",
+            desc: "Call / Contact / Request always visible and easy to tap.",
             Icon: Smartphone,
           },
           {
-            title: "One-tap menu",
-            desc: "PDF + indexable web page: useful for people and Google.",
-            Icon: UtensilsCrossed,
+            title: "Structured content",
+            desc: "Well-organized, indexable pages: useful for users and Google.",
+            Icon: LayoutDashboard,
           },
           {
             title: "Optimized photos",
@@ -82,61 +82,60 @@ export function Solution() {
         ];
   const gallery = [
     {
-      src: "/images/restaurant-real/hero-dining.jpg",
+      src: "/images/business/team-meeting.jpg",
       alt:
         locale === "it"
-          ? "Sala ristorante con atmosfera calda e tavoli apparecchiati"
-          : "Restaurant dining room with warm atmosphere and set tables",
-      label: locale === "it" ? "Testata + prenota" : "Hero + book",
+          ? "Team di lavoro in riunione attorno a un tavolo"
+          : "Business team meeting around a conference table",
+      label: locale === "it" ? "Testata + CTA" : "Hero + CTA",
       mockHeader: true,
       className:
         "relative col-span-12 h-44 overflow-hidden rounded-2xl border border-white/15 sm:col-span-7 sm:h-64 lg:h-72",
       sizes: "(max-width: 640px) 100vw, 58vw",
     },
     {
-      src: "/images/restaurant-real/dish-plating.jpg",
+      src: "/images/business/office-professionals.jpg",
       alt:
         locale === "it"
-          ? "Sala ristorante luminosa con tavoli pronti al servizio"
-          : "Bright dining room with tables ready for service",
-      label: locale === "it" ? "Sala ristorante" : "Dining room",
+          ? "Professionisti in un ambiente d'ufficio moderno"
+          : "Professionals in a modern office environment",
+      label: locale === "it" ? "Ambiente curato" : "Curated space",
       mockHeader: false,
       className:
         "relative col-span-12 h-44 overflow-hidden rounded-2xl border border-white/15 sm:col-span-5 sm:h-64 lg:h-72",
       sizes: "(max-width: 640px) 100vw, 42vw",
     },
     {
-      src: "/images/restaurant-real/chef-kitchen.jpg",
+      src: "/images/business/business-handshake.jpg",
       alt:
         locale === "it"
-          ? "Piatto in evidenza con cura dell'impiattamento"
-          : "Featured dish with careful plating",
-      label: locale === "it" ? "Piatto in evidenza" : "Featured dish",
+          ? "Stretta di mano tra professioniste alla scrivania"
+          : "Professional handshake across a desk",
+      label: locale === "it" ? "Dettaglio prodotto" : "Product detail",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-4 sm:h-52",
       sizes: "(max-width: 640px) 100vw, 34vw",
     },
     {
-      src: "/images/restaurant-real/menu-fine-dining.jpg",
+      src: "/images/business/presentation.jpg",
       alt:
         locale === "it"
-          ? "Cocktail e abbinamenti serviti al tavolo"
-          : "Cocktails and pairings served at the table",
-      label:
-        locale === "it" ? "Cocktail e abbinamenti" : "Cocktails and pairings",
+          ? "Presentazione aziendale ai colleghi in ufficio"
+          : "Business presentation to colleagues in office",
+      label: locale === "it" ? "Galleria immagini" : "Image gallery",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-5 sm:h-52",
       sizes: "(max-width: 640px) 100vw, 40vw",
     },
     {
-      src: "/images/restaurant-real/reserved-table.jpg",
+      src: "/images/business/modern-building.jpg",
       alt:
         locale === "it"
-          ? "Area bar e sala serale con illuminazione d'atmosfera"
-          : "Evening bar and dining area with ambient lighting",
-      label: locale === "it" ? "Atmosfera serale" : "Evening atmosphere",
+          ? "Edificio moderno con design geometrico e cielo azzurro"
+          : "Modern building with geometric design against blue sky",
+      label: locale === "it" ? "Atmosfera e brand" : "Atmosphere and brand",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-3 sm:h-52",
@@ -175,8 +174,8 @@ export function Solution() {
           </StaggerText>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
-              ? "Elementi concreti, pensati per prenotazioni, chiamate e richieste."
-              : "Practical elements built for bookings, calls, and leads."}
+              ? "Elementi concreti, pensati per contatti, richieste e conversioni."
+              : "Practical elements built for leads, inquiries, and conversions."}
           </p>
         </div>
 
@@ -203,22 +202,22 @@ export function Solution() {
                       </p>
                       <p className="mt-1 text-[10px] font-semibold leading-3.5 text-white/95 sm:text-[11px] sm:leading-4 lg:text-xs">
                         {locale === "it"
-                          ? "Prenota il tavolo in 15 secondi."
-                          : "Book your table in 15 seconds."}
+                          ? "Scopri i nostri servizi."
+                          : "Discover our services."}
                       </p>
                       <div className="mt-1.5 flex items-center gap-1.5 sm:mt-2 sm:gap-2">
                         <span className="rounded-full bg-cyan-300/20 px-1.5 py-0.5 text-[9px] font-semibold text-cyan-100 sm:px-2 sm:py-1 sm:text-[10px]">
                           {locale === "it" ? "Chiama" : "Call"}
                         </span>
                         <span className="rounded-full bg-fuchsia-300/20 px-1.5 py-0.5 text-[9px] font-semibold text-fuchsia-100 sm:px-2 sm:py-1 sm:text-[10px]">
-                          {locale === "it" ? "Indicazioni" : "Directions"}
+                          {locale === "it" ? "Richiedi" : "Request"}
                         </span>
                       </div>
                       <button
                         type="button"
                         className="mt-1.5 w-full rounded-md bg-[linear-gradient(120deg,rgba(103,232,249,0.9),rgba(129,140,248,0.86),rgba(232,121,249,0.85))] px-2 py-1 text-[9px] font-semibold text-slate-950 sm:mt-2 sm:rounded-lg sm:py-1.5 sm:text-[10px]"
                       >
-                        {locale === "it" ? "Prenota ora" : "Book now"}
+                        {locale === "it" ? "Contattaci" : "Contact us"}
                       </button>
                     </div>
                   ) : null}

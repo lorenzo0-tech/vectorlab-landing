@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { cookies } from "next/headers";
 
@@ -27,59 +27,60 @@ export default async function AnteprimaSoluzionePage() {
     locale === "it"
       ? [
           {
-            label: "Testata + prenota",
-            reason: "Sala di alto livello leggibile e orientata a conversione.",
+            label: "Testata + CTA",
+            reason:
+              "Ambiente di alto livello leggibile e orientato a conversione.",
             src: "/images/salaprincipale.jpeg",
           },
           {
-            label: "Piatto firma primo piano",
+            label: "Immagine principale",
             reason:
-              "Immagine principale del cibo più coerente con il valore percepito del locale.",
+              "Primo piano del prodotto/servizio, coerente con il valore percepito dell'azienda.",
             src: "/images/herofoto.webp",
           },
           {
-            label: "Chef al pass",
-            reason:
-              "Gesto dello chef in azione: comunica qualità e artigianalità.",
+            label: "Dettaglio operativo",
+            reason: "Scatto in azione: comunica qualità e professionalità.",
             src: "/images/chefalpass.jpg",
           },
           {
-            label: "Menu degustazione",
+            label: "Galleria servizi",
             reason:
-              "Scatto menu/tavolo per rappresentare scelta percorsi e offerta.",
+              "Panoramica dell'offerta per rappresentare i percorsi e i servizi disponibili.",
             src: "/images/menudegustazione.jpeg",
           },
           {
-            label: "Prenotazione tavolo",
+            label: "Sezione contatto",
             reason:
-              "Dettaglio tavolo riservato chiaro, perfetto per invito alla prenotazione.",
+              "Dettaglio chiaro e diretto, perfetto per invitare alla richiesta di contatto.",
             src: "/images/tavoloreserved.jpg",
           },
         ]
       : [
           {
-            label: "Hero + book",
-            reason: "Premium dining room, readable and conversion-oriented.",
+            label: "Hero + CTA",
+            reason: "Premium environment, readable and conversion-oriented.",
             src: "/images/salaprincipale.jpeg",
           },
           {
-            label: "Signature dish close-up",
-            reason: "Main food image aligned with the venue’s perceived value.",
+            label: "Main image",
+            reason:
+              "Primary product/service image aligned with the brand’s perceived value.",
             src: "/images/herofoto.webp",
           },
           {
-            label: "Chef at the pass",
-            reason: "Chef in action: communicates quality and craftsmanship.",
+            label: "In-action detail",
+            reason: "Action shot: communicates quality and professionalism.",
             src: "/images/chefalpass.jpg",
           },
           {
-            label: "Tasting menu",
-            reason: "Menu/table shot to represent menu paths and offer.",
+            label: "Services gallery",
+            reason: "Overview shot to represent service paths and offer.",
             src: "/images/menudegustazione.jpeg",
           },
           {
-            label: "Table booking",
-            reason: "Clear reserved-table detail, perfect for booking CTA.",
+            label: "Contact section",
+            reason: "Clear, direct detail - perfect for a contact CTA.",
             src: "/images/tavoloreserved.jpg",
           },
         ];

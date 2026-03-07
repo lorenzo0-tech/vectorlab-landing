@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import Image from "next/image";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -19,267 +17,117 @@ type PackageCard = {
   highlight?: boolean;
 };
 
-type PackageCategory = {
-  key: "ristoranti" | "hotel";
-  title: string;
-  subtitle: string;
-  cards: PackageCard[];
-};
-
 export function Packages() {
   const { locale } = useLanguage();
-  const reduce = useReducedMotion();
-  const [selectedCategory, setSelectedCategory] = useState<
-    "ristoranti" | "hotel"
-  >("ristoranti");
 
-  const categories: PackageCategory[] =
+  const cards: PackageCard[] =
     locale === "it"
       ? [
           {
-            key: "ristoranti",
-            title: "Pacchetti siti web per ristoranti",
-            subtitle:
-              "Pensati per aumentare prenotazioni, ordini e valore percepito del locale.",
-            cards: [
-              {
-                name: "STANDARD",
-                trackingName: "BASE",
-                tagline: "Base solida per iniziare a vendere meglio online.",
-                price: "A partire da €1.290",
-                points: [
-                  "Sito professionale fino a 5 sezioni (home, menu, chi siamo, contatti, prenotazione)",
-                  "Menu digitale chiaro e facilmente aggiornabile",
-                  "CTA dirette a WhatsApp/telefono/prenotazione",
-                  "Ottimizzazione smartphone-first e tempi di caricamento rapidi",
-                  "SEO locale base (Google Business Profile + struttura tecnica)",
-                ],
-                image: "/images/vettolab-free/ristorante-base.jpg",
-                target: "Ristoranti, pizzerie, trattorie",
-              },
-              {
-                name: "PRO",
-                trackingName: "VETRINA",
-                tagline:
-                  "Per locali che vogliono distinguersi e convertire di più.",
-                price: "A partire da €2.490",
-                highlight: true,
-                points: [
-                  "Tutto del piano Standard",
-                  "Design premium personalizzato sul posizionamento del locale",
-                  "Galleria fotografica avanzata e sezioni storytelling",
-                  "Integrazione modulo richieste eventi/cene private",
-                  "Tracking conversioni principali (clic prenota, chiamate, mappa)",
-                  "Setup blog/notizie o eventi speciali",
-                ],
-                image: "/images/vettolab-free/ristorante-pro.jpg",
-                target: "Ristoranti premium, bistrot, locali eventi",
-              },
-              {
-                name: "ENTERPRISE",
-                trackingName: "CRESCITA",
-                tagline:
-                  "Pacchetto personalizzato per richieste complesse e obiettivi ambiziosi.",
-                price: "Da €4.200",
-                points: [
-                  "Architettura su misura multi-sede o multi-brand",
-                  "Funzionalità dedicate (CRM, booking avanzato, integrazioni esterne)",
-                  "Strategia contenuti e funnel completi di acquisizione",
-                  "Performance e SEO avanzata con roadmap trimestrale",
-                  "Supporto continuativo e sviluppo evolutivo",
-                ],
-                image: "/images/vettolab-free/ristorante-enterprise.jpg",
-                target: "Gruppi ristorazione e progetti complessi",
-              },
+            name: "STARTER",
+            trackingName: "BASE",
+            tagline: "Base solida per iniziare a crescere online.",
+            price: "A partire da €1.490",
+            points: [
+              "Sito professionale fino a 5 sezioni (home, servizi, chi siamo, contatti, richiesta informazioni)",
+              "CTA dirette a WhatsApp/telefono/modulo contatto",
+              "Ottimizzazione smartphone-first e tempi di caricamento rapidi",
+              "SEO base (struttura tecnica + contenuti orientati alla ricerca)",
+              "Consegna tipica in 14 giorni",
             ],
+            image: "/images/business/pkg-starter.jpg",
+            target: "Professionisti, studi, attività locali",
           },
           {
-            key: "hotel",
-            title: "Pacchetti siti web per hotel, ville e b&b",
-            subtitle:
-              "Creati per aumentare richieste dirette, ridurre dipendenza OTA e valorizzare la struttura.",
-            cards: [
-              {
-                name: "STANDARD",
-                trackingName: "BASE",
-                tagline:
-                  "Per presentare la struttura in modo elegante e chiaro.",
-                price: "A partire da €1.490",
-                points: [
-                  "Sito professionale fino a 7 sezioni (camere, servizi, location, contatti)",
-                  "Presentazione camere/suite con gallery dedicata",
-                  "Modulo richiesta disponibilità ottimizzato",
-                  "Ottimizzazione mobile e performance core",
-                  "SEO locale base e struttura tecnica corretta",
-                ],
-                image: "/images/vettolab-free/hotel-base.jpg",
-                target: "B&b, boutique hotel, ville vacanza",
-              },
-              {
-                name: "PRO",
-                trackingName: "VETRINA",
-                tagline:
-                  "Per strutture che vogliono un'immagine luxury e più richieste dirette.",
-                price: "A partire da €2.990",
-                highlight: true,
-                points: [
-                  "Tutto del piano Standard",
-                  "Design premium su misura con storytelling struttura",
-                  "Pagine esperienze/servizi (spa, ristorante, transfer, attività)",
-                  "Percorso prenotazione avanzato con campi personalizzati",
-                  "Tracking eventi conversione e report essenziali",
-                  "SEO contenutistica iniziale su keyword locali ad alto intento",
-                ],
-                image: "/images/vettolab-free/hotel-pro.jpg",
-                target: "Hotel 4*, resort, ville di fascia alta",
-              },
-              {
-                name: "ENTERPRISE",
-                trackingName: "CRESCITA",
-                tagline:
-                  "Soluzione su richiesta per progetti hospitality complessi.",
-                price: "Da €5.500",
-                points: [
-                  "Progetto custom per gruppi alberghieri o strutture multi-servizio",
-                  "Integrazioni PMS/CRM/channel manager dove richiesto",
-                  "Architettura multilingua avanzata e multi-destinazione",
-                  "Strategia conversione diretta con funnel dedicati",
-                  "Roadmap evolutiva tecnica e marketing con supporto continuativo",
-                ],
-                image: "/images/vettolab-free/hotel-enterprise.jpg",
-                target: "Gruppi hotel, resort luxury, progetti complessi",
-              },
+            name: "BUSINESS",
+            trackingName: "VETRINA",
+            tagline:
+              "Per aziende che vogliono distinguersi e convertire di più.",
+            price: "A partire da €2.990",
+            highlight: true,
+            points: [
+              "Tutto del piano Starter",
+              "Design premium personalizzato sul posizionamento del brand",
+              "Galleria fotografica avanzata e sezioni storytelling",
+              "Integrazione moduli richieste e funzionalità specifiche",
+              "Tracking conversioni principali (clic CTA, contatti, mappa)",
+              "Setup blog/notizie o sezioni dinamiche",
             ],
+            image: "/images/business/pkg-business.jpg",
+            target: "PMI, brand in crescita, aziende ambiziose",
+          },
+          {
+            name: "ENTERPRISE",
+            trackingName: "CRESCITA",
+            tagline:
+              "Soluzione su misura per progetti complessi e obiettivi ambiziosi.",
+            price: "Da €5.500",
+            points: [
+              "Architettura su misura multi-sede o multi-brand",
+              "Funzionalità dedicate (CRM, booking, integrazioni esterne)",
+              "Strategia contenuti e funnel completi di acquisizione",
+              "Performance e SEO avanzata con roadmap trimestrale",
+              "Supporto continuativo e sviluppo evolutivo",
+            ],
+            image: "/images/business/pkg-enterprise.jpg",
+            target: "Gruppi aziendali, realtà strutturate, progetti complessi",
           },
         ]
       : [
           {
-            key: "ristoranti",
-            title: "Restaurant website packages",
-            subtitle:
-              "Built to increase bookings, orders, and perceived value.",
-            cards: [
-              {
-                name: "STANDARD",
-                trackingName: "BASE",
-                tagline: "Strong baseline to sell better online.",
-                price: "From €1,290",
-                points: [
-                  "Professional website up to 5 sections",
-                  "Clear and editable digital menu",
-                  "Direct CTAs to WhatsApp/phone/booking",
-                  "Smartphone-first speed optimization",
-                  "Local SEO fundamentals",
-                ],
-                image: "/images/vettolab-free/ristorante-base.jpg",
-                target: "Restaurants, pizzerias, trattorias",
-              },
-              {
-                name: "PRO",
-                trackingName: "VETRINA",
-                tagline:
-                  "For venues that want higher positioning and conversion.",
-                price: "From €2,490",
-                highlight: true,
-                points: [
-                  "Everything in Standard",
-                  "Premium custom design",
-                  "Advanced visual storytelling blocks",
-                  "Private events inquiry forms",
-                  "Core conversion tracking",
-                  "Events/news setup",
-                ],
-                image: "/images/vettolab-free/ristorante-pro.jpg",
-                target: "Premium restaurants, bistros, event venues",
-              },
-              {
-                name: "ENTERPRISE",
-                trackingName: "CRESCITA",
-                tagline: "Tailored package for complex requirements.",
-                price: "From €4,200",
-                points: [
-                  "Custom architecture for multi-location brands",
-                  "Advanced integrations and custom features",
-                  "Full acquisition funnel strategy",
-                  "Advanced SEO/performance roadmap",
-                  "Ongoing optimization support",
-                ],
-                image: "/images/vettolab-free/ristorante-enterprise.jpg",
-                target: "Restaurant groups and complex projects",
-              },
+            name: "STARTER",
+            trackingName: "BASE",
+            tagline: "Strong baseline to grow your online presence.",
+            price: "From €1,490",
+            points: [
+              "Professional website up to 5 sections",
+              "Direct CTAs to WhatsApp/phone/contact form",
+              "Smartphone-first speed optimization",
+              "SEO fundamentals (technical structure + search-oriented content)",
+              "Typical delivery in 14 days",
             ],
+            image: "/images/business/pkg-starter.jpg",
+            target: "Professionals, studios, local businesses",
           },
           {
-            key: "hotel",
-            title: "Hotel, villa and b&b website packages",
-            subtitle:
-              "Designed to increase direct requests and strengthen positioning.",
-            cards: [
-              {
-                name: "STANDARD",
-                trackingName: "BASE",
-                tagline: "Elegant and clear online presence for your property.",
-                price: "From €1,490",
-                points: [
-                  "Professional website up to 7 sections",
-                  "Rooms/suites presentation with dedicated gallery",
-                  "Availability request form",
-                  "Mobile and core performance optimization",
-                  "Local SEO fundamentals",
-                ],
-                image: "/images/vettolab-free/hotel-base.jpg",
-                target: "B&b, boutique hotels, villas",
-              },
-              {
-                name: "PRO",
-                trackingName: "VETRINA",
-                tagline: "For luxury positioning and higher direct demand.",
-                price: "From €2,990",
-                highlight: true,
-                points: [
-                  "Everything in Standard",
-                  "Premium custom storytelling design",
-                  "Experience/services pages (spa, dining, transfer)",
-                  "Advanced booking inquiry flow",
-                  "Conversion tracking and reporting",
-                  "High-intent local SEO content setup",
-                ],
-                image: "/images/vettolab-free/hotel-pro.jpg",
-                target: "4-star hotels, resorts, premium villas",
-              },
-              {
-                name: "ENTERPRISE",
-                trackingName: "CRESCITA",
-                tagline:
-                  "Made-to-measure package for complex hospitality projects.",
-                price: "From €5,500",
-                points: [
-                  "Custom project for groups and multi-service properties",
-                  "PMS/CRM/channel manager integrations where needed",
-                  "Advanced multilingual architecture",
-                  "Direct-booking conversion strategy",
-                  "Continuous technical and marketing roadmap",
-                ],
-                image: "/images/vettolab-free/hotel-enterprise.jpg",
-                target: "Hotel groups, luxury resorts, complex projects",
-              },
+            name: "BUSINESS",
+            trackingName: "VETRINA",
+            tagline:
+              "For companies that want higher positioning and conversion.",
+            price: "From €2,990",
+            highlight: true,
+            points: [
+              "Everything in Starter",
+              "Premium custom design tailored to your brand",
+              "Advanced visual storytelling blocks",
+              "Custom inquiry forms and specific features",
+              "Core conversion tracking",
+              "Blog/news or dynamic sections setup",
             ],
+            image: "/images/business/pkg-business.jpg",
+            target: "SMEs, growing brands, ambitious businesses",
+          },
+          {
+            name: "ENTERPRISE",
+            trackingName: "CRESCITA",
+            tagline: "Tailored solution for complex projects and big goals.",
+            price: "From €5,500",
+            points: [
+              "Custom architecture for multi-location brands",
+              "Advanced integrations and custom features (CRM, booking, APIs)",
+              "Full acquisition funnel strategy",
+              "Advanced SEO/performance roadmap",
+              "Ongoing optimization and development support",
+            ],
+            image: "/images/business/pkg-enterprise.jpg",
+            target: "Corporate groups, structured businesses, complex projects",
           },
         ];
-
-  const activeCategory =
-    categories.find((category) => category.key === selectedCategory) ??
-    categories[0];
 
   return (
     <section id="pacchetti" className="section-pad">
       <div className="container-pad">
-        <motion.div
-          initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        >
+        <div className="reveal">
           <h2 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl xl:text-5xl">
             {locale === "it" ? (
               <>
@@ -293,72 +141,22 @@ export function Packages() {
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
-              ? "Offerte chiare e trasparenti, con differenze nette tra ristorazione e alberghi."
-              : "Clear and transparent offers, with dedicated setups for restaurants and hospitality."}
+              ? "Offerte chiare e trasparenti, pensate per aziende di ogni dimensione e settore."
+              : "Clear and transparent offers, designed for businesses of every size and industry."}
           </p>
-
-          <div className="mt-6 flex w-full flex-wrap gap-2 rounded-2xl border border-white/15 bg-black/10 p-2 sm:inline-flex sm:w-auto sm:gap-0 sm:rounded-full sm:p-1">
-            <button
-              type="button"
-              onClick={() => setSelectedCategory("ristoranti")}
-              className={
-                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition-all duration-200 sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
-                (selectedCategory === "ristoranti"
-                  ? "bg-white/90 text-slate-900 shadow-md"
-                  : "text-foreground/80 hover:text-foreground hover:bg-white/8")
-              }
-              aria-pressed={selectedCategory === "ristoranti"}
-            >
-              {locale === "it" ? "Ristoranti" : "Restaurants"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedCategory("hotel")}
-              className={
-                "focus-ring rounded-full min-h-[44px] px-5 py-2.5 text-xs font-semibold transition-all duration-200 sm:min-h-0 sm:px-4 sm:py-2 sm:text-sm " +
-                (selectedCategory === "hotel"
-                  ? "bg-white/90 text-slate-900 shadow-md"
-                  : "text-foreground/80 hover:text-foreground hover:bg-white/8")
-              }
-              aria-pressed={selectedCategory === "hotel"}
-            >
-              <span className="sm:hidden">
-                {locale === "it" ? "Hotel / Ville" : "Hotels / Villas"}
-              </span>
-              <span className="hidden sm:inline">
-                {locale === "it"
-                  ? "Hotel / Ville / B&B"
-                  : "Hotels / Villas / B&B"}
-              </span>
-            </button>
-          </div>
-        </motion.div>
+        </div>
 
         <div className="mt-10">
-          <div className="mb-5">
-            <h3 className="heading-display text-2xl font-semibold tracking-tight sm:text-3xl">
-              {activeCategory.title}
-            </h3>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-(--muted)">
-              {activeCategory.subtitle}
-            </p>
-          </div>
-
           <div className="grid gap-4 lg:grid-cols-3">
-            {activeCategory.cards.map((p) => (
-              <motion.div
-                key={`${activeCategory.key}-${p.name}`}
+            {cards.map((p) => (
+              <div
+                key={p.name}
                 className={
-                  "group card-tech relative overflow-hidden rounded-3xl p-6 transition-transform " +
+                  "group card-tech relative overflow-hidden rounded-3xl p-6 transition-transform reveal " +
                   (p.highlight
                     ? "glass-strong gradient-border card-highlight-glow"
                     : "glass gradient-border")
                 }
-                initial={reduce ? { opacity: 1 } : { opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-                whileHover={reduce ? undefined : { y: -2 }}
               >
                 <span aria-hidden="true" className="sweep-strip" />
 
@@ -442,7 +240,7 @@ export function Packages() {
                     {locale === "it" ? "Ricevi proposta" : "Get proposal"}
                   </a>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

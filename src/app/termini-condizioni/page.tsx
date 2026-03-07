@@ -62,8 +62,8 @@ export default async function TerminiCondizioniPage() {
                 </h2>
                 <p className="mt-2">
                   {locale === "it"
-                    ? `${COMPANY_NAME} offre servizi di progettazione e sviluppo di siti web per il settore della ristorazione e dell'ospitalità. Il sito ha finalità informativa e promozionale. Le condizioni specifiche di ciascun incarico sono definite nel contratto individuale sottoscritto tra le parti.`
-                    : `${COMPANY_NAME} provides website design and development services for the restaurant and hospitality sector. The website serves informational and promotional purposes. The specific conditions of each engagement are defined in the individual contract signed between the parties.`}
+                    ? `${COMPANY_NAME} offre servizi di progettazione e sviluppo di siti web per aziende di ogni settore. Il sito ha finalit\u00e0 informativa e promozionale. Le condizioni specifiche di ciascun incarico sono definite nel contratto individuale sottoscritto tra le parti.`
+                    : `${COMPANY_NAME} provides website design and development services for businesses of all industries. The website serves informational and promotional purposes. The specific conditions of each engagement are defined in the individual contract signed between the parties.`}
                 </p>
               </section>
 

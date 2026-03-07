@@ -16,24 +16,24 @@ export function FAQ() {
             a: "In molti casi la consegna tipica è 14 giorni (in base alla complessità). Se servono più pagine, contenuti extra o integrazioni, definiamo tempi chiari prima di partire.",
           },
           {
-            q: "Quanto costa un sito web per il mio ristorante o hotel?",
-            a: "I pacchetti partono da \u20ac1.290 per ristoranti e \u20ac1.490 per hotel. Il prezzo finale dipende da pagine, integrazioni e personalizzazione. Prenota un\u2019analisi gratuita per un preventivo su misura.",
+            q: "Quanto costa un sito web per la mia azienda?",
+            a: "I pacchetti partono da \u20ac1.490. Il prezzo finale dipende da pagine, integrazioni e personalizzazione. Prenota un\u2019analisi gratuita per un preventivo su misura.",
           },
           {
             q: "Ci serve un sito “bello” o un sito che porta risultati?",
-            a: "Noi progettiamo per l’azione: prenotazioni, chiamate, richieste. La progettazione è di alto livello, ma è al servizio della conversione: inviti all’azione visibili, percorso semplice, prima su smartphone, velocità reale.",
+            a: "Noi progettiamo per l'azione: contatti, richieste, vendite. La progettazione è di alto livello, ma è al servizio della conversione: inviti all'azione visibili, percorso semplice, prima su smartphone, velocità reale.",
           },
           {
-            q: "Gestite anche menu, foto e contenuti?",
-            a: "Sì: impostiamo struttura e sezioni, ottimizziamo foto e rendiamo il menu immediato (PDF + pagina web indicizzabile). Se hai già contenuti li adattiamo; se mancano, ti guidiamo su cosa serve davvero.",
+            q: "Gestite anche foto e contenuti?",
+            a: "Sì: impostiamo struttura e sezioni, ottimizziamo foto e rendiamo i contenuti chiari e ben organizzati. Se hai già contenuti li adattiamo; se mancano, ti guidiamo su cosa serve davvero.",
           },
           {
             q: "Il sito sarà adatto a Google?",
-            a: "Sì. Mettiamo una base SEO locale pulita: struttura corretta, performance, heading e contenuti chiari. Non vendiamo “magie”, ma scelte tecniche che aiutano davvero a essere trovati.",
+            a: "Sì. Mettiamo una base SEO pulita: struttura corretta, performance, heading e contenuti chiari. Non vendiamo \u201cmagie\u201d, ma scelte tecniche che aiutano davvero a essere trovati.",
           },
           {
-            q: "Posso aggiornare il menu o i contenuti da solo?",
-            a: "S\u00ec. Consegniamo il sito con una struttura facilmente aggiornabile. Per chi preferisce non pensarci, offriamo piani di manutenzione mensile che includono aggiornamenti contenuti, menu e foto.",
+            q: "Posso aggiornare i contenuti da solo?",
+            a: "S\u00ec. Consegniamo il sito con una struttura facilmente aggiornabile. Per chi preferisce non pensarci, offriamo piani di manutenzione mensile che includono aggiornamenti contenuti e foto.",
           },
           {
             q: "Il sito \u00e8 di mia propriet\u00e0?",
@@ -45,11 +45,11 @@ export function FAQ() {
           },
           {
             q: "Come misurate se sta funzionando?",
-            a: "Tracciamo i clic sulle azioni importanti (inviti all\u2019azione, menu, contatti, mappa). Cos\u00ec capiamo cosa genera richieste e cosa va ottimizzato.",
+            a: "Tracciamo i clic sulle azioni importanti (inviti all\u2019azione, contatti, moduli, mappa). Cos\u00ec capiamo cosa genera richieste e cosa va ottimizzato.",
           },
           {
             q: "Lavorate solo a Milano?",
-            a: "Siamo basati a Milano, ma lavoriamo in tutta Italia e con strutture internazionali. La maggior parte del processo \u00e8 da remoto, con call di allineamento e condivisione in tempo reale.",
+            a: "Siamo basati a Milano, ma lavoriamo in tutta Italia e con aziende internazionali. La maggior parte del processo \u00e8 da remoto, con call di allineamento e condivisione in tempo reale.",
           },
         ]
       : [
@@ -58,24 +58,24 @@ export function FAQ() {
             a: "In many cases, typical delivery is 14 days (depending on complexity). If extra pages, content, or integrations are needed, we define clear timelines before starting.",
           },
           {
-            q: "How much does a website cost for my restaurant or hotel?",
-            a: "Packages start from \u20ac1,290 for restaurants and \u20ac1,490 for hotels. The final price depends on pages, integrations, and customization level. Book a free audit to get a tailored quote.",
+            q: "How much does a website cost for my business?",
+            a: "Packages start from \u20ac1,490. The final price depends on pages, integrations, and customization level. Book a free audit to get a tailored quote.",
           },
           {
             q: "Do we need a beautiful site or a site that gets results?",
-            a: "We design for action: bookings, calls, and leads. The design is premium, but conversion-focused: visible CTAs, simple journey, smartphone-first, real speed.",
+            a: "We design for action: leads, inquiries, and sales. The design is premium, but conversion-focused: visible CTAs, simple journey, smartphone-first, real speed.",
           },
           {
-            q: "Do you also handle menus, photos, and content?",
-            a: "Yes. We set up structure and sections, optimize photos, and make the menu immediate (PDF + indexable web page). If you already have content we adapt it; if not, we guide you on what really matters.",
+            q: "Do you also handle photos and content?",
+            a: "Yes. We set up structure and sections, optimize photos, and make content clear and well-organized. If you already have content we adapt it; if not, we guide you on what really matters.",
           },
           {
             q: "Will the site be Google-friendly?",
-            a: "Yes. We set a clean local SEO foundation: proper structure, performance, headings, and clear content. No magic promises, just technical choices that truly help discoverability.",
+            a: "Yes. We set a clean SEO foundation: proper structure, performance, headings, and clear content. No magic promises, just technical choices that truly help discoverability.",
           },
           {
-            q: "Can I update the menu or content myself?",
-            a: "Yes. We deliver the site with an easily updatable structure. For those who prefer not to worry about it, we offer monthly maintenance plans that include content, menu, and photo updates.",
+            q: "Can I update the content myself?",
+            a: "Yes. We deliver the site with an easily updatable structure. For those who prefer not to worry about it, we offer monthly maintenance plans that include content and photo updates.",
           },
           {
             q: "Do I own the website?",
@@ -87,11 +87,11 @@ export function FAQ() {
           },
           {
             q: "How do you measure if it works?",
-            a: "We track clicks on key actions (CTAs, menu, contacts, map). This helps us understand what generates leads and what to optimize.",
+            a: "We track clicks on key actions (CTAs, contacts, forms, map). This helps us understand what generates leads and what to optimize.",
           },
           {
             q: "Do you only work in Milan?",
-            a: "We're based in Milan, but we work across Italy and with international properties. Most of the process is remote, with alignment calls and real-time sharing.",
+            a: "We're based in Milan, but we work across Italy and with international businesses. Most of the process is remote, with alignment calls and real-time sharing.",
           },
         ];
 

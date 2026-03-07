@@ -128,17 +128,15 @@ export function Footer() {
                   className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
                   href="/siti-web-ristoranti-milano"
                 >
-                  {locale === "it"
-                    ? "Siti web ristoranti Milano"
-                    : "Restaurant websites Milan"}
+                  {locale === "it" ? "Siti web Milano" : "Websites Milan"}
                 </Link>
                 <Link
                   className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
                   href="/siti-web-hotel-milano"
                 >
                   {locale === "it"
-                    ? "Siti web hotel Milano"
-                    : "Hotel websites Milan"}
+                    ? "Siti web aziende Milano"
+                    : "Business websites Milan"}
                 </Link>
                 <span className="inline-flex min-h-[44px] items-center sm:min-h-0">
                   <CookiePreferencesButton />

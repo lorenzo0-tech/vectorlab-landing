@@ -21,36 +21,36 @@ export function VetrinaRistorante() {
               </p>
               <h2 className="heading-display mt-4 text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
                 {locale === "it"
-                  ? "Sito per ristorante: vetrina di alto livello pronta da presentare ai clienti"
-                  : "Restaurant website: premium showcase ready to present to clients"}
+                  ? "Sito aziendale: vetrina di alto livello pronta da presentare"
+                  : "Business website: premium showcase ready to present"}
               </h2>
               <p className="mt-4 text-lg leading-8 text-(--muted)">
                 {locale === "it"
-                  ? "Ho realizzato una pagina completa con identità visiva, fotografia d'impatto, menu degustazione, calendario di prenotazione e ottimizzazione per cellulare."
-                  : "I built a complete page with visual identity, impactful photography, tasting menu, booking calendar, and smartphone optimization."}
+                  ? "Un progetto completo con identità visiva, fotografia d'impatto, sezioni servizi, modulo contatto e ottimizzazione per cellulare."
+                  : "A complete project with visual identity, impactful photography, services sections, contact form, and smartphone optimization."}
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <a href="/demo-ristorante" className="btn-primary focus-ring">
                   {locale === "it"
-                    ? "Apri la vetrina ristorante"
-                    : "Open restaurant showcase"}
+                    ? "Vedi il progetto demo"
+                    : "View demo project"}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a href="#metodo" className="btn-secondary focus-ring">
-                  {locale === "it" ? "Vedi come lavoro" : "See my process"}
+                  {locale === "it" ? "Vedi come lavoriamo" : "See our process"}
                 </a>
               </div>
             </div>
 
             <div className="lg:col-span-5">
-              {/* Restaurant demo screenshot */}
+              {/* Demo screenshot */}
               <div className="group/img overflow-hidden rounded-2xl border border-white/12 bg-slate-950/55">
                 <div className="flex items-center gap-1.5 bg-slate-900/90 px-3 py-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
                   <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
                   <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
                   <span className="ml-2 flex-1 rounded-md bg-white/8 px-2 py-0.5 text-[10px] text-white/40 font-mono">
-                    vettolab.com/demo-ristorante
+                    vettolab.com/demo
                   </span>
                 </div>
                 <div className="relative aspect-4/3">
@@ -58,8 +58,8 @@ export function VetrinaRistorante() {
                     src="/images/vettolab-free/hero-ristorante.jpg"
                     alt={
                       locale === "it"
-                        ? "Anteprima demo ristorante premium"
-                        : "Premium restaurant demo preview"
+                        ? "Anteprima demo progetto premium"
+                        : "Premium project demo preview"
                     }
                     fill
                     className="object-cover transition-transform duration-500 group-hover/img:scale-[1.03]"
@@ -74,13 +74,13 @@ export function VetrinaRistorante() {
                     {(locale === "it"
                       ? [
                           "Posizionamento chiaro e proposta di valore immediata",
-                          "Sezioni orientate alle prenotazioni, non solo estetica",
+                          "Sezioni orientate alla conversione, non solo estetica",
                           "Struttura pensata per conversione da telefono",
                           "Base tecnica pronta per andare online",
                         ]
                       : [
                           "Clear positioning and immediate value proposition",
-                          "Sections focused on bookings, not just aesthetics",
+                          "Sections focused on conversion, not just aesthetics",
                           "Structure built for smartphone conversion",
                           "Technical base ready to go live",
                         ]

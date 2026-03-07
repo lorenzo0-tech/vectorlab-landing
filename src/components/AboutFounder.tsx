@@ -38,12 +38,11 @@ export function AboutFounder({ locale }: { locale: string }) {
                   <span className="text-foreground font-semibold">
                     {COMPANY_NAME}
                   </span>
-                  . Lavoro da {COMPANY_CITY} con un&apos;unica specializzazione:
-                  creare{" "}
+                  . Lavoro da {COMPANY_CITY} con un obiettivo chiaro: creare{" "}
                   <span className="text-foreground font-semibold">
-                    siti web per ristoranti e hotel
+                    siti web per aziende
                   </span>{" "}
-                  che trasformano visitatori in prenotazioni.
+                  che trasformano visitatori in clienti.
                 </>
               ) : (
                 <>
@@ -51,11 +50,11 @@ export function AboutFounder({ locale }: { locale: string }) {
                   <span className="text-foreground font-semibold">
                     {COMPANY_NAME}
                   </span>
-                  . I work from {COMPANY_CITY} with a single focus: building{" "}
+                  . I work from {COMPANY_CITY} with a clear goal: building{" "}
                   <span className="text-foreground font-semibold">
-                    websites for restaurants and hotels
+                    websites for businesses
                   </span>{" "}
-                  that turn visitors into bookings.
+                  that turn visitors into customers.
                 </>
               )}
             </p>
@@ -63,9 +62,8 @@ export function AboutFounder({ locale }: { locale: string }) {
             <p>
               {locale === "it" ? (
                 <>
-                  Non faccio siti per tutti. Ogni progetto nasce
-                  dall&apos;analisi del locale, del suo posizionamento e dei
-                  suoi{" "}
+                  Ogni progetto nasce dall&apos;analisi dell&apos;azienda, del
+                  suo posizionamento e dei suoi{" "}
                   <span className="text-foreground font-semibold">
                     obiettivi concreti
                   </span>
@@ -77,8 +75,8 @@ export function AboutFounder({ locale }: { locale: string }) {
                 </>
               ) : (
                 <>
-                  I don&apos;t build sites for everyone. Every project starts
-                  from analyzing the venue, its positioning, and its{" "}
+                  Every project starts from analyzing the business, its
+                  positioning, and its{" "}
                   <span className="text-foreground font-semibold">
                     concrete goals
                   </span>
@@ -93,19 +91,19 @@ export function AboutFounder({ locale }: { locale: string }) {
             <div className="mx-auto h-px w-16 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
             <p>
               {locale === "it"
-                ? 'Se hai un ristorante, un hotel o un B&B e vuoi un sito che lavori per te — non solo che "faccia bella figura" — parliamone.'
-                : 'If you have a restaurant, hotel, or B&B and want a site that works for you — not just one that "looks nice" — let\'s talk.'}
+                ? 'Se hai un\'azienda e vuoi un sito che lavori per te \u2014 non solo che "faccia bella figura" \u2014 parliamone.'
+                : 'If you have a business and want a site that works for you \u2014 not just one that "looks nice" \u2014 let\'s talk.'}
             </p>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-6 reveal-stagger">
             {(locale === "it"
               ? [
-                  { value: "100%", label: "Verticale ospitalità" },
+                  { value: "100%", label: "Orientati ai risultati" },
                   { value: "14 gg", label: "Consegna tipica" },
                   { value: COMPANY_CITY, label: "Base operativa" },
                 ]
               : [
-                  { value: "100%", label: "Hospitality-focused" },
+                  { value: "100%", label: "Results-driven" },
                   { value: "14 days", label: "Typical delivery" },
                   { value: COMPANY_CITY, label: "Based in" },
                 ]

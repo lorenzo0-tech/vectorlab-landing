@@ -516,8 +516,8 @@ export function FinalCTA() {
                       required
                       placeholder={
                         locale === "it"
-                          ? "Prenotazioni, chiamate, richieste…"
-                          : "Bookings, calls, leads…"
+                          ? "Contatti, chiamate, richieste\u2026"
+                          : "Leads, calls, inquiries\u2026"
                       }
                     />
                     {touched.obiettivo && fieldErrors.obiettivo ? (

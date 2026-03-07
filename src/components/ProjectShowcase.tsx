@@ -9,42 +9,42 @@ export function ProjectShowcase({ locale }: { locale: string }) {
       ? [
           {
             title: "Demo Hotel / Villa Luxury",
-            subtitle: "Esperienza completa multipagina per hotel, villa e b&b",
+            subtitle: "Esperienza completa multipagina per strutture ricettive",
             description:
-              "Un sito premium con percorso completo: suite, esperienze, spa, ristorante, galleria, contatti e prenotazione.",
+              "Un sito premium con percorso completo: pagine, esperienze, servizi, galleria e contatti. Un esempio del livello qualitativo che applichiamo a ogni progetto.",
             href: "/demo-hotel-villa",
             image: "/images/vettolab-free/hotel-pro.jpg",
-            cta: "Vedi demo hotel live",
+            cta: "Vedi demo live",
           },
           {
             title: "Demo Ristorante Premium",
-            subtitle: "Vetrina orientata a prenotazioni e valore percepito",
+            subtitle:
+              "Vetrina orientata alla conversione e al valore percepito",
             description:
-              "Un concept completo per ristoranti: storytelling, menu, esperienze, atmosfera e inviti all'azione ottimizzati.",
+              "Un concept completo: storytelling, servizi, esperienze, atmosfera e inviti all'azione ottimizzati. Un esempio della qualità che dedichiamo a ogni cliente.",
             href: "/demo-ristorante",
             image: "/images/vettolab-free/hero-ristorante.jpg",
-            cta: "Vedi demo ristorante live",
+            cta: "Vedi demo live",
           },
         ]
       : [
           {
             title: "Luxury Hotel / Villa Demo",
-            subtitle:
-              "Complete multi-page experience for hotels, villas and b&bs",
+            subtitle: "Complete multi-page premium experience",
             description:
-              "A premium website with a full journey: suites, experiences, spa, restaurant, gallery, contacts, and booking.",
+              "A premium website with a full journey: pages, experiences, services, gallery, and contacts. A showcase of the quality we bring to every project.",
             href: "/demo-hotel-villa",
             image: "/images/vettolab-free/hotel-pro.jpg",
-            cta: "View live hotel demo",
+            cta: "View live demo",
           },
           {
             title: "Premium Restaurant Demo",
-            subtitle: "Showcase focused on bookings and perceived value",
+            subtitle: "Showcase focused on conversion and perceived value",
             description:
-              "A complete concept for restaurants: storytelling, menu, experiences, atmosphere, and optimized CTAs.",
+              "A complete concept: storytelling, services, experiences, atmosphere, and optimized CTAs. A sample of the quality we dedicate to every client.",
             href: "/demo-ristorante",
             image: "/images/vettolab-free/hero-ristorante.jpg",
-            cta: "View live restaurant demo",
+            cta: "View live demo",
           },
         ];
 
@@ -70,8 +70,8 @@ export function ProjectShowcase({ locale }: { locale: string }) {
           </StaggerText>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-(--muted)">
             {locale === "it"
-              ? "Due demo navigabili, immediate da valutare, per capire in pochi minuti qualità, posizionamento e potenziale di conversione del tuo progetto."
-              : "Two fully navigable demos to quickly evaluate quality, positioning, and conversion potential for your project."}
+              ? "Due demo navigabili, immediate da valutare, per capire in pochi minuti qualità, stile e potenziale di conversione che portiamo in ogni progetto."
+              : "Two fully navigable demos to quickly evaluate the quality, style, and conversion potential we bring to every project."}
           </p>
         </div>
 
