@@ -69,7 +69,7 @@ export function Packages() {
               "Performance e SEO avanzata con roadmap trimestrale",
               "Supporto continuativo e sviluppo evolutivo",
             ],
-            image: "/images/business/pkg-enterprise.jpg",
+            image: "/images/business/team-meeting.jpg",
             target: "Gruppi aziendali, realtà strutturate, progetti complessi",
           },
         ]
@@ -119,7 +119,7 @@ export function Packages() {
               "Advanced SEO/performance roadmap",
               "Ongoing optimization and development support",
             ],
-            image: "/images/business/pkg-enterprise.jpg",
+            image: "/images/business/team-meeting.jpg",
             target: "Corporate groups, structured businesses, complex projects",
           },
         ];

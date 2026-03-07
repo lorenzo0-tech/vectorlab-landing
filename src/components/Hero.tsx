@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Mail } from "lucide-react";
-import Image from "next/image";
 import { useLanguage } from "@/components/LanguageProvider";
 import { Parallax } from "@/components/Parallax";
 import { CALENDLY_URL } from "@/lib/constants";
@@ -302,6 +301,30 @@ export function Hero() {
             >
               <div className="glass-strong gradient-border panel-tech card-tech relative overflow-hidden rounded-3xl p-3">
                 <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-cyan-200/20 bg-[#060b16]">
+                  {/* Dot grid background */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 opacity-30"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle, rgba(6,182,212,0.22) 1px, transparent 1px)",
+                      backgroundSize: "20px 20px",
+                    }}
+                  />
+
+                  {/* Scan line */}
+                  {showMotionEffects && (
+                    <div
+                      aria-hidden="true"
+                      className="hero-scan pointer-events-none absolute inset-x-0 h-px"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, transparent, rgba(6,182,212,0.5) 40%, rgba(217,70,239,0.3) 60%, transparent)",
+                        animation: "hero-scan 4s ease-in-out infinite",
+                      }}
+                    />
+                  )}
+
                   {showMotionEffects && (
                     <>
                       <div
@@ -318,43 +341,102 @@ export function Hero() {
                           animation: "hero-blob-b 12s ease-in-out infinite",
                         }}
                       />
-                      <div
-                        aria-hidden="true"
-                        className="hero-ring-cw absolute left-1/2 top-1/2 h-52 w-52 rounded-full border border-cyan-200/28"
-                        style={{
-                          animation: "hero-ring-cw 20s linear infinite",
-                        }}
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="hero-ring-ccw absolute left-1/2 top-1/2 h-36 w-36 rounded-full border border-fuchsia-200/26"
-                        style={{
-                          animation: "hero-ring-ccw 14s linear infinite",
-                        }}
-                      />
                     </>
                   )}
 
+                  {/* Floating metric cards */}
                   <div
-                    className="hero-logo-bob absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/30 bg-white/5 p-2 shadow-[0_20px_50px_rgba(2,6,23,0.45)] backdrop-blur-md"
+                    className="hero-float absolute left-[8%] top-[12%] rounded-xl border border-cyan-300/20 bg-white/[0.04] px-3 py-2 shadow-lg backdrop-blur-md"
+                    style={
+                      showMotionEffects
+                        ? { animation: "hero-float 5s ease-in-out infinite" }
+                        : undefined
+                    }
+                  >
+                    <p className="text-2xl font-bold tracking-tight text-cyan-300">
+                      98
+                    </p>
+                    <p className="text-[10px] font-medium tracking-wide text-cyan-100/60">
+                      Performance
+                    </p>
+                  </div>
+
+                  <div
+                    className="hero-float absolute right-[10%] top-[8%] rounded-xl border border-emerald-300/20 bg-white/[0.04] px-3 py-2 shadow-lg backdrop-blur-md"
                     style={
                       showMotionEffects
                         ? {
                             animation:
-                              "hero-logo-bob 4.2s ease-in-out infinite",
+                              "hero-float 5s ease-in-out 0.8s infinite",
                           }
                         : undefined
                     }
                   >
-                    <Image
-                      src="/icon.png"
-                      alt={locale === "it" ? "Logo VettoLab" : "VettoLab logo"}
-                      width={96}
-                      height={96}
-                      sizes="96px"
-                      priority
-                      className="h-full w-full object-cover"
-                    />
+                    <p className="text-2xl font-bold tracking-tight text-emerald-300">
+                      &lt;1s
+                    </p>
+                    <p className="text-[10px] font-medium tracking-wide text-emerald-100/60">
+                      First Paint
+                    </p>
+                  </div>
+
+                  <div
+                    className="hero-float absolute bottom-[22%] left-[10%] rounded-xl border border-fuchsia-300/20 bg-white/[0.04] px-3 py-2 shadow-lg backdrop-blur-md"
+                    style={
+                      showMotionEffects
+                        ? {
+                            animation:
+                              "hero-float 5s ease-in-out 1.6s infinite",
+                          }
+                        : undefined
+                    }
+                  >
+                    <p className="text-2xl font-bold tracking-tight text-fuchsia-300">
+                      A+
+                    </p>
+                    <p className="text-[10px] font-medium tracking-wide text-fuchsia-100/60">
+                      SEO Score
+                    </p>
+                  </div>
+
+                  <div
+                    className="hero-float absolute bottom-[18%] right-[8%] rounded-xl border border-amber-300/20 bg-white/[0.04] px-3 py-2 shadow-lg backdrop-blur-md"
+                    style={
+                      showMotionEffects
+                        ? {
+                            animation:
+                              "hero-float 5s ease-in-out 2.4s infinite",
+                          }
+                        : undefined
+                    }
+                  >
+                    <p className="text-2xl font-bold tracking-tight text-amber-300">
+                      0
+                    </p>
+                    <p className="text-[10px] font-medium tracking-wide text-amber-100/60">
+                      CLS
+                    </p>
+                  </div>
+
+                  {/* Center code snippet badge */}
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 shadow-2xl backdrop-blur-lg">
+                    <p className="text-center font-mono text-[11px] leading-relaxed text-cyan-100/80">
+                      <span className="text-fuchsia-400/90">const</span>{" "}
+                      <span className="text-cyan-300">sito</span>{" "}
+                      <span className="text-white/50">=</span>{" "}
+                      <span className="text-emerald-300/90">
+                        {`"ultra-veloce"`}
+                      </span>
+                      <span className="text-white/30">;</span>
+                    </p>
+                    <p className="font-mono text-[11px] leading-relaxed text-cyan-100/80">
+                      <span className="text-fuchsia-400/90">const</span>{" "}
+                      <span className="text-cyan-300">conversioni</span>{" "}
+                      <span className="text-white/50">=</span>{" "}
+                      <span className="text-amber-300/90">+40</span>
+                      <span className="text-white/50">%</span>
+                      <span className="text-white/30">;</span>
+                    </p>
                   </div>
 
                   <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-slate-950/75 via-slate-950/30 to-transparent px-3 py-2">

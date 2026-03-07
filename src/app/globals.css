@@ -1578,40 +1578,37 @@ body::before {
     transform: translate(0, 0);
   }
 }
-@keyframes hero-ring-cw {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-@keyframes hero-ring-ccw {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(-360deg);
-  }
-}
-@keyframes hero-logo-bob {
-  0% {
-    transform: translate(-50%, -50%) translateY(0) scale(1);
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translate(-50%, -50%) translateY(-6px) scale(1.02);
+    transform: translateY(-8px);
+  }
+}
+@keyframes hero-scan {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
   }
   100% {
-    transform: translate(-50%, -50%) translateY(0) scale(1);
+    top: 100%;
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-blob-a,
   .hero-blob-b,
-  .hero-ring-cw,
-  .hero-ring-ccw,
-  .hero-logo-bob {
+  .hero-float,
+  .hero-scan {
     animation: none !important;
   }
 }
