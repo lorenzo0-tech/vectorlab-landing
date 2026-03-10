@@ -220,7 +220,7 @@ export function Hero() {
       />
 
       <div className="container-pad">
-        <div className="relative flex min-h-[70vh] items-center pb-20 pt-10 sm:min-h-[86vh] sm:pb-24 sm:pt-20">
+        <div className="relative flex min-h-[70vh] items-center pb-20 pt-20 sm:min-h-[86vh] sm:pb-24 sm:pt-28">
           <div className="absolute inset-0 -z-10">
             <ParticlesCanvas enabled={particlesEnabled} />
           </div>

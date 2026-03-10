@@ -169,7 +169,7 @@ export function Navbar() {
 
       <header
         className={
-          "sticky top-0 z-50 transition-transform duration-300 " +
+          "fixed top-0 inset-x-0 z-50 transition-transform duration-300 " +
           (navVisible || mobileOpen ? "translate-y-0" : "-translate-y-full")
         }
       >
@@ -246,7 +246,7 @@ export function Navbar() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-cta hidden focus-ring sm:inline-flex"
+                className="nav-cta hidden focus-ring lg:inline-flex"
                 aria-label={
                   locale === "it"
                     ? "Prenota un'analisi gratuita di 15 minuti su Calendly"

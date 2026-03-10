@@ -95,7 +95,7 @@ export function Footer() {
           <span className="ft-main-line ft-main-line--top" aria-hidden="true" />
           <span className="ft-main-line ft-main-line--mid" aria-hidden="true" />
 
-          <div className="grid gap-10 py-10 sm:grid-cols-12 sm:gap-6">
+          <div className="grid gap-8 py-10 sm:grid-cols-12 sm:gap-6">
             {/* Col 1 — Brand */}
             <div className="sm:col-span-5 lg:col-span-4">
               <div className="flex items-center gap-3">
@@ -167,9 +167,9 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Col 2 — Navigation links */}
+            {/* Col 2 — Navigation + Services + Legal (mobile: compact grid) */}
             <div className="sm:col-span-3 lg:col-span-4">
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                 <div>
                   <p className="ft-col-title">
                     {locale === "it" ? "Navigazione" : "Navigate"}
@@ -212,11 +212,29 @@ export function Footer() {
                     ))}
                   </ul>
                 </div>
+                {/* Legal links — only visible on mobile inside this grid */}
+                <div className="col-span-2 sm:hidden">
+                  <p className="ft-col-title">
+                    {locale === "it" ? "Legale" : "Legal"}
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+                    {legalLinks.map((link) => (
+                      <li key={link.href}>
+                        <Link href={link.href} className="ft-link">
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <CookiePreferencesButton />
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 
-            {/* Col 3 — Legal */}
-            <div className="sm:col-span-4 lg:col-span-4">
+            {/* Col 3 — Legal (hidden on mobile, shown in col 2 grid) */}
+            <div className="hidden sm:block sm:col-span-4 lg:col-span-4">
               <p className="ft-col-title">
                 {locale === "it" ? "Legale" : "Legal"}
               </p>
