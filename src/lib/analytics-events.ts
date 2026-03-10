@@ -17,6 +17,7 @@ export type PosizioneInvitoAzione =
   | "testata"
   | "barra_nav"
   | "barra_fissa_smartphone"
+  | "menu_mobile"
   | "pacchetti"
   | "cta_finale";
 

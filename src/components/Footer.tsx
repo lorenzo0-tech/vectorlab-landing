@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUpRight, Mail } from "lucide-react";
+import { useMemo } from "react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
@@ -16,16 +17,96 @@ import {
 
 export function Footer() {
   const { locale } = useLanguage();
+  const year = useMemo(() => new Date().getFullYear(), []);
+
+  const legalLinks = [
+    { href: "/privacy-policy", label: "Privacy Policy" },
+    { href: "/cookie-policy", label: "Cookie Policy" },
+    {
+      href: "/termini-condizioni",
+      label: locale === "it" ? "Termini e Condizioni" : "Terms & Conditions",
+    },
+  ];
+
+  const seoLinks = [
+    {
+      href: "/siti-web-ristoranti-milano",
+      label: locale === "it" ? "Siti web Milano" : "Websites Milan",
+    },
+    {
+      href: "/siti-web-hotel-milano",
+      label:
+        locale === "it"
+          ? "Siti web aziende Milano"
+          : "Business websites Milan",
+    },
+  ];
 
   return (
-    <footer className="pb-28 sm:pb-10">
+    <footer className="ft pb-28 sm:pb-10">
       <div className="container-pad">
-        <div className="glass gradient-border panel-tech rounded-3xl p-6 sm:p-8">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <div className="flex items-center gap-4">
+        {/* ── Top CTA band ── */}
+        <div className="ft-cta-band reveal">
+          <div className="ft-cta-band-glow" aria-hidden="true" />
+          <div className="ft-cta-band-grid" aria-hidden="true" />
+          <div className="relative z-[1] flex flex-col items-center gap-5 px-4 py-10 text-center sm:gap-6 sm:px-6 sm:py-16">
+            <p className="ft-cta-eyebrow">
+              {locale === "it" ? "Pronto a partire?" : "Ready to start?"}
+            </p>
+            <h3 className="heading-display text-xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+              {locale === "it" ? (
+                <>
+                  Trasformiamo la tua visione <br className="hidden sm:block" />
+                  in un{" "}
+                  <span className="ft-cta-highlight">sito che converte</span>
+                </>
+              ) : (
+                <>
+                  Let&apos;s turn your vision <br className="hidden sm:block" />
+                  into a{" "}
+                  <span className="ft-cta-highlight">site that converts</span>
+                </>
+              )}
+            </h3>
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+              <a
+                className="nav-cta inline-flex focus-ring"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="nav-cta-text">
+                  {locale === "it"
+                    ? "Prenota analisi gratuita"
+                    : "Book free audit"}
+                </span>
+                <span className="nav-cta-icon">
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </span>
+              </a>
+              <a
+                className="btn-secondary focus-ring"
+                href={`mailto:${EMAIL_TO}`}
+              >
+                <Mail className="h-4 w-4" />
+                {EMAIL_TO}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Main footer grid ── */}
+        <div className="ft-main mt-10">
+          {/* Decorative elements */}
+          <span className="ft-main-line ft-main-line--top" aria-hidden="true" />
+          <span className="ft-main-line ft-main-line--mid" aria-hidden="true" />
+
+          <div className="grid gap-10 py-10 sm:grid-cols-12 sm:gap-6">
+            {/* Col 1 — Brand */}
+            <div className="sm:col-span-5 lg:col-span-4">
+              <div className="flex items-center gap-3">
                 <div
-                  className="footer-logo-wrap relative h-16 w-16 overflow-hidden rounded-2xl border border-cyan-200/35 bg-[#060b16] shadow-[0_20px_50px_rgba(2,6,23,0.35)]"
+                  className="ft-logo"
                   role="button"
                   tabIndex={0}
                   aria-label="Apri preferenze cookie"
@@ -37,130 +118,130 @@ export function Footer() {
                     }
                   }}
                 >
-                  <div
-                    aria-hidden="true"
-                    className="footer-logo-scanline absolute inset-0 opacity-35"
-                    style={{
-                      background:
-                        "repeating-linear-gradient(180deg, rgba(165,243,252,0.18) 0px, rgba(165,243,252,0.18) 1px, transparent 1px, transparent 4px)",
-                    }}
+                  <Image
+                    src="/icon.png"
+                    alt="Logo VettoLab"
+                    width={40}
+                    height={40}
+                    sizes="40px"
+                    className="h-full w-full object-cover"
                   />
-
-                  <div
-                    aria-hidden="true"
-                    className="footer-logo-glow-a absolute -left-6 -top-6 h-14 w-14 rounded-full bg-cyan-400/30 blur-2xl"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="footer-logo-glow-b absolute -bottom-6 -right-6 h-14 w-14 rounded-full bg-fuchsia-400/30 blur-2xl"
-                  />
-
-                  <div
-                    aria-hidden="true"
-                    className="footer-logo-shine absolute top-[-120%] h-[240%] w-[34%] rotate-[18deg] bg-linear-to-r from-white/0 via-cyan-100/70 to-white/0 blur-[1px]"
-                  />
-
-                  <div
-                    aria-hidden="true"
-                    className="footer-logo-ring absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-100/40"
-                  />
-
-                  <div className="absolute inset-2 overflow-hidden rounded-xl border border-white/25 bg-white/8 p-1.5 backdrop-blur-sm">
-                    <Image
-                      src="/icon.png"
-                      alt="Logo VettoLab"
-                      width={64}
-                      height={64}
-                      sizes="64px"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
+                  <span className="ft-logo-ring" aria-hidden="true" />
                 </div>
+                <div>
+                  <p className="heading-display text-base font-semibold tracking-tight">
+                    {COMPANY_NAME}
+                  </p>
+                  <p className="text-[11px] text-(--muted) tracking-wide uppercase">
+                    Web Studio
+                  </p>
+                </div>
+              </div>
 
-                <p className="heading-display inline-flex items-center text-lg font-semibold tracking-tight">
-                  {COMPANY_NAME}
+              <p className="mt-5 max-w-xs text-sm leading-relaxed text-(--muted)">
+                {locale === "it"
+                  ? "Siti web su misura che trasformano visitatori in clienti. Design premium, performance reale."
+                  : "Bespoke websites that turn visitors into customers. Premium design, real performance."}
+              </p>
+
+              <div className="mt-5 flex items-center gap-3">
+                <span className="ft-status" aria-hidden="true" />
+                <p className="text-[11px] font-medium text-emerald-400 uppercase tracking-wider">
+                  {locale === "it"
+                    ? "Disponibili per nuovi progetti"
+                    : "Available for new projects"}
                 </p>
               </div>
-              <p className="mt-2 text-sm text-(--muted)">
-                {COMPANY_CITY} · P.IVA: {COMPANY_VAT}
-              </p>
-              <a
-                href={`mailto:${EMAIL_TO}`}
-                className="mt-1 inline-block text-sm text-(--muted) hover:text-foreground transition-colors"
-              >
-                ✉ {EMAIL_TO}
-              </a>
-              <p className="mt-3 text-xs text-(--muted)">
-                {locale === "it"
-                  ? "Nota legale: le informazioni non costituiscono offerta vincolante."
-                  : "Legal note: information does not constitute a binding offer."}
-              </p>
-              <p className="mt-4 inline-flex items-center rounded-full border border-cyan-200/60 bg-cyan-50/80 px-3 py-1 text-xs font-semibold text-cyan-900">
-                {locale === "it"
-                  ? "Disponibilità chiamata: 15 min"
-                  : "Call availability: 15 min"}
-              </p>
+
+              <div className="ft-contact-stack mt-6">
+                <a href={`mailto:${EMAIL_TO}`} className="ft-contact-item">
+                  <Mail className="h-3.5 w-3.5" />
+                  <span>{EMAIL_TO}</span>
+                </a>
+                <div className="ft-contact-item">
+                  <MapPin className="h-3.5 w-3.5" />
+                  <span>{COMPANY_CITY}</span>
+                </div>
+                <div className="ft-contact-item">
+                  <Phone className="h-3.5 w-3.5" />
+                  <span>
+                    {locale === "it"
+                      ? "Chiamata gratuita 15 min"
+                      : "Free 15 min call"}
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div className="flex w-full flex-col gap-2 sm:w-auto">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-(--muted)">
-                <Link
-                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
-                  href="/privacy-policy"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
-                  href="/cookie-policy"
-                >
-                  Cookie Policy
-                </Link>
-                <Link
-                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
-                  href="/termini-condizioni"
-                >
-                  {locale === "it"
-                    ? "Termini e Condizioni"
-                    : "Terms and Conditions"}
-                </Link>
-                <Link
-                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
-                  href="/siti-web-ristoranti-milano"
-                >
-                  {locale === "it" ? "Siti web Milano" : "Websites Milan"}
-                </Link>
-                <Link
-                  className="focus-ring inline-flex min-h-[44px] items-center rounded px-2 py-2 hover:text-foreground sm:min-h-0 sm:px-1 sm:py-0.5"
-                  href="/siti-web-hotel-milano"
-                >
-                  {locale === "it"
-                    ? "Siti web aziende Milano"
-                    : "Business websites Milan"}
-                </Link>
-                <span className="inline-flex min-h-[44px] items-center sm:min-h-0">
-                  <CookiePreferencesButton />
-                </span>
+            {/* Col 2 — Navigation links */}
+            <div className="sm:col-span-3 lg:col-span-4">
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <p className="ft-col-title">
+                    {locale === "it" ? "Navigazione" : "Navigate"}
+                  </p>
+                  <ul className="mt-3 space-y-2.5">
+                    {[
+                      { label: locale === "it" ? "Soluzione" : "Solution", href: "#soluzione" },
+                      { label: locale === "it" ? "Pacchetti" : "Packages", href: "#pacchetti" },
+                      { label: locale === "it" ? "Metodo" : "Method", href: "#metodo" },
+                      { label: "FAQ", href: "#faq" },
+                    ].map((link) => (
+                      <li key={link.href}>
+                        <a href={link.href} className="ft-link">
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="ft-col-title">
+                    {locale === "it" ? "Servizi" : "Services"}
+                  </p>
+                  <ul className="mt-3 space-y-2.5">
+                    {seoLinks.map((link) => (
+                      <li key={link.href}>
+                        <Link href={link.href} className="ft-link">
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <a
-                className="btn-secondary focus-ring w-full overflow-wrap-anywhere text-xs sm:w-auto sm:text-sm"
-                href={`mailto:${EMAIL_TO}`}
-              >
-                {EMAIL_TO}
-                <Mail className="h-4 w-4" />
-              </a>
-              <a
-                className="btn-primary focus-ring w-full sm:w-auto"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {locale === "it"
-                  ? "Prenota analisi gratuita"
-                  : "Book free audit"}
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
             </div>
+
+            {/* Col 3 — Legal */}
+            <div className="sm:col-span-4 lg:col-span-4">
+              <p className="ft-col-title">
+                {locale === "it" ? "Legale" : "Legal"}
+              </p>
+              <ul className="mt-3 space-y-2.5">
+                {legalLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="ft-link">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <CookiePreferencesButton />
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* ── Bottom bar ── */}
+          <div className="ft-bottom">
+            <p className="text-[11px] text-(--muted)">
+              © {year} {COMPANY_NAME} · P.IVA {COMPANY_VAT}
+            </p>
+            <p className="text-[11px] text-(--muted)">
+              {locale === "it"
+                ? "Le informazioni non costituiscono offerta vincolante."
+                : "Information does not constitute a binding offer."}
+            </p>
           </div>
         </div>
       </div>

@@ -10,7 +10,6 @@ type PackageCard = {
   name: string;
   trackingName: "BASE" | "VETRINA" | "CRESCITA";
   tagline: string;
-  price: string;
   points: string[];
   image: string;
   target: string;
@@ -27,7 +26,6 @@ export function Packages() {
             name: "STARTER",
             trackingName: "BASE",
             tagline: "Base solida per iniziare a crescere online.",
-            price: "A partire da €1.490",
             points: [
               "Sito professionale fino a 5 sezioni (home, servizi, chi siamo, contatti, richiesta informazioni)",
               "CTA dirette a WhatsApp/telefono/modulo contatto",
@@ -43,7 +41,6 @@ export function Packages() {
             trackingName: "VETRINA",
             tagline:
               "Per aziende che vogliono distinguersi e convertire di più.",
-            price: "A partire da €2.990",
             highlight: true,
             points: [
               "Tutto del piano Starter",
@@ -61,7 +58,6 @@ export function Packages() {
             trackingName: "CRESCITA",
             tagline:
               "Soluzione su misura per progetti complessi e obiettivi ambiziosi.",
-            price: "Da €5.500",
             points: [
               "Architettura su misura multi-sede o multi-brand",
               "Funzionalità dedicate (CRM, booking, integrazioni esterne)",
@@ -78,7 +74,6 @@ export function Packages() {
             name: "STARTER",
             trackingName: "BASE",
             tagline: "Strong baseline to grow your online presence.",
-            price: "From €1,490",
             points: [
               "Professional website up to 5 sections",
               "Direct CTAs to WhatsApp/phone/contact form",
@@ -94,7 +89,6 @@ export function Packages() {
             trackingName: "VETRINA",
             tagline:
               "For companies that want higher positioning and conversion.",
-            price: "From €2,990",
             highlight: true,
             points: [
               "Everything in Starter",
@@ -111,7 +105,6 @@ export function Packages() {
             name: "ENTERPRISE",
             trackingName: "CRESCITA",
             tagline: "Tailored solution for complex projects and big goals.",
-            price: "From €5,500",
             points: [
               "Custom architecture for multi-location brands",
               "Advanced integrations and custom features (CRM, booking, APIs)",
@@ -186,10 +179,7 @@ export function Packages() {
                 <p className="mt-1 text-xs font-semibold text-(--muted)">
                   {p.target}
                 </p>
-                <p className="mt-3 text-2xl font-bold tracking-tight text-cyan-200">
-                  {p.price}
-                </p>
-                <p className="mt-2 text-lg font-semibold tracking-tight">
+                <p className="mt-3 text-lg font-semibold tracking-tight">
                   {p.tagline}
                 </p>
 
