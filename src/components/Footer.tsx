@@ -36,9 +36,7 @@ export function Footer() {
     {
       href: "/siti-web-hotel-milano",
       label:
-        locale === "it"
-          ? "Siti web aziende Milano"
-          : "Business websites Milan",
+        locale === "it" ? "Siti web aziende Milano" : "Business websites Milan",
     },
   ];
 
@@ -75,14 +73,10 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="nav-cta-text">
-                  {locale === "it"
-                    ? "Prenota analisi gratuita"
-                    : "Book free audit"}
-                </span>
-                <span className="nav-cta-icon">
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </span>
+                {locale === "it"
+                  ? "Prenota analisi gratuita"
+                  : "Book free audit"}
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
               <a
                 className="btn-secondary focus-ring"
@@ -182,9 +176,18 @@ export function Footer() {
                   </p>
                   <ul className="mt-3 space-y-2.5">
                     {[
-                      { label: locale === "it" ? "Soluzione" : "Solution", href: "#soluzione" },
-                      { label: locale === "it" ? "Pacchetti" : "Packages", href: "#pacchetti" },
-                      { label: locale === "it" ? "Metodo" : "Method", href: "#metodo" },
+                      {
+                        label: locale === "it" ? "Soluzione" : "Solution",
+                        href: "#soluzione",
+                      },
+                      {
+                        label: locale === "it" ? "Pacchetti" : "Packages",
+                        href: "#pacchetti",
+                      },
+                      {
+                        label: locale === "it" ? "Metodo" : "Method",
+                        href: "#metodo",
+                      },
                       { label: "FAQ", href: "#faq" },
                     ].map((link) => (
                       <li key={link.href}>

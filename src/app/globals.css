@@ -963,12 +963,12 @@ body::before {
     color: var(--accent-cyan);
   }
 
-  /* ── CTA button — premium style ── */
+  /* ── CTA button — clean style ── */
   .nav-cta {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0;
+    gap: 6px;
     overflow: hidden;
     border-radius: 9999px;
     font-weight: 600;
@@ -976,6 +976,7 @@ body::before {
     color: rgba(255, 255, 255, 0.96);
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    padding: 10px 20px;
     background: linear-gradient(
       135deg,
       color-mix(in srgb, var(--accent-cyan) 90%, white 10%),
@@ -988,21 +989,6 @@ body::before {
     transition: all 300ms ease;
   }
 
-  .nav-cta-text {
-    padding: 8px 14px 8px 18px;
-  }
-
-  .nav-cta-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 0 14px;
-    background: rgba(255, 255, 255, 0.12);
-    border-left: 1px solid rgba(255, 255, 255, 0.14);
-    transition: background 200ms ease;
-  }
-
   .nav-cta:hover {
     filter: brightness(1.08);
     box-shadow:
@@ -1010,10 +996,6 @@ body::before {
       0 0 80px color-mix(in srgb, var(--accent-indigo) 14%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
     transform: translateY(-1px);
-  }
-
-  .nav-cta:hover .nav-cta-icon {
-    background: rgba(255, 255, 255, 0.2);
   }
 
   .nav-cta:active {
@@ -1031,7 +1013,9 @@ body::before {
     color: var(--fg);
     background: color-mix(in srgb, var(--surface) 60%, transparent);
     border: 1px solid var(--border);
-    transition: background 200ms ease, border-color 200ms ease;
+    transition:
+      background 200ms ease,
+      border-color 200ms ease;
   }
 
   .nav-hamburger:hover {
@@ -1093,7 +1077,10 @@ body::before {
     color: var(--fg);
     opacity: 0;
     transform: translateX(-16px);
-    transition: opacity 350ms ease, transform 350ms ease, color 200ms ease;
+    transition:
+      opacity 350ms ease,
+      transform 350ms ease,
+      color 200ms ease;
     min-height: 52px;
     -webkit-tap-highlight-color: transparent;
   }
@@ -1501,14 +1488,27 @@ body::before {
 }
 
 @keyframes nav-beam-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes nav-logo-ping {
-  0% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 0; transform: scale(1.6); }
-  100% { opacity: 0; transform: scale(1.6); }
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
 }
 
 @keyframes title-flow {
@@ -1861,7 +1861,11 @@ body::before {
     linear-gradient(to right, var(--accent-cyan) 1px, transparent 1px),
     linear-gradient(to bottom, var(--accent-indigo) 1px, transparent 1px);
   background-size: 28px 28px;
-  -webkit-mask: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 70%);
+  -webkit-mask: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    #000 20%,
+    transparent 70%
+  );
   mask: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 70%);
 }
 
@@ -1922,9 +1926,20 @@ body::before {
   inset: -3px;
   border-radius: 0.75rem;
   border: 1px solid transparent;
-  background: conic-gradient(from 0deg, var(--accent-cyan), var(--accent-indigo), var(--accent-fuchsia), var(--accent-cyan)) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  background: conic-gradient(
+      from 0deg,
+      var(--accent-cyan),
+      var(--accent-indigo),
+      var(--accent-fuchsia),
+      var(--accent-cyan)
+    )
+    border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: ft-ring-spin 10s linear infinite;
@@ -2042,17 +2057,27 @@ a.ft-contact-item:hover {
 /* ── Footer keyframes ── */
 
 @keyframes ft-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-3px) rotate(1.2deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(1.2deg);
+  }
 }
 
 @keyframes ft-ring-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes ft-status-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
   }

@@ -8,6 +8,8 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { CALENDLY_URL, COMPANY_NAME } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
 
+const NAV_HEIGHT = 80; // offset to clear sticky header
+
 const navItemsByLocale = {
   it: [
     { label: "Soluzione", href: "#soluzione", num: "01" },
@@ -23,6 +25,19 @@ const navItemsByLocale = {
   ],
 } as const;
 
+/** Scroll to an anchor with offset, works even when body overflow is locked */
+function scrollToSection(href: string) {
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Unlock body first so scroll can happen
+  document.body.style.overflow = "";
+  requestAnimationFrame(() => {
+    const y = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  });
+}
+
 function useScrolled(threshold = 8) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -34,10 +49,40 @@ function useScrolled(threshold = 8) {
   return scrolled;
 }
 
+/** Returns true when navbar should be visible (top of page OR scrolling up) */
+function useNavVisible() {
+  const [visible, setVisible] = useState(true);
+  const lastY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        // Always show if near the top
+        if (y < 60) {
+          setVisible(true);
+        } else {
+          setVisible(y < lastY.current); // scrolling up → show
+        }
+        lastY.current = y;
+        ticking.current = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return visible;
+}
+
 export function Navbar() {
   const { locale } = useLanguage();
   const navItems = navItemsByLocale[locale];
   const scrolled = useScrolled(10);
+  const navVisible = useNavVisible();
   const year = useMemo(() => new Date().getFullYear(), []);
   const [active, setActive] = useState<string>("#soluzione");
   const [progress, setProgress] = useState(0);
@@ -71,7 +116,10 @@ export function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       const height = document.documentElement.scrollHeight - window.innerHeight;
-      if (height <= 0) { setProgress(0); return; }
+      if (height <= 0) {
+        setProgress(0);
+        return;
+      }
       setProgress(Math.min(1, Math.max(0, window.scrollY / height)));
     };
     onScroll();
@@ -92,7 +140,11 @@ export function Navbar() {
         if (!visible?.target?.id) return;
         setActive(`#${visible.target.id}`);
       },
-      { root: null, rootMargin: "-28% 0px -52% 0px", threshold: [0.1, 0.35, 0.6] },
+      {
+        root: null,
+        rootMargin: "-28% 0px -52% 0px",
+        threshold: [0.1, 0.35, 0.6],
+      },
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
@@ -101,7 +153,9 @@ export function Navbar() {
   // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   return (
@@ -113,20 +167,21 @@ export function Navbar() {
         aria-hidden="true"
       />
 
-      <header className="sticky top-0 z-50">
+      <header
+        className={
+          "sticky top-0 z-50 transition-transform duration-300 " +
+          (navVisible || mobileOpen ? "translate-y-0" : "-translate-y-full")
+        }
+      >
         <div className="container-pad">
           <div
             className={
               "nav-shell mt-2 flex items-center justify-between rounded-2xl px-4 py-2 transition-all duration-500 sm:mt-3 sm:px-5 sm:py-2.5 " +
-              (scrolled
-                ? "nav-shell--active"
-                : "bg-transparent")
+              (scrolled ? "nav-shell--active" : "bg-transparent")
             }
           >
             {/* Animated border beam (visible on scroll) */}
-            {scrolled && (
-              <span className="nav-beam" aria-hidden="true" />
-            )}
+            {scrolled && <span className="nav-beam" aria-hidden="true" />}
 
             {/* ── Logo ── */}
             <a
@@ -204,12 +259,8 @@ export function Navbar() {
                   })
                 }
               >
-                <span className="nav-cta-text">
-                  {locale === "it" ? "Prenota analisi" : "Book audit"}
-                </span>
-                <span className="nav-cta-icon">
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </span>
+                {locale === "it" ? "Prenota analisi" : "Book audit"}
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
 
               {/* Mobile hamburger */}
@@ -234,8 +285,7 @@ export function Navbar() {
       {/* ── Mobile fullscreen overlay ── */}
       <div
         className={
-          "nav-mobile-overlay " +
-          (mobileOpen ? "nav-mobile-overlay--open" : "")
+          "nav-mobile-overlay " + (mobileOpen ? "nav-mobile-overlay--open" : "")
         }
       >
         <div className="nav-mobile-bg" aria-hidden="true" />
@@ -245,8 +295,14 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               className="nav-mobile-link"
-              style={{ transitionDelay: mobileOpen ? `${80 + i * 50}ms` : "0ms" }}
-              onClick={() => setMobileOpen(false)}
+              style={{
+                transitionDelay: mobileOpen ? `${80 + i * 50}ms` : "0ms",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileOpen(false);
+                scrollToSection(item.href);
+              }}
             >
               <span className="nav-mobile-num">{item.num}</span>
               <span className="nav-mobile-label">{item.label}</span>
@@ -267,12 +323,8 @@ export function Navbar() {
                 });
               }}
             >
-              <span className="nav-cta-text">
-                {locale === "it" ? "Prenota analisi gratis" : "Book free audit"}
-              </span>
-              <span className="nav-cta-icon">
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </span>
+              {locale === "it" ? "Prenota analisi gratis" : "Book free audit"}
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
         </nav>
