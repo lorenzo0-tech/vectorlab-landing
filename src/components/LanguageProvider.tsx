@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useMemo, useState } from "react";
+import { createContext, ReactNode, useContext, useMemo } from "react";
 
 export type Locale = "it" | "en";
 
@@ -10,42 +10,20 @@ type LanguageContextValue = {
   toggleLocale: () => void;
 };
 
-const LANGUAGE_STORAGE_KEY = "site_locale_v1";
-const LANGUAGE_COOKIE_KEY = "site_locale_v1";
-
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window === "undefined") return "it";
-    try {
-      const cookie = document.cookie
-        .split("; ")
-        .find((entry) => entry.startsWith(`${LANGUAGE_COOKIE_KEY}=`))
-        ?.split("=")[1];
-      if (cookie === "it" || cookie === "en") return cookie;
-      const saved = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-      return saved === "it" || saved === "en" ? saved : "it";
-    } catch {
-      return "it";
-    }
-  });
+  const locale: Locale = "it";
 
-  const setLocale = (next: Locale) => {
-    setLocaleState(next);
-    try {
-      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, next);
-      document.cookie = `${LANGUAGE_COOKIE_KEY}=${next}; path=/; max-age=31536000; samesite=lax`;
-    } catch {
-      return;
-    }
+  const setLocale = () => {
+    return;
   };
 
   const value = useMemo<LanguageContextValue>(
     () => ({
       locale,
       setLocale,
-      toggleLocale: () => setLocale(locale === "it" ? "en" : "it"),
+      toggleLocale: () => undefined,
     }),
     [locale],
   );

@@ -19,12 +19,12 @@ export function Solution() {
       ? [
           {
             title: "Testata chiara",
-            desc: "Una promessa comprensibile in 3 secondi, con invito all’azione immediato.",
+            desc: "Una promessa comprensibile in 3 secondi, con invito all'azione immediato.",
             Icon: MousePointerClick,
           },
           {
             title: "Pulsanti che convertono",
-            desc: "Chiama / Contatta / Richiedi sempre visibili e facili da toccare.",
+            desc: "Chiama, contatta o richiedi: sempre visibili e facili da toccare.",
             Icon: Smartphone,
           },
           {
@@ -87,7 +87,7 @@ export function Solution() {
         locale === "it"
           ? "Team di lavoro in riunione attorno a un tavolo"
           : "Business team meeting around a conference table",
-      label: locale === "it" ? "Testata + CTA" : "Hero + CTA",
+      label: locale === "it" ? "Testata + invito all'azione" : "Hero + CTA",
       mockHeader: true,
       className:
         "relative col-span-12 h-44 overflow-hidden rounded-2xl border border-white/15 sm:col-span-7 sm:h-64 lg:h-72",
@@ -111,7 +111,7 @@ export function Solution() {
         locale === "it"
           ? "Stretta di mano tra professioniste alla scrivania"
           : "Professional handshake across a desk",
-      label: locale === "it" ? "Dettaglio prodotto" : "Product detail",
+      label: locale === "it" ? "Dettaglio servizio" : "Product detail",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-4 sm:h-52",
@@ -123,7 +123,7 @@ export function Solution() {
         locale === "it"
           ? "Presentazione aziendale ai colleghi in ufficio"
           : "Business presentation to colleagues in office",
-      label: locale === "it" ? "Galleria immagini" : "Image gallery",
+      label: locale === "it" ? "Galleria fotografica" : "Image gallery",
       mockHeader: false,
       className:
         "relative col-span-12 h-36 overflow-hidden rounded-2xl border border-white/15 sm:col-span-5 sm:h-52",
@@ -217,7 +217,7 @@ export function Solution() {
                         type="button"
                         className="mt-1.5 w-full rounded-md bg-[linear-gradient(120deg,rgba(103,232,249,0.9),rgba(129,140,248,0.86),rgba(232,121,249,0.85))] px-2 py-1 text-[9px] font-semibold text-slate-950 sm:mt-2 sm:rounded-lg sm:py-1.5 sm:text-[10px]"
                       >
-                        {locale === "it" ? "Contattaci" : "Contact us"}
+                        {locale === "it" ? "Scrivici" : "Contact us"}
                       </button>
                     </div>
                   ) : null}

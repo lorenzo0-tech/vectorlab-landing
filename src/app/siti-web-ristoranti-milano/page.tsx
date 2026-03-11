@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { cookies } from "next/headers";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -34,52 +33,26 @@ export const metadata: Metadata = {
 };
 
 export default async function SitiWebRistorantiMilanoPage() {
-  const cookieStore = await cookies();
-  const locale =
-    cookieStore.get("site_locale_v1")?.value === "en" ? "en" : "it";
-  const punti =
-    locale === "it"
-      ? [
-          "Struttura mobile-first per utenti che cercano tavolo da smartphone",
-          "Menu, CTA e contatti in evidenza per aumentare richieste e chiamate",
-          "Base SEO locale pulita per ricerche geo-localizzate su Milano",
-        ]
-      : [
-          "Mobile-first structure for users searching for a table on smartphone",
-          "Menu, CTA and contacts highlighted to increase leads and calls",
-          "Clean local SEO base for geo-localized Milan searches",
-        ];
+  const punti = [
+    "Struttura pensata prima di tutto per smartphone, per chi cerca rapidamente i tuoi servizi a Milano",
+    "Contatti, chiamata e richiesta informazioni sempre in evidenza nei punti decisivi",
+    "Base SEO locale pulita per intercettare ricerche geolocalizzate su Milano e dintorni",
+  ];
 
-  const faq =
-    locale === "it"
-      ? [
-          {
-            q: "Quanto tempo serve per pubblicare un sito professionale a Milano?",
-            a: "In molti casi servono circa 2-4 settimane, in base a contenuti disponibili, numero di pagine e integrazioni richieste.",
-          },
-          {
-            q: "I contenuti vengono gestiti in modo semplice anche da smartphone?",
-            a: "Sì, progettiamo una struttura chiara e veloce da consultare, con percorsi diretti verso contatto, chiamata e richiesta informazioni.",
-          },
-          {
-            q: "Il sito aiuta davvero la visibilità locale su Milano?",
-            a: "La base SEO locale è progettata per supportare le ricerche geolocalizzate, con struttura tecnica pulita e contenuti orientati all'intento di ricerca.",
-          },
-        ]
-      : [
-          {
-            q: "How long does it take to publish a professional website in Milan?",
-            a: "In many cases it takes about 2-4 weeks, depending on available content, number of pages, and required integrations.",
-          },
-          {
-            q: "Can the content be managed easily on smartphone too?",
-            a: "Yes, we design a clear and fast structure with direct paths for contact, calling, and requesting information.",
-          },
-          {
-            q: "Does the site really help local visibility in Milan?",
-            a: "The local SEO base is designed to support geo-localized searches with clean technical structure and intent-oriented content.",
-          },
-        ];
+  const faq = [
+    {
+      q: "Quanto tempo serve per pubblicare un sito professionale a Milano?",
+      a: "In molti casi servono circa 2-4 settimane, in base ai contenuti disponibili, al numero di pagine e alle integrazioni richieste.",
+    },
+    {
+      q: "I contenuti si consultano bene anche da smartphone?",
+      a: "Sì, progettiamo percorsi chiari e veloci, con accessi diretti a contatto, chiamata e richiesta informazioni.",
+    },
+    {
+      q: "Il sito aiuta davvero la visibilità locale su Milano?",
+      a: "Sì, la base SEO locale è pensata per sostenere le ricerche geolocalizzate, con struttura tecnica ordinata e contenuti coerenti con l'intento di ricerca.",
+    },
+  ];
 
   const cleanSiteUrl = SITE_URL.replace(/\/+$/, "");
   const pageUrl = `${cleanSiteUrl}/siti-web-ristoranti-milano`;
@@ -89,14 +62,8 @@ export default async function SitiWebRistorantiMilanoPage() {
     "@graph": [
       {
         "@type": "Service",
-        name:
-          locale === "it"
-            ? "Siti web professionali a Milano"
-            : "Professional websites in Milan",
-        serviceType:
-          locale === "it"
-            ? "Creazione siti web professionali"
-            : "Professional website development",
+        name: "Siti web professionali a Milano",
+        serviceType: "Creazione di siti web professionali",
         areaServed: {
           "@type": "City",
           name: COMPANY_CITY,
@@ -132,10 +99,7 @@ export default async function SitiWebRistorantiMilanoPage() {
           {
             "@type": "ListItem",
             position: 2,
-            name:
-              locale === "it"
-                ? "Siti web professionali a Milano"
-                : "Professional websites in Milan",
+            name: "Siti web professionali a Milano",
             item: pageUrl,
           },
         ],
@@ -154,17 +118,13 @@ export default async function SitiWebRistorantiMilanoPage() {
             />
 
             <p className="text-xs font-semibold tracking-[0.16em] text-cyan-100/90 uppercase">
-              {locale === "it" ? "SEO Locale · Milano" : "Local SEO · Milan"}
+              SEO locale · Milano
             </p>
             <h1 className="heading-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              {locale === "it"
-                ? "Siti web professionali a Milano"
-                : "Professional websites in Milan"}
+              Siti web professionali a Milano
             </h1>
             <p className="mt-4 text-(--muted)">
-              {locale === "it"
-                ? "Realizziamo siti web per aziende e professionisti con un approccio orientato a contatti, richieste e risultati reali. Layout pulito, performance solide e messaggi chiari per chi cerca i tuoi servizi a Milano."
-                : "We build websites for businesses and professionals with a lead-focused approach. Clean layout, solid performance, and clear messaging for people searching in Milan."}
+              Realizziamo siti web per aziende e professionisti con un approccio orientato a richieste, contatti e risultati concreti. Struttura chiara, prestazioni solide e messaggi puliti per chi cerca i tuoi servizi a Milano.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-(--muted)">
@@ -178,9 +138,7 @@ export default async function SitiWebRistorantiMilanoPage() {
 
             <div className="mt-8 rounded-2xl border border-cyan-200/20 bg-slate-900/45 p-5 sm:p-6">
               <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
-                {locale === "it"
-                  ? "FAQ su siti web professionali a Milano"
-                  : "FAQ about professional websites in Milan"}
+                FAQ sui siti web professionali a Milano
               </h2>
               <div className="mt-4 space-y-4">
                 {faq.map((item) => (
@@ -201,20 +159,18 @@ export default async function SitiWebRistorantiMilanoPage() {
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring"
               >
-                {locale === "it" ? "Prenota una chiamata" : "Book a call"}
+                Prenota una chiamata
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />
-                {locale === "it" ? "Torna alla home" : "Back to home"}
+                Torna alla home
               </Link>
               <Link
                 href="/siti-web-hotel-milano"
                 className="btn-secondary focus-ring inline-flex"
               >
-                {locale === "it"
-                  ? "Vedi anche: siti web aziende Milano"
-                  : "See also: business websites Milan"}
+                Vedi anche: siti web per aziende a Milano
               </Link>
             </div>
           </article>

@@ -359,7 +359,7 @@ export default async function PrivacyPolicyPage() {
             <div className="mt-8">
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />
-                {locale === "it" ? "Torna alla home" : "Back to home"}
+                Torna alla home
               </Link>
             </div>
           </article>

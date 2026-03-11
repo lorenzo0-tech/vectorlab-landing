@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CalendarCheck } from "lucide-react";
-import { cookies } from "next/headers";
 import { AmbientBackdrop } from "@/components/AmbientBackdrop";
 import { CALENDLY_URL } from "@/lib/constants";
 
@@ -22,10 +21,6 @@ export const metadata: Metadata = {
 };
 
 export default async function GraziePage() {
-  const cookieStore = await cookies();
-  const locale =
-    cookieStore.get("site_locale_v1")?.value === "en" ? "en" : "it";
-
   return (
     <main className="main-ambient min-h-screen overflow-hidden">
       <AmbientBackdrop />
@@ -45,14 +40,10 @@ export default async function GraziePage() {
               <CalendarCheck className="h-6 w-6" />
             </span>
             <h1 className="heading-display mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-              {locale === "it"
-                ? "Richiesta inviata correttamente."
-                : "Request sent successfully."}
+              Richiesta inviata correttamente.
             </h1>
             <p className="mt-4 text-(--muted)">
-              {locale === "it"
-                ? "Ti ricontattiamo entro 48 ore con i prossimi step consigliati per impostare il progetto nel modo giusto."
-                : "We will contact you within 48 hours with the recommended next steps to set the project correctly."}
+              Ti ricontattiamo entro 48 ore con i prossimi passaggi consigliati per impostare il progetto nel modo giusto.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -62,13 +53,11 @@ export default async function GraziePage() {
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring"
               >
-                {locale === "it"
-                  ? "Prenota una chiamata ora"
-                  : "Book a call now"}
+                Prenota una chiamata ora
               </a>
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />
-                {locale === "it" ? "Torna alla home" : "Back to home"}
+                Torna alla home
               </Link>
             </div>
           </div>

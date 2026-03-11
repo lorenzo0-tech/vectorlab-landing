@@ -5,12 +5,12 @@ import { useLanguage } from "@/components/LanguageProvider";
 const ITEMS_IT = [
   "Siti per aziende",
   "Siti professionali",
-  "Smartphone-first",
+  "Ottimizzati per smartphone",
   "SEO locale",
   "Velocità reale",
   "Contenuti strutturati",
   "Contatti diretti",
-  "Design premium",
+  "Progettazione curata",
   "Tracciamento clic",
   "Consegna 14 giorni",
 ];

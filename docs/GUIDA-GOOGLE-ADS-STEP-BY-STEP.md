@@ -105,26 +105,26 @@ Questo è il passo PIÙ IMPORTANTE — senza tracking non sai cosa funziona.
 
 ### Step 3: Crea il primo Gruppo di Annunci
 
-**Nome gruppo**: `Sito web nuova attività — Broad`
+**Nome gruppo**: `Siti web per attività locali`
 
 **Keyword da inserire** (copia e incolla):
 
 ```
-sito web nuova attività
-sito web per nuova azienda
-creare sito web per nuova attività
-sito web apertura ristorante
-sito web per chi apre un'attività
-web agency nuove attività
-sito web professionale da zero
-sito web nuova apertura
-agenzia web per nuova attività
-realizzazione sito web nuova impresa
-sito web per startup
-sito web apertura locale
-creare sito internet per nuova attività
-sito web per nuovi imprenditori
-sito web aziendale nuovo business
+creazione siti web milano
+realizzazione siti web milano
+sito web professionale milano
+agenzia siti web milano
+web agency milano
+studio web milano
+web designer milano
+sito web per attività
+sito web per azienda
+sito web per impresa locale
+creare sito web per attività
+rifacimento sito web aziendale
+sito internet professionale per attività
+sviluppo sito web milano
+realizzazione sito aziendale milano
 ```
 
 **Tipo di corrispondenza delle keyword:**
@@ -138,16 +138,16 @@ Per ogni keyword puoi scegliere:
 **Consiglio per iniziare**: Usa **corrispondenza a frase** per la maggior parte. Ecco come inserire:
 
 ```
-"sito web nuova attività"
-"sito web per nuova azienda"
-"creare sito web per nuova attività"
-"sito web apertura ristorante"
-"web agency nuove attività"
-"sito web professionale da zero"
-"sito web nuova apertura"
-"agenzia web per nuova attività"
-"sito web per startup"
-"sito web apertura locale"
+"creazione siti web milano"
+"realizzazione siti web milano"
+"sito web professionale milano"
+"agenzia siti web milano"
+"web agency milano"
+"studio web milano"
+"web designer milano"
+"sito web per attività"
+"sito web per azienda"
+"rifacimento sito web aziendale"
 [sito web nuova attività milano]
 [sito web per nuova azienda milano]
 [web agency per startup milano]
@@ -195,41 +195,42 @@ Google Ads usa **Annunci adattabili della rete di ricerca (RSA)** — dai a Goog
 | --------------------------- | ------------------------------------------------------------------ |
 | **URL finale**              | `https://www.vettolab.com` (o la landing page dedicata se la crei) |
 | **Percorso visualizzato 1** | `siti-web`                                                         |
-| **Percorso visualizzato 2** | `nuova-attivita`                                                   |
+| **Percorso visualizzato 2** | `milano`                                                           |
 
 **Titoli** (max 30 caratteri ciascuno, inseriscine 12-15):
 
-| #   | Titolo                            |
-| --- | --------------------------------- |
-| 1   | Sito Web Per Nuova Attività       |
-| 2   | Apri Con Il Sito Giusto           |
-| 3   | Siti Web Da Zero — VettoLab       |
-| 4   | Sito Professionale Su Misura      |
-| 5   | Analisi Gratuita 15 Minuti        |
-| 6   | Design Premium + Performance      |
-| 7   | Sito Che Converte Dal Giorno 1    |
-| 8   | Web Studio Milano — VettoLab      |
-| 9   | Dal Design Alla Conversione       |
-| 10  | Zero Template, 100% Custom        |
-| 11  | Stai Aprendo? Parti Col Sito      |
-| 12  | Primo Sito Web Per La Tua Azienda |
-| 13  | Niente WordPress — Solo Custom    |
-| 14  | Prenota Analisi Gratuita          |
-| 15  | Sito Web Pensato Per Vendere      |
+| #   | Titolo                           |
+| --- | -------------------------------- |
+| 1   | Creazione Siti Web Milano        |
+| 2   | Sito Web Professionale Su Misura |
+| 3   | Realizzazione Siti Web Milano    |
+| 4   | Web Agency Milano Per Attività   |
+| 5   | Analisi Gratuita 15 Minuti       |
+| 6   | Sito Web Che Porta Contatti      |
+| 7   | Restyling Sito Aziendale         |
+| 8   | VettoLab Web Studio Milano       |
+| 9   | Design Premium E Performance     |
+| 10  | Siti Web Per Aziende E Attività  |
+| 11  | Più Credibilità Online Subito    |
+| 12  | Sito Custom Senza Template       |
+| 13  | Prenota Una Analisi Gratuita     |
+| 14  | Sviluppo Siti Web Per Imprese    |
+| 15  | Dal Sito Alle Conversioni        |
 
 **Descrizioni** (max 90 caratteri ciascuna, inseriscine 4):
 
-| #   | Descrizione                                                                                                            |
-| --- | ---------------------------------------------------------------------------------------------------------------------- |
-| 1   | Stai per aprire un'attività? Creiamo il tuo sito web da zero. Design premium, zero template. Prenota analisi gratuita. |
-| 2   | Siti web su misura per nuove attività a Milano. Dalla strategia al lancio, tutto incluso. Performance reale garantita. |
-| 3   | Il tuo business merita un sito pensato per convertire. Niente template. Analisi gratuita di 15 minuti senza impegno.   |
-| 4   | VettoLab: siti web professionali per chi apre da zero. Design che impressiona, codice che performa. Contattaci ora.    |
+| #   | Descrizione                                                                           |
+| --- | ------------------------------------------------------------------------------------- |
+| 1   | Creiamo siti web su misura per attività e aziende a Milano. Prenota analisi gratuita. |
+| 2   | Design premium, performance reale e struttura pensata per generare contatti.          |
+| 3   | Restyling o nuovo sito aziendale: più credibilità online e più richieste clienti.     |
+| 4   | VettoLab realizza siti web professionali, veloci e mobile-first per imprese locali.   |
 
 **PIN (blocco posizione):**
 
-- Blocca il Titolo #1 o #2 in **Posizione 1** (così Google li mostra sempre come primo titolo)
-- Blocca il Titolo #5 ("Analisi Gratuita 15 Minuti") in **Posizione 3** (call-to-action sempre visibile)
+- Blocca il Titolo #1 in **Posizione 1** per tenere sempre visibile il servizio principale
+- Blocca il Titolo #8 in **Posizione 2** per mostrare sempre il brand
+- Blocca il Titolo #5 in **Posizione 3** per avere sempre una CTA chiara
 
 ### Step 6: Configura le Estensioni (Asset)
 

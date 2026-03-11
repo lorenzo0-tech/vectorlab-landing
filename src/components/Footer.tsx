@@ -5,7 +5,6 @@ import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
-import { useLanguage } from "@/components/LanguageProvider";
 import { openCookiePreferences } from "@/lib/cookie-consent";
 import {
   CALENDLY_URL,
@@ -16,28 +15,24 @@ import {
 } from "@/lib/constants";
 
 export function Footer() {
-  const { locale } = useLanguage();
   const year = useMemo(() => new Date().getFullYear(), []);
 
   const legalLinks = [
-    { href: "/privacy-policy", label: "Privacy Policy" },
-    { href: "/cookie-policy", label: "Cookie Policy" },
-    {
-      href: "/termini-condizioni",
-      label: locale === "it" ? "Termini e Condizioni" : "Terms & Conditions",
-    },
+    { href: "/privacy-policy", label: "Informativa privacy" },
+    { href: "/cookie-policy", label: "Informativa cookie" },
+    { href: "/termini-condizioni", label: "Termini e condizioni" },
   ];
 
   const seoLinks = [
     {
       href: "/siti-web-ristoranti-milano",
-      label: locale === "it" ? "Siti web Milano" : "Websites Milan",
+      label: "Siti web per ristoranti a Milano",
     },
     {
       href: "/siti-web-hotel-milano",
-      label:
-        locale === "it" ? "Siti web aziende Milano" : "Business websites Milan",
+      label: "Siti web per hotel a Milano",
     },
+    { href: "/blog", label: "Blog" },
   ];
 
   return (
@@ -48,23 +43,11 @@ export function Footer() {
           <div className="ft-cta-band-glow" aria-hidden="true" />
           <div className="ft-cta-band-grid" aria-hidden="true" />
           <div className="relative z-[1] flex flex-col items-center gap-5 px-4 py-10 text-center sm:gap-6 sm:px-6 sm:py-16">
-            <p className="ft-cta-eyebrow">
-              {locale === "it" ? "Pronto a partire?" : "Ready to start?"}
-            </p>
+            <p className="ft-cta-eyebrow">Pronto a partire?</p>
             <h3 className="heading-display text-xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
-              {locale === "it" ? (
-                <>
-                  Trasformiamo la tua visione <br className="hidden sm:block" />
-                  in un{" "}
-                  <span className="ft-cta-highlight">sito che converte</span>
-                </>
-              ) : (
-                <>
-                  Let&apos;s turn your vision <br className="hidden sm:block" />
-                  into a{" "}
-                  <span className="ft-cta-highlight">site that converts</span>
-                </>
-              )}
+              Trasformiamo la tua visione <br className="hidden sm:block" />
+              in un{" "}
+              <span className="ft-cta-highlight">sito che porta contatti</span>
             </h3>
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
               <a
@@ -73,9 +56,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {locale === "it"
-                  ? "Prenota analisi gratuita"
-                  : "Book free audit"}
+                Prenota analisi gratuita
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
               <a
@@ -127,23 +108,20 @@ export function Footer() {
                     {COMPANY_NAME}
                   </p>
                   <p className="text-[11px] text-(--muted) tracking-wide uppercase">
-                    Web Studio
+                    Studio digitale
                   </p>
                 </div>
               </div>
 
               <p className="mt-5 max-w-xs text-sm leading-relaxed text-(--muted)">
-                {locale === "it"
-                  ? "Siti web su misura che trasformano visitatori in clienti. Design premium, performance reale."
-                  : "Bespoke websites that turn visitors into customers. Premium design, real performance."}
+                Siti web su misura che trasformano visitatori in clienti.
+                Progettazione curata e prestazioni concrete.
               </p>
 
               <div className="mt-5 flex items-center gap-3">
                 <span className="ft-status" aria-hidden="true" />
                 <p className="text-[11px] font-medium text-emerald-400 uppercase tracking-wider">
-                  {locale === "it"
-                    ? "Disponibili per nuovi progetti"
-                    : "Available for new projects"}
+                  Disponibili per nuovi progetti
                 </p>
               </div>
 
@@ -158,11 +136,7 @@ export function Footer() {
                 </div>
                 <div className="ft-contact-item">
                   <Phone className="h-3.5 w-3.5" />
-                  <span>
-                    {locale === "it"
-                      ? "Chiamata gratuita 15 min"
-                      : "Free 15 min call"}
-                  </span>
+                  <span>Chiamata gratuita di 15 minuti</span>
                 </div>
               </div>
             </div>
@@ -171,37 +145,31 @@ export function Footer() {
             <div className="sm:col-span-3 lg:col-span-4">
               <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                 <div>
-                  <p className="ft-col-title">
-                    {locale === "it" ? "Navigazione" : "Navigate"}
-                  </p>
+                  <p className="ft-col-title">Navigazione</p>
                   <ul className="mt-3 space-y-2.5">
                     {[
-                      {
-                        label: locale === "it" ? "Soluzione" : "Solution",
-                        href: "#soluzione",
-                      },
-                      {
-                        label: locale === "it" ? "Pacchetti" : "Packages",
-                        href: "#pacchetti",
-                      },
-                      {
-                        label: locale === "it" ? "Metodo" : "Method",
-                        href: "#metodo",
-                      },
+                      { label: "Soluzione", href: "#soluzione" },
+                      { label: "Pacchetti", href: "#pacchetti" },
+                      { label: "Metodo", href: "#metodo" },
                       { label: "FAQ", href: "#faq" },
+                      { label: "Blog", href: "/blog" },
                     ].map((link) => (
                       <li key={link.href}>
-                        <a href={link.href} className="ft-link">
-                          {link.label}
-                        </a>
+                        {link.href.startsWith("/") ? (
+                          <Link href={link.href} className="ft-link">
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a href={link.href} className="ft-link">
+                            {link.label}
+                          </a>
+                        )}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <p className="ft-col-title">
-                    {locale === "it" ? "Servizi" : "Services"}
-                  </p>
+                  <p className="ft-col-title">Approfondimenti</p>
                   <ul className="mt-3 space-y-2.5">
                     {seoLinks.map((link) => (
                       <li key={link.href}>
@@ -214,9 +182,7 @@ export function Footer() {
                 </div>
                 {/* Legal links — only visible on mobile inside this grid */}
                 <div className="col-span-2 sm:hidden">
-                  <p className="ft-col-title">
-                    {locale === "it" ? "Legale" : "Legal"}
-                  </p>
+                  <p className="ft-col-title">Legale</p>
                   <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
                     {legalLinks.map((link) => (
                       <li key={link.href}>
@@ -235,9 +201,7 @@ export function Footer() {
 
             {/* Col 3 — Legal (hidden on mobile, shown in col 2 grid) */}
             <div className="hidden sm:block sm:col-span-4 lg:col-span-4">
-              <p className="ft-col-title">
-                {locale === "it" ? "Legale" : "Legal"}
-              </p>
+              <p className="ft-col-title">Legale</p>
               <ul className="mt-3 space-y-2.5">
                 {legalLinks.map((link) => (
                   <li key={link.href}>
@@ -259,9 +223,7 @@ export function Footer() {
               © {year} {COMPANY_NAME} · P.IVA {COMPANY_VAT}
             </p>
             <p className="text-[11px] text-(--muted)">
-              {locale === "it"
-                ? "Le informazioni non costituiscono offerta vincolante."
-                : "Information does not constitute a binding offer."}
+              Le informazioni non costituiscono offerta vincolante.
             </p>
           </div>
         </div>

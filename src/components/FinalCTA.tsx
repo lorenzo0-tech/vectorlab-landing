@@ -109,20 +109,17 @@ function validaTutto(values: FormState, locale: Locale) {
 }
 
 function buildMailto(values: FormState, locale: Locale) {
-  const subject =
-    locale === "it"
-      ? `Richiesta preventivo — ${values.attivita || "Attività"} (${values.citta || "Città"})`
-      : `Quote request — ${values.attivita || "Business"} (${values.citta || "City"})`;
+  const subject = `Richiesta preventivo — ${values.attivita || "Attività"} (${values.citta || "Città"})`;
   const bodyLines = [
-    `${locale === "it" ? "Nome" : "Name"}: ${values.nome}`,
+    `Nome: ${values.nome}`,
     `Email: ${values.email}`,
-    `${locale === "it" ? "Telefono" : "Phone"}: ${values.telefono || "-"}`,
-    `${locale === "it" ? "Attività" : "Business"}: ${values.attivita}`,
-    `${locale === "it" ? "Città" : "City"}: ${values.citta}`,
-    `${locale === "it" ? "Sito attuale" : "Current website"}: ${values.sito}`,
-    `${locale === "it" ? "Obiettivo" : "Goal"}: ${values.obiettivo}`,
+    `Telefono: ${values.telefono || "-"}`,
+    `Attività: ${values.attivita}`,
+    `Città: ${values.citta}`,
+    `Sito attuale: ${values.sito}`,
+    `Obiettivo: ${values.obiettivo}`,
     "",
-    `${locale === "it" ? "Messaggio" : "Message"}:`,
+    "Messaggio:",
     values.messaggio,
   ];
 
@@ -307,7 +304,7 @@ export function FinalCTA() {
               </h2>
               <p className="mt-4 text-lg leading-8 text-(--muted)">
                 {locale === "it"
-                  ? "Partiamo da una chiamata di 15 minuti: obiettivo chiaro, azione principale, e la struttura giusta per far muovere le persone."
+                  ? "Partiamo da una chiamata di 15 minuti: obiettivo chiaro, azione principale e struttura giusta per trasformare visite in richieste."
                   : "We start with a 15-minute call: clear goal, primary action, and the right structure to drive action."}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -363,7 +360,7 @@ export function FinalCTA() {
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-(--muted)">
                   {locale === "it"
-                    ? "Compila i campi essenziali: prepariamo una prima proposta di struttura e le azioni da spingere."
+                    ? "Compila i campi essenziali: prepariamo una prima proposta di struttura e le azioni da rafforzare."
                     : "Fill in the essential fields: we prepare an initial structure proposal and the key actions to prioritize."}
                 </p>
                 <p className="mt-3 inline-flex items-center gap-2 rounded-xl border border-cyan-200/20 bg-cyan-900/10 px-3 py-2 text-xs font-medium text-cyan-200">

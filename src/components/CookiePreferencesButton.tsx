@@ -2,7 +2,6 @@
 
 import { Cookie } from "lucide-react";
 import { openCookiePreferences } from "@/lib/cookie-consent";
-import { useLanguage } from "@/components/LanguageProvider";
 
 type CookiePreferencesButtonProps = {
   floating?: boolean;
@@ -11,10 +10,8 @@ type CookiePreferencesButtonProps = {
 export function CookiePreferencesButton({
   floating = false,
 }: CookiePreferencesButtonProps) {
-  const { locale } = useLanguage();
-  const ariaLabel =
-    locale === "en" ? "Open cookie preferences" : "Apri preferenze cookie";
-  const label = locale === "en" ? "Cookie preferences" : "Preferenze cookie";
+  const ariaLabel = "Apri preferenze cookie";
+  const label = "Preferenze cookie";
 
   if (floating) {
     return (

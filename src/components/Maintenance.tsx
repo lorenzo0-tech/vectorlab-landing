@@ -21,44 +21,44 @@ export function Maintenance() {
     locale === "it"
       ? [
           {
-            name: "CARE ESSENTIAL",
+            name: "ASSISTENZA BASE",
             price: "€79",
             period: "/mese",
             tagline: "Mantieni il sito sicuro, aggiornato e sempre online.",
             points: [
               "Aggiornamenti tecnici e di sicurezza",
               "Backup settimanale automatico",
-              "Monitoraggio uptime e performance",
+              "Monitoraggio disponibilità e prestazioni",
               "30 minuti di micro-interventi al mese",
               "Report trimestrale sullo stato del sito",
             ],
           },
           {
-            name: "CARE BUSINESS",
+            name: "ASSISTENZA CONTINUA",
             price: "€149",
             period: "/mese",
             tagline: "Per chi aggiorna spesso menu, foto e promozioni.",
             highlight: true,
             points: [
-              "Tutto di Care Essential",
+              "Tutto del piano Assistenza Base",
               "2 ore di lavoro al mese (contenuti, foto, testi)",
               "Aggiornamento menu e sezioni stagionali",
-              "SEO on-page light e ottimizzazione continua",
-              "SLA risposta entro 48 ore",
+              "SEO on-page di base e ottimizzazione continua",
+              "Presa in carico entro 48 ore",
             ],
           },
           {
-            name: "CARE PERFORMANCE",
+            name: "ASSISTENZA CRESCITA",
             price: "€299",
             period: "/mese",
             tagline: "Crescita continua: conversioni, SEO e report mensili.",
             points: [
-              "Tutto di Care Business",
+              "Tutto del piano Assistenza Continua",
               "5 ore di lavoro al mese",
               "Ottimizzazione conversione (CRO) continuativa",
               "SEO locale avanzata con monitoraggio posizionamento",
               "Report mensile dettagliato con metriche chiave",
-              "SLA risposta entro 24 ore",
+              "Presa in carico entro 24 ore",
             ],
           },
         ]
@@ -188,7 +188,7 @@ export function Maintenance() {
                   }
                 >
                   {locale === "it"
-                    ? "Attiva manutenzione"
+                    ? "Attiva assistenza"
                     : "Activate maintenance"}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>

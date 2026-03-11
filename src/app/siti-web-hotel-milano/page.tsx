@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { cookies } from "next/headers";
 import {
   CALENDLY_URL,
   COMPANY_CITY,
@@ -34,52 +33,26 @@ export const metadata: Metadata = {
 };
 
 export default async function SitiWebHotelMilanoPage() {
-  const cookieStore = await cookies();
-  const locale =
-    cookieStore.get("site_locale_v1")?.value === "en" ? "en" : "it";
-  const punti =
-    locale === "it"
-      ? [
-          "Percorso di contatto semplice, con CTA visibili su mobile",
-          "Messaggi orientati a richieste dirette e riduzione della dispersione",
-          "SEO locale di base per intercettare ricerche aziendali su Milano",
-        ]
-      : [
-          "Simple contact path, with mobile-visible CTAs",
-          "Messaging aimed at direct requests and lower traffic leakage",
-          "Local SEO baseline to capture business searches in Milan",
-        ];
+  const punti = [
+    "Percorso di contatto semplice, con inviti all'azione ben visibili anche da smartphone",
+    "Messaggi orientati a richieste dirette e riduzione della dispersione lungo il percorso",
+    "Base SEO locale per intercettare ricerche aziendali e professionali su Milano",
+  ];
 
-  const faq =
-    locale === "it"
-      ? [
-          {
-            q: "Un sito professionale può aumentare le richieste?",
-            a: "Sì, una struttura chiara con call to action evidenti e contenuti orientati all'utente riduce la dispersione e facilita richieste dirette.",
-          },
-          {
-            q: "Quanto conta la velocità su mobile per un'azienda?",
-            a: "Conta molto: gli utenti valutano rapidamente servizi e offerte da smartphone. Performance e chiarezza incidono sulla conversione.",
-          },
-          {
-            q: "Il sito è pensato anche per ricerche locali su Milano?",
-            a: "Sì, impostiamo una base SEO locale tecnica e contenutistica per intercettare intenti di ricerca legati ai tuoi servizi nella città.",
-          },
-        ]
-      : [
-          {
-            q: "Can a professional website increase direct requests?",
-            a: "Yes, a clear structure with visible calls to action and user-oriented content reduces drop-off and improves direct requests.",
-          },
-          {
-            q: "How important is mobile speed for a business?",
-            a: "Very important: users evaluate services and offers quickly on smartphone. Performance and clarity affect conversion.",
-          },
-          {
-            q: "Is the site designed for local searches in Milan too?",
-            a: "Yes, we set a technical and content local SEO baseline to capture search intent for your services in the city.",
-          },
-        ];
+  const faq = [
+    {
+      q: "Un sito professionale può aumentare le richieste?",
+      a: "Sì, una struttura chiara con inviti all'azione evidenti e contenuti orientati all'utente riduce la dispersione e facilita le richieste dirette.",
+    },
+    {
+      q: "Quanto conta la velocità su smartphone per un'azienda?",
+      a: "Conta molto: chi valuta servizi e offerte da telefono decide in pochi secondi. Prestazioni e chiarezza incidono direttamente sulle richieste.",
+    },
+    {
+      q: "Il sito è pensato anche per le ricerche locali su Milano?",
+      a: "Sì, impostiamo una base SEO locale tecnica e contenutistica per intercettare intenti di ricerca legati ai tuoi servizi nella città.",
+    },
+  ];
 
   const cleanSiteUrl = SITE_URL.replace(/\/+$/, "");
   const pageUrl = `${cleanSiteUrl}/siti-web-hotel-milano`;
@@ -89,14 +62,8 @@ export default async function SitiWebHotelMilanoPage() {
     "@graph": [
       {
         "@type": "Service",
-        name:
-          locale === "it"
-            ? "Siti web per aziende a Milano"
-            : "Business websites in Milan",
-        serviceType:
-          locale === "it"
-            ? "Creazione siti web per aziende"
-            : "Business website development",
+        name: "Siti web per aziende a Milano",
+        serviceType: "Creazione di siti web per aziende",
         areaServed: {
           "@type": "City",
           name: COMPANY_CITY,
@@ -132,10 +99,7 @@ export default async function SitiWebHotelMilanoPage() {
           {
             "@type": "ListItem",
             position: 2,
-            name:
-              locale === "it"
-                ? "Siti web per aziende a Milano"
-                : "Business websites in Milan",
+            name: "Siti web per aziende a Milano",
             item: pageUrl,
           },
         ],
@@ -154,17 +118,13 @@ export default async function SitiWebHotelMilanoPage() {
             />
 
             <p className="text-xs font-semibold tracking-[0.16em] text-cyan-100/90 uppercase">
-              {locale === "it" ? "SEO Locale · Milano" : "Local SEO · Milan"}
+              SEO locale · Milano
             </p>
             <h1 className="heading-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              {locale === "it"
-                ? "Siti web per aziende a Milano"
-                : "Business websites in Milan"}
+              Siti web per aziende a Milano
             </h1>
             <p className="mt-4 text-(--muted)">
-              {locale === "it"
-                ? "Progettiamo siti web per aziende con un percorso chiaro verso il contatto e la conversione. Design premium, struttura orientata ai risultati e scelte tecniche pensate per una presenza locale solida."
-                : "We design business websites with a clear path to contact and conversion. Premium design, results-oriented structure, and technical choices built for a solid local presence."}
+              Progettiamo siti web per aziende con un percorso chiaro verso il contatto e la richiesta. Progettazione curata, struttura orientata ai risultati e scelte tecniche pensate per una presenza locale solida.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-(--muted)">
@@ -178,9 +138,7 @@ export default async function SitiWebHotelMilanoPage() {
 
             <div className="mt-8 rounded-2xl border border-cyan-200/20 bg-slate-900/45 p-5 sm:p-6">
               <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
-                {locale === "it"
-                  ? "FAQ su siti web per aziende a Milano"
-                  : "FAQ about business websites in Milan"}
+                FAQ sui siti web per aziende a Milano
               </h2>
               <div className="mt-4 space-y-4">
                 {faq.map((item) => (
@@ -201,20 +159,18 @@ export default async function SitiWebHotelMilanoPage() {
                 rel="noopener noreferrer"
                 className="btn-primary focus-ring"
               >
-                {locale === "it" ? "Prenota una chiamata" : "Book a call"}
+                Prenota una chiamata
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <Link href="/" className="btn-secondary focus-ring inline-flex">
                 <ArrowLeft className="h-4 w-4" />
-                {locale === "it" ? "Torna alla home" : "Back to home"}
+                Torna alla home
               </Link>
               <Link
                 href="/siti-web-ristoranti-milano"
                 className="btn-secondary focus-ring inline-flex"
               >
-                {locale === "it"
-                  ? "Vedi anche: siti web professionali Milano"
-                  : "See also: professional websites Milan"}
+                Vedi anche: siti web professionali a Milano
               </Link>
             </div>
           </article>

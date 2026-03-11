@@ -99,7 +99,7 @@ const tastingMenus = [
       en: "Availability on request",
     },
     description: {
-      it: "9 portate d'autore con abbinamento vini o percorso analcolico di alta gamma.",
+      it: "9 portate d'autore con abbinamento vini o percorso analcolico dedicato.",
       en: "9 signature courses with wine pairing or a premium non-alcoholic pairing.",
     },
     courses: {

@@ -67,11 +67,11 @@ export function AboutFounder({ locale }: { locale: string }) {
                   <span className="text-foreground font-semibold">
                     obiettivi concreti
                   </span>
-                  . Design di alto livello, struttura orientata alla{" "}
+                  . Progettazione di alto livello, struttura orientata alla{" "}
                   <span className="text-foreground font-semibold">
                     conversione
                   </span>
-                  , performance reali.
+                  , prestazioni concrete.
                 </>
               ) : (
                 <>

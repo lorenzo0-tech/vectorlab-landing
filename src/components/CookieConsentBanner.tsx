@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/components/LanguageProvider";
 import {
   COOKIE_CONSENT_EVENT,
   readCookieConsent,
@@ -12,7 +11,6 @@ import {
 } from "@/lib/cookie-consent";
 
 export function CookieConsentBanner() {
-  const { locale } = useLanguage();
   const [hydrated, setHydrated] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
@@ -65,14 +63,13 @@ export function CookieConsentBanner() {
           {/* ── Compact row: copy + actions ── */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <p className="text-xs text-(--muted) sm:text-sm">
-              {locale === "it"
-                ? "Usiamo cookie tecnici (sempre attivi) e, con il tuo consenso, cookie analitici e pubblicitari. "
-                : "We use technical cookies (always active) and, with your consent, analytics and advertising cookies. "}
+              Usiamo cookie tecnici, sempre attivi, e con il tuo consenso anche
+              cookie analitici e pubblicitari.
               <Link
                 href="/cookie-policy"
                 className="focus-ring rounded px-1 py-0.5 text-foreground underline decoration-cyan-300/60 underline-offset-4"
               >
-                Cookie Policy
+                Informativa cookie
               </Link>
             </p>
 
@@ -82,13 +79,7 @@ export function CookieConsentBanner() {
                 className="btn-secondary focus-ring px-4 py-2 text-xs sm:text-sm"
                 onClick={() => setShowPreferences((prev) => !prev)}
               >
-                {showPreferences
-                  ? locale === "it"
-                    ? "Chiudi"
-                    : "Close"
-                  : locale === "it"
-                    ? "Personalizza"
-                    : "Customize"}
+                {showPreferences ? "Chiudi" : "Personalizza"}
               </button>
               <button
                 type="button"
@@ -98,7 +89,7 @@ export function CookieConsentBanner() {
                   setDismissed(true);
                 }}
               >
-                {locale === "it" ? "Rifiuta" : "Reject"}
+                Rifiuta
               </button>
               <button
                 type="button"
@@ -108,7 +99,7 @@ export function CookieConsentBanner() {
                   setDismissed(true);
                 }}
               >
-                {locale === "it" ? "Accetta tutti" : "Accept all"}
+                Accetta tutti
               </button>
             </div>
           </div>
@@ -151,7 +142,7 @@ export function CookieConsentBanner() {
                   setDismissed(true);
                 }}
               >
-                {locale === "it" ? "Salva preferenze" : "Save preferences"}
+                Salva preferenze
               </button>
             </div>
           ) : null}

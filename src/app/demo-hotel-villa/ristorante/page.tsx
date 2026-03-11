@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       locale === "en"
         ? "Signature Italian dining with curated wine pairing in a luxury setting."
-        : "Ristorante signature con cucina italiana contemporanea e wine pairing curato.",
+        : "Ristorante con cucina italiana contemporanea e abbinamento vini curato in un contesto esclusivo.",
   };
 }
 
@@ -23,14 +23,14 @@ export default async function RistorantePage() {
       name: isEn ? "Lake Tasting" : "Degustazione Lago",
       description: isEn
         ? "7 seasonal courses with a focus on premium Italian ingredients."
-        : "7 portate stagionali, focus materie prime italiane.",
+        : "7 portate stagionali con attenzione alle migliori materie prime italiane.",
       price: isEn ? "Rate on request" : "Tariffa su richiesta",
     },
     {
       name: isEn ? "Villa Journey" : "Percorso Villa",
       description: isEn
         ? "9 signature courses with dedicated table service."
-        : "9 portate signature con servizio dedicato al tavolo.",
+        : "9 portate d'autore con servizio dedicato al tavolo.",
       price: isEn ? "Rate on request" : "Tariffa su richiesta",
     },
     {

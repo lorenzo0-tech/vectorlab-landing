@@ -3,27 +3,18 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Image from "next/image";
-import { LanguageToggle } from "@/components/LanguageToggle";
-import { useLanguage } from "@/components/LanguageProvider";
+import Link from "next/link";
 import { CALENDLY_URL, COMPANY_NAME } from "@/lib/constants";
 import { trackCtaClick } from "@/lib/analytics-events";
 
 const NAV_HEIGHT = 80; // offset to clear sticky header
 
-const navItemsByLocale = {
-  it: [
-    { label: "Soluzione", href: "#soluzione", num: "01" },
-    { label: "Pacchetti", href: "#pacchetti", num: "02" },
-    { label: "Metodo", href: "#metodo", num: "03" },
-    { label: "FAQ", href: "#faq", num: "04" },
-  ],
-  en: [
-    { label: "Solution", href: "#soluzione", num: "01" },
-    { label: "Packages", href: "#pacchetti", num: "02" },
-    { label: "Method", href: "#metodo", num: "03" },
-    { label: "FAQ", href: "#faq", num: "04" },
-  ],
-} as const;
+const navItems = [
+  { label: "Soluzione", href: "#soluzione", num: "01" },
+  { label: "Pacchetti", href: "#pacchetti", num: "02" },
+  { label: "Metodo", href: "#metodo", num: "03" },
+  { label: "FAQ", href: "#faq", num: "04" },
+] as const;
 
 /** Scroll to an anchor with offset, works even when body overflow is locked */
 function scrollToSection(href: string) {
@@ -79,8 +70,6 @@ function useNavVisible() {
 }
 
 export function Navbar() {
-  const { locale } = useLanguage();
-  const navItems = navItemsByLocale[locale];
   const scrolled = useScrolled(10);
   const navVisible = useNavVisible();
   const year = useMemo(() => new Date().getFullYear(), []);
@@ -235,23 +224,21 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
+              <Link href="/blog" className="nav-item focus-ring relative z-[1]">
+                <span className="nav-item-num">05</span>
+                Blog
+              </Link>
             </nav>
 
             {/* ── Right side ── */}
             <div className="relative z-[2] flex items-center gap-2">
-              <LanguageToggle />
-
               {/* Desktop CTA */}
               <a
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="nav-cta hidden focus-ring lg:inline-flex"
-                aria-label={
-                  locale === "it"
-                    ? "Prenota un'analisi gratuita di 15 minuti su Calendly"
-                    : "Book a 15-minute call on Calendly"
-                }
+                aria-label="Prenota un'analisi gratuita di 15 minuti su Calendly"
                 onClick={() =>
                   trackCtaClick({
                     posizione: "barra_nav",
@@ -259,7 +246,7 @@ export function Navbar() {
                   })
                 }
               >
-                {locale === "it" ? "Prenota analisi" : "Book audit"}
+                Prenota analisi
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
 
@@ -309,6 +296,16 @@ export function Navbar() {
               <span className="nav-mobile-line" aria-hidden="true" />
             </a>
           ))}
+          <a
+            href="/blog"
+            className="nav-mobile-link"
+            style={{ transitionDelay: mobileOpen ? "280ms" : "0ms" }}
+            onClick={() => setMobileOpen(false)}
+          >
+            <span className="nav-mobile-num">05</span>
+            <span className="nav-mobile-label">Blog</span>
+            <span className="nav-mobile-line" aria-hidden="true" />
+          </a>
           <div className="mt-8 flex flex-col gap-3">
             <a
               href={CALENDLY_URL}
@@ -323,7 +320,7 @@ export function Navbar() {
                 });
               }}
             >
-              {locale === "it" ? "Prenota analisi gratis" : "Book free audit"}
+              Prenota analisi gratuita
               <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
@@ -339,11 +336,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary focus-ring w-full min-h-[48px] px-3 py-2.5 text-xs"
-              aria-label={
-                locale === "it"
-                  ? "Prenota analisi gratuita di 15 minuti"
-                  : "Book a free 15-minute audit"
-              }
+              aria-label="Prenota analisi gratuita di 15 minuti"
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",
@@ -351,17 +344,13 @@ export function Navbar() {
                 })
               }
             >
-              {locale === "it" ? "Analisi 15 min" : "Free audit"}
+              Analisi 15 min
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
               href="#preventivo"
               className="btn-secondary focus-ring w-full min-h-[48px] px-3 py-2.5 text-xs"
-              aria-label={
-                locale === "it"
-                  ? "Vai alla sezione proposta"
-                  : "Go to proposal section"
-              }
+              aria-label="Vai alla sezione proposta"
               onClick={() =>
                 trackCtaClick({
                   posizione: "barra_fissa_smartphone",
@@ -369,7 +358,7 @@ export function Navbar() {
                 })
               }
             >
-              {locale === "it" ? "Proposta" : "Proposal"}
+              Proposta
             </a>
           </div>
           <p className="mt-2 text-center text-xs text-(--muted)">

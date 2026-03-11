@@ -9,16 +9,16 @@ export function TrustBar({ locale }: { locale: string }) {
   const checks: CheckItem[] =
     locale === "it"
       ? [
-          "Inviti all'azione sempre visibili (Chiama / Contatta / Richiedi)",
+          "Inviti all'azione sempre visibili (chiama, contatta, richiedi)",
           "Contenuti chiari e ben strutturati",
           "Prestazioni e struttura adatte a Google",
-          "Struttura pensata per cellulare",
+          "Struttura pensata prima di tutto per smartphone",
           {
-            before: "Tempi chiari, consegna tipica ",
+            before: "Tempi chiari, consegna tipica in ",
             count: 14,
             after: " giorni",
           },
-          { before: "Pacchetti da \u20ac", count: 1490, after: "" },
+          { before: "Pacchetti a partire da €", count: 1490, after: "" },
         ]
       : [
           "Always-visible CTAs (Call / Contact / Inquire)",
@@ -40,7 +40,7 @@ export function TrustBar({ locale }: { locale: string }) {
           {locale === "it" ? (
             <>
               Niente promesse vaghe. Solo scelte che aumentano le{" "}
-              <span className="heading-accent">conversioni.</span>
+              <span className="heading-accent">richieste di contatto.</span>
             </>
           ) : (
             <>

@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       locale === "en"
         ? "Showcase of luxury suites and villas with premium comfort and privacy."
-        : "Vetrina di suite e ville luxury con comfort premium e privacy assoluta.",
+        : "Vetrina di suite e ville esclusive con comfort elevato e privacy assoluta.",
   };
 }
 

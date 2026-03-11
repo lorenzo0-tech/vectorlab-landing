@@ -29,7 +29,7 @@ export function FAQ() {
           },
           {
             q: "Il sito sarà adatto a Google?",
-            a: "Sì. Mettiamo una base SEO pulita: struttura corretta, performance, heading e contenuti chiari. Non vendiamo \u201cmagie\u201d, ma scelte tecniche che aiutano davvero a essere trovati.",
+            a: "Sì. Mettiamo una base SEO pulita: struttura corretta, prestazioni, titoli e contenuti chiari. Non vendiamo \u201cmagie\u201d, ma scelte tecniche che aiutano davvero a essere trovati.",
           },
           {
             q: "Posso aggiornare i contenuti da solo?",
@@ -37,11 +37,11 @@ export function FAQ() {
           },
           {
             q: "Il sito \u00e8 di mia propriet\u00e0?",
-            a: "Assolutamente s\u00ec. Il dominio, i contenuti e le immagini restano tuoi. Il sito viene consegnato completo e funzionante, senza vincoli di lock-in.",
+            a: "Assolutamente s\u00ec. Il dominio, i contenuti e le immagini restano tuoi. Il sito viene consegnato completo e funzionante, senza vincoli tecnici o contrattuali.",
           },
           {
             q: "Cosa succede dopo la consegna?",
-            a: "Dopo il lancio puoi gestire il sito in autonomia oppure attivare un piano di manutenzione. Offriamo tre livelli: Essential (aggiornamenti tecnici e sicurezza), Business (contenuti e SEO light), Performance (ottimizzazione conversioni e report mensili).",
+            a: "Dopo il lancio puoi gestire il sito in autonomia oppure attivare un piano di manutenzione. Offriamo tre livelli: Assistenza Base, Assistenza Continua e Assistenza Crescita.",
           },
           {
             q: "Come misurate se sta funzionando?",
@@ -49,7 +49,7 @@ export function FAQ() {
           },
           {
             q: "Lavorate solo a Milano?",
-            a: "Siamo basati a Milano, ma lavoriamo in tutta Italia e con aziende internazionali. La maggior parte del processo \u00e8 da remoto, con call di allineamento e condivisione in tempo reale.",
+            a: "Siamo basati a Milano, ma lavoriamo in tutta Italia e con aziende internazionali. La maggior parte del processo \u00e8 da remoto, con chiamate di allineamento e condivisione in tempo reale.",
           },
         ]
       : [

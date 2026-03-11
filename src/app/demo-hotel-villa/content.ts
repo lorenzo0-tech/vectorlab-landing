@@ -137,7 +137,7 @@ const gallery = [
   {
     src: "/images/luxury-real/gallery-unique-2.jpg",
     alt: {
-      it: "Dettagli eleganti di una camera premium",
+      it: "Dettagli eleganti di una camera di fascia alta",
       en: "Elegant details of a premium room",
     },
   },

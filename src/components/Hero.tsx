@@ -194,7 +194,7 @@ export function Hero() {
 
   const pills = useMemo(
     () => [
-      locale === "it" ? "Prima su smartphone" : "Smartphone-first",
+      locale === "it" ? "Ottimizzato per smartphone" : "Smartphone-first",
       locale === "it" ? "Velocità reale" : "Real speed",
       locale === "it" ? "Orientato alla conversione" : "Conversion-driven",
       locale === "it" ? "SEO di base" : "SEO fundamentals",
@@ -238,7 +238,7 @@ export function Hero() {
 
               <p className="mt-6 text-pretty text-base leading-7 text-(--muted) sm:text-lg sm:leading-8 md:text-xl">
                 {locale === "it"
-                  ? "Progettiamo e sviluppiamo siti web per aziende di ogni settore: design di alto livello, esperienza utente prima da smartphone e tecnologia solida per trasformare visite in clienti e richieste."
+                  ? "Progettiamo e sviluppiamo siti web per aziende di ogni settore: progettazione di alto livello, esperienza utente curata prima di tutto su smartphone e tecnologia solida per trasformare visite in clienti e richieste."
                   : "We design and build websites for businesses across every industry: premium design, smartphone-first UX, and solid technology to turn visits into customers and leads."}
               </p>
 
@@ -357,7 +357,7 @@ export function Hero() {
                       98
                     </p>
                     <p className="text-[10px] font-medium tracking-wide text-cyan-100/60">
-                      Performance
+                      Prestazioni
                     </p>
                   </div>
 
@@ -376,7 +376,7 @@ export function Hero() {
                       &lt;1s
                     </p>
                     <p className="text-[10px] font-medium tracking-wide text-emerald-100/60">
-                      First Paint
+                      Prima comparsa
                     </p>
                   </div>
 
@@ -395,7 +395,7 @@ export function Hero() {
                       A+
                     </p>
                     <p className="text-[10px] font-medium tracking-wide text-fuchsia-100/60">
-                      SEO Score
+                      Punteggio SEO
                     </p>
                   </div>
 
@@ -414,7 +414,7 @@ export function Hero() {
                       0
                     </p>
                     <p className="text-[10px] font-medium tracking-wide text-amber-100/60">
-                      CLS
+                      Stabilità visiva
                     </p>
                   </div>
 
@@ -442,7 +442,7 @@ export function Hero() {
                   <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-slate-950/75 via-slate-950/30 to-transparent px-3 py-2">
                     <p className="text-[11px] font-semibold tracking-[0.12em] text-cyan-100/95 uppercase">
                       {locale === "it"
-                        ? "Esperienza digitale premium"
+                        ? "Esperienza digitale di alto livello"
                         : "Premium digital experience"}
                     </p>
                   </div>
@@ -456,7 +456,7 @@ export function Hero() {
                   </p>
                   <p className="mt-1 text-sm font-semibold">
                     {locale === "it"
-                      ? "Aziende · Professionisti · Brand"
+                      ? "Aziende · Professionisti · Marchi"
                       : "Businesses · Professionals · Brands"}
                   </p>
                 </div>

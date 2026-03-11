@@ -23,13 +23,13 @@ export function Packages() {
     locale === "it"
       ? [
           {
-            name: "STARTER",
+            name: "BASE",
             trackingName: "BASE",
             tagline: "Base solida per iniziare a crescere online.",
             points: [
               "Sito professionale fino a 5 sezioni (home, servizi, chi siamo, contatti, richiesta informazioni)",
-              "CTA dirette a WhatsApp/telefono/modulo contatto",
-              "Ottimizzazione smartphone-first e tempi di caricamento rapidi",
+              "Inviti all'azione diretti a WhatsApp, telefono o modulo contatto",
+              "Ottimizzazione per smartphone e tempi di caricamento rapidi",
               "SEO base (struttura tecnica + contenuti orientati alla ricerca)",
               "Consegna tipica in 14 giorni",
             ],
@@ -37,24 +37,24 @@ export function Packages() {
             target: "Professionisti, studi, attività locali",
           },
           {
-            name: "BUSINESS",
+            name: "CRESCITA",
             trackingName: "VETRINA",
             tagline:
               "Per aziende che vogliono distinguersi e convertire di più.",
             highlight: true,
             points: [
-              "Tutto del piano Starter",
-              "Design premium personalizzato sul posizionamento del brand",
+              "Tutto del piano Base",
+              "Progettazione personalizzata sul posizionamento del marchio",
               "Galleria fotografica avanzata e sezioni storytelling",
               "Integrazione moduli richieste e funzionalità specifiche",
-              "Tracking conversioni principali (clic CTA, contatti, mappa)",
+              "Tracciamento conversioni principali (clic sugli inviti all'azione, contatti, mappa)",
               "Setup blog/notizie o sezioni dinamiche",
             ],
             image: "/images/business/pkg-business.jpg",
-            target: "PMI, brand in crescita, aziende ambiziose",
+            target: "PMI, marchi in crescita, aziende ambiziose",
           },
           {
-            name: "ENTERPRISE",
+            name: "SU MISURA",
             trackingName: "CRESCITA",
             tagline:
               "Soluzione su misura per progetti complessi e obiettivi ambiziosi.",
@@ -62,7 +62,7 @@ export function Packages() {
               "Architettura su misura multi-sede o multi-brand",
               "Funzionalità dedicate (CRM, booking, integrazioni esterne)",
               "Strategia contenuti e funnel completi di acquisizione",
-              "Performance e SEO avanzata con roadmap trimestrale",
+              "Prestazioni e SEO avanzata con piano di sviluppo trimestrale",
               "Supporto continuativo e sviluppo evolutivo",
             ],
             image: "/images/business/team-meeting.jpg",
