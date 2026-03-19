@@ -26,6 +26,16 @@ export default async function PrenotazionePage() {
     isEn ? "Late check-out until 3:00 PM" : "Late check-out fino alle 15:00",
   ];
 
+  const bookingSteps = [
+    isEn ? "Tell us dates and preferences" : "Indica date e preferenze",
+    isEn
+      ? "Receive a curated stay proposal"
+      : "Ricevi una proposta di soggiorno curata",
+    isEn
+      ? "Confirm details with concierge"
+      : "Conferma i dettagli con il concierge",
+  ];
+
   return (
     <main className="container-pad py-12 sm:py-16">
       <div className="max-w-3xl">
@@ -37,15 +47,28 @@ export default async function PrenotazionePage() {
             ? "Book your tailor-made stay"
             : "Prenota il tuo soggiorno su misura"}
         </h1>
-        <p className="mt-4 text-[#5f4d3b]">
+        <p className="mt-4 max-w-3xl text-[#5f4d3b] sm:text-lg sm:leading-8">
           {isEn
             ? "Share dates, preferences, and desired services: our concierge will reply quickly with a personalized proposal."
             : "Indica date, preferenze e servizi desiderati: il nostro concierge ti risponderà con una proposta personalizzata in tempi rapidi."}
         </p>
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {bookingSteps.map((item, index) => (
+            <div
+              key={item}
+              className="rounded-2xl border border-[#deccb4] bg-[#fbf7ef] px-4 py-4 text-sm text-[#5f4d3b]"
+            >
+              <p className="text-[11px] uppercase tracking-[0.14em] text-[#8a6a46]">
+                0{index + 1}
+              </p>
+              <p className="mt-2">{item}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-        <section className="rounded-3xl border border-[#deccb4] bg-[#fdf9f3] p-7 sm:p-10">
+        <section className="rounded-[2rem] border border-[#deccb4] bg-[#fdf9f3] p-7 shadow-[0_20px_40px_rgba(90,70,45,0.08)] sm:p-10">
           <form className="grid gap-5" aria-label="Modulo prenotazione hotel">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-sm text-[#5f4d3b]">
@@ -171,7 +194,7 @@ export default async function PrenotazionePage() {
           </form>
         </section>
 
-        <aside className="h-fit rounded-3xl border border-[#deccb4] bg-[#f4ede3] p-7 sm:p-8">
+        <aside className="h-fit rounded-[2rem] border border-[#deccb4] bg-[linear-gradient(180deg,#f4ede3_0%,#efe4d6_100%)] p-7 sm:p-8">
           <h2 className="heading-display text-3xl text-[#352617]">
             {isEn ? "Dedicated assistance" : "Assistenza dedicata"}
           </h2>
@@ -198,10 +221,23 @@ export default async function PrenotazionePage() {
             </li>
           </ul>
 
-          <div className="mt-7 rounded-2xl border border-[#d7c2a4] bg-[#fbf7ef] p-4 text-sm text-[#5f4d3b]">
+          <div className="mt-7 rounded-2xl border border-[#d7c2a4] bg-[#fbf7ef] p-4 text-sm leading-7 text-[#5f4d3b]">
             {isEn
               ? "From first contact to your arrival, we support you with care and attention to deliver an impeccable experience."
               : "Dal primo contatto all&apos;arrivo in struttura, ti accompagniamo con cura e attenzione per offrirti un&apos;esperienza impeccabile."}
+          </div>
+
+          <div className="mt-5 rounded-2xl border border-[#d7c2a4] bg-[#fffaf3] p-5">
+            <p className="text-xs uppercase tracking-[0.14em] text-[#7a6548]">
+              {isEn
+                ? "What the client perceives"
+                : "Cosa percepisce il cliente"}
+            </p>
+            <p className="mt-3 text-sm leading-7 text-[#5f4d3b]">
+              {isEn
+                ? "Not a generic form, but a premium inquiry flow guided by service culture and attention to detail."
+                : "Non un modulo generico, ma un flusso di richiesta premium guidato da cultura del servizio e attenzione al dettaglio."}
+            </p>
           </div>
         </aside>
       </div>

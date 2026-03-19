@@ -226,9 +226,24 @@ export default async function PrivacyPolicyPage() {
                     : "Data may be shared with technical suppliers strictly necessary for service delivery, appointed as data processors under Art. 28 GDPR where applicable:"}
                 </p>
                 <ul className="mt-2 list-disc space-y-1 pl-5">
-                  <li>Vercel Inc. ({locale === "it" ? "hosting e CDN" : "hosting and CDN"})</li>
-                  <li>Google LLC (Google Analytics{locale === "it" ? ", con IP anonimizzato" : ", with anonymized IP"})</li>
-                  <li>Calendly LLC ({locale === "it" ? "pianificazione appuntamenti" : "appointment scheduling"})</li>
+                  <li>
+                    Vercel Inc. (
+                    {locale === "it" ? "hosting e CDN" : "hosting and CDN"})
+                  </li>
+                  <li>
+                    Google LLC (Google Analytics
+                    {locale === "it"
+                      ? ", con IP anonimizzato"
+                      : ", with anonymized IP"}
+                    )
+                  </li>
+                  <li>
+                    Calendly LLC (
+                    {locale === "it"
+                      ? "pianificazione appuntamenti"
+                      : "appointment scheduling"}
+                    )
+                  </li>
                 </ul>
                 <p className="mt-2">
                   {locale === "it"
@@ -275,16 +290,46 @@ export default async function PrivacyPolicyPage() {
                     : "Under Arts. 15-22 of the GDPR, you have the right to:"}
                 </p>
                 <ul className="mt-2 list-disc space-y-1 pl-5">
-                  <li>{locale === "it" ? "Accedere ai tuoi dati personali e ottenerne copia" : "Access your personal data and obtain a copy"}</li>
-                  <li>{locale === "it" ? "Rettificare dati inesatti o incompleti" : "Rectify inaccurate or incomplete data"}</li>
-                  <li>{locale === "it" ? "Ottenere la cancellazione dei dati (diritto all'oblio)" : "Obtain erasure of data (right to be forgotten)"}</li>
-                  <li>{locale === "it" ? "Limitare il trattamento" : "Restrict processing"}</li>
-                  <li>{locale === "it" ? "Opporti al trattamento" : "Object to processing"}</li>
-                  <li>{locale === "it" ? "Ricevere i dati in formato strutturato (portabilità)" : "Receive data in a structured format (portability)"}</li>
-                  <li>{locale === "it" ? "Revocare il consenso in qualsiasi momento, senza pregiudicare la liceità del trattamento precedente" : "Withdraw consent at any time, without affecting the lawfulness of prior processing"}</li>
+                  <li>
+                    {locale === "it"
+                      ? "Accedere ai tuoi dati personali e ottenerne copia"
+                      : "Access your personal data and obtain a copy"}
+                  </li>
+                  <li>
+                    {locale === "it"
+                      ? "Rettificare dati inesatti o incompleti"
+                      : "Rectify inaccurate or incomplete data"}
+                  </li>
+                  <li>
+                    {locale === "it"
+                      ? "Ottenere la cancellazione dei dati (diritto all'oblio)"
+                      : "Obtain erasure of data (right to be forgotten)"}
+                  </li>
+                  <li>
+                    {locale === "it"
+                      ? "Limitare il trattamento"
+                      : "Restrict processing"}
+                  </li>
+                  <li>
+                    {locale === "it"
+                      ? "Opporti al trattamento"
+                      : "Object to processing"}
+                  </li>
+                  <li>
+                    {locale === "it"
+                      ? "Ricevere i dati in formato strutturato (portabilità)"
+                      : "Receive data in a structured format (portability)"}
+                  </li>
+                  <li>
+                    {locale === "it"
+                      ? "Revocare il consenso in qualsiasi momento, senza pregiudicare la liceità del trattamento precedente"
+                      : "Withdraw consent at any time, without affecting the lawfulness of prior processing"}
+                  </li>
                 </ul>
                 <p className="mt-2">
-                  {locale === "it" ? "Per esercitare i tuoi diritti, scrivi a" : "To exercise your rights, write to"}{" "}
+                  {locale === "it"
+                    ? "Per esercitare i tuoi diritti, scrivi a"
+                    : "To exercise your rights, write to"}{" "}
                   <a
                     className="underline decoration-cyan-300/60 underline-offset-4"
                     href={`mailto:${EMAIL_TO}`}

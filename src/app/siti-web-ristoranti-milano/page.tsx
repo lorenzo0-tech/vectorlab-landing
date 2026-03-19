@@ -124,7 +124,10 @@ export default async function SitiWebRistorantiMilanoPage() {
               Siti web professionali a Milano
             </h1>
             <p className="mt-4 text-(--muted)">
-              Realizziamo siti web per aziende e professionisti con un approccio orientato a richieste, contatti e risultati concreti. Struttura chiara, prestazioni solide e messaggi puliti per chi cerca i tuoi servizi a Milano.
+              Realizziamo siti web per aziende e professionisti con un approccio
+              orientato a richieste, contatti e risultati concreti. Struttura
+              chiara, prestazioni solide e messaggi puliti per chi cerca i tuoi
+              servizi a Milano.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-(--muted)">

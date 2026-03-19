@@ -40,15 +40,25 @@ export default async function DemoHotelLayout({
   const isEn = locale === "en";
 
   return (
-    <div className="min-h-screen bg-[#f8f5ef] pb-16 text-[#32281d] sm:pb-0">
-      <header className="sticky top-0 z-40 border-b border-[#dfcfba] bg-[#fbf8f2]/92 backdrop-blur">
+    <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#fcfaf6_0%,#f7f1e8_42%,#f2e8db_100%)] pb-16 text-[#32281d] sm:pb-0">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[-8%] top-0 h-80 w-80 rounded-full bg-[#e8dac2]/45 blur-3xl" />
+        <div className="absolute right-[-5%] top-[18%] h-96 w-96 rounded-full bg-[#d8c1a0]/30 blur-3xl" />
+      </div>
+
+      <header className="sticky top-0 z-40 border-b border-[#dfcfba]/80 bg-[#fbf8f2]/88 backdrop-blur-xl">
         <div className="container-pad flex items-center justify-between py-4">
-          <Link
-            href="/demo-hotel-villa"
-            className="heading-display text-sm uppercase tracking-[0.24em] text-[#4b3927]"
-          >
-            {hotelMeta.name}
-          </Link>
+          <div>
+            <Link
+              href="/demo-hotel-villa"
+              className="heading-display text-sm uppercase tracking-[0.24em] text-[#4b3927]"
+            >
+              {hotelMeta.name}
+            </Link>
+            <p className="mt-1 hidden text-[11px] uppercase tracking-[0.16em] text-[#7a6548] md:block">
+              {isEn ? "Lakefront luxury retreat" : "Ritiro esclusivo sul lago"}
+            </p>
+          </div>
           <nav
             aria-label={
               isEn ? "Hotel demo navigation" : "Navigazione demo hotel"
@@ -65,10 +75,16 @@ export default async function DemoHotelLayout({
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
+            <Link
+              href="/demo-hotel-villa/contatti"
+              className="hidden min-h-[44px] items-center rounded-full border border-[#cfb28b] bg-white/55 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-[#4c3926] shadow-[0_12px_35px_rgba(90,70,45,0.08)] lg:inline-flex"
+            >
+              {isEn ? "Private concierge" : "Concierge privato"}
+            </Link>
             <Link
               href="/demo-hotel-villa/prenotazione"
-              className="min-h-[44px] inline-flex items-center rounded-full border border-[#bda17f] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-[#3d2e1f]"
+              className="min-h-[44px] inline-flex items-center rounded-full border border-[#bda17f] bg-[#4e3b28] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-[#f8ecda] shadow-[0_12px_30px_rgba(65,48,31,0.18)]"
             >
               {isEn ? "Book now" : "Prenota ora"}
             </Link>
@@ -77,10 +93,10 @@ export default async function DemoHotelLayout({
         </div>
       </header>
 
-      <div className="border-b border-[#dfcfba] bg-[#f0e8dc]/90 py-1.5 text-center text-[11px] uppercase tracking-[0.15em] text-[#7a6548]">
+      <div className="border-b border-[#dfcfba] bg-[#efe5d7]/90 py-1.5 text-center text-[11px] uppercase tracking-[0.15em] text-[#7a6548]">
         {isEn
-          ? "Demonstrative example \u2014 fictitious content created by VettoLab"
-          : "Esempio dimostrativo \u2014 contenuti fittizi creati da VettoLab"}
+          ? "Demonstrative example \u2014 fictional premium hotel concept by VettoLab"
+          : "Esempio dimostrativo \u2014 concept premium fittizio creato da VettoLab"}
       </div>
 
       <Link
@@ -98,18 +114,35 @@ export default async function DemoHotelLayout({
 
       {children}
 
-      <footer className="border-t border-[#dfcfba] bg-[#f4ede3]">
-        <div className="container-pad py-8 text-sm text-[#5f4d3b]">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <footer className="border-t border-[#dfcfba] bg-[#efe5d8]/85 backdrop-blur">
+        <div className="container-pad py-10 text-sm text-[#5f4d3b]">
+          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-[#7c6545]">
+                {isEn ? "Showcase concept" : "Concept dimostrativo"}
+              </p>
+              <h3 className="heading-display mt-3 text-3xl text-[#382918] sm:text-4xl">
+                {isEn
+                  ? "An immersive hotel experience built to sell exclusivity at first glance."
+                  : "Un'esperienza hotel immersiva pensata per vendere esclusivita' al primo sguardo."}
+              </h3>
+            </div>
+            <div className="rounded-3xl border border-[#d7c2a4] bg-[#fbf6ef] p-5 shadow-[0_18px_40px_rgba(90,70,45,0.08)]">
+              <p className="text-xs uppercase tracking-[0.14em] text-[#7a6548]">
+                {hotelMeta.city}
+              </p>
+              <p className="mt-2 text-sm text-[#5f4d3b]">{hotelMeta.phone}</p>
+              <p className="text-sm text-[#5f4d3b]">{hotelMeta.email}</p>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-col gap-2 border-t border-[#dccbb5] pt-4 sm:flex-row sm:items-center sm:justify-between">
             <p>
               © 2026 {hotelMeta.name} —{" "}
               {isEn
                 ? "Luxury hotel showcase demo."
-                : "Demo vetrina hotel luxury."}
+                : "Demo vetrina hotel di fascia alta."}
             </p>
-            <p>
-              {hotelMeta.city} · {hotelMeta.phone} · {hotelMeta.email}
-            </p>
+            <p>{hotelMeta.city}</p>
           </div>
           <p className="mt-2 text-xs text-[#7a6a58]">
             {isEn

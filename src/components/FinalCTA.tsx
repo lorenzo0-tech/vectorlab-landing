@@ -108,7 +108,7 @@ function validaTutto(values: FormState, locale: Locale) {
   return errori;
 }
 
-function buildMailto(values: FormState, locale: Locale) {
+function buildMailto(values: FormState) {
   const subject = `Richiesta preventivo — ${values.attivita || "Attività"} (${values.citta || "Città"})`;
   const bodyLines = [
     `Nome: ${values.nome}`,
@@ -140,7 +140,7 @@ export function FinalCTA() {
     {},
   );
   const [startedAt] = useState(() => Date.now());
-  const mailto = useMemo(() => buildMailto(values, locale), [locale, values]);
+  const mailto = useMemo(() => buildMailto(values), [values]);
 
   const setCampo = (campo: CampoForm, valore: string) => {
     setValues((v) => ({ ...v, [campo]: valore }));

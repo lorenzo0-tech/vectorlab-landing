@@ -308,7 +308,8 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     slug: "come-aumentare-richieste-da-sito-web-per-studio-professionale",
-    title: "Come aumentare le richieste da un sito web per studio professionale",
+    title:
+      "Come aumentare le richieste da un sito web per studio professionale",
     excerpt:
       "Avvocati, commercialisti, consulenti e studi tecnici hanno bisogno di chiarezza, fiducia e percorsi semplici verso il contatto.",
     description:
@@ -387,7 +388,8 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     slug: "sito-web-per-ristorante-cosa-deve-avere-davvero",
-    title: "Sito web per ristorante: cosa deve avere davvero per portare prenotazioni",
+    title:
+      "Sito web per ristorante: cosa deve avere davvero per portare prenotazioni",
     excerpt:
       "Menu leggibile, fotografie credibili e contatto immediato contano più di un sito scenografico ma dispersivo.",
     description:
@@ -426,7 +428,8 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     slug: "sito-web-per-hotel-come-aumentare-richieste-dirette",
-    title: "Sito web per hotel: come aumentare le richieste dirette senza dipendere solo dai portali",
+    title:
+      "Sito web per hotel: come aumentare le richieste dirette senza dipendere solo dai portali",
     excerpt:
       "Un buon sito per hotel deve far percepire esperienza, rassicurare e semplificare la richiesta diretta.",
     description:

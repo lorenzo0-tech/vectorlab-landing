@@ -10,7 +10,7 @@ import { trackCtaClick } from "@/lib/analytics-events";
 const NAV_HEIGHT = 80; // offset to clear sticky header
 
 const navItems = [
-  { label: "Soluzione", href: "#soluzione", num: "01" },
+  { label: "Progetti", href: "#progetti", num: "01" },
   { label: "Pacchetti", href: "#pacchetti", num: "02" },
   { label: "Metodo", href: "#metodo", num: "03" },
   { label: "FAQ", href: "#faq", num: "04" },
@@ -73,7 +73,7 @@ export function Navbar() {
   const scrolled = useScrolled(10);
   const navVisible = useNavVisible();
   const year = useMemo(() => new Date().getFullYear(), []);
-  const [active, setActive] = useState<string>("#soluzione");
+  const [active, setActive] = useState<string>("#progetti");
   const [progress, setProgress] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -114,7 +114,7 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [navItems]);
+  }, []);
 
   useEffect(() => {
     const sections = navItems
@@ -137,7 +137,7 @@ export function Navbar() {
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [navItems]);
+  }, []);
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -296,7 +296,7 @@ export function Navbar() {
               <span className="nav-mobile-line" aria-hidden="true" />
             </a>
           ))}
-          <a
+          <Link
             href="/blog"
             className="nav-mobile-link"
             style={{ transitionDelay: mobileOpen ? "280ms" : "0ms" }}
@@ -305,7 +305,7 @@ export function Navbar() {
             <span className="nav-mobile-num">05</span>
             <span className="nav-mobile-label">Blog</span>
             <span className="nav-mobile-line" aria-hidden="true" />
-          </a>
+          </Link>
           <div className="mt-8 flex flex-col gap-3">
             <a
               href={CALENDLY_URL}

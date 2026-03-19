@@ -20,21 +20,42 @@ export default async function ContattiPage() {
   const isEn = locale === "en";
   const { hotelMeta } = getHotelDemoContent(locale);
 
+  const reassurance = [
+    isEn ? "Response within a few hours" : "Risposta entro poche ore",
+    isEn
+      ? "Proposal tailored to suite and services"
+      : "Proposta calibrata su suite e servizi",
+    isEn
+      ? "Concierge support before arrival"
+      : "Supporto concierge prima dell'arrivo",
+  ];
+
   return (
     <main className="container-pad py-12 sm:py-16">
       <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-        <section className="rounded-3xl border border-[#deccb4] bg-[#fdf9f3] p-7 sm:p-10">
+        <section className="rounded-[2rem] border border-[#deccb4] bg-[#fdf9f3] p-7 shadow-[0_18px_36px_rgba(90,70,45,0.06)] sm:p-10">
           <p className="text-xs uppercase tracking-[0.2em] text-[#8a6a46]">
             {isEn ? "Contacts & Bookings" : "Contatti & Prenotazioni"}
           </p>
           <h1 className="heading-display mt-3 text-4xl text-[#352617] sm:text-5xl">
             {isEn ? "Talk to our concierge" : "Parla con il nostro concierge"}
           </h1>
-          <p className="mt-4 text-[#5f4d3b]">
+          <p className="mt-4 max-w-2xl text-[#5f4d3b] sm:text-lg sm:leading-8">
             {isEn
               ? "Tell us how you imagine your stay: you will receive a tailored proposal with the best available options."
               : "Raccontaci come immagini il tuo soggiorno: riceverai una proposta dedicata con le migliori soluzioni disponibili."}
           </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {reassurance.map((item) => (
+              <div
+                key={item}
+                className="rounded-2xl border border-[#deccb4] bg-[#fbf7ef] px-4 py-4 text-sm text-[#5f4d3b]"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
 
           <form
             className="mt-8 grid gap-4"
@@ -83,7 +104,7 @@ export default async function ContattiPage() {
           </Link>
         </section>
 
-        <aside className="rounded-3xl border border-[#deccb4] bg-[#f4ede3] p-7 sm:p-10">
+        <aside className="rounded-[2rem] border border-[#deccb4] bg-[linear-gradient(180deg,#f4ede3_0%,#efe4d6_100%)] p-7 sm:p-10">
           <h2 className="heading-display text-3xl text-[#352617]">
             {isEn ? "Dedicated concierge" : "Concierge dedicato"}
           </h2>
@@ -106,6 +127,19 @@ export default async function ContattiPage() {
                 : "Transfer privato disponibile su richiesta"}
             </li>
           </ul>
+
+          <div className="mt-6 rounded-2xl border border-[#d7c2a4] bg-[#fbf7ef] p-5 text-sm leading-8 text-[#5f4d3b]">
+            <p className="text-xs uppercase tracking-[0.16em] text-[#8a6a46]">
+              {isEn
+                ? "What this page communicates"
+                : "Cosa comunica questa pagina"}
+            </p>
+            <p className="mt-3">
+              {isEn
+                ? "The guest feels taken care of before arrival. The contact becomes part of the luxury experience rather than a practical afterthought."
+                : "L'ospite percepisce di essere seguito prima ancora dell'arrivo. Il contatto diventa parte dell'esperienza di lusso, non un dettaglio pratico secondario."}
+            </p>
+          </div>
         </aside>
       </div>
     </main>

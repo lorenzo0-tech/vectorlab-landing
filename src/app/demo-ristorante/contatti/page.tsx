@@ -20,21 +20,40 @@ export default async function ContattiRistorantePage() {
   const isEn = locale === "en";
   const { restaurantMeta } = getRestaurantDemoContent(locale);
 
+  const contactSignals = [
+    isEn ? "Fast reply for reservations" : "Risposta rapida per prenotazioni",
+    isEn ? "Private event support" : "Supporto per eventi privati",
+    isEn
+      ? "Allergies and special requests handled with care"
+      : "Allergie e richieste speciali gestite con attenzione",
+  ];
+
   return (
     <main className="container-pad py-12 sm:py-16">
       <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-        <section className="rounded-3xl border border-[#7c5b35]/45 bg-[#17110b] p-7 sm:p-10">
+        <section className="rounded-[2rem] border border-[#7c5b35]/45 bg-[#17110b] p-7 shadow-[0_18px_36px_rgba(0,0,0,0.18)] sm:p-10">
           <p className="text-xs uppercase tracking-[0.2em] text-[#c9a273]">
             {isEn ? "Contacts" : "Contatti"}
           </p>
           <h1 className="heading-display mt-3 text-4xl text-[#f7e7d2] sm:text-5xl">
             {isEn ? "Talk to Atelier Nove" : "Parla con Atelier Nove"}
           </h1>
-          <p className="mt-4 text-[#d9c4a8]">
+          <p className="mt-4 max-w-2xl text-[#d9c4a8] sm:text-lg sm:leading-8">
             {isEn
               ? "For bookings, private events, or tailored requests, our team is at your service."
               : "Per prenotazioni, eventi privati o richieste personalizzate, il nostro team è a disposizione."}
           </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {contactSignals.map((item) => (
+              <div
+                key={item}
+                className="rounded-2xl border border-[#7c5b35]/45 bg-[#120d09] px-4 py-4 text-sm text-[#d7c3a7]"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
 
           <form
             className="mt-8 grid gap-4"
@@ -81,7 +100,7 @@ export default async function ContattiRistorantePage() {
           </Link>
         </section>
 
-        <aside className="rounded-3xl border border-[#7c5b35]/45 bg-[#1b130c] p-7 sm:p-10">
+        <aside className="rounded-[2rem] border border-[#7c5b35]/45 bg-[#1b130c] p-7 sm:p-10">
           <h2 className="heading-display text-3xl text-[#f2debf]">
             {isEn ? "Useful information" : "Informazioni utili"}
           </h2>
@@ -102,6 +121,17 @@ export default async function ContattiRistorantePage() {
                 : "Primo turno: 19:15 · Secondo turno: 21:30"}
             </li>
           </ul>
+
+          <div className="mt-6 rounded-2xl border border-[#7c5b35]/45 bg-[#120d09] p-5 text-sm leading-8 text-[#cbb69a]">
+            <p className="text-xs uppercase tracking-[0.16em] text-[#dcb485]">
+              {isEn ? "Before your reservation" : "Prima della prenotazione"}
+            </p>
+            <p className="mt-3">
+              {isEn
+                ? "You receive a measured, welcoming reply that already reflects the care reserved for your table."
+                : "Ricevi una risposta misurata e accogliente che riflette fin da subito la cura riservata al tuo tavolo."}
+            </p>
+          </div>
         </aside>
       </div>
     </main>

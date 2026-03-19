@@ -23,28 +23,40 @@ export default async function CookiePolicyPage() {
     {
       name: "site_locale_v1",
       provider: COMPANY_NAME,
-      purpose: locale === "it" ? "Memorizza la lingua scelta dall'utente" : "Stores the user's language preference",
+      purpose:
+        locale === "it"
+          ? "Memorizza la lingua scelta dall'utente"
+          : "Stores the user's language preference",
       duration: locale === "it" ? "1 anno" : "1 year",
       type: locale === "it" ? "Tecnico" : "Technical",
     },
     {
       name: "cookie_consent_v1",
       provider: COMPANY_NAME,
-      purpose: locale === "it" ? "Registra le preferenze cookie dell'utente" : "Records the user's cookie preferences",
+      purpose:
+        locale === "it"
+          ? "Registra le preferenze cookie dell'utente"
+          : "Records the user's cookie preferences",
       duration: locale === "it" ? "1 anno" : "1 year",
       type: locale === "it" ? "Tecnico" : "Technical",
     },
     {
       name: "_ga",
       provider: "Google Analytics",
-      purpose: locale === "it" ? "Distingue gli utenti per analisi aggregate del traffico" : "Distinguishes users for aggregated traffic analysis",
+      purpose:
+        locale === "it"
+          ? "Distingue gli utenti per analisi aggregate del traffico"
+          : "Distinguishes users for aggregated traffic analysis",
       duration: locale === "it" ? "2 anni" : "2 years",
       type: locale === "it" ? "Analitico" : "Analytics",
     },
     {
       name: "_ga_*",
       provider: "Google Analytics",
-      purpose: locale === "it" ? "Mantiene lo stato della sessione di analisi" : "Maintains analytics session state",
+      purpose:
+        locale === "it"
+          ? "Mantiene lo stato della sessione di analisi"
+          : "Maintains analytics session state",
       duration: locale === "it" ? "2 anni" : "2 years",
       type: locale === "it" ? "Analitico" : "Analytics",
     },
@@ -104,14 +116,22 @@ export default async function CookiePolicyPage() {
                 </h2>
                 <ul className="mt-2 list-disc space-y-2 pl-5">
                   <li>
-                    <strong className="text-foreground">{locale === "it" ? "Cookie tecnici (necessari)" : "Technical cookies (necessary)"}</strong>
+                    <strong className="text-foreground">
+                      {locale === "it"
+                        ? "Cookie tecnici (necessari)"
+                        : "Technical cookies (necessary)"}
+                    </strong>
                     <br />
                     {locale === "it"
                       ? "Indispensabili per il funzionamento del sito. Non richiedono consenso. Includono la memorizzazione della lingua e delle preferenze cookie."
                       : "Essential for website operation. Do not require consent. Include language preference and cookie preference storage."}
                   </li>
                   <li>
-                    <strong className="text-foreground">{locale === "it" ? "Cookie analitici" : "Analytics cookies"}</strong>
+                    <strong className="text-foreground">
+                      {locale === "it"
+                        ? "Cookie analitici"
+                        : "Analytics cookies"}
+                    </strong>
                     <br />
                     {locale === "it"
                       ? "Misurano traffico e interazioni in forma aggregata e anonimizzata tramite Google Analytics (con IP anonimizzato). Attivati solo previo consenso."
@@ -135,11 +155,21 @@ export default async function CookiePolicyPage() {
                   <table className="w-full border-collapse text-xs">
                     <thead>
                       <tr className="border-b border-white/15">
-                        <th className="py-2 pr-3 text-left font-semibold text-foreground">Cookie</th>
-                        <th className="py-2 pr-3 text-left font-semibold text-foreground">{locale === "it" ? "Fornitore" : "Provider"}</th>
-                        <th className="py-2 pr-3 text-left font-semibold text-foreground">{locale === "it" ? "Finalità" : "Purpose"}</th>
-                        <th className="py-2 pr-3 text-left font-semibold text-foreground">{locale === "it" ? "Durata" : "Duration"}</th>
-                        <th className="py-2 text-left font-semibold text-foreground">{locale === "it" ? "Tipo" : "Type"}</th>
+                        <th className="py-2 pr-3 text-left font-semibold text-foreground">
+                          Cookie
+                        </th>
+                        <th className="py-2 pr-3 text-left font-semibold text-foreground">
+                          {locale === "it" ? "Fornitore" : "Provider"}
+                        </th>
+                        <th className="py-2 pr-3 text-left font-semibold text-foreground">
+                          {locale === "it" ? "Finalità" : "Purpose"}
+                        </th>
+                        <th className="py-2 pr-3 text-left font-semibold text-foreground">
+                          {locale === "it" ? "Durata" : "Duration"}
+                        </th>
+                        <th className="py-2 text-left font-semibold text-foreground">
+                          {locale === "it" ? "Tipo" : "Type"}
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/10">
@@ -183,8 +213,8 @@ export default async function CookiePolicyPage() {
                 </h2>
                 <p className="mt-2">
                   {locale === "it"
-                    ? "Al primo accesso al sito, un banner ti permette di accettare o rifiutare i cookie analitici. Puoi modificare le tue preferenze in qualsiasi momento tramite il pulsante \"Preferenze cookie\" nel footer del sito."
-                    : "On your first visit, a banner allows you to accept or reject analytics cookies. You can change your preferences at any time via the \"Cookie preferences\" button in the website footer."}
+                    ? 'Al primo accesso al sito, un banner ti permette di accettare o rifiutare i cookie analitici. Puoi modificare le tue preferenze in qualsiasi momento tramite il pulsante "Preferenze cookie" nel footer del sito.'
+                    : 'On your first visit, a banner allows you to accept or reject analytics cookies. You can change your preferences at any time via the "Cookie preferences" button in the website footer.'}
                 </p>
                 <p className="mt-2">
                   {locale === "it"
@@ -201,12 +231,21 @@ export default async function CookiePolicyPage() {
                 </h2>
                 <ul className="mt-2 list-disc space-y-2 pl-5">
                   <li>
-                    <strong className="text-foreground">Google Analytics</strong>
+                    <strong className="text-foreground">
+                      Google Analytics
+                    </strong>
                     <br />
                     {locale === "it"
                       ? "Servizio di analisi web fornito da Google LLC. IP anonimizzato. Informativa:"
                       : "Web analytics service provided by Google LLC. Anonymized IP. Policy:"}{" "}
-                    <a className="underline decoration-cyan-300/60 underline-offset-4" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>
+                    <a
+                      className="underline decoration-cyan-300/60 underline-offset-4"
+                      href="https://policies.google.com/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      policies.google.com/privacy
+                    </a>
                   </li>
                   <li>
                     <strong className="text-foreground">Calendly</strong>
@@ -214,7 +253,14 @@ export default async function CookiePolicyPage() {
                     {locale === "it"
                       ? "Servizio di pianificazione appuntamenti fornito da Calendly LLC. Può impostare propri cookie secondo la propria informativa:"
                       : "Appointment scheduling service provided by Calendly LLC. May set its own cookies according to its policy:"}{" "}
-                    <a className="underline decoration-cyan-300/60 underline-offset-4" href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer">calendly.com/privacy</a>
+                    <a
+                      className="underline decoration-cyan-300/60 underline-offset-4"
+                      href="https://calendly.com/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      calendly.com/privacy
+                    </a>
                   </li>
                 </ul>
               </section>

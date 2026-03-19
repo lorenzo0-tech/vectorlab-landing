@@ -124,7 +124,10 @@ export default async function SitiWebHotelMilanoPage() {
               Siti web per aziende a Milano
             </h1>
             <p className="mt-4 text-(--muted)">
-              Progettiamo siti web per aziende con un percorso chiaro verso il contatto e la richiesta. Progettazione curata, struttura orientata ai risultati e scelte tecniche pensate per una presenza locale solida.
+              Progettiamo siti web per aziende con un percorso chiaro verso il
+              contatto e la richiesta. Progettazione curata, struttura orientata
+              ai risultati e scelte tecniche pensate per una presenza locale
+              solida.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-(--muted)">

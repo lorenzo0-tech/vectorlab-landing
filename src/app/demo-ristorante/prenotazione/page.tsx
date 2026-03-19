@@ -28,6 +28,16 @@ export default async function PrenotazioneRistorantePage() {
     isEn ? "Private tasting" : "Degustazione privata",
   ];
 
+  const bookingMoments = [
+    isEn ? "Choose date and tasting path" : "Scegli data e percorso",
+    isEn
+      ? "Share occasion and preferences"
+      : "Condividi occasione e preferenze",
+    isEn
+      ? "Receive table confirmation fast"
+      : "Ricevi rapidamente la conferma tavolo",
+  ];
+
   return (
     <main className="container-pad py-12 sm:py-16">
       <div className="max-w-3xl">
@@ -39,15 +49,28 @@ export default async function PrenotazioneRistorantePage() {
             ? "Book your tailor-made table"
             : "Prenota il tuo tavolo su misura"}
         </h1>
-        <p className="mt-4 text-[#d9c4a8]">
+        <p className="mt-4 max-w-3xl text-[#d9c4a8] sm:text-lg sm:leading-8">
           {isEn
             ? "Tell us your preferences and occasion: our team will reply quickly with the best proposal."
             : "Indicaci preferenze e occasione: il nostro team ti risponderà rapidamente con la migliore proposta."}
         </p>
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {bookingMoments.map((item, index) => (
+            <div
+              key={item}
+              className="rounded-2xl border border-[#7c5b35]/45 bg-[#17110b] px-4 py-4 text-sm text-[#d7c3a7]"
+            >
+              <p className="text-[11px] uppercase tracking-[0.14em] text-[#dcb485]">
+                0{index + 1}
+              </p>
+              <p className="mt-2">{item}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-        <section className="rounded-3xl border border-[#7c5b35]/45 bg-[#17110b] p-7 sm:p-10">
+        <section className="rounded-[2rem] border border-[#7c5b35]/45 bg-[#17110b] p-7 shadow-[0_22px_44px_rgba(0,0,0,0.22)] sm:p-10">
           <form
             className="grid gap-5"
             aria-label={
@@ -157,7 +180,7 @@ export default async function PrenotazioneRistorantePage() {
           </form>
         </section>
 
-        <aside className="h-fit rounded-3xl border border-[#7c5b35]/45 bg-[#1b130c] p-7 sm:p-8">
+        <aside className="h-fit rounded-[2rem] border border-[#7c5b35]/45 bg-[#1b130c] p-7 sm:p-8">
           <div className="mb-5 overflow-hidden rounded-2xl border border-[#7c5b35]/45">
             <Image
               src="/images/restaurant-real/reserved-table.jpg"
@@ -201,6 +224,17 @@ export default async function PrenotazioneRistorantePage() {
           <div className="mt-7 rounded-2xl border border-[#7c5b35]/45 bg-[#120d09] p-4 text-sm text-[#cbb69a]">
             {isEn ? "Quick contacts" : "Contatti rapidi"}:{" "}
             {restaurantMeta.phone} · {restaurantMeta.email}
+          </div>
+
+          <div className="mt-5 rounded-2xl border border-[#7c5b35]/45 bg-[#120d09] p-5 text-sm leading-7 text-[#cbb69a]">
+            <p className="text-xs uppercase tracking-[0.14em] text-[#dcb485]">
+              {isEn ? "What to expect" : "Cosa aspettarti"}
+            </p>
+            <p className="mt-3">
+              {isEn
+                ? "Your request is handled as the beginning of the evening, with attention to timing, preferences, and the occasion you want to celebrate."
+                : "La tua richiesta viene seguita come l'inizio della serata, con attenzione a tempi, preferenze e occasione che desideri celebrare."}
+            </p>
           </div>
         </aside>
       </div>

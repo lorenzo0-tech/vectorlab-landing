@@ -143,23 +143,33 @@ function ParticlesCanvas({ enabled }: { enabled: boolean }) {
 
 export function Hero() {
   const { locale } = useLanguage();
-  const [shouldReduceMotion, setShouldReduceMotion] = useState(true);
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return true;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
   const [showMotionEffects, setShowMotionEffects] = useState(false);
 
   useEffect(() => {
-    const reduced = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    setShouldReduceMotion(reduced);
+    if (typeof window === "undefined" || !window.matchMedia) return;
 
-    if (reduced) return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = (event: MediaQueryListEvent) => {
+      setShouldReduceMotion(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
 
     const timer = window.setTimeout(() => {
       setShowMotionEffects(true);
     }, 900);
 
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [shouldReduceMotion]);
 
   const canRunParticles =
     !shouldReduceMotion &&

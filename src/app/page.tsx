@@ -6,7 +6,7 @@ import { TrustBar } from "@/components/TrustBar";
 import { CaseStudies } from "@/components/CaseStudies";
 import { Problem } from "@/components/Problem";
 import { AboutFounder } from "@/components/AboutFounder";
-import { ProjectShowcase } from "@/components/ProjectShowcase";
+import { CompletedSites } from "@/components/CompletedSites";
 import { Process } from "@/components/Process";
 import {
   COMPANY_CITY,
@@ -16,9 +16,6 @@ import {
   SITE_URL,
 } from "@/lib/constants";
 
-const Solution = dynamic(() =>
-  import("@/components/Solution").then((mod) => mod.Solution),
-);
 const Packages = dynamic(() =>
   import("@/components/Packages").then((mod) => mod.Packages),
 );
@@ -159,13 +156,10 @@ export default async function Home() {
             <CaseStudies locale={locale} />
           </div>
           <div className="divider-tech section-tone" data-tone="indigo">
-            <ProjectShowcase locale={locale} />
+            <CompletedSites locale={locale} />
           </div>
           <div className="divider-tech section-tone" data-tone="warning">
             <Problem locale={locale} />
-          </div>
-          <div className="divider-tech section-tone" data-tone="cyan">
-            <Solution />
           </div>
           <div className="divider-tech section-tone" data-tone="fuchsia">
             <Packages />

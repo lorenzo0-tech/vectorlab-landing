@@ -43,7 +43,8 @@ export default async function GraziePage() {
               Richiesta inviata correttamente.
             </h1>
             <p className="mt-4 text-(--muted)">
-              Ti ricontattiamo entro 48 ore con i prossimi passaggi consigliati per impostare il progetto nel modo giusto.
+              Ti ricontattiamo entro 48 ore con i prossimi passaggi consigliati
+              per impostare il progetto nel modo giusto.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
